@@ -208,10 +208,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008891cfb47cd6e46a0e7f1df1f6e735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeedWalk: 4
+  maxSpeedWalk: 3
   maxSpeedRun: 7
-  accelerationWalk: 300
-  accelerationRun: 800
+  accelerationWalk: 1500
+  accelerationRun: 2500
   jumpForse: 0
   cameraMain: {fileID: 844262806813105437}
 --- !u!114 &786862915565640646
