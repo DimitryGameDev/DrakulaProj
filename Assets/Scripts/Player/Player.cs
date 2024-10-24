@@ -5,7 +5,7 @@ public class Player : SingletonBase<Player>
 {
     [SerializeField] private float stress;
     public float CurrentStress => stress;
-    
+
     //[SerializeField] private float money;
     
     private float maxStress = 100f;
@@ -13,6 +13,7 @@ public class Player : SingletonBase<Player>
     
     public UnityEvent changeStress;
     public UnityEvent onStress;
+
     
     /*
     public float CurrentMoney => money;
