@@ -17,15 +17,15 @@ public class CharacterInputController : MonoBehaviour
     public Character Character => character;
     
     private Vector3 playerMoveDirection;
-    private float radiusAdmin;
-    private float hightAdmin;   
+    private float radiusCharacter;
+    private float hightCharacter;   
     
     //public State stateMove;
     public void Start()
     {
         character = GetComponent<Character>();
-        radiusAdmin = character.GetComponent<CapsuleCollider>().radius;
-        hightAdmin = character.GetComponent<CapsuleCollider>().height;
+        radiusCharacter = character.GetComponent<CapsuleCollider>().radius;
+        hightCharacter = character.GetComponent<CapsuleCollider>().height;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -59,68 +59,77 @@ public class CharacterInputController : MonoBehaviour
         */
     }
 
-    const string Horizontal = "Horizontal";
-    const string Vertical = "Vertical";
+    private const string Horizontal = "Horizontal";
+    private const string Vertical = "Vertical";
 
     private void AdminMove()
     {
-        float dirZ = Input.GetAxis(Vertical);
-        float dirX = Input.GetAxis(Horizontal);
-
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        
+        var dirZ = Input.GetAxis(Vertical);
+        var dirX = Input.GetAxis(Horizontal);
+        
+        var ground = IsGrounded();
+        
+        if (Input.GetButton("Jump") && ground)
         {
-            character.Jump();
+            //character.Jump();
         }
         
         playerMoveDirection = new Vector3(dirX, 0, dirZ);
 
-        if (IsWall() && !IsGrounded()) return;
+        if (IsWall() && !ground) return;
         
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (!ground)
         {
-            character.Move(playerMoveDirection, IsGrounded(),MoveType.Run);
+            character.Move(playerMoveDirection, MoveType.Air);
             return;
         }
         
-        character.Move(playerMoveDirection, IsGrounded(),MoveType.Walk);
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            character.Move(playerMoveDirection, MoveType.Run);
+            return;
+        }
+
+        character.Move(playerMoveDirection, MoveType.Walk);
     }
 
-    const string XAxis = "Mouse X";
-    const string YAxis = "Mouse Y";
+    private const string XAxis = "Mouse X";
+    private const string YAxis = "Mouse Y";
     private void AdminCameraMove()
     {
-        float dirY = Input.GetAxis(YAxis);
-        float dirX = Input.GetAxis(XAxis);
+        var dirY = Input.GetAxis(YAxis);
+        var dirX = Input.GetAxis(XAxis);
         
         character.CameraMove(dirX, dirY);
     }
     private bool IsGrounded()
     {
         RaycastHit hitLegs;
-
-        Vector3 vectordown = character.transform.TransformDirection(Vector3.down);
-
-        if (Physics.Raycast(character.transform.position - new Vector3(radiusAdmin, 0, 0), vectordown, out hitLegs, hightAdmin/2 + 0.01f))
+        var vectorDown = character.transform.TransformDirection(Vector3.down);
+        var maxDistance = hightCharacter / 2 + 0.001f;
+        
+        if (Physics.Raycast(character.transform.position - new Vector3(radiusCharacter, 0, 0), vectorDown, out hitLegs, maxDistance))
         {
-            Debug.DrawRay(character.transform.position - new Vector3(radiusAdmin, 0, 0), vectordown * hitLegs.distance, Color.red);
+            Debug.DrawRay(character.transform.position - new Vector3(radiusCharacter, 0, 0), vectorDown * hitLegs.distance, Color.red);
             return true;
         }
 
-        if (Physics.Raycast(character.transform.position - new Vector3(-radiusAdmin, 0, 0), vectordown, out hitLegs, hightAdmin / 2 + 0.01f))
+        if (Physics.Raycast(character.transform.position - new Vector3(-radiusCharacter, 0, 0), vectorDown, out hitLegs,maxDistance))
         {
-            Debug.DrawRay(character.transform.position - new Vector3(-radiusAdmin, 0, 0), vectordown * hitLegs.distance, Color.red);
+            Debug.DrawRay(character.transform.position - new Vector3(-radiusCharacter, 0, 0), vectorDown * hitLegs.distance, Color.red);
             return true;
         }
 
-        if (Physics.Raycast(character.transform.position - new Vector3(0, 0, radiusAdmin), vectordown, out hitLegs, hightAdmin / 2 + 0.01f))
+        if (Physics.Raycast(character.transform.position - new Vector3(0, 0, radiusCharacter), vectorDown, out hitLegs,maxDistance))
         {
-            Debug.DrawRay(character.transform.position - new Vector3(0, 0, radiusAdmin), vectordown * hitLegs.distance, Color.red);
+            Debug.DrawRay(character.transform.position - new Vector3(0, 0, radiusCharacter), vectorDown * hitLegs.distance, Color.red);
             return true;
         }
 
-        if (Physics.Raycast(character.transform.position - new Vector3(0, 0, -radiusAdmin), vectordown, out hitLegs, hightAdmin / 2 + 0.01f))
+        if (Physics.Raycast(character.transform.position - new Vector3(0, 0, -radiusCharacter), vectorDown, out hitLegs, maxDistance))
         {
-            Debug.DrawRay(character.transform.position - new Vector3(0, 0, -radiusAdmin), vectordown * hitLegs.distance, Color.red);
+            Debug.DrawRay(character.transform.position - new Vector3(0, 0, -radiusCharacter), vectorDown * hitLegs.distance, Color.red);
             return true;
         }
 
@@ -129,26 +138,27 @@ public class CharacterInputController : MonoBehaviour
     private bool IsWall()
     {
         RaycastHit hitLegs;
-
-        if (Physics.Raycast(character.transform.position, character.transform.TransformDirection(Vector3.forward), out hitLegs, radiusAdmin + 0.1f))
+        var maxRadius = radiusCharacter + 0.1f;
+        
+        if (Physics.Raycast(character.transform.position, character.transform.TransformDirection(Vector3.forward), out hitLegs, maxRadius))
         {
             Debug.DrawRay(character.transform.position , character.transform.TransformDirection(Vector3.forward) * hitLegs.distance, Color.red);
             return true;
         }
 
-        if (Physics.Raycast(character.transform.position, character.transform.TransformDirection(Vector3.back), out hitLegs, radiusAdmin + 0.1f))
+        if (Physics.Raycast(character.transform.position, character.transform.TransformDirection(Vector3.back), out hitLegs, maxRadius))
         {
             Debug.DrawRay(character.transform.position , character.transform.TransformDirection(Vector3.back) * hitLegs.distance, Color.red);
             return true;
         }
 
-        if (Physics.Raycast(character.transform.position, character.transform.TransformDirection(Vector3.right), out hitLegs, radiusAdmin + 0.1f))
+        if (Physics.Raycast(character.transform.position, character.transform.TransformDirection(Vector3.right), out hitLegs, maxRadius))
         {
             Debug.DrawRay(character.transform.position, character.transform.TransformDirection(Vector3.right) * hitLegs.distance, Color.red);
             return true;
         }
 
-        if (Physics.Raycast(character.transform.position, character.transform.TransformDirection(Vector3.left), out hitLegs, radiusAdmin + 0.1f))
+        if (Physics.Raycast(character.transform.position, character.transform.TransformDirection(Vector3.left), out hitLegs, maxRadius))
         {
             Debug.DrawRay(character.transform.position, character.transform.TransformDirection(Vector3.left) * hitLegs.distance, Color.red);
             return true;
