@@ -5,11 +5,21 @@ using UnityEngine;
 public class Dracula : MonoBehaviour
 {
     [SerializeField] private List<PatrolPoint> patrolPoints;
+    [SerializeField] private List<GameObject> draculasPrefabs;
+    private Dictionary<List<PatrolPoint>, List<GameObject>> draculas;
     [SerializeField] private int spawnRate;
+
     Transform nearestPatrolPoint;
     public float mindistance = 100;
     [SerializeField] private GameObject dracula;
     // Update is called once per frame
+    void Start()
+    {
+        draculas = new Dictionary<List<PatrolPoint>, List<GameObject>>()
+        {
+            {patrolPoints, draculasPrefabs}
+        };
+    }
     void Update()
     {
         MinDistReload();
