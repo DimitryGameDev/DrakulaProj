@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Interactive: MonoBehaviour
+public class InteractiveObject: MonoBehaviour
 {
     // Можно подписаться из скрипта на этом же обьекте на это событие
     public UnityEvent onVision;

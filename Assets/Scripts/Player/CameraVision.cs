@@ -5,13 +5,13 @@ public class CameraVision : MonoBehaviour
 {
     [SerializeField] private float maxDistance = 100f;
     private Camera playerCamera;
-    private List<Interactive> visionObjs;
+    private List<InteractiveObject> visionObjs;
 
     private void Start()
     {
         playerCamera = Camera.main;
-        visionObjs = new List<Interactive>();
-        visionObjs.AddRange(FindObjectsOfType<Interactive>());
+        visionObjs = new List<InteractiveObject>();
+        visionObjs.AddRange(FindObjectsOfType<InteractiveObject>());
     }
 
     private void Update()

@@ -162,9 +162,9 @@ public class CharacterInputController : MonoBehaviour
         {
            
             Debug.DrawRay(character.Camera.transform.position, character.Camera.transform.forward * hitCamera.distance, Color.yellow, 0.01f);
-            if (hitCamera.collider.transform.root?.GetComponent<Interactive>())
+            if (hitCamera.collider.transform.root?.GetComponent<InteractiveObject>())
             {
-                var use = hitCamera.collider.transform.root.GetComponent<Interactive>();
+                var use = hitCamera.collider.transform.root.GetComponent<InteractiveObject>();
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
