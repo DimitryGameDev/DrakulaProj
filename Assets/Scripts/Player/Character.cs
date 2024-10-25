@@ -11,7 +11,7 @@ public enum MoveType
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CharacterInputController))] 
-public class Character : MonoBehaviour
+public class Character : Player
 {/*
     // TO DO:
     [Range(1f,10f)][SerializeField] private float maxSpeedSit = 1f;
@@ -27,6 +27,7 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
+        Init();
         cameraMain.SetTarget(transform,TypeMoveCamera.WithRotation);
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;

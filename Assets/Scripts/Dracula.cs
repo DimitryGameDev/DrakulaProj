@@ -1,65 +1,107 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Dracula : MonoBehaviour
 {
-    [SerializeField] private List<PatrolPoint> patrolPoints;
-    [SerializeField] private List<GameObject> draculasPrefabs;
-    private Dictionary<List<PatrolPoint>, List<GameObject>> draculas;
-    [SerializeField] private int spawnRate;
+    [Header("Dracula Prefabs")]
+    [SerializeField] private GameObject draculaPrefabsStay;
+    [SerializeField] private GameObject draculaPrefabsSit;
+    [SerializeField] private GameObject draculaPrefabsUp;
+    [SerializeField] private GameObject draculaPrefabsT;
+    [Space]
+    [Header("Dracula Settings")]
+    [SerializeField][Range(0f,10f)] private float minDistance = 5;
+    [SerializeField] private int spawnRate = 4;
 
-    Transform nearestPatrolPoint;
-    public float mindistance = 100;
-    [SerializeField] private GameObject dracula;
-    // Update is called once per frame
-    void Start()
+    private GameObject dracula;
+    private List<PatrolPoint> patrolPoints;
+    private List<PatrolPoint> nearestPatrolPoints;
+    private float time;
+    
+    private void Start()
     {
-        draculas = new Dictionary<List<PatrolPoint>, List<GameObject>>()
-        {
-            {patrolPoints, draculasPrefabs}
-        };
+        patrolPoints = new List<PatrolPoint>();
+        FillPatrolPointsInScene();
+        nearestPatrolPoints = new List<PatrolPoint>();
+ 
+        DraculaSpawn();
     }
+    
     void Update()
     {
-        MinDistReload();
+        time += Time.deltaTime;
+
+        if (time >= spawnRate)
+        {
+            DraculaSpawn();
+            time = 0;
+        }
+    }
+    private void DraculaSpawn()
+    {   
+        Destroy(dracula);
+
         FindNearestPatrolPoint();
-    }
 
-    private void FollowPoints()
-    {
+        var patrolPoint = FindPatrolPointsToPlayer();
         
+        var prefab = draculaPrefabsT;
+        if (patrolPoint.DraculaPos == DraculaPosType.Sit) prefab = draculaPrefabsSit;
+        if (patrolPoint.DraculaPos == DraculaPosType.Stay) prefab = draculaPrefabsStay;
+        if (patrolPoint.DraculaPos == DraculaPosType.Up) prefab = draculaPrefabsUp;
+        
+        transform.position = patrolPoint.transform.position;    
+        
+        dracula = Instantiate(prefab, patrolPoint.transform.position, Quaternion.identity,null);
+        
+        CleatNearestPatrolPoint();
     }
-
-    private void FindNearestPatrolPoint()
+    private  void FindNearestPatrolPoint()
     {
-        for(int i = 0; i < patrolPoints.Count; i++)
+        var draculaPos = transform.position;
+        for (int i = 0; i < patrolPoints.Count; i++)
         {
-            
-                Transform pointTransform = patrolPoints[i].transform;
-                Transform draculaTransform = dracula.transform;
-                float distance = Vector3.Distance(pointTransform.position, draculaTransform.position);
-                if (distance < mindistance)
-                {
-                    mindistance = distance;
-                }
-                nearestPatrolPoint = pointTransform;
-            
-        }
-        IEnumerator DraculaSpawn()
-        {
-            while (true)
+            PatrolPoint patrolPoint = patrolPoints[i];
+            var distance = Vector3.Distance(draculaPos, patrolPoint.transform.position);
+            if (distance < minDistance)
             {
-                var spawnPoint =  nearestPatrolPoint.position;
-                yield return new WaitForSeconds(spawnRate);
+                nearestPatrolPoints.Add(patrolPoint);
             }
-     
         }
     }
 
-   
-    private void MinDistReload()
+    private const float MinDistToPlayer = 1000f;
+    private  PatrolPoint FindPatrolPointsToPlayer()
     {
-        mindistance = 100;
+        var playerPos = Character.Instance.transform.position;
+        float minDist = MinDistToPlayer;
+        PatrolPoint spawnPoints = null;
+        for (int i = 0; i < nearestPatrolPoints.Count; i++)
+        {
+            PatrolPoint patrolPoint = nearestPatrolPoints[i];
+            var distance = Vector3.Distance(playerPos, patrolPoint.transform.position);
+            if (distance < minDist)
+            {
+                spawnPoints = patrolPoint;
+                minDist = distance;
+            }
+        }
+
+        return spawnPoints;
+    }
+    
+    private void CleatNearestPatrolPoint()
+    {
+        nearestPatrolPoints.Clear();
+    }
+    
+    private void FillPatrolPointsInScene()
+    {
+        patrolPoints.AddRange(FindObjectsOfType<PatrolPoint>());
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, minDistance);
     }
 }
