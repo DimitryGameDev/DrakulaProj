@@ -14,8 +14,8 @@ public class OnePersonCamera : MonoBehaviour
     [Range(0f, 90f)][SerializeField] private float yRotationLimit = 88f;
     [Range(6f, 10f)][SerializeField] private float cameraSmothMoveSpead = 8f;
     [Range(1f, 5f)][SerializeField] private float cameraSmothRotateSpead = 5f;
-
-    [SerializeField] private float cameraOffsetY;
+    [SerializeField] private float cameraOffsetY = 2f;
+    
     
     private TypeMoveCamera typeMove;
     private Transform target;

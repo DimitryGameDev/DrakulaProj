@@ -61,7 +61,7 @@ public class Dracula : MonoBehaviour
 
             transform.position = patrolPoint.transform.position;
 
-            dracula = Instantiate(prefab, patrolPoint.transform.position, Quaternion.identity, null);
+            dracula = Instantiate(prefab, patrolPoint.transform.position, Quaternion.identity);
         }
 
         CleatNearestPatrolPoint();
