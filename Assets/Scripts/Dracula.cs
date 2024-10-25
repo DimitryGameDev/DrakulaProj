@@ -3,30 +3,32 @@ using UnityEngine;
 
 public class Dracula : MonoBehaviour
 {
-    [Header("Dracula Prefabs")]
-    [SerializeField] private GameObject draculaPrefabsStay;
+    [Header("Dracula Prefabs")] [SerializeField]
+    private GameObject draculaPrefabsStay;
+
     [SerializeField] private GameObject draculaPrefabsSit;
     [SerializeField] private GameObject draculaPrefabsUp;
     [SerializeField] private GameObject draculaPrefabsT;
-    [Space]
-    [Header("Dracula Settings")]
-    [SerializeField][Range(0f,10f)] private float minDistance = 5;
+
+    [Space] [Header("Dracula Settings")] [SerializeField] [Range(0f, 10f)]
+    private float minDistance = 5;
+
     [SerializeField] private int spawnRate = 4;
 
     private GameObject dracula;
     private List<PatrolPoint> patrolPoints;
     private List<PatrolPoint> nearestPatrolPoints;
     private float time;
-    
+
     private void Start()
     {
         patrolPoints = new List<PatrolPoint>();
         FillPatrolPointsInScene();
         nearestPatrolPoints = new List<PatrolPoint>();
- 
+
         DraculaSpawn();
     }
-    
+
     void Update()
     {
         time += Time.deltaTime;
@@ -37,26 +39,35 @@ public class Dracula : MonoBehaviour
             time = 0;
         }
     }
+
     private void DraculaSpawn()
-    {   
+    {
         Destroy(dracula);
 
         FindNearestPatrolPoint();
 
         var patrolPoint = FindPatrolPointsToPlayer();
-        
-        var prefab = draculaPrefabsT;
-        if (patrolPoint.DraculaPos == DraculaPosType.Sit) prefab = draculaPrefabsSit;
-        if (patrolPoint.DraculaPos == DraculaPosType.Stay) prefab = draculaPrefabsStay;
-        if (patrolPoint.DraculaPos == DraculaPosType.Up) prefab = draculaPrefabsUp;
-        
-        transform.position = patrolPoint.transform.position;    
-        
-        dracula = Instantiate(prefab, patrolPoint.transform.position, Quaternion.identity,null);
-        
+
+        if (draculaPrefabsT != null)
+        {
+            var prefab = draculaPrefabsT;
+
+            if (patrolPoint.DraculaPos == DraculaPosType.Sit 
+                && draculaPrefabsSit != null) prefab = draculaPrefabsSit;
+            if (patrolPoint.DraculaPos == DraculaPosType.Stay 
+                && draculaPrefabsStay != null) prefab = draculaPrefabsStay;
+            if (patrolPoint.DraculaPos == DraculaPosType.Up 
+                && draculaPrefabsUp != null) prefab = draculaPrefabsUp;
+
+            transform.position = patrolPoint.transform.position;
+
+            dracula = Instantiate(prefab, patrolPoint.transform.position, Quaternion.identity, null);
+        }
+
         CleatNearestPatrolPoint();
     }
-    private  void FindNearestPatrolPoint()
+
+    private void FindNearestPatrolPoint()
     {
         var draculaPos = transform.position;
         for (int i = 0; i < patrolPoints.Count; i++)
@@ -71,7 +82,8 @@ public class Dracula : MonoBehaviour
     }
 
     private const float MinDistToPlayer = 1000f;
-    private  PatrolPoint FindPatrolPointsToPlayer()
+
+    private PatrolPoint FindPatrolPointsToPlayer()
     {
         var playerPos = Character.Instance.transform.position;
         float minDist = MinDistToPlayer;
@@ -89,16 +101,17 @@ public class Dracula : MonoBehaviour
 
         return spawnPoints;
     }
-    
+
     private void CleatNearestPatrolPoint()
     {
         nearestPatrolPoints.Clear();
     }
-    
+
     private void FillPatrolPointsInScene()
     {
         patrolPoints.AddRange(FindObjectsOfType<PatrolPoint>());
     }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
