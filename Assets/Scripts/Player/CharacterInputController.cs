@@ -8,10 +8,13 @@ public enum State
     Monitor,
 }
 */
+
 [RequireComponent (typeof(CapsuleCollider))]
 public class CharacterInputController : MonoBehaviour
 {
     //[SerializeField] private float maxDistanseHitCamera = 1f;
+    [SerializeField] private bool heartEnabled;
+    public bool HeartEnabled => heartEnabled;
     
     private Character character; 
     public Character Character => character;
@@ -23,6 +26,8 @@ public class CharacterInputController : MonoBehaviour
     //public State stateMove;
     public void Start()
     {
+        heartEnabled = false;
+        
         character = GetComponent<Character>();
         radiusCharacter = character.GetComponent<CapsuleCollider>().radius;
         hightCharacter = character.GetComponent<CapsuleCollider>().height;
@@ -39,6 +44,7 @@ public class CharacterInputController : MonoBehaviour
     { 
         AdminCameraMove();
         
+        HeartState();
         /*
         if (stateMove == State.None)
         {
@@ -64,6 +70,7 @@ public class CharacterInputController : MonoBehaviour
 
     private void AdminMove()
     {
+        if (heartEnabled) return;
         
         var dirZ = Input.GetAxis(Vertical);
         var dirX = Input.GetAxis(Horizontal);
@@ -165,6 +172,14 @@ public class CharacterInputController : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void HeartState()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+            heartEnabled = true;
+        if (Input.GetKeyUp(KeyCode.E))
+            heartEnabled = false;
     }
     
 #if UNITY_STANDALONE || UNITY_EDITOR 
