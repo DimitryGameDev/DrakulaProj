@@ -43,8 +43,8 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private void Update()
     { 
-        AdminCameraMove();
         MainRay();
+        AdminCameraMove();
         HeartState();
     }
 
