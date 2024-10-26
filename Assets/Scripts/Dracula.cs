@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Common;
 using Unity.VisualScripting;
@@ -11,19 +12,20 @@ public class Dracula : MonoBehaviour
     [SerializeField] private GameObject draculaPrefabsUp;
     [SerializeField] private GameObject draculaPrefabsT;
     [SerializeField] private ImpactEffect draculaImpactEffectPrefab;
+    [SerializeField] private Material draculaMat;
     [Space] [Header("Dracula Settings")] 
     [SerializeField] [Range(0f, 10f)] private float minDistance = 5;
-
     [SerializeField] private int spawnRate = 4;
 
-    private GameObject dracula;
+    private GameObject draculaPrefab;
     private List<PatrolPoint> patrolPoints;
     private List<PatrolPoint> nearestPatrolPoints;
+
     private MeshRenderer draculaMeshRenderer;
     private float timeSpawnRate;
     private float timeImpactEffect;
-    private bool isHeart;
-    private bool isVisible;
+    private bool isHeart= false;
+    private bool isVisible = false;
 
     private void Start()
     {
@@ -37,12 +39,12 @@ public class Dracula : MonoBehaviour
         nearestPatrolPoints = new List<PatrolPoint>();
         DraculaSpawn();
     }
-
-    void Update()
+    
+    private void FixedUpdate()
     {
         timeSpawnRate += Time.deltaTime;
 
-        if (timeSpawnRate >= spawnRate)
+        if (timeSpawnRate >= spawnRate && timeImpactEffect <= 0)
         {
             DraculaSpawn();
             timeSpawnRate = 0;
@@ -51,20 +53,32 @@ public class Dracula : MonoBehaviour
         VisibleMeshDracula();
         DraculaEffect();
     }
-    
+
     private void TogleVisionOn() => isVisible = true;
     private void TogleVisionOff() => isVisible = false;
     private void TogleHeartOn() => isHeart = true;
     private void TogleHeartOff() => isHeart = false;
+
+    private float transperant;
     private void VisibleMeshDracula()
     {
-        if (isHeart)
+        if (draculaMat != null && draculaMeshRenderer != null)
         {
-            draculaMeshRenderer.enabled = true;
-        }
-        else
-        {
-            draculaMeshRenderer.enabled = false;
+            if (isHeart)
+            {
+                draculaMeshRenderer.enabled = true;
+                transperant = Mathf.Lerp(transperant, 1, 0.1f);
+            }
+            else
+            {
+                transperant = Mathf.Lerp(transperant, 0, 0.1f);
+                if (transperant <= 0.1f)
+                {
+                    draculaMeshRenderer.enabled = false;
+                }
+            }
+            draculaMat.color = new Color(draculaMat.color.r, draculaMat.color.g, draculaMat.color.b, transperant);
+
         }
     } 
     private void DraculaEffect()
@@ -74,19 +88,20 @@ public class Dracula : MonoBehaviour
         {
             if (timeImpactEffect <= 0)
             {
-                Instantiate(draculaImpactEffectPrefab,transform.position, Quaternion.identity,null);
+                Instantiate(draculaImpactEffectPrefab,new Vector3(transform.position.x,0,transform.position.z), Quaternion.identity,null);
                 timeImpactEffect = draculaImpactEffectPrefab.LifeTimer; 
             }
-            
         }
     }
 
     private void DraculaSpawn()
     {
-        Destroy(dracula);
-
         FindNearestPatrolPoint();
 
+        if (nearestPatrolPoints.Count == 0) return;
+        
+        Destroy(draculaPrefab);
+        
         var patrolPoint = FindPatrolPointsToPlayer();
         
         var prefab = draculaPrefabsT;
@@ -100,33 +115,41 @@ public class Dracula : MonoBehaviour
 
         transform.position = patrolPoint.transform.position;
             
-        dracula = Instantiate(prefab, patrolPoint.transform.position, Quaternion.identity, transform);
-        draculaMeshRenderer = dracula.GetComponent<MeshRenderer>();
- 
-
+        draculaPrefab = Instantiate(prefab, patrolPoint.transform.position, Quaternion.identity, transform);
+        draculaMeshRenderer = draculaPrefab.GetComponent<MeshRenderer>();
         CleatNearestPatrolPoint();
     }
 
     private void FindNearestPatrolPoint()
     {
         var draculaPos = transform.position;
+        
         for (int i = 0; i < patrolPoints.Count; i++)
         {
             PatrolPoint patrolPoint = patrolPoints[i];
             var distance = Vector3.Distance(draculaPos, patrolPoint.transform.position);
+            
             if (distance < minDistance)
-            {
+            {   
+                RaycastHit hitInfo;
+                Ray ray = new Ray(transform.position, patrolPoint.transform.position - transform.position);
+                
+                Debug.DrawLine(transform.position, patrolPoint.transform.position, Color.blue,3f);
+                
+                if (Physics.Raycast(ray, out hitInfo,minDistance))
+                {
+                    Debug.DrawLine(transform.position, patrolPoint.transform.position, Color.red, 3f);
+                    continue;
+                }
                 nearestPatrolPoints.Add(patrolPoint);
             }
         }
     }
-
-    private const float MinDistToPlayer = 1000f;
-
+    
     private PatrolPoint FindPatrolPointsToPlayer()
     {
         var playerPos = Character.Instance.transform.position;
-        float minDist = MinDistToPlayer;
+        float minDist =  Mathf.Infinity;
         PatrolPoint spawnPoints = null;
         for (int i = 0; i < nearestPatrolPoints.Count; i++)
         {
