@@ -1,46 +1,112 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Lockpick : MonoBehaviour
 {
+    [SerializeField] private float timeToSuccess;
+    
     [SerializeField] private NoiseLevel noiseLevel;
     [SerializeField] private Texture2D mouseTexture;
-    [SerializeField] private RectTransform rectTransform;
+
+    [SerializeField] private GameObject panel;
+    [SerializeField] private RectTransform background;
+    [SerializeField] private RectTransform point;
+
+    private float timer;
     
-    private Camera mainCamera;
     private Vector2 randomImagePosition;
+    private Vector2 screenMousePosition;
+    
+    private bool isOpening;
+    private bool isSuccess;
+
     private void Start()
     {
-        mainCamera = Camera.main;
-        
-        randomImagePosition = new Vector2 (Random.Range(0, Screen.width - rectTransform.rect.size.x),
-            Random.Range(0, Screen.height - rectTransform.rect.size.y));
+        ResetPoint();
     }
 
     private void Update()
-    {
-        Vector3 screenMousePosition =Input.mousePosition;
-      //  Debug.Log(screenMousePosition);
-      Debug.Log(randomImagePosition);
-      rectTransform.anchoredPosition = Vector2.MoveTowards(rectTransform.anchoredPosition, randomImagePosition, 100 * Time.deltaTime );
-      if (rectTransform.anchoredPosition == randomImagePosition )
-      {
-          randomImagePosition = new Vector2(Random.Range(0, Screen.width - rectTransform.rect.size.x),
-              Random.Range(0, Screen.height - rectTransform.rect.size.y));
-      }
-        
+    { 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            noiseLevel.IncreaseLevel();
+            StartUnlock();
+        }
+
+       PointMove();
+    }
+
+    private void StartUnlock()
+    {
+        panel.SetActive(true);
+        
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.SetCursor(mouseTexture,Vector2.zero, CursorMode.Auto);
+        Cursor.visible = true;
+
+        isOpening = true;
+
+        timer = timeToSuccess;
+    }
+
+    private void PointMove()
+    {
+        if(!isOpening) return;
+
+        if (timer >= 0)
+            timer -= Time.deltaTime;
+        else
+            timer = 0;
+        
+        screenMousePosition = Input.mousePosition;
+        
+        if (point.anchoredPosition == randomImagePosition)
+        {
+            GenerateRandomPosition();
+        }
+        
+        point.anchoredPosition = Vector2.MoveTowards(point.anchoredPosition, randomImagePosition, 100 * Time.deltaTime);
+        
+        Vector2 localPoint;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(point, screenMousePosition, null, out localPoint);
+        
+        if (localPoint.x >= point.rect.xMin && localPoint.x <= point.rect.xMax &&
+            localPoint.y >= point.rect.yMin && localPoint.y <= point.rect.yMax)
+        {
+            //Debug.Log("Курсор внутри point");
+            if (timer <= 0.1f)
+            {
+                isSuccess = true;
+                ResetPoint();
+            }
+        }
+        else
+        {
+            //Debug.Log("Курсор вне point");
+            //isSuccess = false;
+            //timer = timeToSuccess;
             
-            Unlock();
+            //if(timer == timeToSuccess)
+            noiseLevel.IncreaseLevel();
+            ResetPoint();
         }
     }
 
-    private void Unlock()
+    private void ResetPoint()
     {
-        Cursor.SetCursor(mouseTexture,Vector2.zero, CursorMode.Auto);
-        Cursor.visible = true;
-       
+        isOpening = false;
+        
+        panel.SetActive(false);
+        
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        
+        point.anchoredPosition = Vector2.zero;
+    }
+
+    private void GenerateRandomPosition()
+    {
+        randomImagePosition = new Vector2(
+            Random.Range(background.rect.x + point.rect.size.x/2, background.rect.xMax - point.rect.xMax), 
+            Random.Range(background.rect.y + point.rect.size.y/2, background.rect.yMax - point.rect.yMax)
+        );
     }
 }
