@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum MoveType
@@ -11,7 +12,7 @@ public enum MoveType
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CharacterInputController))] 
-public class Character : MonoBehaviour
+public class Character : Player
 {/*
     // TO DO:
     [Range(1f,10f)][SerializeField] private float maxSpeedSit = 1f;
@@ -25,6 +26,11 @@ public class Character : MonoBehaviour
     private Rigidbody rb;
     private Vector3 moveVector;
 
+    private void Awake()
+    {
+        Init();
+    }
+    
     private void Start()
     {
         cameraMain.SetTarget(transform,TypeMoveCamera.WithRotation);

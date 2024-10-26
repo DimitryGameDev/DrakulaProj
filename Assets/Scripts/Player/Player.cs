@@ -6,38 +6,16 @@ public class Player : SingletonBase<Player>
     [SerializeField] private float stress;
     public float CurrentStress => stress;
 
-    //[SerializeField] private float money;
-    
-    private float maxStress = 100f;
-    public float MaxStress => maxStress;
+    private const float MaxStress = 100f;
     
     public UnityEvent changeStress;
     public UnityEvent onStress;
-
-    
-    /*
-    public float CurrentMoney => money;
-
-    public UnityEvent ChangeMoney;
-
-    public void AddMoney(float value)
-    {
-        money += value;
-        ChangeMoney.Invoke();
-    }
-
-    public void RemoveMoney(float value)
-    {
-        money -= value;
-        ChangeMoney.Invoke();
-    }
-    */
     
     public void AddStress(float value)
     {   
-        if (stress + value > maxStress)
+        if (stress + value > MaxStress)
         {           
-            stress = maxStress;
+            stress = MaxStress;
             changeStress.Invoke();
             onStress.Invoke();
             return;
