@@ -31,4 +31,5 @@ public class InteractiveObject: MonoBehaviour
     {
         onUse.Invoke();
     }
+    
 }

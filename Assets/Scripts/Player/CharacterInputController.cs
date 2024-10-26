@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 [RequireComponent (typeof(CapsuleCollider))]
-public class CharacterInputController : MonoBehaviour
+public class CharacterInputController : SingletonBase<CharacterInputController>
 {
     [SerializeField] private float maxDistanseHitCamera = 1f;
     [SerializeField] private bool heartEnabled;
@@ -12,8 +15,16 @@ public class CharacterInputController : MonoBehaviour
     
     private Vector3 playerMoveDirection;
     private float radiusCharacter;
-    private float hightCharacter;   
-    
+    private float hightCharacter;
+
+    public UnityEvent heartOn;
+    public UnityEvent heartOff;
+
+    private void Awake()
+    {
+        Init();
+    }
+
     public void Start()
     {
         heartEnabled = false;
@@ -149,9 +160,15 @@ public class CharacterInputController : MonoBehaviour
     private void HeartState()
     {
         if (Input.GetKeyDown(KeyCode.F))
+        {
             heartEnabled = true;
+            heartOn.Invoke();
+        }
         if (Input.GetKeyUp(KeyCode.F))
+        {
             heartEnabled = false;
+            heartOff.Invoke();
+        }
     }
     
     private void MainRay()
