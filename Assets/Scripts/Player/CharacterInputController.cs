@@ -1,18 +1,12 @@
+using System;
 using UnityEngine;
-
-/*
-public enum State
-{
-    None,
-    AdminPlace,
-    Monitor,
-}
-*/
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 [RequireComponent (typeof(CapsuleCollider))]
-public class CharacterInputController : MonoBehaviour
+public class CharacterInputController : SingletonBase<CharacterInputController>
 {
-    //[SerializeField] private float maxDistanseHitCamera = 1f;
+    [SerializeField] private float maxDistanseHitCamera = 1f;
     [SerializeField] private bool heartEnabled;
     public bool HeartEnabled => heartEnabled;
     
@@ -21,9 +15,16 @@ public class CharacterInputController : MonoBehaviour
     
     private Vector3 playerMoveDirection;
     private float radiusCharacter;
-    private float hightCharacter;   
-    
-    //public State stateMove;
+    private float hightCharacter;
+
+    public UnityEvent heartOn;
+    public UnityEvent heartOff;
+
+    private void Awake()
+    {
+        Init();
+    }
+
     public void Start()
     {
         heartEnabled = false;
@@ -43,26 +44,8 @@ public class CharacterInputController : MonoBehaviour
     private void Update()
     { 
         AdminCameraMove();
-        
+        MainRay();
         HeartState();
-        /*
-        if (stateMove == State.None)
-        {
-            
-            MainRay();
-        }
-
-        if (stateMove == State.AdminPlace)
-        {
-            AdminInPlaceCameraMove();
-            RayInPlace();            
-        }
-
-        if (stateMove == State.Monitor)
-        {
-            RayInPlace();
-        }  
-        */
     }
 
     private const string Horizontal = "Horizontal";
@@ -176,85 +159,36 @@ public class CharacterInputController : MonoBehaviour
 
     private void HeartState()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-            heartEnabled = true;
-        if (Input.GetKeyUp(KeyCode.E))
-            heartEnabled = false;
-    }
-    
-#if UNITY_STANDALONE || UNITY_EDITOR 
-/*
-    private void AdminInPlaceCameraMove()
-    {
-        float dirY = Input.GetAxis(yAxis);
-        float dirX = Input.GetAxis(xAxis);
-
-        admin.Camera.Rotate(dirX, dirY);
-
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            adminPlace.StandUp();
-            stateMove = State.None;
+            heartEnabled = true;
+            heartOn.Invoke();
+        }
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            heartEnabled = false;
+            heartOff.Invoke();
         }
     }
-
-    private RaycastHit lastHitCamera;
-
+    
     private void MainRay()
     {
         RaycastHit hitCamera;
-
-        if (Physics.Raycast(admin.Camera.transform.position, admin.Camera.transform.forward, out hitCamera, maxDistanseHitCamera))
+ 
+        if (Physics.Raycast(character.Camera.transform.position, character.Camera.transform.forward, out hitCamera, maxDistanseHitCamera))
         {
-            Debug.DrawRay(admin.Camera.transform.position, admin.Camera.transform.TransformDirection(Vector3.forward) * hitCamera.distance, Color.yellow);
-
-            if (hitCamera.collider.transform.parent?.GetComponent<AdminPlace>())
+           
+            Debug.DrawRay(character.Camera.transform.position, character.Camera.transform.forward * hitCamera.distance, Color.yellow, 0.01f);
+            if (hitCamera.collider.transform.root?.GetComponent<InteractiveObject>())
             {
-                adminPlace = hitCamera.collider.transform.parent?.GetComponent<AdminPlace>();
-                adminPlace.EnableOutline();
+                var use = hitCamera.collider.transform.root.GetComponent<InteractiveObject>();
 
-                if (Input.GetButtonDown("Fire1"))
+                if (Input.GetKeyDown(KeyCode.E))
                 {
-                    adminPlace.SeatDown();
-                    stateMove = State.AdminPlace;
+                    use.Use();
                 }
             }
         }
     }
 
-
-    private void RayInPlace()
-    {
-        RaycastHit hitCamera;
-        
-        if (Physics.Raycast(admin.Camera.transform.position, admin.Camera.transform.forward, out hitCamera, maxDistanseHitCamera))
-        {
-            Debug.DrawRay(admin.Camera.transform.position, admin.Camera.transform.TransformDirection(Vector3.forward) * hitCamera.distance, Color.yellow);
-
-            if (hitCamera.collider.transform?.GetComponent<MonitorController>())
-            {
-                monitorController = hitCamera.collider.transform?.GetComponent<MonitorController>();
-
-                if(stateMove == State.AdminPlace)
-                {
-                    monitorController.EnableOutline();
-                }
-
-                if (Input.GetButtonDown("Fire1") && stateMove != State.Monitor)
-                {
-                    monitorController.EnterMonitor(adminPlace);
-                    stateMove = State.Monitor;
-                }
-
-                if (Input.GetButtonDown("Fire2") && stateMove == State.Monitor && (Input.GetKeyDown(KeyCode.LeftAlt) == false))
-                {
-                    monitorController.ExitMonitor();
-                    stateMove = State.AdminPlace;
-                }
-
-            }
-        }
-    } 
-    */
-#endif
 }

@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum MoveType
@@ -25,9 +26,13 @@ public class Character : Player
     private Rigidbody rb;
     private Vector3 moveVector;
 
-    private void Start()
+    private void Awake()
     {
         Init();
+    }
+    
+    private void Start()
+    {
         cameraMain.SetTarget(transform,TypeMoveCamera.WithRotation);
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
