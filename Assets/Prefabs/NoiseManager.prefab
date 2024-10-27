@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2834467183317447084
+--- !u!1 &7947517721969356095
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4348842289790759822}
-  - component: {fileID: 3437918274545489615}
+  - component: {fileID: 7581141092685668381}
+  - component: {fileID: 707196784238923946}
   m_Layer: 0
-  m_Name: LockPick
+  m_Name: NoiseManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4348842289790759822
+--- !u!4 &7581141092685668381
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2834467183317447084}
+  m_GameObject: {fileID: 7947517721969356095}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 0.3}
+  m_LocalPosition: {x: 0, y: 1.3059711, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3437918274545489615
+--- !u!114 &707196784238923946
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2834467183317447084}
+  m_GameObject: {fileID: 7947517721969356095}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7187462cd332a0541b8e0e2d0ce61496, type: 3}
+  m_Script: {fileID: 11500000, guid: 4cc59ff7d5132034ca04159a101c769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bag: {fileID: 0}
-  onePersonCamera: {fileID: 0}
-  timeToSuccess: 3
-  noiseLevel: {fileID: 0}
-  interactiveObject: {fileID: 0}
-  mouseTexture: {fileID: 2800000, guid: b5db39f40da420646a68201ce460dad6, type: 3}
-  infoText: {fileID: 0}
-  panel: {fileID: 0}
-  background: {fileID: 0}
-  point: {fileID: 0}
+  maxLevel: 3
+  resetTime: 10
