@@ -20,6 +20,7 @@ public class PatrolPoint : MonoBehaviour
 
     private static readonly Color Gizmocolor = new(1, 0, 0, 0.3f);
 
+    
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Gizmocolor;
