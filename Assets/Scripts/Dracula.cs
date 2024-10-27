@@ -14,13 +14,13 @@ public class Dracula : MonoBehaviour
     [SerializeField] private GameObject draculaPrefabsT;
     [SerializeField] private ImpactEffect draculaImpactEffectPrefab;
     [SerializeField] private Material draculaMat;
-    [SerializeField] private PatrolPoint[] spawnPositions;
+    
     
     [Space] [Header("Dracula Settings")] 
     [SerializeField] [Range(0f, 10f)] private float minDistance = 5;
-    [SerializeField] private PatrolPoint startPoint;
     [SerializeField] private int spawnRate = 4;
     [SerializeField] private AudioClip spawnClip;
+    [SerializeField] private PatrolPoint[] spawnPositions;
     
     private Transform player;
     private GameObject draculaPrefab;
