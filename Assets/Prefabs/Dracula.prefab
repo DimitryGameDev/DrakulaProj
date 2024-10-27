@@ -56,7 +56,6 @@ MonoBehaviour:
   minDistance: 6
   spawnRate: 3
   spawnClips:
-  - {fileID: 8300000, guid: f6753f4b9f31d2743bae7db9d7cdb687, type: 3}
   - {fileID: 8300000, guid: 5dbefb0d6d692de4fb5dcc0b5afdb1ab, type: 3}
   spawnPositions:
   - {fileID: 0}
