@@ -19,7 +19,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     public UnityEvent heartOn;
     public UnityEvent heartOff;
-
+    public UnityEvent draculaAnim;
     private void Awake()
     {
         Init();
@@ -46,6 +46,10 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         MainRay();
         AdminCameraMove();
         HeartState();
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            draculaAnim?.Invoke();
+        }
     }
 
     private const string Horizontal = "Horizontal";

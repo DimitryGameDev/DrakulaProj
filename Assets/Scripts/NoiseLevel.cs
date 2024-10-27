@@ -25,6 +25,7 @@ public class NoiseLevel : MonoBehaviour
         if (currentLevel < maxLevel)
         {
             currentLevel++;
+            Debug.Log("Increased");
             OnIncreasedLevel?.Invoke();
             timer = resetTime;
         }
