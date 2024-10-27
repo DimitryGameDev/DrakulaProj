@@ -1,10 +1,14 @@
+using System;
 using System.Collections.Generic;
 using Common;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(InteractiveObject))]
 [RequireComponent(typeof(AudioSource))]
-public class Dracula : MonoBehaviour
+public class Dracula : SingletonBase<Dracula>
 {
     [SerializeField] private bool playOnAwake = true;
     [Space][Header("Dracula Prefabs")]
@@ -13,9 +17,7 @@ public class Dracula : MonoBehaviour
     [SerializeField] private GameObject draculaPrefabsUp;
     [SerializeField] private GameObject draculaPrefabsT;
     [SerializeField] private ImpactEffect draculaImpactEffectPrefab;
-    [SerializeField] private Material draculaMat;
-    
-    
+
     [Space] [Header("Dracula Settings")] 
     [SerializeField] [Range(0f, 10f)] private float minDistance = 5;
     [SerializeField] private int spawnRate = 4;
@@ -33,6 +35,13 @@ public class Dracula : MonoBehaviour
     
     private bool isHeart = false;
     private bool isVisible = false;
+
+    public UnityEvent DraculaInPlayer;
+
+    private void Awake()
+    {
+        Init();
+    }
 
     private void Start()
     {
@@ -71,27 +80,22 @@ public class Dracula : MonoBehaviour
     private void TogleVisionOff() => isVisible = false;
     private void TogleHeartOn() => isHeart = true;
     private void TogleHeartOff() => isHeart = false;
-
-    private float transperant;
+    
     private void VisibleMeshDracula()
     {
-        if (draculaMat != null && draculaMeshRenderer != null)
+        if (draculaMeshRenderer != null)
         {
             if (isHeart)
             {
                 draculaMeshRenderer.enabled = true;
-                transperant = Mathf.Lerp(transperant, 1, 0.1f);
+                
             }
             else
             {
-                transperant = Mathf.Lerp(transperant, 0, 0.1f);
-                if (transperant <= 0.1f)
-                {
-                    draculaMeshRenderer.enabled = false;
-                }
-            }
-            draculaMat.color = new Color(draculaMat.color.r, draculaMat.color.g, draculaMat.color.b, transperant);
 
+                draculaMeshRenderer.enabled = false;
+
+            }
         }
     } 
     private void DraculaEffect()
@@ -108,7 +112,10 @@ public class Dracula : MonoBehaviour
     }
     private void DraculaRotateToPlayer() 
     {
-        transform.rotation = Quaternion.LookRotation(player.position - transform.position);
+        if (draculaPrefab != null)
+        {
+            draculaPrefab.transform.LookAt(new Vector3(player.position.x,0,player.position.z));
+        }
     }
     public void DraculaSpawn()
     {
@@ -131,9 +138,15 @@ public class Dracula : MonoBehaviour
         Destroy(draculaPrefab);
         
         var patrolPoint = FindPatrolPointsToPlayer();
+
+        if (patrolPoint.DraculaPos == DraculaPosType.Player)
+        {
+            KillPlayer();
+            return;
+        }
         
         var prefab = draculaPrefabsT;
-
+        
         if (patrolPoint.DraculaPos == DraculaPosType.Sit 
             && draculaPrefabsSit != null) prefab = draculaPrefabsSit;
         if (patrolPoint.DraculaPos == DraculaPosType.Stay 
@@ -148,7 +161,16 @@ public class Dracula : MonoBehaviour
         CleatNearestPatrolPoint();
     
     }
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        KillPlayer();
+    }
+    private void KillPlayer()
+    {
+        DraculaInPlayer.Invoke();
+        enabled = false;
+    }
+
     private void FindNearestPatrolPoint()
     {
         var draculaPos = transform.position;
@@ -167,9 +189,14 @@ public class Dracula : MonoBehaviour
                 
                 if (Physics.Raycast(ray, out hitInfo,minDistance))
                 {
+                    if (hitInfo.collider.transform.GetComponent<Character>() != null)
+                    {
+                        nearestPatrolPoints.Add(patrolPoint);
+                    }
                     Debug.DrawLine(transform.position, patrolPoint.transform.position, Color.red, 3f);
                     continue;
                 }
+ 
                 nearestPatrolPoints.Add(patrolPoint);
             }
         }
