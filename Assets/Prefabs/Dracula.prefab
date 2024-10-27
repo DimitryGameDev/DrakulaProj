@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7725249361171625947}
   - component: {fileID: 7595149920051348018}
   - component: {fileID: 1927389643681340454}
+  - component: {fileID: 3688468272676090876}
   m_Layer: 0
   m_Name: Dracula
   m_TagString: Untagged
@@ -47,20 +48,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnAwake: 0
-  draculaPrefabsStay: {fileID: 5010678280393002059, guid: 36a2e33343b7b0942b4bb4c6a284deb8, type: 3}
+  draculaPrefabsStay: {fileID: 1048065073813441343, guid: 2bba16bbd7ae4074687d1f509eccc04c, type: 3}
   draculaPrefabsSit: {fileID: 4952164425413839822, guid: 3732402b815ef0440a414eb7b43b9981, type: 3}
   draculaPrefabsUp: {fileID: 4615541415238061755, guid: 9ec5a297330b42b449a4087578efdd72, type: 3}
   draculaPrefabsT: {fileID: 0}
   draculaImpactEffectPrefab: {fileID: 3372215897970909540, guid: b050a9eceb45b064b98b0640343fb692, type: 3}
-  draculaMat: {fileID: 2100000, guid: 74a2384630cf5314cbb4ddd24d531e7e, type: 2}
   minDistance: 6
-  spawnRate: 3
+  spawnRate: 5
   spawnClips:
   - {fileID: 8300000, guid: 5dbefb0d6d692de4fb5dcc0b5afdb1ab, type: 3}
   spawnPositions:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  DraculaInPlayer:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7595149920051348018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,3 +181,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &3688468272676090876
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8228517700685265482}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.48119545
+  m_Height: 3.0143309
+  m_Direction: 1
+  m_Center: {x: -0.02749443, y: 0.5142908, z: 0.005300045}

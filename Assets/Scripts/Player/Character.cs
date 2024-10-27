@@ -82,6 +82,7 @@ public class Character : Player
 
                 break;
             }
+            
             case MoveType.Run:
             {
                 if (rb.velocity.magnitude >= maxSpeedRun)
@@ -92,9 +93,12 @@ public class Character : Player
 
                 break;
             }
+            
+            /*
             case MoveType.Air:
                 rb.velocity = new Vector3(Mathf.Lerp(rb.velocity.x,0,AirMoveLimit), rb.velocity.y, Mathf.Lerp(rb.velocity.z,0,AirMoveLimit));
                 break;
+            */
             default:
                 throw new ArgumentOutOfRangeException(nameof(moveType), moveType, null);
         }

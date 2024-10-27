@@ -62,20 +62,22 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         
         var ground = IsGrounded();
         
-        if (Input.GetButton("Jump") && ground)
+        if (Input.GetButton("Jump") /*&& ground*/)
         {
             //character.Jump();
         }
         
         playerMoveDirection = new Vector3(dirX, 0, dirZ);
 
-        if (IsWall() && !ground) return;
+        //if (IsWall() && !ground) return;
         
+        /*
         if (!ground)
         {
             character.Move(playerMoveDirection, MoveType.Air);
             return;
         }
+        */
         
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -95,12 +97,13 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         
         character.CameraMove(dirX, dirY);
     }
+
     private bool IsGrounded()
     {
         RaycastHit hitLegs;
         var vectorDown = character.transform.TransformDirection(Vector3.down);
         var maxDistance = hightCharacter / 2 + 0.001f;
-        
+
         if (Physics.Raycast(character.transform.position - new Vector3(radiusCharacter, 0, 0), vectorDown, out hitLegs, maxDistance))
         {
             Debug.DrawRay(character.transform.position - new Vector3(radiusCharacter, 0, 0), vectorDown * hitLegs.distance, Color.red);
@@ -127,6 +130,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
         return false;
     }
+
     private bool IsWall()
     {
         RaycastHit hitLegs;

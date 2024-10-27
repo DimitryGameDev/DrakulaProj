@@ -1,27 +1,23 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Death : MonoBehaviour
 {
-   
-    
-    [SerializeField] GameObject draculaPrefab;
+    [SerializeField]private GameObject draculaPrefab;
 
     private void Start()
     {
+        Dracula.Instance.DraculaInPlayer.AddListener(Anime);
         CharacterInputController.Instance.draculaAnim.AddListener(Anime);
         draculaPrefab.SetActive(false);
     }
 
-    private void Anime()
+    public void Anime()
     {
         draculaPrefab.SetActive(true);
-        draculaPrefab.GetComponent<Animator>().Play("Attack");
-       
+        var animator = draculaPrefab.GetComponent<Animator>();
+        animator.Play("Attack");
+
     }
 
     void OnDestroy()

@@ -586,6 +586,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (29)
@@ -747,6 +751,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -919,6 +927,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -1285,6 +1297,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -1763,6 +1779,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (16)
@@ -1824,6 +1844,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -1887,6 +1911,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (7)
@@ -1948,6 +1976,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -2072,10 +2104,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7725249361171625947, guid: 4ff9b714b11f9a744b826c976d05204f, type: 3}
-      propertyPath: spawnRate
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7725249361171625947, guid: 4ff9b714b11f9a744b826c976d05204f, type: 3}
       propertyPath: spawnPositions.Array.data[0]
       value: 
       objectReference: {fileID: 1512755716}
@@ -2093,7 +2121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8205711772304318754, guid: 4ff9b714b11f9a744b826c976d05204f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.01
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8205711772304318754, guid: 4ff9b714b11f9a744b826c976d05204f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2183,6 +2211,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -2389,8 +2421,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642624846}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41.2, y: 0.479, z: -20.56}
+  m_LocalRotation: {x: -0.022196919, y: -0.0012663101, z: 0.0003543302, w: -0.99975276}
+  m_LocalPosition: {x: 7.4996157, y: 0.50016665, z: -22.023464}
   m_LocalScale: {x: 4.6137, y: 0.49766, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2553,6 +2585,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -2878,17 +2914,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 742548594}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &748897678 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2280108597574474885, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-  m_PrefabInstance: {fileID: 3204719585770374629}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa6af49966e4b5e4d8934386ab2cc14a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &768329044
 GameObject:
   m_ObjectHideFlags: 0
@@ -3041,6 +3066,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -3414,6 +3443,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (14)
@@ -3476,6 +3509,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (30)
@@ -3485,86 +3522,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee5c98f81edade54894316fa3665899f, type: 3}
---- !u!1001 &814976372
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1200770904}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.2523229
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.1099999
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 8.043092
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.17725694
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.98416466
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 181.81
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      propertyPath: m_Name
-      value: "\u0414\u0440\u0430\u0444 \u0413\u0440\u0430\u043A\u0443\u043B\u0430V1"
-      objectReference: {fileID: 0}
-    - target: {fileID: 5866666021909216657, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: a4e137e3ae5f53d458e156a66b515a88, type: 2}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 893043475}
-  m_SourcePrefab: {fileID: 100100000, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
 --- !u!1 &821226417
 GameObject:
   m_ObjectHideFlags: 0
@@ -3828,6 +3785,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (21)
@@ -3942,112 +3903,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 885720760}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &893043472 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-  m_PrefabInstance: {fileID: 814976372}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &893043473 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7530b0f26734d83419e11951bbf492b4, type: 3}
-  m_PrefabInstance: {fileID: 814976372}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &893043475
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893043472}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c202bf4533bec1a4a9940ab2fe1e0642, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &896534109
 GameObject:
   m_ObjectHideFlags: 0
@@ -4411,6 +4266,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (28)
@@ -4572,6 +4431,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -5386,6 +5249,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (11)
@@ -5452,6 +5319,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -5620,6 +5491,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (26)
@@ -5787,6 +5662,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (34)
@@ -5844,6 +5723,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (40)
@@ -5900,6 +5783,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -5962,6 +5849,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -6329,6 +6220,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (20)
@@ -6338,125 +6233,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee5c98f81edade54894316fa3665899f, type: 3}
---- !u!1 &1200770877 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7706991297277966182, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-  m_PrefabInstance: {fileID: 3204719585770374629}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &1200770896
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1200770877}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!4 &1200770904 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 487218471206118414, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-  m_PrefabInstance: {fileID: 3204719585770374629}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1200770905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1200770877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83c7a68e15ce54c25a87641a3e114cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  draculaPrefab: {fileID: 893043472}
 --- !u!1 &1205441552
 GameObject:
   m_ObjectHideFlags: 0
@@ -7145,6 +6921,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (19)
@@ -7307,6 +7087,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (17)
@@ -7368,6 +7152,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -7530,6 +7318,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -8133,7 +7925,7 @@ Transform:
   m_GameObject: {fileID: 1407574658}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8338,6 +8130,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint
@@ -8395,6 +8191,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (38)
@@ -8451,6 +8251,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -8513,6 +8317,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -8797,6 +8605,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (36)
@@ -8853,6 +8665,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -9241,6 +9057,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (8)
@@ -9407,6 +9227,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -9979,6 +9803,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (23)
@@ -10466,6 +10294,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (33)
@@ -10522,6 +10354,10 @@ PrefabInstance:
     - target: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
@@ -10695,6 +10531,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (22)
@@ -10716,7 +10556,7 @@ GameObject:
   - component: {fileID: 2081341264}
   - component: {fileID: 2081341263}
   - component: {fileID: 2081341262}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11068,6 +10908,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2624195754851953038, guid: ee5c98f81edade54894316fa3665899f, type: 3}
+      propertyPath: draculaPos
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222770725585558051, guid: ee5c98f81edade54894316fa3665899f, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (31)
@@ -11187,75 +11031,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2409594483910024187, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-      propertyPath: stepSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 205ef3677a961d742ad3e23bbcfa0a9e, type: 3}
-    - target: {fileID: 2409594483910024187, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-      propertyPath: stepLenght
-      value: 0.6
+    - target: {fileID: 786862915565640646, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
+      propertyPath: heartEnabled
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2409594483910024187, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-      propertyPath: stepSounds.Array.size
+    - target: {fileID: 786862915565640646, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
+      propertyPath: maxDistanseHitCamera
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 2409594483910024187, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-      propertyPath: stepSounds.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: c22ba271f1e8c6249beeeeacc03e559a, type: 3}
-    - target: {fileID: 2409594483910024187, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-      propertyPath: stepSounds.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 50d3c0404ca8d5f4eb652fee1822644d, type: 3}
-    - target: {fileID: 2409594483910024187, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-      propertyPath: stepSounds.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: 50d3c0404ca8d5f4eb652fee1822644d, type: 3}
-    - target: {fileID: 2409594483910024187, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-      propertyPath: stepSounds.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 50d3c0404ca8d5f4eb652fee1822644d, type: 3}
-    - target: {fileID: 2409594483910024187, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-      propertyPath: stepSounds.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: 50d3c0404ca8d5f4eb652fee1822644d, type: 3}
-    - target: {fileID: 2409594483910024187, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-      propertyPath: stepSounds.Array.data[5]
-      value: 
-      objectReference: {fileID: 8300000, guid: 50d3c0404ca8d5f4eb652fee1822644d, type: 3}
-    - target: {fileID: 2860855700448144896, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-      propertyPath: m_Color.b
-      value: 0.57169807
-      objectReference: {fileID: 0}
-    - target: {fileID: 2860855700448144896, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-      propertyPath: m_Color.g
-      value: 0.8038027
-      objectReference: {fileID: 0}
-    - target: {fileID: 2860855700448144896, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3447343984335801941, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-      propertyPath: heartPrefab
-      value: 
-      objectReference: {fileID: 748897678}
+      propertyPath: maxDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7706991297277966182, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 487218471206118414, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 893043473}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7706991297277966182, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1200770896}
-    - targetCorrespondingSourceObject: {fileID: 7706991297277966182, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1200770905}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
