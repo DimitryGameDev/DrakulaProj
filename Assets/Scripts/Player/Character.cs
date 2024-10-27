@@ -1,6 +1,6 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum MoveType
 {
@@ -12,6 +12,7 @@ public enum MoveType
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CharacterInputController))] 
+[RequireComponent(typeof(AudioSource))]
 public class Character : Player
 {/*
     // TO DO:
@@ -22,10 +23,13 @@ public class Character : Player
     [Range(1f,10f)][SerializeField] private float maxSpeedWalk = 3f;
     [Range(1f,10f)][SerializeField] private float maxSpeedRun = 6f;
     [SerializeField] private OnePersonCamera cameraMain; 
+    [SerializeField] private float stepLenght; 
+    [SerializeField] private AudioClip[] stepSounds; 
     public OnePersonCamera Camera => cameraMain;
+    private AudioSource audioSource;
     private Rigidbody rb;
     private Vector3 moveVector;
-
+    private float stepTime;
     private void Awake()
     {
         Init();
@@ -34,10 +38,11 @@ public class Character : Player
     private void Start()
     {
         cameraMain.SetTarget(transform,TypeMoveCamera.WithRotation);
+        audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
     }
-
+    
     private const float Acceleration = 2000f;
     private const float AirMoveLimit = 0.300f;
     
@@ -71,6 +76,7 @@ public class Character : Player
             {
                 if (rb.velocity.magnitude >= maxSpeedWalk)
                 {
+                    StepsPlay();
                     rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeedWalk);
                 }
 
@@ -80,6 +86,7 @@ public class Character : Player
             {
                 if (rb.velocity.magnitude >= maxSpeedRun)
                 {
+                    StepsPlay();
                     rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeedRun);
                 }
 
@@ -92,7 +99,16 @@ public class Character : Player
                 throw new ArgumentOutOfRangeException(nameof(moveType), moveType, null);
         }
     }
-    
+
+    private void StepsPlay()
+    {
+        stepTime += Time.deltaTime;
+        if (stepTime >= stepLenght)
+        {
+            audioSource.PlayOneShot(stepSounds[Random.Range(0,stepSounds.Length)]);
+            stepTime = 0;
+        }
+    }
     private void CharacterRotate()
     {
         transform.rotation = new Quaternion(0, cameraMain.transform.rotation.y,0, cameraMain.transform.rotation.w);

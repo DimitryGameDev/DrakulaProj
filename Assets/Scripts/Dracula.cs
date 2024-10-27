@@ -1,30 +1,37 @@
-using System;
 using System.Collections.Generic;
 using Common;
-using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(InteractiveObject))]
+[RequireComponent(typeof(AudioSource))]
 public class Dracula : MonoBehaviour
 {
-    [Header("Dracula Prefabs")] 
+    [SerializeField] private bool playOnAwake = true;
+    [Space][Header("Dracula Prefabs")]
     [SerializeField] private GameObject draculaPrefabsStay;
     [SerializeField] private GameObject draculaPrefabsSit;
     [SerializeField] private GameObject draculaPrefabsUp;
     [SerializeField] private GameObject draculaPrefabsT;
     [SerializeField] private ImpactEffect draculaImpactEffectPrefab;
     [SerializeField] private Material draculaMat;
+    
+    
     [Space] [Header("Dracula Settings")] 
     [SerializeField] [Range(0f, 10f)] private float minDistance = 5;
     [SerializeField] private int spawnRate = 4;
-
+    [SerializeField] private AudioClip[] spawnClips;
+    [SerializeField] private PatrolPoint[] spawnPositions;
+    
+    private Transform player;
     private GameObject draculaPrefab;
     private List<PatrolPoint> patrolPoints;
     private List<PatrolPoint> nearestPatrolPoints;
-
+    private AudioSource source;
     private MeshRenderer draculaMeshRenderer;
     private float timeSpawnRate;
     private float timeImpactEffect;
-    private bool isHeart= false;
+    
+    private bool isHeart = false;
     private bool isVisible = false;
 
     private void Start()
@@ -34,10 +41,15 @@ public class Dracula : MonoBehaviour
         GetComponent<InteractiveObject>().onVision.AddListener(TogleVisionOn);
         GetComponent<InteractiveObject>().onHide.AddListener(TogleVisionOff);
         
-        patrolPoints = new List<PatrolPoint>();
-        FillPatrolPointsInScene();
         nearestPatrolPoints = new List<PatrolPoint>();
-        DraculaSpawn();
+        patrolPoints = new List<PatrolPoint>();
+        
+        FillPatrolPointsInScene();
+        
+        player = Character.Instance.transform;
+        source = GetComponent<AudioSource>();
+        
+        if (!playOnAwake)enabled = false;
     }
     
     private void FixedUpdate()
@@ -46,11 +58,12 @@ public class Dracula : MonoBehaviour
 
         if (timeSpawnRate >= spawnRate && timeImpactEffect <= 0)
         {
-            DraculaSpawn();
+            DraculaMove();
             timeSpawnRate = 0;
         }
 
         VisibleMeshDracula();
+        DraculaRotateToPlayer();
         DraculaEffect();
     }
 
@@ -88,13 +101,28 @@ public class Dracula : MonoBehaviour
         {
             if (timeImpactEffect <= 0)
             {
-                Instantiate(draculaImpactEffectPrefab,new Vector3(transform.position.x,0,transform.position.z), Quaternion.identity,null);
+                Instantiate(draculaImpactEffectPrefab,new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity,null);
                 timeImpactEffect = draculaImpactEffectPrefab.LifeTimer; 
             }
         }
     }
+    private void DraculaRotateToPlayer() 
+    {
+        transform.rotation = Quaternion.LookRotation(player.position - transform.position);
+    }
+    public void DraculaSpawn()
+    {
+        transform.position = spawnPositions[Random.Range(0,spawnPositions.Length)].transform.position;
+        source.PlayOneShot(spawnClips[Random.Range(0,spawnClips.Length)]);
+        enabled = true;
+    }
+    
+    public void DraculaDeSpawn()
+    {
+        enabled = false;
+    }
 
-    private void DraculaSpawn()
+    private void DraculaMove()
     {
         FindNearestPatrolPoint();
 
@@ -114,12 +142,13 @@ public class Dracula : MonoBehaviour
             && draculaPrefabsUp != null) prefab = draculaPrefabsUp;
 
         transform.position = patrolPoint.transform.position;
-            
+          
         draculaPrefab = Instantiate(prefab, patrolPoint.transform.position, Quaternion.identity, transform);
         draculaMeshRenderer = draculaPrefab.GetComponent<MeshRenderer>();
         CleatNearestPatrolPoint();
+    
     }
-
+    
     private void FindNearestPatrolPoint()
     {
         var draculaPos = transform.position;
@@ -148,7 +177,7 @@ public class Dracula : MonoBehaviour
     
     private PatrolPoint FindPatrolPointsToPlayer()
     {
-        var playerPos = Character.Instance.transform.position;
+        var playerPos = player.transform.position;
         float minDist =  Mathf.Infinity;
         PatrolPoint spawnPoints = null;
         for (int i = 0; i < nearestPatrolPoints.Count; i++)
@@ -181,4 +210,6 @@ public class Dracula : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, minDistance);
     }
+    
+    
 }
