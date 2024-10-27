@@ -3,6 +3,7 @@ using UnityEngine;
 
 public enum DraculaPosType
 {
+    Player,
     T,
     Sit,
     Stay,

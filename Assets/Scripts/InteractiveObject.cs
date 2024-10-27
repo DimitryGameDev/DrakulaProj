@@ -9,15 +9,16 @@ public class InteractiveObject: MonoBehaviour
     public UnityEvent onUse;
     
     /// <summary>
-    ///Вызывается когда камера игрока видит одбьект
+    ///Вызывается когда камера игрока видит обьект
     /// </summary>
     public void Visible()
     {
         onVision.Invoke();
+        
     }
     
     /// <summary>
-    /// Вызывается когда камера игрока не видит одбьект
+    /// Вызывается когда камера игрока не видит объект
     /// </summary>
     public void Hide()
     {

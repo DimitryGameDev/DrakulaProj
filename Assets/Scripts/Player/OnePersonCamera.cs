@@ -16,8 +16,7 @@ public class OnePersonCamera : MonoBehaviour
     [Range(1f, 5f)][SerializeField] private float cameraSmothRotateSpead = 5f;
     [SerializeField] private float cameraOffsetY = 2f;
     
-    
-    private TypeMoveCamera typeMove;
+    public TypeMoveCamera typeMove;
     private Transform target;
     private Camera mainCamera;
     private Vector2 rotation;
@@ -30,7 +29,7 @@ public class OnePersonCamera : MonoBehaviour
 
     public void Rotate(float dirX, float dirY)
     {
-        if (typeMove != TypeMoveCamera.None)
+        if (typeMove == TypeMoveCamera.None)
         {
             return;
         }
@@ -59,12 +58,12 @@ public class OnePersonCamera : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, target.position + new Vector3(0, cameraOffsetY), Time.deltaTime * cameraSmothMoveSpead);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, target.rotation, cameraSmothRotateSpead);
             }
-            else
+            /*else
             {
                 rotation.x = target.rotation.eulerAngles.y;
                 rotation.y = target.rotation.eulerAngles.x;
                 typeMove = TypeMoveCamera.None;
-            }
+            }*/
         }
 
         if (typeMove == TypeMoveCamera.OnlyMove)
@@ -73,10 +72,10 @@ public class OnePersonCamera : MonoBehaviour
             {
                 transform.position = Vector3.MoveTowards(transform.position, target.position + new Vector3(0, cameraOffsetY), Time.deltaTime * cameraSmothMoveSpead);
             }
-            else
+            /*else
             {
                 typeMove = TypeMoveCamera.None;
-            }
+            }*/
         }
 
     }
