@@ -2,55 +2,71 @@ using UnityEngine;
 
 public class Lockpick : MonoBehaviour
 {
-    [SerializeField] private float timeToSuccess;
+    [Header("Player")]
+    [SerializeField] private Bag bag;
+    [SerializeField] private OnePersonCamera onePersonCamera;
     
+    [Header("Base")]
+    [SerializeField] private float timeToSuccess;
     [SerializeField] private NoiseLevel noiseLevel;
+    [SerializeField] private InteractiveObject interactiveObject;
+    
+    [Header("UI")]
     [SerializeField] private Texture2D mouseTexture;
-
+    [SerializeField] private GameObject infoText;
     [SerializeField] private GameObject panel;
     [SerializeField] private RectTransform background;
     [SerializeField] private RectTransform point;
-
+    
+    private Character character;
+    
     private float timer;
+    private float textTimer;
     
     private Vector2 randomImagePosition;
     private Vector2 screenMousePosition;
     
     private bool isOpening;
-    private bool isSuccess;
 
     private void Start()
     {
+        infoText.SetActive(false);
+        
+        character = bag.GetComponent<Character>();
         ResetPoint();
     }
 
     private void Update()
     { 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            StartUnlock();
-        }
-
        PointMove();
+       InfoText();
     }
 
-    private void StartUnlock()
+    public void StartUnlock()
     {
+        if (bag.GetKeyAmount() <= 0)
+        {
+            textTimer = timeToSuccess;
+            return;
+        }
+
         panel.SetActive(true);
-        
+
         Cursor.lockState = CursorLockMode.None;
-        Cursor.SetCursor(mouseTexture,Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(mouseTexture, Vector2.zero, CursorMode.Auto);
         Cursor.visible = true;
-
-        isOpening = true;
-
+        
         timer = timeToSuccess;
+        isOpening = true;
     }
 
     private void PointMove()
     {
         if(!isOpening) return;
 
+        onePersonCamera.typeMove = TypeMoveCamera.None;
+        
+        
         if (timer >= 0)
             timer -= Time.deltaTime;
         else
@@ -71,20 +87,17 @@ public class Lockpick : MonoBehaviour
         if (localPoint.x >= point.rect.xMin && localPoint.x <= point.rect.xMax &&
             localPoint.y >= point.rect.yMin && localPoint.y <= point.rect.yMax)
         {
-            //Debug.Log("Курсор внутри point");
             if (timer <= 0.1f)
             {
-                isSuccess = true;
+                bag.DrawKey(1);
                 ResetPoint();
+                Destroy(gameObject);
+                
+                //OpenDoorlogic
             }
         }
         else
         {
-            //Debug.Log("Курсор вне point");
-            //isSuccess = false;
-            //timer = timeToSuccess;
-            
-            //if(timer == timeToSuccess)
             noiseLevel.IncreaseLevel();
             ResetPoint();
         }
@@ -100,6 +113,8 @@ public class Lockpick : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         
         point.anchoredPosition = Vector2.zero;
+        
+        onePersonCamera.typeMove = TypeMoveCamera.WithRotation;
     }
 
     private void GenerateRandomPosition()
@@ -108,5 +123,16 @@ public class Lockpick : MonoBehaviour
             Random.Range(background.rect.x + point.rect.size.x/2, background.rect.xMax - point.rect.xMax), 
             Random.Range(background.rect.y + point.rect.size.y/2, background.rect.yMax - point.rect.yMax)
         );
+    }
+
+    private void InfoText()
+    {
+        if(textTimer>=0)
+            textTimer -= Time.deltaTime;
+
+        if (textTimer > 0)
+            infoText.SetActive(true);
+        else
+            infoText.SetActive(false);
     }
 }

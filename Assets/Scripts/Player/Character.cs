@@ -117,8 +117,11 @@ public class Character : Player
     
     public void CameraMove(float dirX,float dirY)
     {
-        cameraMain.Rotate(dirX, dirY);
-        CharacterRotate();
+        if (cameraMain.typeMove != TypeMoveCamera.None)
+        {
+            cameraMain.Rotate(dirX, dirY);
+            CharacterRotate();
+        }
     }
     
     /*

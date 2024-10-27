@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 [RequireComponent (typeof(CapsuleCollider))]
 public class CharacterInputController : SingletonBase<CharacterInputController>
