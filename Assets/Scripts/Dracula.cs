@@ -19,7 +19,7 @@ public class Dracula : MonoBehaviour
     [Space] [Header("Dracula Settings")] 
     [SerializeField] [Range(0f, 10f)] private float minDistance = 5;
     [SerializeField] private int spawnRate = 4;
-    [SerializeField] private AudioClip spawnClip;
+    [SerializeField] private AudioClip[] spawnClips;
     [SerializeField] private PatrolPoint[] spawnPositions;
     
     private Transform player;
@@ -113,7 +113,7 @@ public class Dracula : MonoBehaviour
     public void DraculaSpawn()
     {
         transform.position = spawnPositions[Random.Range(0,spawnPositions.Length)].transform.position;
-        source.PlayOneShot(spawnClip);
+        source.PlayOneShot(spawnClips[Random.Range(0,spawnClips.Length)]);
         enabled = true;
     }
     
