@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
-using Common;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(InteractiveObject))]
@@ -11,11 +10,13 @@ public class Dracula : SingletonBase<Dracula>
 {
     [SerializeField] private bool playOnAwake = true;
     [Space][Header("Dracula Prefabs")]
+    [SerializeField] private GameObject startPrefab;
     [SerializeField] private GameObject draculaPrefabsStay;
     [SerializeField] private GameObject draculaPrefabsSit;
     [SerializeField] private GameObject draculaPrefabsUp;
     [SerializeField] private GameObject draculaPrefabsT;
-    [SerializeField] private ImpactEffect draculaImpactEffectPrefab;
+    [SerializeField] private DraculaSpawnEffect draculaSpawnEffectPrefab;
+    [SerializeField] private ImpactEffect visionEffectPrefab;
 
     [Space] [Header("Dracula Settings")] 
     [SerializeField] [Range(0f, 10f)] private float minDistance = 5;
@@ -29,8 +30,8 @@ public class Dracula : SingletonBase<Dracula>
     private List<PatrolPoint> nearestPatrolPoints;
     private AudioSource source;
     private MeshRenderer draculaMeshRenderer;
+    private DraculaSpawnEffect draculaSpawnEffect;
     private float timeSpawnRate;
-    private float timeImpactEffect;
     
     private bool isHeart = false;
     private bool isVisible = false;
@@ -62,50 +63,70 @@ public class Dracula : SingletonBase<Dracula>
     
     private void FixedUpdate()
     {
+        if (draculaSpawnEffect != null && draculaSpawnEffect.IsPlaying())
+        {
+            DraculaState();
+            return;
+        }
+        
         timeSpawnRate += Time.deltaTime;
-
-        if (timeSpawnRate >= spawnRate && timeImpactEffect <= 0)
+        
+        if (timeSpawnRate >= spawnRate)
         {
             DraculaMove();
             timeSpawnRate = 0;
         }
+        DraculaState();
+    }
 
+    private void DraculaState()
+    {
         VisibleMeshDracula();
         DraculaRotateToPlayer();
         DraculaEffect();
     }
-
+    
     private void TogleVisionOn() => isVisible = true;
     private void TogleVisionOff() => isVisible = false;
     private void TogleHeartOn() => isHeart = true;
     private void TogleHeartOff() => isHeart = false;
-    
+
+    private bool isActiveMesh;
     private void VisibleMeshDracula()
     {
         if (draculaMeshRenderer != null)
         {
-            if (isHeart)
+            if (isVisible && isHeart || isHeart && isActiveMesh)
             {
-                draculaMeshRenderer.enabled = true;
-                
+                if (draculaMeshRenderer.enabled == false)
+                {
+                    isActiveMesh = true;
+                    draculaMeshRenderer.enabled = true;
+                    Instantiate(visionEffectPrefab,transform.position,Quaternion.identity);
+                }
             }
             else
             {
-
-                draculaMeshRenderer.enabled = false;
-
+                if (draculaMeshRenderer.enabled == true)
+                {
+                    isActiveMesh = false;
+                    draculaMeshRenderer.enabled = false;
+                    Instantiate(visionEffectPrefab,transform.position,Quaternion.identity);
+                }
             }
         }
     } 
     private void DraculaEffect()
     {
-        timeImpactEffect -= Time.deltaTime;
         if (isVisible && isHeart)
         {
-            if (timeImpactEffect <= 0)
+            if (draculaSpawnEffect == null)
             {
-                Instantiate(draculaImpactEffectPrefab,new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity,null);
-                timeImpactEffect = draculaImpactEffectPrefab.LifeTimer; 
+                draculaSpawnEffect = Instantiate(draculaSpawnEffectPrefab,new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity);
+            }
+            else if (!draculaSpawnEffect.IsPlaying())
+            {
+                draculaSpawnEffect = Instantiate(draculaSpawnEffectPrefab,new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity);
             }
         }
     }
@@ -120,6 +141,9 @@ public class Dracula : SingletonBase<Dracula>
     {
         transform.position = spawnPositions[Random.Range(0,spawnPositions.Length)].transform.position;
         source.PlayOneShot(spawnClips[Random.Range(0,spawnClips.Length)]);
+        draculaPrefab = Instantiate(startPrefab, transform.position, Quaternion.identity, transform);
+        draculaMeshRenderer = draculaPrefab.GetComponent<MeshRenderer>();
+        draculaMeshRenderer.enabled = false;
         enabled = true;
     }
     
@@ -157,6 +181,7 @@ public class Dracula : SingletonBase<Dracula>
           
         draculaPrefab = Instantiate(prefab, patrolPoint.transform.position, Quaternion.identity, transform);
         draculaMeshRenderer = draculaPrefab.GetComponent<MeshRenderer>();
+        draculaMeshRenderer.enabled = false;
         CleatNearestPatrolPoint();
     
     }
@@ -188,9 +213,10 @@ public class Dracula : SingletonBase<Dracula>
                 
                 if (Physics.Raycast(ray, out hitInfo,minDistance))
                 {
-                    if (hitInfo.collider.transform.GetComponent<Character>() != null)
+                    if (hitInfo.collider.transform?.GetComponent<Character>())
                     {
                         nearestPatrolPoints.Add(patrolPoint);
+                        continue;
                     }
                     Debug.DrawLine(transform.position, patrolPoint.transform.position, Color.red, 3f);
                     continue;

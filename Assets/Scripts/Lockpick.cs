@@ -5,6 +5,7 @@ public class Lockpick : MonoBehaviour
     [Header("Player")]
     [SerializeField] private Bag bag;
     [SerializeField] private OnePersonCamera onePersonCamera;
+    [SerializeField] private Transform cameraTarget;
     
     [Header("Base")]
     [SerializeField] private float timeToSuccess;
@@ -51,7 +52,9 @@ public class Lockpick : MonoBehaviour
         }
 
         panel.SetActive(true);
-
+        
+        onePersonCamera.SetTarget(cameraTarget,TypeMoveCamera.WithRotation,true);
+        
         Cursor.lockState = CursorLockMode.None;
         Cursor.SetCursor(mouseTexture, Vector2.zero, CursorMode.Auto);
         Cursor.visible = true;
@@ -63,9 +66,6 @@ public class Lockpick : MonoBehaviour
     private void PointMove()
     {
         if(!isOpening) return;
-
-        onePersonCamera.typeMove = TypeMoveCamera.None;
-        
         
         if (timer >= 0)
             timer -= Time.deltaTime;
@@ -92,7 +92,7 @@ public class Lockpick : MonoBehaviour
                 bag.DrawKey(1);
                 ResetPoint();
                 Destroy(gameObject);
-                
+                onePersonCamera.SetTarget(character.CameraPos,TypeMoveCamera.WithRotation,false);
                 //OpenDoorlogic
             }
         }
@@ -100,6 +100,7 @@ public class Lockpick : MonoBehaviour
         {
             noiseLevel.IncreaseLevel();
             ResetPoint();
+            onePersonCamera.SetTarget(character.CameraPos,TypeMoveCamera.WithRotation,false);
         }
     }
 
@@ -113,8 +114,6 @@ public class Lockpick : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         
         point.anchoredPosition = Vector2.zero;
-        
-        onePersonCamera.typeMove = TypeMoveCamera.WithRotation;
     }
 
     private void GenerateRandomPosition()

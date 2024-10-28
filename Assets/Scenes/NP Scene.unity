@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18058917, g: 0.22607946, b: 0.3070911, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -227,6 +227,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5200979702488812890, guid: b99a639029f3a3a45a63db9ab27f1c68, type: 3}
   m_PrefabInstance: {fileID: 7847632120732983552}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &563933177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 563933178}
+  m_Layer: 0
+  m_Name: CameraTarget (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &563933178
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563933177}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000029653306}
+  m_LocalPosition: {x: -0.0000038146973, y: 0, z: 4.166666}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1164815843}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &634139220 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 844262806813105437, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
@@ -519,6 +550,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1006038580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1006038581}
+  m_Layer: 0
+  m_Name: CameraTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1006038581
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006038580}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000029653306}
+  m_LocalPosition: {x: -0.0000038146973, y: 0, z: 4.166666}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1889768159}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1127343504 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8480812018889599076, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
@@ -668,6 +730,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1538780211}
+  - {fileID: 563933178}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1416596667 stripped
@@ -711,6 +774,10 @@ PrefabInstance:
       propertyPath: noiseLevel
       value: 
       objectReference: {fileID: 933961626}
+    - target: {fileID: 3437918274545489615, guid: 372ac921a3418db42a95f968f34bb796, type: 3}
+      propertyPath: cameraTarget
+      value: 
+      objectReference: {fileID: 563933178}
     - target: {fileID: 3437918274545489615, guid: 372ac921a3418db42a95f968f34bb796, type: 3}
       propertyPath: onePersonCamera
       value: 
@@ -986,6 +1053,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9130649279268300690}
+  - {fileID: 1006038581}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1963806791 stripped
@@ -1301,6 +1369,10 @@ PrefabInstance:
       propertyPath: noiseLevel
       value: 
       objectReference: {fileID: 933961626}
+    - target: {fileID: 3437918274545489615, guid: 372ac921a3418db42a95f968f34bb796, type: 3}
+      propertyPath: cameraTarget
+      value: 
+      objectReference: {fileID: 1006038581}
     - target: {fileID: 3437918274545489615, guid: 372ac921a3418db42a95f968f34bb796, type: 3}
       propertyPath: onePersonCamera
       value: 
