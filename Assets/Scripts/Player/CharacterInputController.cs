@@ -3,9 +3,11 @@ using UnityEngine.Events;
 
 [RequireComponent (typeof(CapsuleCollider))]
 public class CharacterInputController : SingletonBase<CharacterInputController>
-{
+{    
+    [SerializeField] private float heartTimeUsage = 2f;
     [SerializeField] private float maxDistanseHitCamera = 1f;
     [SerializeField] private bool heartEnabled;
+
     public bool HeartEnabled => heartEnabled;
     
     private Character character; 
@@ -14,10 +16,12 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     private Vector3 playerMoveDirection;
     private float radiusCharacter;
     private float hightCharacter;
+    private float timeHeart;
 
     public UnityEvent heartOn;
     public UnityEvent heartOff;
     public UnityEvent draculaAnim;
+    
     private void Awake()
     {
         Init();
@@ -44,6 +48,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         MainRay();
         AdminCameraMove();
         HeartState();
+        
         if (Input.GetKeyDown(KeyCode.R))
         {
             draculaAnim?.Invoke();
@@ -55,10 +60,15 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private void AdminMove()
     {
-        if (heartEnabled) return;
         
         var dirZ = Input.GetAxis(Vertical);
         var dirX = Input.GetAxis(Horizontal);
+
+        if (heartEnabled)
+        {
+            dirZ = 0;
+            dirX = 0;
+        }
         
         var ground = IsGrounded();
         
@@ -165,11 +175,21 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private void HeartState()
     {
+        if (heartEnabled == false)
+        {
+            timeHeart += Time.deltaTime;
+        }
+        
         if (Input.GetKeyDown(KeyCode.F))
         {
-            heartEnabled = true;
-            heartOn.Invoke();
+            if (timeHeart >= heartTimeUsage)
+            {
+                heartEnabled = true;
+                heartOn.Invoke();
+                timeHeart = 0;
+            }
         }
+        
         if (Input.GetKeyUp(KeyCode.F))
         {
             heartEnabled = false;

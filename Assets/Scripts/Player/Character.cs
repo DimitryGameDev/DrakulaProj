@@ -22,10 +22,12 @@ public class Character : Player
     [Header("Character Settings")]
     [Range(1f,10f)][SerializeField] private float maxSpeedWalk = 3f;
     [Range(1f,10f)][SerializeField] private float maxSpeedRun = 6f;
-    [SerializeField] private OnePersonCamera cameraMain; 
+    [SerializeField] private OnePersonCamera cameraMain;
+    [SerializeField] private Transform cameraPos;
     [SerializeField] private float stepLenght; 
     [SerializeField] private AudioClip[] stepSounds; 
     public OnePersonCamera Camera => cameraMain;
+    public Transform CameraPos => cameraPos;
     private AudioSource audioSource;
     private Rigidbody rb;
     private Vector3 moveVector;
@@ -37,18 +39,17 @@ public class Character : Player
     
     private void Start()
     {
-        cameraMain.SetTarget(transform,TypeMoveCamera.WithRotation);
+        cameraMain.SetTarget(cameraPos,TypeMoveCamera.WithRotation);
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
     }
     
     private const float Acceleration = 2000f;
-    private const float AirMoveLimit = 0.300f;
+    //private const float AirMoveLimit = 0.300f;
     
     public void Move(Vector3 direction,MoveType moveType)
     {
-        
         if (direction.magnitude > 1) direction /= 2;
         
         if (direction == Vector3.zero && moveType != MoveType.Air)
@@ -113,19 +114,17 @@ public class Character : Player
             stepTime = 0;
         }
     }
+    
     private void CharacterRotate()
     {
+        if (cameraMain.IsLocked || cameraMain.enabled) return; 
         transform.rotation = new Quaternion(0, cameraMain.transform.rotation.y,0, cameraMain.transform.rotation.w);
     }
     
-    
     public void CameraMove(float dirX,float dirY)
     {
-        if (cameraMain.typeMove != TypeMoveCamera.None)
-        {
-            cameraMain.Rotate(dirX, dirY);
-            CharacterRotate();
-        }
+         cameraMain.Rotate(dirX, dirY);
+         CharacterRotate();
     }
     
     /*

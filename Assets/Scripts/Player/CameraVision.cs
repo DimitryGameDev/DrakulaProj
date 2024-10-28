@@ -21,17 +21,19 @@ public class CameraVision : MonoBehaviour
 
     private void FindObjIntoCamera()
     {
-        if (heartPrefab.IsActive)
-        {
+       
             for (var i = 0; i < visionObjs.Count; i++)
-            {
-                if (IsVisionObj(visionObjs[i].gameObject))
+            { 
+                if (heartPrefab.IsActive)
                 {
-                    Debug.DrawLine(playerCamera.transform.position, visionObjs[i].transform.position, Color.red,
-                        Time.deltaTime);
-                    visionObjs[i].Visible();
+                    if (IsVisionObj(visionObjs[i].gameObject))
+                    {
+                        Debug.DrawLine(playerCamera.transform.position, visionObjs[i].transform.position, Color.red,
+                            Time.deltaTime);
+                        visionObjs[i].Visible();
+                    }
                 }
-
+                
                 if (!IsVisionObj(visionObjs[i].gameObject))
                 {
                     Debug.DrawLine(playerCamera.transform.position, visionObjs[i].transform.position, Color.black,
@@ -39,13 +41,13 @@ public class CameraVision : MonoBehaviour
                     visionObjs[i].Hide();
                 }
             }
-        }
+     
            
     }
 
     private bool IsVisionObj(GameObject objectToCheck)
     {
-        Vector3 viewPortPoint = playerCamera.WorldToViewportPoint(objectToCheck.transform.position);
+        Vector3 viewPortPoint = playerCamera.WorldToViewportPoint(objectToCheck.transform.localPosition);
         
         if (viewPortPoint is { z: > 0, y: < 1 and > 0, x: > 0 and < 1 })
         {
