@@ -33,7 +33,9 @@ public class Lockpick : MonoBehaviour
     {
         infoText.SetActive(false);
         
-        character = bag.GetComponent<Character>();
+        if(bag!=null)
+        character = bag.transform.root.GetComponent<Character>();
+        
         ResetPoint();
     }
 
