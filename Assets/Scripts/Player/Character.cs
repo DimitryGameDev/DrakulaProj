@@ -46,7 +46,7 @@ public class Character : Player
     }
     
     private const float Acceleration = 2000f;
-    //private const float AirMoveLimit = 0.300f;
+    private const float AirMoveLimit = 0.300f;
     
     public void Move(Vector3 direction,MoveType moveType)
     {
@@ -94,12 +94,11 @@ public class Character : Player
 
                 break;
             }
-            
-            /*
+    
             case MoveType.Air:
                 rb.velocity = new Vector3(Mathf.Lerp(rb.velocity.x,0,AirMoveLimit), rb.velocity.y, Mathf.Lerp(rb.velocity.z,0,AirMoveLimit));
                 break;
-            */
+            
             default:
                 throw new ArgumentOutOfRangeException(nameof(moveType), moveType, null);
         }
