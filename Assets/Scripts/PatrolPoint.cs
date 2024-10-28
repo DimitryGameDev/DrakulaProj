@@ -25,7 +25,7 @@ public class PatrolPoint : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Gizmocolor;
-        Gizmos.DrawSphere(transform.position, radius);
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }
 

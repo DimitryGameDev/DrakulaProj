@@ -78,16 +78,14 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         }
         
         playerMoveDirection = new Vector3(dirX, 0, dirZ);
-
-        //if (IsWall() && !ground) return;
+            
+        if (IsWall() && !ground) return;
         
-        /*
         if (!ground)
         {
             character.Move(playerMoveDirection, MoveType.Air);
             return;
         }
-        */
         
         if (Input.GetKey(KeyCode.LeftShift))
         {
