@@ -134,7 +134,7 @@ public class Dracula : SingletonBase<Dracula>
     {
         if (draculaPrefab != null)
         {
-            draculaPrefab.transform.LookAt(new Vector3(player.position.x,0,player.position.z));
+            draculaPrefab.transform.LookAt(new Vector3(player.position.x,transform.position.y,player.position.z));
         }
     }
     public void DraculaSpawn()
