@@ -3,6 +3,7 @@ using UnityEngine;
 
 public enum DraculaPosType
 {
+    Player,
     T,
     Sit,
     Stay,
@@ -20,10 +21,11 @@ public class PatrolPoint : MonoBehaviour
 
     private static readonly Color Gizmocolor = new(1, 0, 0, 0.3f);
 
+    
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Gizmocolor;
-        Gizmos.DrawSphere(transform.position, radius);
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }
 
