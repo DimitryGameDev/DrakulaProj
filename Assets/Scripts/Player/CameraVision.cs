@@ -21,7 +21,6 @@ public class CameraVision : MonoBehaviour
 
     private void FindObjIntoCamera()
     {
-       
             for (var i = 0; i < visionObjs.Count; i++)
             { 
                 if (heartPrefab.IsActive)
@@ -41,8 +40,6 @@ public class CameraVision : MonoBehaviour
                     visionObjs[i].Hide();
                 }
             }
-     
-           
     }
 
     private bool IsVisionObj(GameObject objectToCheck)

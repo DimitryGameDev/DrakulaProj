@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6855806385617706685
+--- !u!1 &5514150968068562413
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6078459014036661662}
-  - component: {fileID: 6021232684887193347}
-  - component: {fileID: 1173587877125750198}
-  - component: {fileID: 9101967164876364303}
-  - component: {fileID: 6409844133439349922}
-  - component: {fileID: 3790601821706023227}
-  - component: {fileID: 110425486073858243}
+  - component: {fileID: 2830828643333048305}
+  - component: {fileID: 7259117975880588569}
+  - component: {fileID: 4672585189347568924}
   m_Layer: 0
-  m_Name: SoundPlate
+  m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6078459014036661662
+--- !u!4 &2830828643333048305
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6855806385617706685}
+  m_GameObject: {fileID: 5514150968068562413}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.42, y: -0.03, z: -33.362953}
-  m_LocalScale: {x: 1, y: 0.1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 6078459014036661662}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6021232684887193347
+--- !u!33 &7259117975880588569
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6855806385617706685}
+  m_GameObject: {fileID: 5514150968068562413}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1173587877125750198
+--- !u!23 &4672585189347568924
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6855806385617706685}
+  m_GameObject: {fileID: 5514150968068562413}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -87,6 +83,41 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6855806385617706685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6078459014036661662}
+  - component: {fileID: 9101967164876364303}
+  - component: {fileID: 6409844133439349922}
+  - component: {fileID: 110425486073858243}
+  m_Layer: 0
+  m_Name: SoundPlate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6078459014036661662
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6855806385617706685}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.42, y: -0.03, z: -33.362953}
+  m_LocalScale: {x: 1, y: 0.1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2830828643333048305}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &9101967164876364303
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -121,23 +152,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trapPlateCollider: {fileID: 9101967164876364303}
-  noiseLevel: {fileID: 3790601821706023227}
-  trapPlateMesh: {fileID: 1173587877125750198}
+  noiseLevel: {fileID: 0}
+  trapPlateMesh: {fileID: 4672585189347568924}
   interactiveObject: {fileID: 110425486073858243}
---- !u!114 &3790601821706023227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6855806385617706685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cc59ff7d5132034ca04159a101c769a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxLevel: 3
-  resetTime: 10
 --- !u!114 &110425486073858243
 MonoBehaviour:
   m_ObjectHideFlags: 0
