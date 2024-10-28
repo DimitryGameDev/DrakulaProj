@@ -1,7 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class NoiseLevel : MonoBehaviour
+public class NoiseLevel : SingletonBase<NoiseLevel>
 {
     public event UnityAction OnIncreasedLevel;
     public event UnityAction OnDecreasedLevel;
@@ -13,7 +14,12 @@ public class NoiseLevel : MonoBehaviour
     public int CurrentLevel => currentLevel;
     
     private float timer;
-    
+
+    private void Awake()
+    {
+        Init();
+    }
+
     private void Update()
     {
         UpdateTimer();
