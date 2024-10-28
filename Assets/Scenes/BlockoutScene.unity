@@ -20533,10 +20533,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1895475711}
         m_TargetAssemblyTypeName: Dracula, Assembly-CSharp
         m_MethodName: DraculaDeSpawn
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: PatrolPoint, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -20619,7 +20619,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1895475711}
         m_TargetAssemblyTypeName: Dracula, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: DraculaSpawn
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1838010188}
@@ -20706,11 +20706,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1895475711}
         m_TargetAssemblyTypeName: Dracula, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 2
+        m_MethodName: DraculaDeSpawn
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: PatrolPoint, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -20856,11 +20856,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1895475711}
         m_TargetAssemblyTypeName: Dracula, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 2
+        m_MethodName: DraculaDeSpawn
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: PatrolPoint, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -20895,11 +20895,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1895475711}
         m_TargetAssemblyTypeName: Dracula, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 2
+        m_MethodName: DraculaDeSpawn
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: PatrolPoint, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -20934,11 +20934,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1895475711}
         m_TargetAssemblyTypeName: Dracula, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 2
+        m_MethodName: DraculaSpawn
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: PatrolPoint, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -21021,11 +21021,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1895475711}
         m_TargetAssemblyTypeName: Dracula, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 2
+        m_MethodName: DraculaDeSpawn
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: PatrolPoint, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -21123,11 +21123,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1895475711}
         m_TargetAssemblyTypeName: Dracula, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 2
+        m_MethodName: DraculaDeSpawn
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: PatrolPoint, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
