@@ -15,18 +15,21 @@ public class Player : SingletonBase<Player>
     
     public UnityEvent changeStress;
     public UnityEvent onStress;
-    
+    public UnityEvent OnChangedMedalPiece;
+
     public void AddMedalPiece(int pieceCount)
     {
         if (medalPieceCount + pieceCount == countPieceForMedal)
         {
             AddMedal();
             medalPieceCount = 0;
+            OnChangedMedalPiece?.Invoke();
             return;
         }
         medalPieceCount += pieceCount;
+        OnChangedMedalPiece?.Invoke();
     }
-    
+
     public void AddMedal()
     {
         medalCount++;
@@ -36,6 +39,7 @@ public class Player : SingletonBase<Player>
     {
         medalCount--;
     }
+    
     public void AddStress(float value)
     {   
         if (stress + value > MaxStress)
