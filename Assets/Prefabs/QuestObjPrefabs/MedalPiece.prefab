@@ -186,3 +186,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 4152670852680653959}
   countPiece: 1
+  impactEffect: {fileID: 8361973088753977710, guid: db55ace5370bc004ab2eb3b198be21d9, type: 3}

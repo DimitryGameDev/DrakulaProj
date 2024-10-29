@@ -4,10 +4,12 @@ using UnityEngine.UI;
 public class KeyInfoUI : MonoBehaviour
 {
     [SerializeField] private Text text;
-    [SerializeField] private Bag bag;
+    private Bag bag;
 
     private void Start()
     {
+        bag = Character.Instance.GetComponent<Bag>();
+        
         bag.ChangeKeyAmount.AddListener(ChangeText);
     }
 

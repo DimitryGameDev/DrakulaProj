@@ -5,14 +5,12 @@ using Random = UnityEngine.Random;
 public class Lockpick : MonoBehaviour
 {
     [Header("Player")]
-    [SerializeField] private Bag bag;
     [SerializeField] private OnePersonCamera onePersonCamera;
     [SerializeField] private Transform cameraTarget;
     
     [Header("Base")]
     [SerializeField] private float timeToSuccess;
     [SerializeField] private NoiseLevel noiseLevel;
-   
     
     [Header("UI")]
     [SerializeField] private Texture2D mouseTexture;
@@ -21,7 +19,14 @@ public class Lockpick : MonoBehaviour
     [SerializeField] private RectTransform background;
     [SerializeField] private RectTransform point;
     
+    [Header("SFX")]
+    [SerializeField] private AudioClip successOpenSFX;
+    [SerializeField] private AudioClip failOpenSFX;
+
+    private AudioSource audioSource;
+    
     private Character character;
+    private Bag bag;
     private InteractiveObject interactiveObject;
     
     private float timer;
@@ -34,8 +39,11 @@ public class Lockpick : MonoBehaviour
     
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        
         infoText.SetActive(false);
-        if(bag!=null) character = bag.transform.root.GetComponent<Character>();
+        character = Character.Instance.transform.root.GetComponent<Character>();
+        bag = Character.Instance.transform.root.GetComponent<Bag>();
         interactiveObject = GetComponent<InteractiveObject>();
         interactiveObject.onUse.AddListener(StartUnlock);
         ResetPoint();
@@ -111,6 +119,8 @@ public class Lockpick : MonoBehaviour
             noiseLevel.IncreaseLevel();
             ResetPoint();
             Resume();
+            
+            audioSource.PlayOneShot(failOpenSFX);
         }
     }
 
@@ -124,6 +134,8 @@ public class Lockpick : MonoBehaviour
     {
         //OpenDoorlogic
         interactiveObject.onUse.RemoveListener(StartUnlock);
+        
+        audioSource.PlayOneShot(successOpenSFX);
     }
     
     private void ResetPoint()

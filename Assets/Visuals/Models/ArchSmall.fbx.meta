@@ -7,12 +7,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: "\u041A\u0438\u0440\u043F\u0438\u0447\u0438"
+    second: {fileID: 2100000, guid: 54357eab8d821e946bbeacefb6d2b0a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: "\u041A\u043E\u0440\u043D\u0438\u0437"
     second: {fileID: 2100000, guid: 112fa99b3f39016418851b8d93b8e7d7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 0
+    materialSearch: 1
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
