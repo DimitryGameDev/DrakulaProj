@@ -4,19 +4,25 @@ using UnityEngine.UI;
 public class MedalInfoUI : MonoBehaviour
 {
     [SerializeField] private Image[] medalImages;
-    [SerializeField] private Player player;
+    [SerializeField] private Bag bag;
 
     private int countPieces;
 
     private void Start()
     {
-        player.OnChangedMedalPiece.AddListener(SetImageVisible);
+        if (bag != null)
+        {
+            bag.ChangeMedalPieceAmount.AddListener(SetImageVisible);
+        }
         SetImageInvisible();
     }
 
     private void OnDestroy()
     {
-        player.OnChangedMedalPiece.RemoveListener(SetImageVisible);
+        if (bag != null)
+        {
+            bag.ChangeMedalPieceAmount.RemoveListener(SetImageVisible);
+        }
     }
 
     private void SetImageVisible()
