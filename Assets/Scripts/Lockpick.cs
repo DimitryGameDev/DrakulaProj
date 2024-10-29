@@ -102,8 +102,8 @@ public class Lockpick : MonoBehaviour
                 bag.DrawKey(1);
                 ResetPoint();
                 Resume();
-                //OpenDoorlogic
-                Destroy(gameObject);
+                
+                SuccessUnlock();
             }
         }
         else
@@ -119,6 +119,13 @@ public class Lockpick : MonoBehaviour
         Dracula.Instance.enabled = true; //включает дракулу
         onePersonCamera.SetTarget(character.CameraPos,TypeMoveCamera.OnlyMove,false);
     }
+
+    private void SuccessUnlock()
+    {
+        //OpenDoorlogic
+        interactiveObject.onUse.RemoveListener(StartUnlock);
+    }
+    
     private void ResetPoint()
     {
         isOpening = false;
