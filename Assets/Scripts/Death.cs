@@ -41,21 +41,23 @@ public class Death : MonoBehaviour
     }
 
     private void DeathCharacter()
-    {
-        var draculaRot = new Vector3(dracula.transform.position.x, cameraTargetDeath.transform.position.y, dracula.transform.position.z);
-        
-        cameraTargetDeath.LookAt(draculaRot);
-        cameraTargetDeath.transform.parent = null;
-        OnePersonCamera.Instance.SetTarget(cameraTargetDeath, TypeMoveCamera.WithRotation);
-        transform.LookAt(draculaRot);
+    { 
         CharacterInputController.Instance.enabled = false;
         FindObjectOfType<Heart>().enabled = false;
-        draculaPrefab.transform.parent = null;
         
+        var draculaRot = new Vector3(dracula.transform.position.x, cameraTargetDeath.transform.position.y, dracula.transform.position.z);
+        cameraTargetDeath.LookAt(draculaRot);
+        OnePersonCamera.Instance.SetTarget(cameraTargetDeath, TypeMoveCamera.WithRotation);
+        cameraTargetDeath.transform.parent = null;
+        
+        transform.LookAt(draculaRot);
+        draculaPrefab.transform.parent = null;
         enabled = true; //вкдючает эффекты в Update
         draculaPrefab.SetActive(true);
+        
         var animator = draculaPrefab.GetComponent<Animator>();
         animator.Play("Attack");
+        
         OnDeath?.Invoke();
     }
 
