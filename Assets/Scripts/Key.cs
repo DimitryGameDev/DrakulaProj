@@ -1,15 +1,8 @@
 using UnityEngine;
 
-public enum Name
-{
-    Key,
-}
-
 public class Key : Pikup
 {
-    [SerializeField] private Name lootName;
     [SerializeField] private int keyCount;
-    
     [SerializeField] private GameObject impactEffect;
     
     protected override void OnTriggerEnter(Collider other)
