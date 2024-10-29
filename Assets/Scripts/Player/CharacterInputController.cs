@@ -1,14 +1,11 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 [RequireComponent (typeof(CapsuleCollider))]
 public class CharacterInputController : SingletonBase<CharacterInputController>
-{
+{    
+    [SerializeField] private float heartTimeUsage = 2f;
     [SerializeField] private float maxDistanseHitCamera = 1f;
-    [SerializeField] private bool heartEnabled;
-    public bool HeartEnabled => heartEnabled;
     
     private Character character; 
     public Character Character => character;
@@ -16,10 +13,15 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     private Vector3 playerMoveDirection;
     private float radiusCharacter;
     private float hightCharacter;
-
+    private float timeHeart;
+    private bool IsMove = true;
+    private bool heartEnabled;
+    public bool HeartEnabled => heartEnabled;
+    
     public UnityEvent heartOn;
     public UnityEvent heartOff;
-
+    public UnityEvent draculaAnim;
+    
     private void Awake()
     {
         Init();
@@ -43,9 +45,14 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private void Update()
     { 
-        AdminCameraMove();
         MainRay();
+        AdminCameraMove();
         HeartState();
+        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            draculaAnim?.Invoke();
+        }
     }
 
     private const string Horizontal = "Horizontal";
@@ -53,20 +60,26 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private void AdminMove()
     {
-        if (heartEnabled) return;
-        
         var dirZ = Input.GetAxis(Vertical);
         var dirX = Input.GetAxis(Horizontal);
+
+        if (!IsMove)
+        {
+            dirZ = 0;
+            dirX = 0;
+        }
         
         var ground = IsGrounded();
         
+        /*
         if (Input.GetButton("Jump") && ground)
         {
-            //character.Jump();
+            character.Jump();
         }
+        */
         
         playerMoveDirection = new Vector3(dirX, 0, dirZ);
-
+            
         if (IsWall() && !ground) return;
         
         if (!ground)
@@ -93,12 +106,13 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         
         character.CameraMove(dirX, dirY);
     }
+
     private bool IsGrounded()
     {
         RaycastHit hitLegs;
         var vectorDown = character.transform.TransformDirection(Vector3.down);
         var maxDistance = hightCharacter / 2 + 0.001f;
-        
+
         if (Physics.Raycast(character.transform.position - new Vector3(radiusCharacter, 0, 0), vectorDown, out hitLegs, maxDistance))
         {
             Debug.DrawRay(character.transform.position - new Vector3(radiusCharacter, 0, 0), vectorDown * hitLegs.distance, Color.red);
@@ -125,6 +139,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
         return false;
     }
+
     private bool IsWall()
     {
         RaycastHit hitLegs;
@@ -159,14 +174,26 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private void HeartState()
     {
+        if (heartEnabled == false)
+        {
+            timeHeart += Time.deltaTime;
+        }
+        
         if (Input.GetKeyDown(KeyCode.F))
         {
-            heartEnabled = true;
-            heartOn.Invoke();
+            if (timeHeart >= heartTimeUsage)
+            {
+                heartEnabled = true;
+                IsMove = false;
+                heartOn.Invoke();
+                timeHeart = 0;
+            }
         }
+        
         if (Input.GetKeyUp(KeyCode.F))
         {
             heartEnabled = false;
+            IsMove = true;
             heartOff.Invoke();
         }
     }
@@ -181,11 +208,11 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
             Debug.DrawRay(character.Camera.transform.position, character.Camera.transform.forward * hitCamera.distance, Color.yellow, 0.01f);
             if (hitCamera.collider.transform.root?.GetComponent<InteractiveObject>())
             {
-                var use = hitCamera.collider.transform.root.GetComponent<InteractiveObject>();
-
+                var hit = hitCamera.collider.transform.root.GetComponent<InteractiveObject>();
+                
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    use.Use();
+                    hit.Use();
                 }
             }
         }

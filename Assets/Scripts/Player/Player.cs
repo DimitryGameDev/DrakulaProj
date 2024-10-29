@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class Player : SingletonBase<Player>
 {
@@ -26,8 +27,11 @@ public class Player : SingletonBase<Player>
 
     public void RemoveStress(float value)
     {
-        stress -= value;
-        changeStress.Invoke();
+        if (stress - value >= 0)
+        {
+            stress -= value;
+            changeStress.Invoke();
+        }
     }
 }
 
