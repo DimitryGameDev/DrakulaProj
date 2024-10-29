@@ -24,7 +24,8 @@ public class Character : Player
     [Range(1f,10f)][SerializeField] private float maxSpeedRun = 6f;
     [SerializeField] private OnePersonCamera cameraMain;
     [SerializeField] private Transform cameraPos;
-    [SerializeField] private float stepLenght; 
+    [SerializeField] private float stepRateWalk = 0.6f; 
+    [SerializeField] private float stepRateRun = 0.6f; 
     [SerializeField] private AudioClip[] stepSounds; 
     public OnePersonCamera Camera => cameraMain;
     public Transform CameraPos => cameraPos;
@@ -77,7 +78,7 @@ public class Character : Player
             {
                 if (rb.velocity.magnitude >= maxSpeedWalk)
                 {
-                    StepsPlay();
+                    StepsPlay(stepRateWalk);
                     rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeedWalk);
                 }
 
@@ -88,7 +89,7 @@ public class Character : Player
             {
                 if (rb.velocity.magnitude >= maxSpeedRun)
                 {
-                    StepsPlay();
+                    StepsPlay(stepRateRun);
                     rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeedRun);
                 }
 
@@ -104,7 +105,7 @@ public class Character : Player
         }
     }
 
-    private void StepsPlay()
+    private void StepsPlay(float stepLenght)
     {
         stepTime += Time.deltaTime;
         if (stepTime >= stepLenght)
