@@ -8,6 +8,6 @@ public class Medal : MonoBehaviour
     public void PickUp()
     {
         Destroy(view);
-        Player.Instance.AddMedalPiece(countPiece);
+        Character.Instance.GetComponent<Bag>().AddMedalPiece(countPiece);
     }
 }

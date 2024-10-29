@@ -6,9 +6,6 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 {    
     [SerializeField] private float heartTimeUsage = 2f;
     [SerializeField] private float maxDistanseHitCamera = 1f;
-    [SerializeField] private bool heartEnabled;
-
-    public bool HeartEnabled => heartEnabled;
     
     private Character character; 
     public Character Character => character;
@@ -17,7 +14,10 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     private float radiusCharacter;
     private float hightCharacter;
     private float timeHeart;
-
+    private bool IsMove = true;
+    private bool heartEnabled;
+    public bool HeartEnabled => heartEnabled;
+    
     public UnityEvent heartOn;
     public UnityEvent heartOff;
     public UnityEvent draculaAnim;
@@ -60,11 +60,10 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private void AdminMove()
     {
-        
         var dirZ = Input.GetAxis(Vertical);
         var dirX = Input.GetAxis(Horizontal);
 
-        if (heartEnabled)
+        if (!IsMove)
         {
             dirZ = 0;
             dirX = 0;
@@ -72,10 +71,12 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         
         var ground = IsGrounded();
         
-        if (Input.GetButton("Jump") /*&& ground*/)
+        /*
+        if (Input.GetButton("Jump") && ground)
         {
-            //character.Jump();
+            character.Jump();
         }
+        */
         
         playerMoveDirection = new Vector3(dirX, 0, dirZ);
             
@@ -183,6 +184,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
             if (timeHeart >= heartTimeUsage)
             {
                 heartEnabled = true;
+                IsMove = false;
                 heartOn.Invoke();
                 timeHeart = 0;
             }
@@ -191,6 +193,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         if (Input.GetKeyUp(KeyCode.F))
         {
             heartEnabled = false;
+            IsMove = true;
             heartOff.Invoke();
         }
     }
@@ -205,11 +208,11 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
             Debug.DrawRay(character.Camera.transform.position, character.Camera.transform.forward * hitCamera.distance, Color.yellow, 0.01f);
             if (hitCamera.collider.transform.root?.GetComponent<InteractiveObject>())
             {
-                var use = hitCamera.collider.transform.root.GetComponent<InteractiveObject>();
-
+                var hit = hitCamera.collider.transform.root.GetComponent<InteractiveObject>();
+                
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    use.Use();
+                    hit.Use();
                 }
             }
         }

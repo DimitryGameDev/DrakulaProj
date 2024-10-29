@@ -56,11 +56,13 @@ MonoBehaviour:
   draculaPrefabsT: {fileID: 1048065073813441343, guid: 2bba16bbd7ae4074687d1f509eccc04c, type: 3}
   draculaSpawnEffectPrefab: {fileID: 3372215897970909540, guid: b050a9eceb45b064b98b0640343fb692, type: 3}
   visionEffectPrefab: {fileID: -4490127325991210572, guid: 62220667f2b90d74c8529927b45e15c6, type: 3}
+  spawnSpeed: 7
+  speedChange: 2
   minDistance: 6
-  spawnRate: 2
   spawnClips:
   - {fileID: 8300000, guid: 5dbefb0d6d692de4fb5dcc0b5afdb1ab, type: 3}
   spawnPositions:
+  - {fileID: 0}
   - {fileID: 0}
   DraculaInPlayer:
     m_PersistentCalls:
@@ -256,7 +258,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 6
+  MaxDistance: 9
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0

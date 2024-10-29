@@ -35,7 +35,7 @@ public class OnePersonCamera : SingletonBase<OnePersonCamera>
 
     public void Rotate(float dirX, float dirY)
     {
-        if (enabled == true || isLocked) return;
+        if (enabled || isLocked) return;
         
         rotation.x += dirX * sensitivity;
         rotation.y += dirY * sensitivity;

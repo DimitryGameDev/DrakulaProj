@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 6147789770226856295}
   - component: {fileID: 844262806813105437}
   - component: {fileID: 6545463510731147803}
+  - component: {fileID: 7728004928073808892}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -154,7 +155,7 @@ Transform:
   m_GameObject: {fileID: 6424571311402904777}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.81, y: 1, z: -13.2}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -296,6 +297,20 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &7728004928073808892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424571311402904777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cbed77344dbf6848a989f66950515c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 8
+  heartPrefab: {fileID: 2280108597574474885}
 --- !u!1 &7706991297277966182
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,13 +325,12 @@ GameObject:
   - component: {fileID: 2409594483910024187}
   - component: {fileID: 786862915565640646}
   - component: {fileID: 2899390705437667259}
-  - component: {fileID: 3447343984335801941}
   - component: {fileID: 8480812018889599076}
   - component: {fileID: 7314905624224714595}
   - component: {fileID: 3124069453675828783}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -405,7 +419,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stress: 0
-  countPieceForMedal: 3
   changeStress:
     m_PersistentCalls:
       m_Calls: []
@@ -434,7 +447,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heartTimeUsage: 2
   maxDistanseHitCamera: 2
-  heartEnabled: 0
   heartOn:
     m_PersistentCalls:
       m_Calls: []
@@ -456,22 +468,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bdb12bb3fec947d1830c4b772199ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
   draculaPos: 0
---- !u!114 &3447343984335801941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7706991297277966182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cbed77344dbf6848a989f66950515c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxDistance: 20
-  heartPrefab: {fileID: 2280108597574474885}
+  radius: 1
+  Gizmocolor: {r: 1, g: 0, b: 0, a: 0.3}
 --- !u!114 &8480812018889599076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,7 +483,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4885996e5028f93449a5915365e3155f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  countPieceForMedal: 3
   ChangeKeyAmount:
+    m_PersistentCalls:
+      m_Calls: []
+  ChangeMedalAmount:
+    m_PersistentCalls:
+      m_Calls: []
+  ChangeMedalPieceAmount:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &7314905624224714595
@@ -500,7 +506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   draculaPrefab: {fileID: 2876659722715574184}
-  targeTransformDeath: {fileID: 7708894270326520532}
+  cameraTargetDeath: {fileID: 7708894270326520532}
   heartPostProcessVolume: {fileID: 72604936209817704}
   OnDeath:
     m_PersistentCalls:
@@ -625,13 +631,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8336295250756958230}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 487218471206118414}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8807782886754090133
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,7 +686,10 @@ MonoBehaviour:
   characterInputController: {fileID: 786862915565640646}
   postProcessVolume: {fileID: 72604936209817704}
   vignetteSpeed: 5
-  lensDistortionSpead: 8
+  lensDistortionSpeed: 8
+  tickRateStress: 1
+  addStressValue: 5
+  removeStressValue: 2
 --- !u!114 &72604936209817704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,7 +721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3986224130250118612, guid: e47c87d3f0e7c4942adc396ba6e772fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.7
       objectReference: {fileID: 0}
     - target: {fileID: 3986224130250118612, guid: e47c87d3f0e7c4942adc396ba6e772fb, type: 3}
       propertyPath: m_LocalPosition.z

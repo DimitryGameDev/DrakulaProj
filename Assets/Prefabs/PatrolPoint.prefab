@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bdb12bb3fec947d1830c4b772199ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
   draculaPos: 2
+  radius: 0.5
+  Gizmocolor: {r: 1, g: 0, b: 0, a: 0.3}
