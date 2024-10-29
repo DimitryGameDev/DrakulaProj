@@ -35,7 +35,7 @@ public class Lockpick : MonoBehaviour
     private void Start()
     {
         infoText.SetActive(false);
-        character = bag.GetComponent<Character>();
+        if(bag!=null) character = bag.transform.root.GetComponent<Character>();
         interactiveObject = GetComponent<InteractiveObject>();
         interactiveObject.onUse.AddListener(StartUnlock);
         ResetPoint();
