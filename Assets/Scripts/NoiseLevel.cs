@@ -1,11 +1,9 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class NoiseLevel : SingletonBase<NoiseLevel>
 {
-    public event UnityAction OnIncreasedLevel;
-    public event UnityAction OnDecreasedLevel;
+    public event UnityAction<int> OnChange;
     
     [SerializeField] private int maxLevel;
     [SerializeField] private float resetTime;
@@ -32,7 +30,7 @@ public class NoiseLevel : SingletonBase<NoiseLevel>
         {
             currentLevel++;
             Debug.Log("Increased");
-            OnIncreasedLevel?.Invoke();
+            OnChange?.Invoke(currentLevel);
             timer = resetTime;
         }
     }
@@ -42,7 +40,7 @@ public class NoiseLevel : SingletonBase<NoiseLevel>
         if (currentLevel > 0 && timer <= 0)
         {
             currentLevel--;
-            OnDecreasedLevel?.Invoke();
+            OnChange?.Invoke(currentLevel);
             timer = resetTime;
         }
     }

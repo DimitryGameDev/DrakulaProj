@@ -5,15 +5,21 @@ public class Heart : MonoBehaviour
 {
     [SerializeField] private CharacterInputController characterInputController;
     [SerializeField] private PostProcessVolume postProcessVolume;
-    [SerializeField] private float vignetteSpeed;
-    [SerializeField] private float lensDistortionSpead;
+    [SerializeField] private float vignetteSpeed = 5f;
+    [SerializeField] private float lensDistortionSpeed = 8f;
+    [SerializeField] private float tickRateStress = 1f;
+    [SerializeField] private float addStressValue = 1f;
+    [SerializeField] private float removeStressValue = 1f;
+    
     private bool isActive;
     public bool IsActive => isActive;
     private Vignette vignette;
     private LensDistortion lensDistortion;
-    
+    private Character character;
+    private float timer;
     private void Start()
     {
+        character = (Character)Character.Instance;
         postProcessVolume.profile.TryGetSettings(out vignette);
         postProcessVolume.profile.TryGetSettings(out lensDistortion);
     }
@@ -21,6 +27,24 @@ public class Heart : MonoBehaviour
     private void Update()
     {
         SetHeartView();
+        ChangeStress();
+    }
+
+    private void ChangeStress()
+    {
+        timer += Time.deltaTime;
+        if (timer >= tickRateStress)
+        {
+            if (isActive )
+            {
+                character.AddStress(addStressValue);
+            }
+            else
+            {
+                character.RemoveStress(removeStressValue);
+            }
+            timer = 0;
+        }
     }
 
     private void SetHeartView()
@@ -34,7 +58,7 @@ public class Heart : MonoBehaviour
             }
             if (lensDistortion.intensity.value != 0)
             {
-                lensDistortion.intensity.value = Mathf.Lerp(lensDistortion.intensity.value, 0, lensDistortionSpead * Time.deltaTime);
+                lensDistortion.intensity.value = Mathf.Lerp(lensDistortion.intensity.value, 0, lensDistortionSpeed * Time.deltaTime);
             }
         }
         if (characterInputController.HeartEnabled)
@@ -44,9 +68,9 @@ public class Heart : MonoBehaviour
             {
                 vignette.opacity.value = Mathf.Lerp(vignette.opacity.value, 1, vignetteSpeed * Time.deltaTime);
             }
-            if (lensDistortion.intensity.value != 0)
+            if (lensDistortion.intensity.value != -60)
             {
-                lensDistortion.intensity.value = Mathf.Lerp(lensDistortion.intensity.value, -50, lensDistortionSpead * Time.deltaTime);
+                lensDistortion.intensity.value = Mathf.Lerp(lensDistortion.intensity.value, -60, lensDistortionSpeed * Time.deltaTime);
             }
         }
     }

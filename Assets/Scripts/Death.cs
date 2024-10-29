@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering.PostProcessing;
@@ -6,11 +5,13 @@ using UnityEngine.Rendering.PostProcessing;
 public class Death : MonoBehaviour
 {
     [SerializeField]private GameObject draculaPrefab;
-    [SerializeField] private Transform targeTransformDeath;
+    [SerializeField] private Transform cameraTargetDeath;
     [SerializeField] private PostProcessVolume heartPostProcessVolume;
     private Vignette vignette;
+    private Dracula dracula;
     
     public UnityEvent OnDeath;
+    
     
     private void Start()
     {
@@ -18,7 +19,8 @@ public class Death : MonoBehaviour
 
         if (Dracula.Instance != null)
         {
-            Dracula.Instance.DraculaInPlayer.AddListener(DeathCharacter);
+            dracula = Dracula.Instance;
+            dracula.DraculaInPlayer.AddListener(DeathCharacter);
         }
         CharacterInputController.Instance.draculaAnim.AddListener(DeathCharacter);
         
@@ -40,15 +42,18 @@ public class Death : MonoBehaviour
 
     private void DeathCharacter()
     {
-        FindObjectOfType<Heart>().enabled = false;
-        CharacterInputController.Instance.enabled = false;
-        OnePersonCamera.Instance.SetTarget(targeTransformDeath, TypeMoveCamera.WithRotation);
-        enabled = true;
+        var draculaRot = new Vector3(dracula.transform.position.x, cameraTargetDeath.transform.position.y, dracula.transform.position.z);
         
-        draculaPrefab.SetActive(true);
-        targeTransformDeath.transform.parent = null;
+        cameraTargetDeath.LookAt(draculaRot);
+        cameraTargetDeath.transform.parent = null;
+        OnePersonCamera.Instance.SetTarget(cameraTargetDeath, TypeMoveCamera.WithRotation);
+        transform.LookAt(draculaRot);
+        CharacterInputController.Instance.enabled = false;
+        FindObjectOfType<Heart>().enabled = false;
         draculaPrefab.transform.parent = null;
         
+        enabled = true; //вкдючает эффекты в Update
+        draculaPrefab.SetActive(true);
         var animator = draculaPrefab.GetComponent<Animator>();
         animator.Play("Attack");
         OnDeath?.Invoke();

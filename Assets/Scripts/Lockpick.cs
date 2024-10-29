@@ -1,5 +1,7 @@
 using UnityEngine;
+using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(InteractiveObject))]
 public class Lockpick : MonoBehaviour
 {
     [Header("Player")]
@@ -10,7 +12,7 @@ public class Lockpick : MonoBehaviour
     [Header("Base")]
     [SerializeField] private float timeToSuccess;
     [SerializeField] private NoiseLevel noiseLevel;
-    [SerializeField] private InteractiveObject interactiveObject;
+   
     
     [Header("UI")]
     [SerializeField] private Texture2D mouseTexture;
@@ -20,6 +22,7 @@ public class Lockpick : MonoBehaviour
     [SerializeField] private RectTransform point;
     
     private Character character;
+    private InteractiveObject interactiveObject;
     
     private float timer;
     private float textTimer;
@@ -28,13 +31,19 @@ public class Lockpick : MonoBehaviour
     private Vector2 screenMousePosition;
     
     private bool isOpening;
-
+    
     private void Start()
     {
         infoText.SetActive(false);
-        
         character = bag.GetComponent<Character>();
+        interactiveObject = GetComponent<InteractiveObject>();
+        interactiveObject.onUse.AddListener(StartUnlock);
         ResetPoint();
+    }
+
+    private void OnDestroy()
+    {
+        interactiveObject.onUse.RemoveListener(StartUnlock);
     }
 
     private void Update()
@@ -58,6 +67,7 @@ public class Lockpick : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.SetCursor(mouseTexture, Vector2.zero, CursorMode.Auto);
         Cursor.visible = true;
+        Dracula.Instance.DraculaDisable();
         
         timer = timeToSuccess;
         isOpening = true;
@@ -91,19 +101,24 @@ public class Lockpick : MonoBehaviour
             {
                 bag.DrawKey(1);
                 ResetPoint();
-                Destroy(gameObject);
-                onePersonCamera.SetTarget(character.CameraPos,TypeMoveCamera.WithRotation,false);
+                Resume();
                 //OpenDoorlogic
+                Destroy(gameObject);
             }
         }
         else
         {
             noiseLevel.IncreaseLevel();
             ResetPoint();
-            onePersonCamera.SetTarget(character.CameraPos,TypeMoveCamera.WithRotation,false);
+            Resume();
         }
     }
 
+    private void Resume()
+    {
+        Dracula.Instance.enabled = true; //включает дракулу
+        onePersonCamera.SetTarget(character.CameraPos,TypeMoveCamera.OnlyMove,false);
+    }
     private void ResetPoint()
     {
         isOpening = false;

@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,6 +9,7 @@ public class InteractiveObject: MonoBehaviour
     public UnityEvent onVision;
     public UnityEvent onHide;
     public UnityEvent onUse;
+    public UnityAction<InteractiveObject> Ondestroy;
     
     /// <summary>
     ///Вызывается когда камера игрока видит обьект
@@ -14,7 +17,6 @@ public class InteractiveObject: MonoBehaviour
     public void Visible()
     {
         onVision.Invoke();
-        
     }
     
     /// <summary>
@@ -32,5 +34,9 @@ public class InteractiveObject: MonoBehaviour
     {
         onUse.Invoke();
     }
-    
+
+    private void OnDestroy()
+    {
+        Ondestroy.Invoke(this);
+    }
 }
