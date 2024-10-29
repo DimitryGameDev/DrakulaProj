@@ -12,7 +12,6 @@ public class Death : MonoBehaviour
     
     public UnityEvent OnDeath;
     
-    
     private void Start()
     {
         heartPostProcessVolume.profile.TryGetSettings(out vignette);
@@ -44,14 +43,15 @@ public class Death : MonoBehaviour
     { 
         CharacterInputController.Instance.enabled = false;
         FindObjectOfType<Heart>().enabled = false;
-        
-        var draculaRot = new Vector3(dracula.transform.position.x, cameraTargetDeath.transform.position.y, dracula.transform.position.z);
-        cameraTargetDeath.LookAt(draculaRot);
-        OnePersonCamera.Instance.SetTarget(cameraTargetDeath, TypeMoveCamera.WithRotation);
+       
+        cameraTargetDeath.LookAt(new Vector3(dracula.transform.position.x, cameraTargetDeath.transform.position.y, dracula.transform.position.z));
         cameraTargetDeath.transform.parent = null;
         
-        transform.LookAt(draculaRot);
+        OnePersonCamera.Instance.SetTarget(cameraTargetDeath, TypeMoveCamera.WithRotation, true);
+        
+        transform.LookAt(new Vector3(dracula.transform.position.x, transform.position.y, dracula.transform.position.z));
         draculaPrefab.transform.parent = null;
+        
         enabled = true; //вкдючает эффекты в Update
         draculaPrefab.SetActive(true);
         
