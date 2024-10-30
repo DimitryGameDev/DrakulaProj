@@ -17,11 +17,11 @@ public class InteractiveObject: MonoBehaviour
     public UnityAction<InteractiveObject> Ondestroy;
 
     private float timer ;
-    private float timeBoxHide = 0.2f;
+    private float timeBoxHide = 0.3f;
 
     private void Start()
     {
-        if (infoPanel!)
+        if (infoPanel)
         {
             infoPanel.SetActive(false);
         }
@@ -41,10 +41,13 @@ public class InteractiveObject: MonoBehaviour
 
     public void ShowInfoPanel()
     {
+        if (infoPanel)
+        {
         infoPanelText.text = infoText;
         timer = 0;
         infoPanel.SetActive(true);
         enabled = true;
+        }
     }
     
     private void HideInfoPanel()
