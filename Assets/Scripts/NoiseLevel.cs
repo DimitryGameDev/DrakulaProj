@@ -22,8 +22,6 @@ public class NoiseLevel : SingletonBase<NoiseLevel>
     {
         UpdateTimer();
         DecreaseLevel();
-        
-        Debug.Log(currentLevel);
     }
 
     public void IncreaseLevel()

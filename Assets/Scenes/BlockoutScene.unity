@@ -5455,6 +5455,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
   m_PrefabInstance: {fileID: 543879657}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &550935862 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5335865789695815326, guid: b99a639029f3a3a45a63db9ab27f1c68, type: 3}
+  m_PrefabInstance: {fileID: 1544658247}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &565634368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22663,6 +22674,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 837370047641164258, guid: 1df7ade11c460784397cddce18b26dfd, type: 3}
+      propertyPath: infoPanel
+      value: 
+      objectReference: {fileID: 853513611}
+    - target: {fileID: 837370047641164258, guid: 1df7ade11c460784397cddce18b26dfd, type: 3}
+      propertyPath: infoPanelText
+      value: 
+      objectReference: {fileID: 550935862}
     - target: {fileID: 2822966819342906851, guid: 1df7ade11c460784397cddce18b26dfd, type: 3}
       propertyPath: m_Name
       value: Door

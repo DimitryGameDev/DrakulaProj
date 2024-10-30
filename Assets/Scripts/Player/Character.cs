@@ -46,7 +46,7 @@ public class Character : Player
         rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
     }
     
-    private const float Acceleration = 2000f;
+    private const float Acceleration = 3000f;
     private const float AirMoveLimit = 0.300f;
     
     public void Move(Vector3 direction,MoveType moveType)
