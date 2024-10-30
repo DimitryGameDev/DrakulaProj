@@ -57,10 +57,14 @@ public class Death : MonoBehaviour
         
         var animator = draculaPrefab.GetComponent<Animator>();
         animator.Play("Attack");
-        
-        OnDeath?.Invoke();
+        LoseGame();
     }
 
+    public void LoseGame()
+    {
+        OnDeath?.Invoke();
+    }
+    
     void OnDestroy()
     {
         CharacterInputController.Instance.draculaAnim.RemoveListener(DeathCharacter);

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootName: 0
   keyCount: 1
-  impactEffect: {fileID: 0}
+  impactEffect: {fileID: 8361973088753977710, guid: db55ace5370bc004ab2eb3b198be21d9, type: 3}
 --- !u!65 &1763746317633287027
 BoxCollider:
   m_ObjectHideFlags: 0

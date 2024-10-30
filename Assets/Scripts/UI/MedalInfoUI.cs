@@ -4,12 +4,14 @@ using UnityEngine.UI;
 public class MedalInfoUI : MonoBehaviour
 {
     [SerializeField] private Image[] medalImages;
-    [SerializeField] private Bag bag;
-
+    
+    private Bag bag;
     private int countPieces;
 
     private void Start()
     {
+        bag = Character.Instance.transform.root.GetComponent<Bag>();
+        
         if (bag != null)
         {
             bag.ChangeMedalPieceAmount.AddListener(SetImageVisible);

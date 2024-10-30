@@ -18,9 +18,9 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     private bool heartEnabled;
     public bool HeartEnabled => heartEnabled;
     
-    public UnityEvent heartOn;
-    public UnityEvent heartOff;
-    public UnityEvent draculaAnim;
+    [HideInInspector] public UnityEvent heartOn;
+    [HideInInspector] public UnityEvent heartOff;
+    [HideInInspector] public UnityEvent draculaAnim;
     
     private void Awake()
     {
@@ -111,7 +111,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     {
         RaycastHit hitLegs;
         var vectorDown = character.transform.TransformDirection(Vector3.down);
-        var maxDistance = hightCharacter / 2 + 0.001f;
+        var maxDistance = hightCharacter / 2 + 0.1f;
 
         if (Physics.Raycast(character.transform.position - new Vector3(radiusCharacter, 0, 0), vectorDown, out hitLegs, maxDistance))
         {
@@ -209,6 +209,8 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
             if (hitCamera.collider.transform.root?.GetComponent<InteractiveObject>())
             {
                 var hit = hitCamera.collider.transform.root.GetComponent<InteractiveObject>();
+
+                hit.ShowInfoPanel();
                 
                 if (Input.GetKeyDown(KeyCode.E))
                 {

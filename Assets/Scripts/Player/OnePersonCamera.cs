@@ -83,7 +83,16 @@ public class OnePersonCamera : SingletonBase<OnePersonCamera>
             }
         }
     }
+
+    public void Lock()
+    {
+        isLocked = true;
+    }
     
+    public void UnLock()
+    {
+        isLocked = false;
+    }
     public void SetTarget(Transform targetForCamera,TypeMoveCamera typeMoveCamera)
     {
         typeMove = typeMoveCamera;

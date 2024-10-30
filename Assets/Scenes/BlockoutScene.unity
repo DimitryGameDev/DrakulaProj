@@ -5455,6 +5455,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
   m_PrefabInstance: {fileID: 543879657}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &550935862 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5335865789695815326, guid: b99a639029f3a3a45a63db9ab27f1c68, type: 3}
+  m_PrefabInstance: {fileID: 1544658247}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &565634368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9199,7 +9210,7 @@ PrefabInstance:
     - target: {fileID: 5791984211820148700, guid: a16ea95f6539e604ba2a4ba370d42ff5, type: 3}
       propertyPath: death
       value: 
-      objectReference: {fileID: 1859974070}
+      objectReference: {fileID: 0}
     - target: {fileID: 5791984211820148700, guid: a16ea95f6539e604ba2a4ba370d42ff5, type: 3}
       propertyPath: winPanel
       value: 
@@ -11460,6 +11471,10 @@ PrefabInstance:
     - target: {fileID: 7706991297277966182, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
       propertyPath: m_Name
       value: Character
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728004928073808892, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
+      propertyPath: maxDistance
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19111,17 +19126,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 731056316360110972, guid: ee5c98f81edade54894316fa3665899f, type: 3}
   m_PrefabInstance: {fileID: 1854560740}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1859974070 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7314905624224714595, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
-  m_PrefabInstance: {fileID: 1206613640}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83c7a68e15ce54c25a87641a3e114cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1859974071 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8480812018889599076, guid: 017e34f5dc1d6c4448c9222b71cb6dae, type: 3}
@@ -22663,13 +22667,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 837370047641164258, guid: 1df7ade11c460784397cddce18b26dfd, type: 3}
+      propertyPath: infoPanel
+      value: 
+      objectReference: {fileID: 853513611}
+    - target: {fileID: 837370047641164258, guid: 1df7ade11c460784397cddce18b26dfd, type: 3}
+      propertyPath: infoPanelText
+      value: 
+      objectReference: {fileID: 550935862}
     - target: {fileID: 2822966819342906851, guid: 1df7ade11c460784397cddce18b26dfd, type: 3}
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 2822966819342906851, guid: 1df7ade11c460784397cddce18b26dfd, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8776672344040936530, guid: 1df7ade11c460784397cddce18b26dfd, type: 3}
       propertyPath: bag

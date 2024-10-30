@@ -8,9 +8,9 @@ public class Bag : MonoBehaviour
     private int medalPieceCount;
     private int keyAmount;
 
-    public UnityEvent ChangeKeyAmount;
-    public UnityEvent ChangeMedalAmount;
-    public UnityEvent ChangeMedalPieceAmount;
+    [HideInInspector]public UnityEvent ChangeKeyAmount;
+    [HideInInspector]public UnityEvent ChangeMedalAmount;
+    [HideInInspector]public UnityEvent ChangeMedalPieceAmount;
 
     public void AddKey(int amount)
     {

@@ -4,14 +4,16 @@ public class EndGameManager : MonoBehaviour
 {
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
-
-    [SerializeField] private Death death;
-
+    
     [SerializeField] private float loseDelayTimer;
+    
+    private Death death;
     private bool isLose;
     
     private void Start()
     {
+        death = Character.Instance.GetComponent<Death>();
+        
         winPanel.SetActive(false);
         losePanel.SetActive(false);
 
@@ -37,6 +39,7 @@ public class EndGameManager : MonoBehaviour
     private void Lose()
     {
         isLose = true;
+        Dracula.Instance.DraculaDisable();
     }
 
     private void ViewLosePanel()
@@ -57,6 +60,7 @@ public class EndGameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         winPanel.SetActive(true);
+        Dracula.Instance.DraculaDisable();
     }
 
     private void OnTriggerEnter(Collider other)

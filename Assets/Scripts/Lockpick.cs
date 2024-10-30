@@ -5,27 +5,30 @@ using Random = UnityEngine.Random;
 public class Lockpick : MonoBehaviour
 {
     [Header("Player")]
-    [SerializeField] private Bag bag;
     [SerializeField] private OnePersonCamera onePersonCamera;
     [SerializeField] private Transform cameraTarget;
     
     [Header("Base")]
     [SerializeField] private float timeToSuccess;
     [SerializeField] private NoiseLevel noiseLevel;
-   
     
     [Header("UI")]
     [SerializeField] private Texture2D mouseTexture;
-    [SerializeField] private GameObject infoText;
     [SerializeField] private GameObject panel;
     [SerializeField] private RectTransform background;
     [SerializeField] private RectTransform point;
     
+    [Header("SFX")]
+    [SerializeField] private AudioClip successOpenSFX;
+    [SerializeField] private AudioClip failOpenSFX;
+
+    private AudioSource audioSource;
+    
     private Character character;
+    private Bag bag;
     private InteractiveObject interactiveObject;
     
     private float timer;
-    private float textTimer;
     
     private Vector2 randomImagePosition;
     private Vector2 screenMousePosition;
@@ -34,8 +37,10 @@ public class Lockpick : MonoBehaviour
     
     private void Start()
     {
-        infoText.SetActive(false);
-        if(bag!=null) character = bag.transform.root.GetComponent<Character>();
+        audioSource = GetComponent<AudioSource>();
+        
+        character = Character.Instance.transform.root.GetComponent<Character>();
+        bag = Character.Instance.transform.root.GetComponent<Bag>();
         interactiveObject = GetComponent<InteractiveObject>();
         interactiveObject.onUse.AddListener(StartUnlock);
         ResetPoint();
@@ -49,26 +54,24 @@ public class Lockpick : MonoBehaviour
     private void Update()
     { 
        PointMove();
-       InfoText();
     }
 
-    public void StartUnlock()
+    private void StartUnlock()
     {
-        if (bag.GetKeyAmount() <= 0)
-        {
-            textTimer = timeToSuccess;
-            return;
-        }
-
+        if (bag.GetKeyAmount() <= 0) return;
+        
         panel.SetActive(true);
         
         onePersonCamera.SetTarget(cameraTarget,TypeMoveCamera.WithRotation,true);
+        CharacterInputController.Instance.enabled = false;
         
         Cursor.lockState = CursorLockMode.None;
         Cursor.SetCursor(mouseTexture, Vector2.zero, CursorMode.Auto);
         Cursor.visible = true;
-        Dracula.Instance.DraculaDisable();
-        
+        if (Dracula.Instance)
+        {
+            Dracula.Instance.DraculaDisable();
+        }
         timer = timeToSuccess;
         isOpening = true;
     }
@@ -111,12 +114,18 @@ public class Lockpick : MonoBehaviour
             noiseLevel.IncreaseLevel();
             ResetPoint();
             Resume();
+            
+            audioSource.PlayOneShot(failOpenSFX);
         }
     }
 
     private void Resume()
     {
-        Dracula.Instance.enabled = true; //включает дракулу
+        if (Dracula.Instance)
+        {
+            Dracula.Instance.enabled = true; //включает дракулу
+        }
+        CharacterInputController.Instance.enabled = true;
         onePersonCamera.SetTarget(character.CameraPos,TypeMoveCamera.OnlyMove,false);
     }
 
@@ -124,6 +133,8 @@ public class Lockpick : MonoBehaviour
     {
         //OpenDoorlogic
         interactiveObject.onUse.RemoveListener(StartUnlock);
+        
+        audioSource.PlayOneShot(successOpenSFX);
     }
     
     private void ResetPoint()
@@ -144,16 +155,5 @@ public class Lockpick : MonoBehaviour
             Random.Range(background.rect.x + point.rect.size.x/2, background.rect.xMax - point.rect.xMax), 
             Random.Range(background.rect.y + point.rect.size.y/2, background.rect.yMax - point.rect.yMax)
         );
-    }
-
-    private void InfoText()
-    {
-        if(textTimer>=0)
-            textTimer -= Time.deltaTime;
-
-        if (textTimer > 0)
-            infoText.SetActive(true);
-        else
-            infoText.SetActive(false);
     }
 }

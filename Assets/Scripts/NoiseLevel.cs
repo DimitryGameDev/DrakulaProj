@@ -45,6 +45,11 @@ public class NoiseLevel : SingletonBase<NoiseLevel>
         }
     }
 
+    public void SetZeroLevel()
+    {
+        currentLevel = 0;
+    }
+    
     private void UpdateTimer()
     {
         if(timer>0)
