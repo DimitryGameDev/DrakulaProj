@@ -240,9 +240,10 @@ public class Dracula : SingletonBase<Dracula>
                 
                 if (Physics.Raycast(ray, out hitInfo,minDistance))
                 {
-                    if (hitInfo.collider.transform?.GetComponent<Character>())
+                    if (hitInfo.collider.transform.parent?.GetComponent<Character>())
                     {
                         KillPlayer();
+                        enabled = false;
                         return;
                     }
                     Debug.DrawLine(transform.position, patrolPoint.transform.position, Color.red, 3f);

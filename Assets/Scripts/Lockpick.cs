@@ -42,8 +42,8 @@ public class Lockpick : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         
         infoText.SetActive(false);
-        character = Character.Instance.transform.root.GetComponent<Character>();
-        bag = Character.Instance.transform.root.GetComponent<Bag>();
+        character = Character.Instance.GetComponent<Character>();
+        bag = Character.Instance.GetComponent<Bag>();
         interactiveObject = GetComponent<InteractiveObject>();
         interactiveObject.onUse.AddListener(StartUnlock);
         ResetPoint();

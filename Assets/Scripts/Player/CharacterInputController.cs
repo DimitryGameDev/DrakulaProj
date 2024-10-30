@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent (typeof(CapsuleCollider))]
 public class CharacterInputController : SingletonBase<CharacterInputController>
 {    
     [SerializeField] private float heartTimeUsage = 2f;
@@ -32,8 +31,8 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         heartEnabled = false;
         
         character = GetComponent<Character>();
-        radiusCharacter = character.GetComponent<CapsuleCollider>().radius;
-        hightCharacter = character.GetComponent<CapsuleCollider>().height;
+        radiusCharacter = character.GetComponentInChildren<CapsuleCollider>().radius;
+        hightCharacter = character.GetComponentInChildren<CapsuleCollider>().height;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -201,9 +200,9 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         {
            
             Debug.DrawRay(character.Camera.transform.position, character.Camera.transform.forward * hitCamera.distance, Color.yellow, 0.01f);
-            if (hitCamera.collider.transform.root?.GetComponent<InteractiveObject>())
+            if (hitCamera.collider.transform.parent?.GetComponent<InteractiveObject>())
             {
-                var hit = hitCamera.collider.transform.root.GetComponent<InteractiveObject>();
+                var hit = hitCamera.collider.transform.parent.GetComponent<InteractiveObject>();
 
                 hit.ShowInfoPanel();
                 
