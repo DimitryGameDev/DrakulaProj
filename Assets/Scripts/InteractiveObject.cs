@@ -62,9 +62,11 @@ public class InteractiveObject: MonoBehaviour
         }
     }
     
-    private void HideInfoPanel()
+    public void HideInfoPanel()
     {
-        infoPanel.SetActive(true);
+        timer = timeBoxHide;
+        infoPanel.SetActive(false);
+        enabled = false;
     }
     /// <summary>
     ///Вызывается когда камера игрока видит обьект
@@ -90,9 +92,7 @@ public class InteractiveObject: MonoBehaviour
         ShowAfterText();
         onUse.Invoke();
     }
-
     
-
     private void OnDestroy()
     {
         Ondestroy.Invoke(this);
