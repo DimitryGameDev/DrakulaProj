@@ -74164,6 +74164,10 @@ PrefabInstance:
       propertyPath: infoPanelText
       value: 
       objectReference: {fileID: 3981263324021731682}
+    - target: {fileID: 837370047641164258, guid: 1df7ade11c460784397cddce18b26dfd, type: 3}
+      propertyPath: infoTextAfterUse
+      value: "\u0414\u0432\u0435\u0440\u044C \u043E\u0442\u043A\u0440\u044B\u0442\u0430"
+      objectReference: {fileID: 0}
     - target: {fileID: 2822966819342906851, guid: 1df7ade11c460784397cddce18b26dfd, type: 3}
       propertyPath: m_Name
       value: Door

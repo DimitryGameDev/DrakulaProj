@@ -14,6 +14,7 @@ public class Lockpick : MonoBehaviour
     
     [Header("UI")]
     [SerializeField] private Texture2D mouseTexture;
+    [SerializeField] private GameObject infoText;
     [SerializeField] private GameObject panel;
     [SerializeField] private RectTransform background;
     [SerializeField] private RectTransform point;
@@ -29,6 +30,7 @@ public class Lockpick : MonoBehaviour
     private InteractiveObject interactiveObject;
     
     private float timer;
+    private float textTimer;
     
     private Vector2 randomImagePosition;
     private Vector2 screenMousePosition;
@@ -39,6 +41,7 @@ public class Lockpick : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         
+        infoText.SetActive(false);
         character = Character.Instance.transform.root.GetComponent<Character>();
         bag = Character.Instance.transform.root.GetComponent<Bag>();
         interactiveObject = GetComponent<InteractiveObject>();
@@ -54,12 +57,17 @@ public class Lockpick : MonoBehaviour
     private void Update()
     { 
        PointMove();
+       InfoText();
     }
 
     private void StartUnlock()
     {
-        if (bag.GetKeyAmount() <= 0) return;
-        
+        if (bag.GetKeyAmount() <= 0)
+        {
+            textTimer = timeToSuccess;
+            return;
+        }
+
         panel.SetActive(true);
         
         onePersonCamera.SetTarget(cameraTarget,TypeMoveCamera.WithRotation,true);
@@ -132,6 +140,7 @@ public class Lockpick : MonoBehaviour
     private void SuccessUnlock()
     {
         //OpenDoorlogic
+
         interactiveObject.onUse.RemoveListener(StartUnlock);
         
         audioSource.PlayOneShot(successOpenSFX);
@@ -155,5 +164,16 @@ public class Lockpick : MonoBehaviour
             Random.Range(background.rect.x + point.rect.size.x/2, background.rect.xMax - point.rect.xMax), 
             Random.Range(background.rect.y + point.rect.size.y/2, background.rect.yMax - point.rect.yMax)
         );
+    }
+
+    private void InfoText()
+    {
+        if(textTimer>=0)
+            textTimer -= Time.deltaTime;
+
+        if (textTimer > 0)
+            infoText.SetActive(true);
+        else
+            infoText.SetActive(false);
     }
 }
