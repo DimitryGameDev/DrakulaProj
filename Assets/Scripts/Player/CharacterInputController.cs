@@ -48,11 +48,6 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         MainRay();
         AdminCameraMove();
         HeartState();
-        
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            draculaAnim?.Invoke();
-        }
     }
 
     private const string Horizontal = "Horizontal";
