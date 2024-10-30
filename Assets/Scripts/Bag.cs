@@ -17,7 +17,7 @@ public class Bag : MonoBehaviour
         keyAmount += amount;
         ChangeKeyAmount?.Invoke();
     }
-
+    
     public bool DrawKey(int amount)
     {
         if (keyAmount - amount < 0) return false;
@@ -38,7 +38,7 @@ public class Bag : MonoBehaviour
         if (medalPieceCount + pieceCount == countPieceForMedal)
         {
             AddMedal();
-            medalPieceCount = 0;
+            medalPieceCount = 1;
             ChangeMedalPieceAmount.Invoke();
             return;
         }

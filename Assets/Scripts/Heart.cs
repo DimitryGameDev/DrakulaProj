@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
+[RequireComponent(typeof(AudioSource))]
 public class Heart : MonoBehaviour
 {
     [SerializeField] private CharacterInputController characterInputController;
@@ -10,6 +12,7 @@ public class Heart : MonoBehaviour
     [SerializeField] private float tickRateStress = 1f;
     [SerializeField] private float addStressValue = 1f;
     [SerializeField] private float removeStressValue = 1f;
+    [SerializeField] private AudioClip heartOnSFX;
     
     private bool isActive;
     public bool IsActive => isActive;
@@ -17,8 +20,13 @@ public class Heart : MonoBehaviour
     private LensDistortion lensDistortion;
     private Character character;
     private float timer;
+
+    private AudioSource audioSource;
+    
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        CharacterInputController.Instance.heartOn.AddListener(PlaySFX);
         character = (Character)Character.Instance;
         postProcessVolume.profile.TryGetSettings(out vignette);
         postProcessVolume.profile.TryGetSettings(out lensDistortion);
@@ -52,6 +60,7 @@ public class Heart : MonoBehaviour
         if (!characterInputController.HeartEnabled)
         {
             isActive = false;
+            
             if (vignette.opacity.value != 0)
             {
                 vignette.opacity.value = Mathf.Lerp(vignette.opacity.value, 0, vignetteSpeed * Time.deltaTime);
@@ -64,6 +73,7 @@ public class Heart : MonoBehaviour
         if (characterInputController.HeartEnabled)
         {
             isActive = true;
+ 
             if (vignette.opacity.value != 1)
             {
                 vignette.opacity.value = Mathf.Lerp(vignette.opacity.value, 1, vignetteSpeed * Time.deltaTime);
@@ -73,5 +83,15 @@ public class Heart : MonoBehaviour
                 lensDistortion.intensity.value = Mathf.Lerp(lensDistortion.intensity.value, -60, lensDistortionSpeed * Time.deltaTime);
             }
         }
+    }
+
+    private void PlaySFX()
+    {
+        audioSource.PlayOneShot(heartOnSFX);
+    }
+
+    private void OnDestroy()
+    {
+        CharacterInputController.Instance.heartOn.RemoveListener(PlaySFX);
     }
 }
