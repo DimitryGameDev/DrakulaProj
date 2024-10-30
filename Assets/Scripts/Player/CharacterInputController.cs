@@ -17,6 +17,8 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     private bool IsMove = true;
     private bool heartEnabled;
     public bool HeartEnabled => heartEnabled;
+
+    [HideInInspector] public bool PickUpHeart;
     
     [HideInInspector] public UnityEvent heartOn;
     [HideInInspector] public UnityEvent heartOff;
@@ -45,6 +47,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private void Update()
     { 
+        Debug.Log(HeartEnabled);
         MainRay();
         AdminCameraMove();
         HeartState();
@@ -169,6 +172,8 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private void HeartState()
     {
+        if(!PickUpHeart) return;
+        
         if (heartEnabled == false)
         {
             timeHeart += Time.deltaTime;
