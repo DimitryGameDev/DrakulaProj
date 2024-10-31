@@ -35,7 +35,6 @@ public class Trigger : MonoBehaviour
 
    private void SwitchActive()
    { 
-      Debug.Log(transform.name);
       isEnable = !isEnable;
       if (!isEnable) gameObject.SetActive(false);
       if (isEnable) gameObject.SetActive(true);
