@@ -56,7 +56,8 @@ public class Bottle : MonoBehaviour
     private void PickUp()
     {
         Destroy(visualModel);
-
+        interactiveObject.Ondestroy.Invoke(interactiveObject);
+        
         if (impactEffect)
             Instantiate(impactEffect, transform.position, Quaternion.identity);
     }
