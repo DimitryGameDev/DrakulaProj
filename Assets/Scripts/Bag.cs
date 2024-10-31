@@ -45,6 +45,11 @@ public class Bag : MonoBehaviour
         medalPieceCount += pieceCount;
         ChangeMedalPieceAmount.Invoke();
     }
+
+    public int GetMedalAmount()
+    {
+        return medalCount;
+    }
     
     public void AddMedal()
     {
