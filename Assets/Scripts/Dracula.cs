@@ -18,9 +18,10 @@ public class Dracula : SingletonBase<Dracula>
     [SerializeField] private ImpactEffect visionEffectPrefab;
 
     [Space] [Header("Dracula Settings")] 
-    [SerializeField] [Range(1f, 15f)]private int spawnSpeed = 4;
+    [SerializeField] [Range(1f, 15f)]private int spawnSpeed = 7;
     [SerializeField] [Range(0f, 10f)]private int speedChange = 2;
-    [SerializeField] [Range(0f, 50f)] private float minDistance = 6;
+    [SerializeField] [Range(0f, 50f)] private float minDistanceToNextPp = 6;
+    [SerializeField] [Range(0f, 50f)] private float minDistanceToPlayer = 3;
     [SerializeField] private AudioClip[] spawnClips;
     [SerializeField] private PatrolPoint[] spawnPositions;
     
@@ -159,7 +160,6 @@ public class Dracula : SingletonBase<Dracula>
     {
         transform.position = spawnPositions[Random.Range(0,spawnPositions.Length)].transform.position;
         Spawn();
-       
     }
     public void DraculaSpawn(PatrolPoint spawnPoint)
     {
@@ -174,8 +174,18 @@ public class Dracula : SingletonBase<Dracula>
         draculaMeshRenderer.enabled = false;
         enabled = true;
     }
+
+    private void DraculaEnable()
+    {
+        transform.position = lastPosition;
+        enabled = true;
+    }
+    
+    private Vector3 lastPosition;
     public void DraculaDisable()
     {
+        lastPosition = transform.position;
+        transform.position = Vector3.zero;
         timer = 0;
         enabled = false;
     }
@@ -189,12 +199,13 @@ public class Dracula : SingletonBase<Dracula>
         Destroy(draculaPrefab);
         
         var patrolPoint = FindPatrolPointsToPlayer();
-
+        
+        /*
         if (patrolPoint.DraculaPos == DraculaPosType.Player)
         {
             KillPlayer();
             return;
-        }
+        }*/
         
         var prefab = draculaPrefabsT;
         
@@ -230,20 +241,23 @@ public class Dracula : SingletonBase<Dracula>
             PatrolPoint patrolPoint = patrolPoints[i];
             var distance = Vector3.Distance(draculaPos, patrolPoint.transform.position);
             
-            if (distance < minDistance)
+            if (distance < minDistanceToNextPp)
             {   
                 RaycastHit hitInfo;
                 Ray ray = new Ray(transform.position + OffsetY, patrolPoint.transform.position - transform.position + OffsetY);
                 
                 Debug.DrawLine(transform.position + OffsetY, patrolPoint.transform.position + OffsetY, Color.blue,3f);
                 
-                if (Physics.Raycast(ray, out hitInfo,minDistance))
+                if (Physics.Raycast(ray, out hitInfo,minDistanceToNextPp))
                 {
                     if (hitInfo.collider.transform.parent?.GetComponent<Character>())
                     {
-                        KillPlayer();
-                        enabled = false;
-                        return;
+                        if (Vector3.Distance(hitInfo.transform.position,transform.position) <= minDistanceToPlayer)
+                        {
+                            KillPlayer();
+                            enabled = false;
+                            return;
+                        }
                     }
                     Debug.DrawLine(transform.position, patrolPoint.transform.position, Color.red, 3f);
                     continue;
@@ -287,8 +301,10 @@ public class Dracula : SingletonBase<Dracula>
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, minDistance);
+        Gizmos.DrawWireSphere(transform.position, minDistanceToNextPp);
+        
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, minDistanceToPlayer);
     }
-    
-    
+
 }
