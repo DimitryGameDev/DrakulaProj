@@ -33,6 +33,7 @@ public class Lockpick : MonoBehaviour
     private OnePersonCamera onePersonCamera;
     private Character character;
     private Bag bag;
+    private Dracula dracula;
     private InteractiveObject interactiveObject;
     
     private float timer;
@@ -50,6 +51,7 @@ public class Lockpick : MonoBehaviour
         //infoText.SetActive(false);
         character = Character.Instance.GetComponent<Character>();
         bag = Character.Instance.GetComponent<Bag>();
+        dracula = Dracula.Instance;
         onePersonCamera = OnePersonCamera.Instance;
         interactiveObject = GetComponent<InteractiveObject>();
         interactiveObject.onUse.AddListener(StartUnlock);
@@ -91,9 +93,9 @@ public class Lockpick : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.SetCursor(mouseTexture, Vector2.zero, CursorMode.Auto);
         Cursor.visible = true;
-        if (Dracula.Instance)
+        if (dracula)
         {
-            Dracula.Instance.DraculaDisable();
+            dracula.DraculaDisable();
         }
         timer = timeToSuccess;
         isOpening = true;
@@ -144,9 +146,9 @@ public class Lockpick : MonoBehaviour
 
     private void Resume()
     {
-        if (Dracula.Instance)
+        if (dracula)
         {
-            Dracula.Instance.enabled = true; //включает дракулу
+            dracula.DraculaEnable();
         }
         CharacterInputController.Instance.enabled = true;
         onePersonCamera.SetTarget(character.CameraPos,TypeMoveCamera.OnlyMove,false);

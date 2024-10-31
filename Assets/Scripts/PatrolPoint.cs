@@ -3,11 +3,13 @@ using UnityEngine;
 
 public enum DraculaPosType
 {
-    Player,
-    T,
-    Sit,
-    Stay,
-    Up
+    None,
+    Sexy,
+    Fly,
+    Stand,
+    Hand,
+    Cross
+    
 }
 
 public class PatrolPoint : MonoBehaviour
