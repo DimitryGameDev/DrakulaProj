@@ -6,13 +6,14 @@ public class BaseDoor : MonoBehaviour
 {
     [SerializeField] private GameObject infoPanel;
     [SerializeField] private Text infoText;
-    [SerializeField] private string text;
+    [SerializeField] private string textOpen;
     [SerializeField] private Animator animator;
-
+    [SerializeField] private GameObject closedTrigger;
+    
     private AudioSource audioSource;
     private float textTimer;
     private bool isOpened;
-    
+        
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -28,12 +29,12 @@ public class BaseDoor : MonoBehaviour
         if (other == Character.Instance.GetComponentInChildren<Collider>())
         {
             OpenDoor();
-            
-            if(!isOpened)
-             textTimer = 1;
+
+            if (!isOpened)
+                textTimer = 1;
         }
     }
-    
+
     private void OpenDoor()
     {
         if (Input.GetKey(KeyCode.E))
@@ -42,6 +43,9 @@ public class BaseDoor : MonoBehaviour
             audioSource.Play();
             
             isOpened = true;
+            
+            if(closedTrigger)
+            Destroy(closedTrigger);
         }
     }
     
@@ -52,7 +56,7 @@ public class BaseDoor : MonoBehaviour
 
         if (textTimer > 0)
         {
-            infoText.text = text;
+            infoText.text = textOpen;
             infoPanel.SetActive(true);
         }
         else

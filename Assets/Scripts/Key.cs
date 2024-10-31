@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(InteractiveObject))]
@@ -25,5 +26,4 @@ public class Key : MonoBehaviour
         Destroy(visualModel);
         interactiveObject.Ondestroy.Invoke(interactiveObject);
     }
-
 }

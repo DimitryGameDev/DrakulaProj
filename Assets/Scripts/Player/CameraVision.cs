@@ -64,7 +64,7 @@ public class CameraVision : MonoBehaviour
 
             if (Physics.Raycast(ray, out hitInfo, maxDistance,LayerMask.NameToLayer("Player") | LayerMask.NameToLayer("Ignore Raycast")))
             {
-                if (hitInfo.transform.parent.gameObject == objectToCheck)
+                if (hitInfo.transform.parent.gameObject == objectToCheck && hitInfo.transform.parent.gameObject != null)
                 {
                     return true;
                 }

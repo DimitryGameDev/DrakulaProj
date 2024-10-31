@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 8225965780088440804}
   - component: {fileID: 5591482961629210622}
   - component: {fileID: 3437507864595563079}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BaseDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,8 +200,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infoPanel: {fileID: 0}
   infoText: {fileID: 0}
-  text: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435 (\u0415)"
+  textOpen: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435 (\u0415)"
   animator: {fileID: 8225965780088440804}
+  closedTrigger: {fileID: 0}
 --- !u!65 &3437507864595563079
 BoxCollider:
   m_ObjectHideFlags: 0
