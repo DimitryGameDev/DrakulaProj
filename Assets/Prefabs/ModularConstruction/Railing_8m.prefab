@@ -146,9 +146,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4090472221352049874, guid: 3b9234925454b834889477dcf6501b50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7379650142546159935, guid: 3b9234925454b834889477dcf6501b50, type: 3}
       propertyPath: m_Name
       value: Railind_2m (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706207872616035755, guid: 3b9234925454b834889477dcf6501b50, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -206,6 +214,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1437753249360697493, guid: 3b9234925454b834889477dcf6501b50, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090472221352049874, guid: 3b9234925454b834889477dcf6501b50, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7379650142546159935, guid: 3b9234925454b834889477dcf6501b50, type: 3}
@@ -268,6 +280,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1437753249360697493, guid: 3b9234925454b834889477dcf6501b50, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090472221352049874, guid: 3b9234925454b834889477dcf6501b50, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6547757907157600560, guid: 3b9234925454b834889477dcf6501b50, type: 3}
@@ -340,9 +356,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4090472221352049874, guid: 3b9234925454b834889477dcf6501b50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7379650142546159935, guid: 3b9234925454b834889477dcf6501b50, type: 3}
       propertyPath: m_Name
       value: Railind_2m (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706207872616035755, guid: 3b9234925454b834889477dcf6501b50, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
