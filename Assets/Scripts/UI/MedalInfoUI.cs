@@ -10,7 +10,7 @@ public class MedalInfoUI : MonoBehaviour
 
     private void Start()
     {
-        bag = Character.Instance.transform.root.GetComponent<Bag>();
+        bag = Character.Instance.GetComponent<Bag>();
         
         if (bag != null)
         {

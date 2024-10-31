@@ -1,20 +1,23 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(InteractiveObject))]
 public class Lockpick : MonoBehaviour
 {
     [Header("Player")]
-    [SerializeField] private OnePersonCamera onePersonCamera;
     [SerializeField] private Transform cameraTarget;
     
     [Header("Base")]
     [SerializeField] private float timeToSuccess;
+    [SerializeField] private string text;
     [SerializeField] private NoiseLevel noiseLevel;
-    
-    [Header("UI")]
-    [SerializeField] private Texture2D mouseTexture;
-    [SerializeField] private GameObject infoText;
+    [SerializeField] private Animator animator;
+
+    [Header("UI")] 
+    [SerializeField] private Texture2D mouseTexture; 
+    [SerializeField] private GameObject infoPanel;
+    [SerializeField] private Text infoText;
     [SerializeField] private GameObject panel;
     [SerializeField] private RectTransform background;
     [SerializeField] private RectTransform point;
@@ -25,6 +28,7 @@ public class Lockpick : MonoBehaviour
 
     private AudioSource audioSource;
     
+    private OnePersonCamera onePersonCamera;
     private Character character;
     private Bag bag;
     private InteractiveObject interactiveObject;
@@ -41,9 +45,10 @@ public class Lockpick : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         
-        infoText.SetActive(false);
-        character = Character.Instance.transform.root.GetComponent<Character>();
-        bag = Character.Instance.transform.root.GetComponent<Bag>();
+        //infoText.SetActive(false);
+        character = Character.Instance.GetComponent<Character>();
+        bag = Character.Instance.GetComponent<Bag>();
+        onePersonCamera = OnePersonCamera.Instance;
         interactiveObject = GetComponent<InteractiveObject>();
         interactiveObject.onUse.AddListener(StartUnlock);
         ResetPoint();
@@ -65,6 +70,7 @@ public class Lockpick : MonoBehaviour
         if (bag.GetKeyAmount() <= 0)
         {
             textTimer = timeToSuccess;
+
             return;
         }
 
@@ -139,11 +145,14 @@ public class Lockpick : MonoBehaviour
 
     private void SuccessUnlock()
     {
+        audioSource.PlayOneShot(successOpenSFX);
         //OpenDoorlogic
 
-        interactiveObject.onUse.RemoveListener(StartUnlock);
+        animator.SetBool("Open", true);
         
-        audioSource.PlayOneShot(successOpenSFX);
+        interactiveObject.onUse.RemoveListener(StartUnlock);
+        Destroy(this);
+        Destroy(interactiveObject);
     }
     
     private void ResetPoint()
@@ -172,8 +181,12 @@ public class Lockpick : MonoBehaviour
             textTimer -= Time.deltaTime;
 
         if (textTimer > 0)
-            infoText.SetActive(true);
+        {
+            infoText.text = text;
+            infoPanel.SetActive(true);
+            interactiveObject.HideInfoPanel();
+        }
         else
-            infoText.SetActive(false);
+            infoPanel.SetActive(false);
     }
 }

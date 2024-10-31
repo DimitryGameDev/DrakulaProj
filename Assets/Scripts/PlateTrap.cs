@@ -15,7 +15,7 @@ public class PlateTrap : MonoBehaviour
     {
         if (trapPlateCollider != null)
         {
-            if (other.CompareTag("Player"))
+            if (other.transform.parent.CompareTag("Player"))
             {
                 noiseLevel.IncreaseLevel();
                 Debug.Log(noiseLevel.CurrentLevel);

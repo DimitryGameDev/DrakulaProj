@@ -17,7 +17,7 @@ public class InteractiveObject: MonoBehaviour
     public UnityAction<InteractiveObject> Ondestroy;
 
     private float timer ;
-    private float timeBoxHide = 0.3f;
+    private float timeBoxHide = 0.1f;
     
     private void Start()
     {
@@ -35,7 +35,7 @@ public class InteractiveObject: MonoBehaviour
         {
             infoPanel.SetActive(false);
             timer = 0;
-            timeBoxHide = 0.3f;
+            timeBoxHide = 0.1f;
             enabled = false;
         }
     }
@@ -55,17 +55,19 @@ public class InteractiveObject: MonoBehaviour
     {
         if (infoTextAfterUse != "")
         {
-            Debug.Log(infoTextAfterUse);
             infoPanelText.text = infoTextAfterUse;
             timer = 0;
-            timeBoxHide = 2f;
+            timeBoxHide = 1f;
         }
     }
-    
-    private void HideInfoPanel()
+
+    public void HideInfoPanel()
     {
-        infoPanel.SetActive(true);
+        timer = timeBoxHide;
+        infoPanel.SetActive(false);
+        enabled = false;
     }
+    
     /// <summary>
     ///Вызывается когда камера игрока видит обьект
     /// </summary>
@@ -90,11 +92,12 @@ public class InteractiveObject: MonoBehaviour
         ShowAfterText();
         onUse.Invoke();
     }
-
     
-
     private void OnDestroy()
     {
+        onUse.RemoveAllListeners();
+        onHide.RemoveAllListeners();
+        onVision.RemoveAllListeners();
         Ondestroy.Invoke(this);
     }
 }

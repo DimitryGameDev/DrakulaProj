@@ -117,7 +117,11 @@ public class Character : Player
     
     private void CharacterRotate()
     {
-        if (cameraMain.IsLocked || cameraMain.enabled) return; 
+        if (cameraMain.IsLocked || cameraMain.enabled)
+        {
+            return;
+        }
+      
         transform.rotation = new Quaternion(0, cameraMain.transform.rotation.y,0, cameraMain.transform.rotation.w);
     }
     

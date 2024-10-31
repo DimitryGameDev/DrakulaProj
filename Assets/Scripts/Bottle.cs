@@ -28,11 +28,6 @@ public class Bottle : MonoBehaviour
         death = Character.Instance.GetComponent<Death>();
     }
 
-    private void OnDestroy()
-    {
-        interactiveObject.onUse.RemoveListener(SetBottleType);
-    }
-
     public void SetBottleType()
     {
         switch (bottleType)
@@ -61,7 +56,8 @@ public class Bottle : MonoBehaviour
     private void PickUp()
     {
         Destroy(visualModel);
-
+        interactiveObject.Ondestroy.Invoke(interactiveObject);
+        
         if (impactEffect)
             Instantiate(impactEffect, transform.position, Quaternion.identity);
     }

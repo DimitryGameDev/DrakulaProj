@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main_Menu.unity
     guid: 34ce909e680d1ca4696cc6d48e51470e
   - enabled: 1
-    path: Assets/Scenes/BlockoutScene.unity
-    guid: 0aed91f922b5b5b4dba3e9da6fe0355e
+    path: Assets/Scenes/TitleScene.unity
+    guid: 3b18a9e4141151e4eb195ad0e9ef5815
+  - enabled: 1
+    path: Assets/Scenes/BranCastle.unity
+    guid: fec545d80d1eca445a2286dea36f330d
   m_configObjects: {}

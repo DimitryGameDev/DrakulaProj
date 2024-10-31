@@ -1,18 +1,28 @@
 using UnityEngine;
 
+[RequireComponent(typeof(InteractiveObject))]
 public class Medal : MonoBehaviour
 {
-    [SerializeField] private GameObject view;
-    [SerializeField] private int countPiece = 1;
-    
+    [SerializeField] private int countPiece;
     [SerializeField] private GameObject impactEffect;
+    [SerializeField] private GameObject visualModel;
     
-    public void PickUp()
+    private InteractiveObject interactiveObject;
+    
+    private void Start()
     {
-        Destroy(view);
+        interactiveObject = GetComponent<InteractiveObject>();
+        interactiveObject.onUse.AddListener(PickUp);
+    }
+
+    private void PickUp()
+    {
         Character.Instance.GetComponent<Bag>().AddMedalPiece(countPiece);
         
         if (impactEffect)
             Instantiate(impactEffect, transform.position, Quaternion.identity);
+        
+        Destroy(visualModel);
+        interactiveObject.Ondestroy.Invoke(interactiveObject);
     }
 }

@@ -55,16 +55,16 @@ public class CameraVision : MonoBehaviour
 
     private bool IsVisionObj(GameObject objectToCheck)
     {
-        Vector3 viewPortPoint = playerCamera.WorldToViewportPoint(objectToCheck.transform.localPosition);
+        Vector3 viewPortPoint = playerCamera.WorldToViewportPoint(objectToCheck.transform.position);
         
         if (viewPortPoint is { z: > 0, y: < 0.8f and > 0.2f, x: > 0.2f and < 0.8f })
         {
             Ray ray = playerCamera.ScreenPointToRay(playerCamera.WorldToScreenPoint(objectToCheck.transform.position));
             RaycastHit hitInfo;
 
-            if (Physics.Raycast(ray, out hitInfo, maxDistance))
+            if (Physics.Raycast(ray, out hitInfo, maxDistance,LayerMask.NameToLayer("Player") | LayerMask.NameToLayer("Ignore Raycast")))
             {
-                if (hitInfo.collider.transform.root.gameObject == objectToCheck)
+                if (hitInfo.transform.parent.gameObject == objectToCheck)
                 {
                     return true;
                 }
@@ -75,6 +75,7 @@ public class CameraVision : MonoBehaviour
 
     private void RemoveVisionObj(InteractiveObject objectToRemove)
     {
+        Debug.Log(objectToRemove);
         visionObjs.Remove(objectToRemove);
     }
 }

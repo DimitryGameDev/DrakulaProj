@@ -1,22 +1,29 @@
 using UnityEngine;
 
-public class Key : Pikup
+[RequireComponent(typeof(InteractiveObject))]
+public class Key : MonoBehaviour
 {
     [SerializeField] private int keyCount;
     [SerializeField] private GameObject impactEffect;
+    [SerializeField] private GameObject visualModel;
+
+    private InteractiveObject interactiveObject;
     
-    protected override void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        base.OnTriggerEnter(other);
-
-        Bag bag = other.GetComponent<Bag>();
-
-        if (bag)
-        {
-            bag.AddKey(keyCount);
-
-            if (impactEffect)
-                Instantiate(impactEffect, transform.position, Quaternion.identity);
-        }
+        interactiveObject = GetComponent<InteractiveObject>();
+        interactiveObject.onUse.AddListener(PickUp);
     }
+    
+    private void PickUp()
+    {
+        Character.Instance.GetComponent<Bag>().AddKey(keyCount);
+
+        if (impactEffect)
+            Instantiate(impactEffect, transform.position, Quaternion.identity);
+        
+        Destroy(visualModel);
+        interactiveObject.Ondestroy.Invoke(interactiveObject);
+    }
+
 }
