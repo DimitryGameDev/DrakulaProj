@@ -15,6 +15,8 @@ public class TitleManager : MonoBehaviour
    private Vector3 textPos;
    private AudioSource audioSource;
    private float timer;
+   private bool nextScene;
+   
    private void Start()
    {
       textPos = titleText.rectTransform.position;
@@ -29,18 +31,13 @@ public class TitleManager : MonoBehaviour
       
       titleText.rectTransform.position = textPos;
       
-      if (Mathf.Approximately(moveByY, textPos.y))
-      {
-         LoadNextScene();
-      }
-      
-      if (Input.anyKey)
+      if (Input.anyKey && !nextScene)
       {
          timer += Time.deltaTime;
-
+         
          if (timer >= timeToScip)
          {
-            LoadNextScene();
+            nextScene = true;
          }
       }
       else
@@ -49,12 +46,22 @@ public class TitleManager : MonoBehaviour
       }
       
       skipImage.fillAmount = timer / timeToScip;
+      
+      if (Mathf.Approximately(moveByY, textPos.y))
+      {
+         nextScene = true;
+      }
+
+      if (nextScene)
+      {
+         LoadNextScene();
+      }
    }
    
    private void LoadNextScene()
    {
       audioSource.volume = Mathf.MoveTowards(audioSource.volume,0f, Time.deltaTime);
-
+      titleText.color = new Color(titleText.color.r, titleText.color.g, titleText.color.b, Mathf.MoveTowards(titleText.color.a,0f, Time.deltaTime));
       if (audioSource.volume == 0)
       {
          SceneManager.LoadScene(2);

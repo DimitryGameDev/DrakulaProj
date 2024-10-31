@@ -41,9 +41,11 @@ public class Death : MonoBehaviour
 
     public void DeathCharacter(int animID)
     {
+        var rb = Character.Instance.GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
+        rb.velocity = new Vector3(0, 0, 0);
         CharacterInputController.Instance.enabled = false;
         FindObjectOfType<Heart>().enabled = false;
-        Character.Instance.GetComponent<Rigidbody>().freezeRotation = true;
         
         if (animID == 1) DieLogic1();
         if (animID == 2) DieLogic2();
