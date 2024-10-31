@@ -1,26 +1,28 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
-[RequireComponent (typeof(CapsuleCollider))]
 public class CharacterInputController : SingletonBase<CharacterInputController>
 {    
     [SerializeField] private float heartTimeUsage = 2f;
     [SerializeField] private float maxDistanseHitCamera = 1f;
-    [SerializeField] private bool heartEnabled;
-
-    public bool HeartEnabled => heartEnabled;
     
     private Character character; 
     public Character Character => character;
     
     private Vector3 playerMoveDirection;
     private float radiusCharacter;
-    private float hightCharacter;
+    private float heightCharacter;
     private float timeHeart;
+    private bool isMove = true;
+    private bool heartEnabled;
+    public bool HeartEnabled => heartEnabled;
 
-    public UnityEvent heartOn;
-    public UnityEvent heartOff;
-    public UnityEvent draculaAnim;
+    [HideInInspector] public bool pickUpHeart;
+    
+    [HideInInspector] public UnityEvent heartOn;
+    [HideInInspector] public UnityEvent heartOff;
+    [HideInInspector] public UnityEvent draculaAnim;
     
     private void Awake()
     {
@@ -32,8 +34,8 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         heartEnabled = false;
         
         character = GetComponent<Character>();
-        radiusCharacter = character.GetComponent<CapsuleCollider>().radius;
-        hightCharacter = character.GetComponent<CapsuleCollider>().height;
+        radiusCharacter = character.GetComponentInChildren<CapsuleCollider>().radius;
+        heightCharacter = character.GetComponentInChildren<CapsuleCollider>().height;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -48,11 +50,6 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         MainRay();
         AdminCameraMove();
         HeartState();
-        
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            draculaAnim?.Invoke();
-        }
     }
 
     private const string Horizontal = "Horizontal";
@@ -60,11 +57,10 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private void AdminMove()
     {
-        
         var dirZ = Input.GetAxis(Vertical);
         var dirX = Input.GetAxis(Horizontal);
 
-        if (heartEnabled)
+        if (!isMove)
         {
             dirZ = 0;
             dirX = 0;
@@ -72,10 +68,12 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         
         var ground = IsGrounded();
         
-        if (Input.GetButton("Jump") /*&& ground*/)
+        /*
+        if (Input.GetButton("Jump") && ground)
         {
-            //character.Jump();
+            character.Jump();
         }
+        */
         
         playerMoveDirection = new Vector3(dirX, 0, dirZ);
             
@@ -110,7 +108,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     {
         RaycastHit hitLegs;
         var vectorDown = character.transform.TransformDirection(Vector3.down);
-        var maxDistance = hightCharacter / 2 + 0.001f;
+        var maxDistance = heightCharacter / 2 + 0.1f;
 
         if (Physics.Raycast(character.transform.position - new Vector3(radiusCharacter, 0, 0), vectorDown, out hitLegs, maxDistance))
         {
@@ -173,24 +171,28 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private void HeartState()
     {
+        if(!pickUpHeart) return;
+        
         if (heartEnabled == false)
         {
-            timeHeart += Time.deltaTime;
+            timeHeart -= Time.deltaTime;
         }
         
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (timeHeart >= heartTimeUsage)
+            if (timeHeart <= 0)
             {
                 heartEnabled = true;
+                isMove = false;
                 heartOn.Invoke();
-                timeHeart = 0;
+                timeHeart = heartTimeUsage;
             }
         }
         
         if (Input.GetKeyUp(KeyCode.F))
         {
             heartEnabled = false;
+            isMove = true;
             heartOff.Invoke();
         }
     }
@@ -199,17 +201,20 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     {
         RaycastHit hitCamera;
  
-        if (Physics.Raycast(character.Camera.transform.position, character.Camera.transform.forward, out hitCamera, maxDistanseHitCamera))
+        if (Physics.Raycast(character.Camera.transform.position, character.Camera.transform.forward, out hitCamera, maxDistanseHitCamera ,LayerMask.NameToLayer("Player")))
         {
-           
-            Debug.DrawRay(character.Camera.transform.position, character.Camera.transform.forward * hitCamera.distance, Color.yellow, 0.01f);
-            if (hitCamera.collider.transform.root?.GetComponent<InteractiveObject>())
+            //Debug.DrawRay(character.Camera.transform.position, character.Camera.transform.forward * hitCamera.distance, Color.yellow, 0.01f);
+            Debug.DrawLine(character.Camera.transform.position, hitCamera.transform.position, Color.yellow);
+            
+            if (hitCamera.collider.transform.parent?.GetComponent<InteractiveObject>())
             {
-                var use = hitCamera.collider.transform.root.GetComponent<InteractiveObject>();
+                var hit = hitCamera.collider.transform.parent.GetComponent<InteractiveObject>();
 
+                hit.ShowInfoPanel();
+                
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    use.Use();
+                    hit.Use();
                 }
             }
         }

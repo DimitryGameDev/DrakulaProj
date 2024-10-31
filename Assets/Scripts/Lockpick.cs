@@ -1,25 +1,40 @@
 using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(InteractiveObject))]
 public class Lockpick : MonoBehaviour
 {
+    [SerializeField] private bool draculaDoor;
+    
     [Header("Player")]
-    [SerializeField] private Bag bag;
-    [SerializeField] private OnePersonCamera onePersonCamera;
     [SerializeField] private Transform cameraTarget;
     
     [Header("Base")]
     [SerializeField] private float timeToSuccess;
+    [SerializeField] private string text;
     [SerializeField] private NoiseLevel noiseLevel;
-    [SerializeField] private InteractiveObject interactiveObject;
-    
-    [Header("UI")]
-    [SerializeField] private Texture2D mouseTexture;
-    [SerializeField] private GameObject infoText;
+    [SerializeField] private Animator animator;
+
+    [Header("UI")] 
+    [SerializeField] private Texture2D mouseTexture; 
+    [SerializeField] private GameObject infoPanel;
+    [SerializeField] private Text infoText;
     [SerializeField] private GameObject panel;
     [SerializeField] private RectTransform background;
     [SerializeField] private RectTransform point;
     
+    [Header("SFX")]
+    [SerializeField] private AudioClip successOpenSFX;
+    [SerializeField] private AudioClip failOpenSFX;
+
+    private AudioSource audioSource;
+    
+    private OnePersonCamera onePersonCamera;
     private Character character;
+    private Bag bag;
+    private Dracula dracula;
+    private InteractiveObject interactiveObject;
     
     private float timer;
     private float textTimer;
@@ -28,13 +43,24 @@ public class Lockpick : MonoBehaviour
     private Vector2 screenMousePosition;
     
     private bool isOpening;
-
+    
     private void Start()
     {
-        infoText.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
         
-        character = bag.GetComponent<Character>();
+        //infoText.SetActive(false);
+        character = Character.Instance.GetComponent<Character>();
+        bag = Character.Instance.GetComponent<Bag>();
+        dracula = Dracula.Instance;
+        onePersonCamera = OnePersonCamera.Instance;
+        interactiveObject = GetComponent<InteractiveObject>();
+        interactiveObject.onUse.AddListener(StartUnlock);
         ResetPoint();
+    }
+
+    private void OnDestroy()
+    {
+        interactiveObject.onUse.RemoveListener(StartUnlock);
     }
 
     private void Update()
@@ -43,22 +69,34 @@ public class Lockpick : MonoBehaviour
        InfoText();
     }
 
-    public void StartUnlock()
+    private void StartUnlock()
     {
+        if (draculaDoor)
+        {
+            if (bag.GetMedalAmount() <= 0)
+                textTimer = timeToSuccess;
+            return;
+        }
+
         if (bag.GetKeyAmount() <= 0)
         {
             textTimer = timeToSuccess;
+
             return;
         }
 
         panel.SetActive(true);
         
         onePersonCamera.SetTarget(cameraTarget,TypeMoveCamera.WithRotation,true);
+        CharacterInputController.Instance.enabled = false;
         
         Cursor.lockState = CursorLockMode.None;
         Cursor.SetCursor(mouseTexture, Vector2.zero, CursorMode.Auto);
         Cursor.visible = true;
-        
+        if (dracula)
+        {
+            dracula.DraculaDisable();
+        }
         timer = timeToSuccess;
         isOpening = true;
     }
@@ -91,19 +129,48 @@ public class Lockpick : MonoBehaviour
             {
                 bag.DrawKey(1);
                 ResetPoint();
-                Destroy(gameObject);
-                onePersonCamera.SetTarget(character.CameraPos,TypeMoveCamera.WithRotation,false);
-                //OpenDoorlogic
+                Resume();
+                
+                SuccessUnlock();
             }
         }
         else
         {
             noiseLevel.IncreaseLevel();
             ResetPoint();
-            onePersonCamera.SetTarget(character.CameraPos,TypeMoveCamera.WithRotation,false);
+            Resume();
+            
+            audioSource.PlayOneShot(failOpenSFX);
         }
     }
 
+    private void Resume()
+    {
+        if (dracula)
+        {
+            dracula.DraculaEnable();
+        }
+        CharacterInputController.Instance.enabled = true;
+        onePersonCamera.SetTarget(character.CameraPos,TypeMoveCamera.OnlyMove,false);
+    }
+
+    private void SuccessUnlock()
+    {
+        if (draculaDoor)
+        {
+            bag.RemoveMedal();
+        }
+
+        audioSource.PlayOneShot(successOpenSFX);
+        //OpenDoorlogic
+
+        animator.SetBool("Open", true);
+        
+        interactiveObject.onUse.RemoveListener(StartUnlock);
+        Destroy(this);
+        Destroy(interactiveObject);
+    }
+    
     private void ResetPoint()
     {
         isOpening = false;
@@ -130,8 +197,12 @@ public class Lockpick : MonoBehaviour
             textTimer -= Time.deltaTime;
 
         if (textTimer > 0)
-            infoText.SetActive(true);
+        {
+            infoText.text = text;
+            infoPanel.SetActive(true);
+            interactiveObject.HideInfoPanel();
+        }
         else
-            infoText.SetActive(false);
+            infoPanel.SetActive(false);
     }
 }

@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2309157677872286240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4373966151718316599}
+  - component: {fileID: 1333135471659915103}
+  m_Layer: 0
+  m_Name: InteractiveCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4373966151718316599
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2309157677872286240}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8205711772304318754}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1333135471659915103
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2309157677872286240}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1 &8228517700685265482
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,7 +65,6 @@ GameObject:
   - component: {fileID: 7725249361171625947}
   - component: {fileID: 7595149920051348018}
   - component: {fileID: 1927389643681340454}
-  - component: {fileID: 6463187408342566782}
   m_Layer: 0
   m_Name: Dracula
   m_TagString: Untagged
@@ -34,6 +86,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6365971147578957288}
+  - {fileID: 4373966151718316599}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7725249361171625947
@@ -49,20 +102,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnAwake: 0
-  startPrefab: {fileID: 1048065073813441343, guid: 2bba16bbd7ae4074687d1f509eccc04c, type: 3}
-  draculaPrefabsStay: {fileID: 1048065073813441343, guid: 2bba16bbd7ae4074687d1f509eccc04c, type: 3}
-  draculaPrefabsSit: {fileID: 1048065073813441343, guid: 2bba16bbd7ae4074687d1f509eccc04c, type: 3}
-  draculaPrefabsUp: {fileID: 1048065073813441343, guid: 2bba16bbd7ae4074687d1f509eccc04c, type: 3}
-  draculaPrefabsT: {fileID: 1048065073813441343, guid: 2bba16bbd7ae4074687d1f509eccc04c, type: 3}
-  draculaSpawnEffectPrefab: {fileID: 3372215897970909540, guid: b050a9eceb45b064b98b0640343fb692, type: 3}
-  visionEffectPrefab: {fileID: -4490127325991210572, guid: 62220667f2b90d74c8529927b45e15c6, type: 3}
-  minDistance: 6
-  spawnRate: 2
+  draculaPrefabsNone: {fileID: 740178084291543719, guid: b3a1862a9d42f074b92bcc7a587922b9, type: 3}
+  draculaPrefabsSexy: {fileID: 3369693194535960404, guid: 417d3999a3bad7248a94f6143bcfe125, type: 3}
+  draculaPrefabsCross: {fileID: 1567872088887843998, guid: 5a40032110b27be4fa742a1fed224beb, type: 3}
+  draculaPrefabsStand: {fileID: 3589427302363245269, guid: 6db526faec442b44198becd4e3111b44, type: 3}
+  draculaPrefabsFly: {fileID: 7898647379886207394, guid: 84e70370e540c3241892d9c0eecb7758, type: 3}
+  draculaPrefabsHand: {fileID: 6423580480786229064, guid: 07dffcd828f281349964950726f25c58, type: 3}
+  draculaSpawnEffectPrefab: {fileID: 3372215897970909540, guid: 3d5a14a42f696a846bc2549c5f74ab02, type: 3}
+  visionEffectPrefab: {fileID: -4490127325991210572, guid: 2f3338a8e1355e24590ca81bef837def, type: 3}
+  spawnSpeed: 7
+  speedChange: 2
+  minDistanceToNextPp: 6
+  minDistanceToPlayer: 4
   spawnClips:
   - {fileID: 8300000, guid: 5dbefb0d6d692de4fb5dcc0b5afdb1ab, type: 3}
   spawnPositions:
   - {fileID: 0}
-  DraculaInPlayer:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  draculaInPlayer:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &7595149920051348018
@@ -77,6 +138,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4602cd3d0f83452ba597aa28a56e6c65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infoPanel: {fileID: 0}
+  infoPanelText: {fileID: 0}
+  infoText: 
+  infoTextAfterUse: 
   onVision:
     m_PersistentCalls:
       m_Calls: []
@@ -182,27 +247,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &6463187408342566782
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8228517700685265482}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.5, z: 1}
-  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1 &9148429417985903238
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,7 +300,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 6
+  MaxDistance: 9
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0

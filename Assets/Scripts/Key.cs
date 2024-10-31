@@ -1,29 +1,29 @@
+using System;
 using UnityEngine;
 
-public enum Name
+[RequireComponent(typeof(InteractiveObject))]
+public class Key : MonoBehaviour
 {
-    Key,
-}
-
-public class Key : Pikup
-{
-    [SerializeField] private Name lootName;
     [SerializeField] private int keyCount;
-    
     [SerializeField] private GameObject impactEffect;
+    [SerializeField] private GameObject visualModel;
+
+    private InteractiveObject interactiveObject;
     
-    protected override void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        base.OnTriggerEnter(other);
+        interactiveObject = GetComponent<InteractiveObject>();
+        interactiveObject.onUse.AddListener(PickUp);
+    }
+    
+    private void PickUp()
+    {
+        Character.Instance.GetComponent<Bag>().AddKey(keyCount);
 
-        Bag bag = other.GetComponent<Bag>();
-
-        if (bag)
-        {
-            bag.AddKey(keyCount);
-
-            if (impactEffect)
-                Instantiate(impactEffect, transform.position, Quaternion.identity);
-        }
+        if (impactEffect)
+            Instantiate(impactEffect, transform.position, Quaternion.identity);
+        
+        Destroy(visualModel);
+        interactiveObject.Ondestroy.Invoke(interactiveObject);
     }
 }
