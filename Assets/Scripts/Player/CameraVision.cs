@@ -55,7 +55,7 @@ public class CameraVision : MonoBehaviour
 
     private bool IsVisionObj(GameObject objectToCheck)
     {
-        Vector3 viewPortPoint = playerCamera.WorldToViewportPoint(objectToCheck.transform.localPosition);
+        Vector3 viewPortPoint = playerCamera.WorldToViewportPoint(objectToCheck.transform.position);
         
         if (viewPortPoint is { z: > 0, y: < 0.8f and > 0.2f, x: > 0.2f and < 0.8f })
         {
@@ -64,7 +64,7 @@ public class CameraVision : MonoBehaviour
 
             if (Physics.Raycast(ray, out hitInfo, maxDistance))
             {
-                if (hitInfo.collider.transform.root.gameObject == objectToCheck)
+                if (hitInfo.collider.transform.parent.gameObject == objectToCheck)
                 {
                     return true;
                 }

@@ -4,6 +4,7 @@ using UnityEngine;
 public class HeartPickUp : MonoBehaviour
 {
     [SerializeField] private GameObject impactEffect;
+    [SerializeField] private GameObject visualModel;
     
     private InteractiveObject interactiveObject;
 
@@ -15,16 +16,12 @@ public class HeartPickUp : MonoBehaviour
     
     private void PickUp()
     {
-        CharacterInputController.Instance.PickUpHeart = true;
+        CharacterInputController.Instance.pickUpHeart = true;
 
         if (impactEffect)
             Instantiate(impactEffect, transform.position, Quaternion.identity);
         
-        Destroy(gameObject);
+        Destroy(visualModel);
     }
-    
-    private void OnDestroy()
-    {
-        interactiveObject.onUse.RemoveListener(PickUp);
-    }
+
 }

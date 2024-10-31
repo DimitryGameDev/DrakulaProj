@@ -26,14 +26,14 @@ public class Trigger : MonoBehaviour
 
    private void OnTriggerEnter(Collider collision)
    {
-      if (collision.gameObject.transform.root.GetComponent<Character>())
+      if (collision.gameObject.transform.parent.GetComponent<Character>())
       {
          onTrigger?.Invoke();
          gameObject.SetActive(false);
       }
    }
 
-   public void SwitchActive()
+   private void SwitchActive()
    {
       isEnable = !isEnable;
       if (isEnable) gameObject.SetActive(true);

@@ -48,7 +48,7 @@ public class Notes : MonoBehaviour
       }
    }
 
-   private void CloseNotes()
+   protected virtual void CloseNotes()
    { 
       enabled = false;
       notesBox.SetActive(false);

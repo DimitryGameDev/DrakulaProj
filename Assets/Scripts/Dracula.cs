@@ -38,7 +38,7 @@ public class Dracula : SingletonBase<Dracula>
     private bool isHeart = false;
     private bool isVisible = false;
 
-    public UnityEvent DraculaInPlayer;
+    public UnityEvent<int> draculaInPlayer;
 
     private void Awake()
     {
@@ -217,7 +217,7 @@ public class Dracula : SingletonBase<Dracula>
 
     private void KillPlayer()
     {
-        DraculaInPlayer.Invoke();
+        draculaInPlayer.Invoke(1);
         enabled = false;
     }
 
@@ -240,9 +240,10 @@ public class Dracula : SingletonBase<Dracula>
                 
                 if (Physics.Raycast(ray, out hitInfo,minDistance))
                 {
-                    if (hitInfo.collider.transform?.GetComponent<Character>())
+                    if (hitInfo.collider.transform.parent?.GetComponent<Character>())
                     {
                         KillPlayer();
+                        enabled = false;
                         return;
                     }
                     Debug.DrawLine(transform.position, patrolPoint.transform.position, Color.red, 3f);

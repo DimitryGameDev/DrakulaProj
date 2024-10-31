@@ -6,7 +6,6 @@ using Random = UnityEngine.Random;
 public class Lockpick : MonoBehaviour
 {
     [Header("Player")]
-    [SerializeField] private OnePersonCamera onePersonCamera;
     [SerializeField] private Transform cameraTarget;
     
     [Header("Base")]
@@ -29,6 +28,7 @@ public class Lockpick : MonoBehaviour
 
     private AudioSource audioSource;
     
+    private OnePersonCamera onePersonCamera;
     private Character character;
     private Bag bag;
     private InteractiveObject interactiveObject;
@@ -48,6 +48,7 @@ public class Lockpick : MonoBehaviour
         //infoText.SetActive(false);
         character = Character.Instance.GetComponent<Character>();
         bag = Character.Instance.GetComponent<Bag>();
+        onePersonCamera = OnePersonCamera.Instance;
         interactiveObject = GetComponent<InteractiveObject>();
         interactiveObject.onUse.AddListener(StartUnlock);
         ResetPoint();

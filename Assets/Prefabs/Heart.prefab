@@ -74,6 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactEffect: {fileID: 8361973088753977710, guid: fabd8e471bd838f4eb5cabc9dc9d94ae, type: 3}
+  visualModel: {fileID: 336337141302122604}
 --- !u!1001 &606720450400642365
 PrefabInstance:
   m_ObjectHideFlags: 0
