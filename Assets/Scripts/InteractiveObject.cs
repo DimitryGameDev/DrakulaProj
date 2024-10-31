@@ -44,10 +44,10 @@ public class InteractiveObject: MonoBehaviour
     {
         if (infoPanel)
         {
-        infoPanelText.text = infoText;
-        timer = 0;
-        infoPanel.SetActive(true);
-        enabled = true;
+            infoPanelText.text = infoText;
+            timer = 0;
+            infoPanel.SetActive(true);
+            enabled = true;
         }
     }
     
