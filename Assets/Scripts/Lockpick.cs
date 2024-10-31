@@ -5,6 +5,8 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(InteractiveObject))]
 public class Lockpick : MonoBehaviour
 {
+    [SerializeField] private bool draculaDoor;
+    
     [Header("Player")]
     [SerializeField] private Transform cameraTarget;
     
@@ -67,6 +69,13 @@ public class Lockpick : MonoBehaviour
 
     private void StartUnlock()
     {
+        if (draculaDoor)
+        {
+            if (bag.GetMedalAmount() <= 0)
+                textTimer = timeToSuccess;
+            return;
+        }
+
         if (bag.GetKeyAmount() <= 0)
         {
             textTimer = timeToSuccess;
@@ -145,6 +154,11 @@ public class Lockpick : MonoBehaviour
 
     private void SuccessUnlock()
     {
+        if (draculaDoor)
+        {
+            bag.RemoveMedal();
+        }
+
         audioSource.PlayOneShot(successOpenSFX);
         //OpenDoorlogic
 
