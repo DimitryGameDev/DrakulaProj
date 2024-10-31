@@ -75,7 +75,6 @@ public class CameraVision : MonoBehaviour
 
     private void RemoveVisionObj(InteractiveObject objectToRemove)
     {
-        Debug.Log(objectToRemove);
         visionObjs.Remove(objectToRemove);
     }
 }

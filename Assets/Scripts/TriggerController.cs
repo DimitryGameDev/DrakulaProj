@@ -5,7 +5,7 @@ public class TriggerController : MonoBehaviour
     public static UnityAction OnTrigger;
     private Trigger[] triggers;
     
-    private void Start()
+    private void Awake()
     {
         triggers = FindObjectsOfType<Trigger>();
         

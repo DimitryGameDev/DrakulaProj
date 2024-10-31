@@ -7,6 +7,7 @@ public class Trigger : MonoBehaviour
    [Header("Включить если EnterTrigger")]
    [SerializeField] private bool isEnable;
    public bool IsEnable => isEnable;
+   
    [Header("Добавить события если EnterTrigger")]
    public UnityEvent onTrigger;
 
@@ -26,17 +27,16 @@ public class Trigger : MonoBehaviour
 
    private void OnTriggerEnter(Collider collision)
    {
-      if (collision.gameObject.transform.parent.GetComponent<Character>())
+      if (collision.transform.parent.GetComponent<Character>())
       {
          onTrigger?.Invoke();
-         gameObject.SetActive(false);
       }
    }
 
    private void SwitchActive()
-   {
+   { 
       isEnable = !isEnable;
-      if (isEnable) gameObject.SetActive(true);
       if (!isEnable) gameObject.SetActive(false);
+      if (isEnable) gameObject.SetActive(true);
    }
 }
