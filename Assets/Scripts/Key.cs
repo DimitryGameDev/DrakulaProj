@@ -5,6 +5,7 @@ public class Key : MonoBehaviour
 {
     [SerializeField] private int keyCount;
     [SerializeField] private GameObject impactEffect;
+    [SerializeField] private GameObject visualModel;
 
     private InteractiveObject interactiveObject;
     
@@ -21,12 +22,7 @@ public class Key : MonoBehaviour
         if (impactEffect)
             Instantiate(impactEffect, transform.position, Quaternion.identity);
         
-        Destroy(gameObject);
-        interactiveObject.onUse.RemoveListener(PickUp);
+        Destroy(visualModel);
     }
-    
-    private void OnDestroy()
-    {
-        interactiveObject.onUse.RemoveListener(PickUp);
-    }
+
 }

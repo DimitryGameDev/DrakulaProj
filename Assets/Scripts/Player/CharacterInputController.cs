@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class CharacterInputController : SingletonBase<CharacterInputController>
 {    
@@ -11,13 +12,13 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     
     private Vector3 playerMoveDirection;
     private float radiusCharacter;
-    private float hightCharacter;
+    private float heightCharacter;
     private float timeHeart;
-    private bool IsMove = true;
+    private bool isMove = true;
     private bool heartEnabled;
     public bool HeartEnabled => heartEnabled;
 
-    [HideInInspector] public bool PickUpHeart;
+    [HideInInspector] public bool pickUpHeart;
     
     [HideInInspector] public UnityEvent heartOn;
     [HideInInspector] public UnityEvent heartOff;
@@ -34,7 +35,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         
         character = GetComponent<Character>();
         radiusCharacter = character.GetComponentInChildren<CapsuleCollider>().radius;
-        hightCharacter = character.GetComponentInChildren<CapsuleCollider>().height;
+        heightCharacter = character.GetComponentInChildren<CapsuleCollider>().height;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -46,7 +47,6 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private void Update()
     { 
-        Debug.Log(HeartEnabled);
         MainRay();
         AdminCameraMove();
         HeartState();
@@ -60,7 +60,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         var dirZ = Input.GetAxis(Vertical);
         var dirX = Input.GetAxis(Horizontal);
 
-        if (!IsMove)
+        if (!isMove)
         {
             dirZ = 0;
             dirX = 0;
@@ -108,7 +108,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     {
         RaycastHit hitLegs;
         var vectorDown = character.transform.TransformDirection(Vector3.down);
-        var maxDistance = hightCharacter / 2 + 0.1f;
+        var maxDistance = heightCharacter / 2 + 0.1f;
 
         if (Physics.Raycast(character.transform.position - new Vector3(radiusCharacter, 0, 0), vectorDown, out hitLegs, maxDistance))
         {
@@ -171,28 +171,28 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private void HeartState()
     {
-        if(!PickUpHeart) return;
+        if(!pickUpHeart) return;
         
         if (heartEnabled == false)
         {
-            timeHeart += Time.deltaTime;
+            timeHeart -= Time.deltaTime;
         }
         
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (timeHeart >= heartTimeUsage)
+            if (timeHeart <= 0)
             {
                 heartEnabled = true;
-                IsMove = false;
+                isMove = false;
                 heartOn.Invoke();
-                timeHeart = 0;
+                timeHeart = heartTimeUsage;
             }
         }
         
         if (Input.GetKeyUp(KeyCode.F))
         {
             heartEnabled = false;
-            IsMove = true;
+            isMove = true;
             heartOff.Invoke();
         }
     }
@@ -201,10 +201,11 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     {
         RaycastHit hitCamera;
  
-        if (Physics.Raycast(character.Camera.transform.position, character.Camera.transform.forward, out hitCamera, maxDistanseHitCamera))
+        if (Physics.Raycast(character.Camera.transform.position, character.Camera.transform.forward, out hitCamera, maxDistanseHitCamera ,LayerMask.NameToLayer("Player")))
         {
-           
-            Debug.DrawRay(character.Camera.transform.position, character.Camera.transform.forward * hitCamera.distance, Color.yellow, 0.01f);
+            //Debug.DrawRay(character.Camera.transform.position, character.Camera.transform.forward * hitCamera.distance, Color.yellow, 0.01f);
+            Debug.DrawLine(character.Camera.transform.position, hitCamera.transform.position, Color.yellow);
+            
             if (hitCamera.collider.transform.parent?.GetComponent<InteractiveObject>())
             {
                 var hit = hitCamera.collider.transform.parent.GetComponent<InteractiveObject>();

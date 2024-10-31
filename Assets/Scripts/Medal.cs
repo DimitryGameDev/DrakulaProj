@@ -5,7 +5,8 @@ public class Medal : MonoBehaviour
 {
     [SerializeField] private int countPiece;
     [SerializeField] private GameObject impactEffect;
-
+    [SerializeField] private GameObject visualModel;
+    
     private InteractiveObject interactiveObject;
     
     private void Start()
@@ -21,11 +22,6 @@ public class Medal : MonoBehaviour
         if (impactEffect)
             Instantiate(impactEffect, transform.position, Quaternion.identity);
         
-        Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        interactiveObject.onUse.RemoveListener(PickUp);
+        Destroy(visualModel);
     }
 }

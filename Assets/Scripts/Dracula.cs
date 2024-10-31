@@ -38,7 +38,7 @@ public class Dracula : SingletonBase<Dracula>
     private bool isHeart = false;
     private bool isVisible = false;
 
-    public UnityEvent DraculaInPlayer;
+    public UnityEvent<int> draculaInPlayer;
 
     private void Awake()
     {
@@ -217,7 +217,7 @@ public class Dracula : SingletonBase<Dracula>
 
     private void KillPlayer()
     {
-        DraculaInPlayer.Invoke();
+        draculaInPlayer.Invoke(1);
         enabled = false;
     }
 
