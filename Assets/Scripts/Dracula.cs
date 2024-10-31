@@ -9,11 +9,14 @@ public class Dracula : SingletonBase<Dracula>
 {
     [SerializeField] private bool playOnAwake = true;
     [Space][Header("Dracula Prefabs")]
-    [SerializeField] private GameObject startPrefab;
-    [SerializeField] private GameObject draculaPrefabsStay;
-    [SerializeField] private GameObject draculaPrefabsSit;
-    [SerializeField] private GameObject draculaPrefabsUp;
-    [SerializeField] private GameObject draculaPrefabsT;
+    [SerializeField] private GameObject draculaPrefabsNone;
+    [SerializeField] private GameObject draculaPrefabsSexy;
+    [SerializeField] private GameObject draculaPrefabsCross;
+    [SerializeField] private GameObject draculaPrefabsStand;
+    [SerializeField] private GameObject draculaPrefabsFly;
+    [SerializeField] private GameObject draculaPrefabsHand;
+    
+    [Space][Header("Visual Prefabs")]
     [SerializeField] private DraculaSpawnEffect draculaSpawnEffectPrefab;
     [SerializeField] private ImpactEffect visionEffectPrefab;
 
@@ -38,7 +41,7 @@ public class Dracula : SingletonBase<Dracula>
     private bool isHeart = false;
     private bool isVisible = false;
 
-    public UnityEvent<int> draculaInPlayer;
+    [HideInInspector] public UnityEvent<int> draculaInPlayer;
 
     private void Awake()
     {
@@ -158,24 +161,26 @@ public class Dracula : SingletonBase<Dracula>
     }
     public void DraculaSpawn()
     {
-        transform.position = spawnPositions[Random.Range(0,spawnPositions.Length)].transform.position;
-        Spawn();
+        PatrolPoint rand = spawnPositions[Random.Range(0, spawnPositions.Length)];
+        transform.position = rand.transform.position;
+        Spawn(rand);
     }
     public void DraculaSpawn(PatrolPoint spawnPoint)
     {
         transform.position = spawnPoint.transform.position;
-        Spawn();
+        Spawn(spawnPoint);
     }
-    private void Spawn()
+    
+    private void Spawn(PatrolPoint spawnPoint)
     {
         source.PlayOneShot(spawnClips[Random.Range(0,spawnClips.Length)]);
-        draculaPrefab = Instantiate(startPrefab, transform.position, Quaternion.identity, transform);
+        draculaPrefab = Instantiate(GetDraculaPrefab(spawnPoint), transform.position, Quaternion.identity, transform);
         draculaMeshRenderer = draculaPrefab.GetComponent<MeshRenderer>();
         draculaMeshRenderer.enabled = false;
         enabled = true;
     }
 
-    private void DraculaEnable()
+    public void DraculaEnable()
     {
         transform.position = lastPosition;
         enabled = true;
@@ -207,22 +212,35 @@ public class Dracula : SingletonBase<Dracula>
             return;
         }*/
         
-        var prefab = draculaPrefabsT;
-        
-        if (patrolPoint.DraculaPos == DraculaPosType.Sit 
-            && draculaPrefabsSit != null) prefab = draculaPrefabsSit;
-        if (patrolPoint.DraculaPos == DraculaPosType.Stay 
-            && draculaPrefabsStay != null) prefab = draculaPrefabsStay;
-        if (patrolPoint.DraculaPos == DraculaPosType.Up 
-            && draculaPrefabsUp != null) prefab = draculaPrefabsUp;
-
-        transform.position = patrolPoint.transform.position;
-          
-        draculaPrefab = Instantiate(prefab, patrolPoint.transform.position, Quaternion.identity, transform);
+        draculaPrefab = Instantiate(GetDraculaPrefab(patrolPoint), patrolPoint.transform.position, Quaternion.identity, transform);
         draculaMeshRenderer = draculaPrefab.GetComponent<MeshRenderer>();
         draculaMeshRenderer.enabled = false;
         CleatNearestPatrolPoint();
     
+    }
+
+    private GameObject GetDraculaPrefab(PatrolPoint patrolPoint)
+    {
+        var currentDraculaPrefab = draculaPrefabsNone;
+        
+        if (patrolPoint.DraculaPos == DraculaPosType.None && draculaPrefabsNone != null)
+        {
+            Random.Range(2, 5);
+        }
+        
+        if (patrolPoint.DraculaPos == DraculaPosType.Sexy 
+            && draculaPrefabsSexy != null) currentDraculaPrefab = draculaPrefabsSexy;
+        if (patrolPoint.DraculaPos == DraculaPosType.Stand 
+            && draculaPrefabsStand != null) currentDraculaPrefab = draculaPrefabsStand;
+        if (patrolPoint.DraculaPos == DraculaPosType.Cross 
+            && draculaPrefabsCross != null) currentDraculaPrefab = draculaPrefabsCross;
+        if (patrolPoint.DraculaPos == DraculaPosType.Hand 
+            && draculaPrefabsHand != null) currentDraculaPrefab = draculaPrefabsHand;
+        if (patrolPoint.DraculaPos == DraculaPosType.Fly 
+            && draculaPrefabsFly != null) currentDraculaPrefab = draculaPrefabsFly;
+        transform.position = patrolPoint.transform.position;
+
+        return currentDraculaPrefab;
     }
 
     private void KillPlayer()

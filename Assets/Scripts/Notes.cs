@@ -15,12 +15,14 @@ public class Notes : MonoBehaviour
 
    private InteractiveObject interactiveObject;
    private AudioSource source;
+   private Dracula dracula;
    private void Start()
    {
       notesBox.SetActive(false);
       enabled = false;
       source = GetComponent<AudioSource>();
       interactiveObject = GetComponent<InteractiveObject>();
+      dracula = Dracula.Instance;
       interactiveObject.onUse.AddListener(OpenNotes);
    }
 
@@ -34,9 +36,9 @@ public class Notes : MonoBehaviour
       
       OnePersonCamera.Instance.Lock();
       CharacterInputController.Instance.enabled = false;
-      if (Dracula.Instance)
+      if (dracula)
       {
-         Dracula.Instance.DraculaDisable();
+         dracula.DraculaDisable();
       }
    }
 
@@ -56,9 +58,9 @@ public class Notes : MonoBehaviour
       
       OnePersonCamera.Instance.UnLock();
       CharacterInputController.Instance.enabled = true;
-      if (Dracula.Instance)
+      if (dracula)
       {
-         Dracula.Instance.enabled = true; //включает дракулу
+         dracula.DraculaEnable(); //включает дракулу
       }
    }
 }
