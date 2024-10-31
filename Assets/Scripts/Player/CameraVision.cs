@@ -62,9 +62,9 @@ public class CameraVision : MonoBehaviour
             Ray ray = playerCamera.ScreenPointToRay(playerCamera.WorldToScreenPoint(objectToCheck.transform.position));
             RaycastHit hitInfo;
 
-            if (Physics.Raycast(ray, out hitInfo, maxDistance))
+            if (Physics.Raycast(ray, out hitInfo, maxDistance,LayerMask.NameToLayer("Player") | LayerMask.NameToLayer("Ignore Raycast")))
             {
-                if (hitInfo.collider.transform.parent.gameObject == objectToCheck)
+                if (hitInfo.transform.parent.gameObject == objectToCheck)
                 {
                     return true;
                 }
@@ -75,6 +75,7 @@ public class CameraVision : MonoBehaviour
 
     private void RemoveVisionObj(InteractiveObject objectToRemove)
     {
+        Debug.Log(objectToRemove);
         visionObjs.Remove(objectToRemove);
     }
 }

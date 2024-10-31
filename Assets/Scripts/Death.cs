@@ -105,7 +105,7 @@ public class Death : MonoBehaviour
         animator.Play("Attack2");
     }
     
-    void OnDestroy()
+    private void OnDestroy()
     {
         dracula.draculaInPlayer.RemoveListener(DeathCharacter);
     }

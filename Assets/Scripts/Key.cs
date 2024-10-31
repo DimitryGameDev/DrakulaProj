@@ -23,6 +23,7 @@ public class Key : MonoBehaviour
             Instantiate(impactEffect, transform.position, Quaternion.identity);
         
         Destroy(visualModel);
+        interactiveObject.Ondestroy.Invoke(interactiveObject);
     }
 
 }

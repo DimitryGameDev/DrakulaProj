@@ -12,6 +12,7 @@ public class HeartPickUp : MonoBehaviour
     {
         interactiveObject = GetComponent<InteractiveObject>();
         interactiveObject.onUse.AddListener(PickUp);
+        
     }
     
     private void PickUp()
@@ -22,6 +23,7 @@ public class HeartPickUp : MonoBehaviour
             Instantiate(impactEffect, transform.position, Quaternion.identity);
         
         Destroy(visualModel);
+        interactiveObject.Ondestroy.Invoke(interactiveObject);
     }
 
 }
