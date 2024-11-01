@@ -1,17 +1,6 @@
 using UnityEngine;
 
 
-public enum DraculaPosType
-{
-    None,
-    Sexy,
-    Fly,
-    Stand,
-    Hand,
-    Cross
-    
-}
-
 public class PatrolPoint : MonoBehaviour
 {
     [SerializeField] private DraculaPosType draculaPos;
