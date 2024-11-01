@@ -14,7 +14,8 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     private float radiusCharacter;
     private float heightCharacter;
     private float timeHeart;
-    private bool isMove = true;
+    public bool isMove = true;
+
     private bool heartEnabled;
     public bool HeartEnabled => heartEnabled;
 
@@ -28,6 +29,8 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     public float SprintTimer => sprintTimer;
     private bool isSprinting;
     public bool IsSprinting => isSprinting;
+    
+    public bool IsLook;
     private void Awake()
     {
         Init();
@@ -228,8 +231,12 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
                 {
                     hit.Use();
                 }
+                IsLook = true;
+                return;
             }
+            
         }
+        IsLook = false;
     }
 
 }
