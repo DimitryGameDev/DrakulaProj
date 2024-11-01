@@ -171,6 +171,13 @@ public class Dracula : SingletonBase<Dracula>
         Spawn(spawnPoint);
     }
     
+    public void DraculaSpawns(PatrolPoint[] spawnPoints)
+    {
+        spawnPositions = spawnPoints;
+        PatrolPoint rand = spawnPositions[Random.Range(0, spawnPositions.Length)];
+        Spawn(rand);
+    }
+    
     private void Spawn(PatrolPoint spawnPoint)
     {
         source.PlayOneShot(spawnClips[Random.Range(0,spawnClips.Length)]);
@@ -222,24 +229,30 @@ public class Dracula : SingletonBase<Dracula>
     private GameObject GetDraculaPrefab(PatrolPoint patrolPoint)
     {
         var currentDraculaPrefab = draculaPrefabsNone;
+        var currentPoint = patrolPoint.DraculaPos;
         
-        if (patrolPoint.DraculaPos == DraculaPosType.None && draculaPrefabsNone != null)
+        if (currentPoint == DraculaPosType.None && currentDraculaPrefab != null)
         {
-            Random.Range(2, 5);
+            var rand = Random.Range(0,3);
+            if (rand == 0) currentPoint = DraculaPosType.Fly;
+            if (rand == 1) currentPoint = DraculaPosType.Stand;
+            if (rand == 2) currentPoint = DraculaPosType.Cross;
+            if (rand == 3) currentPoint = DraculaPosType.Hand ; 
         }
         
-        if (patrolPoint.DraculaPos == DraculaPosType.Sexy 
+        if (currentPoint == DraculaPosType.Sexy 
             && draculaPrefabsSexy != null) currentDraculaPrefab = draculaPrefabsSexy;
-        if (patrolPoint.DraculaPos == DraculaPosType.Stand 
+        if (currentPoint == DraculaPosType.Stand 
             && draculaPrefabsStand != null) currentDraculaPrefab = draculaPrefabsStand;
-        if (patrolPoint.DraculaPos == DraculaPosType.Cross 
+        if (currentPoint == DraculaPosType.Cross 
             && draculaPrefabsCross != null) currentDraculaPrefab = draculaPrefabsCross;
-        if (patrolPoint.DraculaPos == DraculaPosType.Hand 
+        if (currentPoint == DraculaPosType.Hand 
             && draculaPrefabsHand != null) currentDraculaPrefab = draculaPrefabsHand;
-        if (patrolPoint.DraculaPos == DraculaPosType.Fly 
+        if (currentPoint == DraculaPosType.Fly 
             && draculaPrefabsFly != null) currentDraculaPrefab = draculaPrefabsFly;
         transform.position = patrolPoint.transform.position;
 
+        Debug.Log(currentDraculaPrefab);
         return currentDraculaPrefab;
     }
 

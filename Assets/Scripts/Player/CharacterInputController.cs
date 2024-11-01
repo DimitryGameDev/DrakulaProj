@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 public class CharacterInputController : SingletonBase<CharacterInputController>
 {    
     [SerializeField] private float heartTimeUsage = 2f;
     [SerializeField] private float maxDistanseHitCamera = 1f;
-    
+    [SerializeField] private float timeSprint = 2f;
+    public float TimeSprint => timeSprint;
     private Character character; 
     public Character Character => character;
     
@@ -14,7 +14,8 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     private float radiusCharacter;
     private float heightCharacter;
     private float timeHeart;
-    private bool isMove = true;
+    public bool isMove = true;
+
     private bool heartEnabled;
     public bool HeartEnabled => heartEnabled;
 
@@ -23,7 +24,13 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     [HideInInspector] public UnityEvent heartOn;
     [HideInInspector] public UnityEvent heartOff;
     [HideInInspector] public UnityEvent draculaAnim;
+
+    private float sprintTimer;
+    public float SprintTimer => sprintTimer;
+    private bool isSprinting;
+    public bool IsSprinting => isSprinting;
     
+    public bool IsLook;
     private void Awake()
     {
         Init();
@@ -85,10 +92,18 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
             return;
         }
         
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && isSprinting && Character.isMove)
         {
+            sprintTimer += Time.deltaTime;
+            if (sprintTimer >= timeSprint)  isSprinting = false;
+            
             character.Move(playerMoveDirection, MoveType.Run);
             return;
+        }
+        else
+        {
+            if (sprintTimer >= 0)sprintTimer -= Time.deltaTime/2;
+            if (sprintTimer <= 0)isSprinting = true;
         }
 
         character.Move(playerMoveDirection, MoveType.Walk);
@@ -216,8 +231,12 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
                 {
                     hit.Use();
                 }
+                IsLook = true;
+                return;
             }
+            
         }
+        IsLook = false;
     }
 
 }

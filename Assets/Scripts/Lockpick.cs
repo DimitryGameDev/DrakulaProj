@@ -215,7 +215,10 @@ public class Lockpick : MonoBehaviour
             infoPanel.SetActive(true);
             interactiveObject.HideInfoPanel();
         }
-        else
+        else if (!CharacterInputController.Instance.IsLook)
+        {
             infoPanel.SetActive(false);
+        }
+           
     }
 }
