@@ -8,14 +8,36 @@ public class Trigger : MonoBehaviour
    [SerializeField] private bool isEnable;
    public bool IsEnable => isEnable;
    
-   [Header("Добавить события если EnterTrigger")]
-   public UnityEvent onTrigger;
-
+   [Header("Либо одно либо другое")]
+   [SerializeField] private PatrolPoint spawnPoint;
+   [Space]
+   [SerializeField] private PatrolPoint[] spawnPoints;
+   
+   [HideInInspector]public UnityEvent onTrigger;
+   
    private void Awake()
    {
       TriggerController.OnTrigger += SwitchActive;
+      if (spawnPoint)
+      {
+         onTrigger.AddListener(SpawnDraculaSpawnPoint);
+         
+      }
+      
+      if (spawnPoints.Length > 0)
+      {
+         onTrigger.AddListener(SpawnDraculaSpawnPoints);
+      }
    }
 
+   private void SpawnDraculaSpawnPoint()
+   {
+      Dracula.Instance.DraculaSpawn(spawnPoint);
+   }
+   private void SpawnDraculaSpawnPoints()
+   {
+      Dracula.Instance.DraculaSpawns(spawnPoints);
+   }
    private void Start()
    {
       if (!isEnable)

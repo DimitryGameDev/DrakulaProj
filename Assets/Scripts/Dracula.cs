@@ -171,6 +171,13 @@ public class Dracula : SingletonBase<Dracula>
         Spawn(spawnPoint);
     }
     
+    public void DraculaSpawns(PatrolPoint[] spawnPoints)
+    {
+        spawnPositions = spawnPoints;
+        PatrolPoint rand = spawnPositions[Random.Range(0, spawnPositions.Length)];
+        Spawn(rand);
+    }
+    
     private void Spawn(PatrolPoint spawnPoint)
     {
         source.PlayOneShot(spawnClips[Random.Range(0,spawnClips.Length)]);
