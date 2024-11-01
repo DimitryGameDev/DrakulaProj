@@ -2,22 +2,19 @@ using UnityEngine;
 
 public class InvisibleDoor : MonoBehaviour
 {
-    [SerializeField] private GameObject wall;
+    [SerializeField] private GameObject[] walls;
 
     private Collider collider;
 
     private void Start()
     {
         collider = GetComponent<Collider>();
-        Debug.Log(collider.name);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.name);
-
         if (other == Character.Instance.GetComponentInChildren<Collider>())
-           WallVisible();
+            WallVisible();
     }
 
     private void WallVisible()
@@ -26,7 +23,11 @@ public class InvisibleDoor : MonoBehaviour
 
         if (CharacterInputController.Instance.HeartEnabled)
         {
-            Destroy(wall);
+            for (int i = 0; i < walls.Length; i++)
+            {
+                Destroy(walls[i]);
+            }
+
             Destroy(collider);
         }
     }

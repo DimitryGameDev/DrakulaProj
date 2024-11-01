@@ -1,21 +1,33 @@
 using UnityEngine;
-using UnityEngine.Events;
 
+[RequireComponent(typeof(InteractiveObject))]
+[RequireComponent(typeof(AudioSource))]
 public class Lever : MonoBehaviour
 {
-    public UnityEvent OnSwitch;
-    [SerializeField] MeshRenderer leverModel;
-    [SerializeField] InteractiveObject interactiveObject;
-    void Start()
-    {
-        leverModel.enabled = false;
-        interactiveObject.onVision.AddListener(Found);
-    } 
-    public void Found()
-    {
-        leverModel.enabled = true;
-        interactiveObject.onVision.RemoveListener(Found);
-        Debug.Log(interactiveObject.name);
-    }
+    [SerializeField] private GameObject trigger;
+    [SerializeField] private Animator animator;
+    [SerializeField] private AudioClip audioClip;
     
+    private AudioSource audioSource;
+    private InteractiveObject interactiveObject;
+    
+    private void Start()
+    {
+        interactiveObject = GetComponent<InteractiveObject>();
+        audioSource = GetComponent<AudioSource>();
+        trigger.SetActive(false);
+        interactiveObject.onUse.AddListener(Open);
+    }
+
+    public void Open()
+    {
+        trigger.SetActive(true);
+        audioSource.PlayOneShot(audioClip);
+        animator.SetBool("Open", true);
+    }
+
+    private void OnDestroy()
+    {
+        interactiveObject.onUse.RemoveListener(Open);
+    }
 }
