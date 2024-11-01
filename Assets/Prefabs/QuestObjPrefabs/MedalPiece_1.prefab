@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 8656293953470765963}
   - component: {fileID: 8106187794240231943}
   - component: {fileID: 5309818253605527197}
-  - component: {fileID: 504136297385214055}
+  - component: {fileID: 2253148517511683738}
   m_Layer: 0
   m_Name: coin_part_1_LP
   m_TagString: Untagged
@@ -159,8 +159,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &504136297385214055
-MeshCollider:
+--- !u!65 &2253148517511683738
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -174,10 +174,9 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7240217018743713238, guid: 6c96fa4ce014c9e45a0f10ad5bc5457e, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.011357188, y: 0.004865187, z: 0.017916178}
+  m_Center: {x: 0.0055033094, y: 0.0010558779, z: 0.000823414}

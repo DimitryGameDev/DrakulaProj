@@ -74,31 +74,17 @@ public class Lockpick : MonoBehaviour
         if (draculaDoor)
         {
             if (bag.GetMedalAmount() <= 0)
+            {
                 textTimer = timeToSuccess;
-            return;
+                return;
+            }
+            else 
+            {
+              MiniGame();
+            }
         }
-
-        if (bag.GetKeyAmount() <= 0)
-        {
-            textTimer = timeToSuccess;
-
-            return;
-        }
-
-        panel.SetActive(true);
-        
-        onePersonCamera.SetTarget(cameraTarget,TypeMoveCamera.WithRotation,true);
-        CharacterInputController.Instance.enabled = false;
-        
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.SetCursor(mouseTexture, Vector2.zero, CursorMode.Auto);
-        Cursor.visible = true;
-        if (dracula)
-        {
-            dracula.DraculaDisable();
-        }
-        timer = timeToSuccess;
-        isOpening = true;
+        if(!draculaDoor)
+            MiniGame();
     }
 
     private void PointMove()
@@ -142,6 +128,33 @@ public class Lockpick : MonoBehaviour
             
             audioSource.PlayOneShot(failOpenSFX);
         }
+    }
+
+    private void MiniGame()
+    {
+        if (bag.GetKeyAmount() <= 0)
+        {
+            textTimer = timeToSuccess;
+
+            return;
+        }
+
+        panel.SetActive(true);
+
+        onePersonCamera.SetTarget(cameraTarget, TypeMoveCamera.WithRotation, true);
+        CharacterInputController.Instance.enabled = false;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.SetCursor(mouseTexture, Vector2.zero, CursorMode.Auto);
+        Cursor.visible = true;
+        if (dracula)
+        {
+            dracula.DraculaDisable();
+        }
+
+        timer = timeToSuccess;
+        isOpening = true;
+
     }
 
     private void Resume()
