@@ -15,21 +15,6 @@ public class Trigger : MonoBehaviour
    
    [HideInInspector]public UnityEvent onTrigger;
    
-   private void Awake()
-   {
-      TriggerController.OnTrigger += SwitchActive;
-      if (spawnPoint)
-      {
-         onTrigger.AddListener(SpawnDraculaSpawnPoint);
-         
-      }
-      
-      if (spawnPoints.Length > 0)
-      {
-         onTrigger.AddListener(SpawnDraculaSpawnPoints);
-      }
-   }
-
    private void SpawnDraculaSpawnPoint()
    {
       Dracula.Instance.DraculaSpawn(spawnPoint);
@@ -40,6 +25,16 @@ public class Trigger : MonoBehaviour
    }
    private void Start()
    {
+      if (spawnPoint)
+      {
+         onTrigger.AddListener(SpawnDraculaSpawnPoint);
+      }
+      
+      if (spawnPoints.Length > 0)
+      {
+         onTrigger.AddListener(SpawnDraculaSpawnPoints);
+      }
+      
       if (!isEnable)
       {
          onTrigger.AddListener(Dracula.Instance.DraculaDisable);
@@ -55,7 +50,7 @@ public class Trigger : MonoBehaviour
       }
    }
 
-   private void SwitchActive()
+   public void SwitchActive()
    { 
       isEnable = !isEnable;
       if (!isEnable) gameObject.SetActive(false);

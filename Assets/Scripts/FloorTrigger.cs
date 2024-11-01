@@ -8,8 +8,13 @@ public class FloorTrigger : MonoBehaviour
     [SerializeField] private Transform teleportPosition;
     [SerializeField] private Wakeup imageVisual;
     private InteractiveObject interactiveObject;
+    private CharacterInputController character;
+    private OnePersonCamera onePersonCamera;
+
     private void Start()
     {
+        character = CharacterInputController.Instance;
+        onePersonCamera = OnePersonCamera.Instance;
         interactiveObject = GetComponent<InteractiveObject>();
         interactiveObject.onUse.AddListener(Teleport);
         enabled = false;
@@ -19,16 +24,16 @@ public class FloorTrigger : MonoBehaviour
     {
         if (!imageVisual.isWakeup)
         {
-            Character.Instance.transform.position = teleportPosition.position;
-            CharacterInputController.Instance.enabled = true;
+            character.transform.position = teleportPosition.position;
+            interactiveObject.infoPanel.SetActive(true);
             enabled = false;
         }
+        interactiveObject.infoPanel.SetActive(false);
     }
 
     private void Teleport()
     {
         imageVisual.WakeUp();
-        CharacterInputController.Instance.enabled = false;
         enabled = true;
     }
 }
