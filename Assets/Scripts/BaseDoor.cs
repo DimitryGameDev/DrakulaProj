@@ -59,7 +59,7 @@ public class BaseDoor : MonoBehaviour
             infoText.text = textOpen;
             infoPanel.SetActive(true);
         }
-        else
+        else if (!CharacterInputController.Instance.IsLook)
             infoPanel.SetActive(false);
     }
 }
