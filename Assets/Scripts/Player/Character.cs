@@ -33,6 +33,8 @@ public class Character : Player
     private Rigidbody rb;
     private Vector3 moveVector;
     private float stepTime;
+
+    public bool isMove;
     private void Awake()
     {
         Init();
@@ -55,6 +57,7 @@ public class Character : Player
         
         if (direction == Vector3.zero && moveType != MoveType.Air)
         {
+            isMove = false;
             rb.velocity = Vector3.zero;
             return;
         }
@@ -76,6 +79,7 @@ public class Character : Player
             
             case MoveType.Walk:
             {
+                isMove = true;
                 if (rb.velocity.magnitude >= maxSpeedWalk)
                 {
                     StepsPlay(stepRateWalk);
@@ -87,6 +91,7 @@ public class Character : Player
             
             case MoveType.Run:
             {
+                isMove = true;
                 if (rb.velocity.magnitude >= maxSpeedRun)
                 {
                     StepsPlay(stepRateRun);

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class InteractiveObject: MonoBehaviour
 {
     [Header("Если Хотим Писать текст Прикрепляем UseBox и UseText")]
-    [SerializeField] private GameObject infoPanel;
+    [SerializeField] public GameObject infoPanel;
     [SerializeField] private Text infoPanelText;
     [SerializeField] private string infoText;
     [SerializeField] private string infoTextAfterUse;
@@ -18,7 +18,6 @@ public class InteractiveObject: MonoBehaviour
 
     private float timer ;
     private float timeBoxHide = 0.1f;
-    
     private void Start()
     {
         if (infoPanel)

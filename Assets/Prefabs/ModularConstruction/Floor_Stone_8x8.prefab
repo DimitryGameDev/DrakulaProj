@@ -99,6 +99,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorTile_Stone_2m (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7344891659510925471, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -160,6 +164,10 @@ PrefabInstance:
     - target: {fileID: 2977815260764504573, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
       propertyPath: m_Name
       value: FloorTile_Stone_2m (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344891659510925471, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -223,6 +231,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorTile_Stone_2m (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7344891659510925471, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -284,6 +296,10 @@ PrefabInstance:
     - target: {fileID: 2977815260764504573, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
       propertyPath: m_Name
       value: FloorTile_Stone_2m (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344891659510925471, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -347,6 +363,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorTile_Stone_2m (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 7344891659510925471, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -408,6 +428,10 @@ PrefabInstance:
     - target: {fileID: 2977815260764504573, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
       propertyPath: m_Name
       value: FloorTile_Stone_2m (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344891659510925471, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -471,6 +495,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorTile_Stone_2m
       objectReference: {fileID: 0}
+    - target: {fileID: 7344891659510925471, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -532,6 +560,10 @@ PrefabInstance:
     - target: {fileID: 2977815260764504573, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
       propertyPath: m_Name
       value: FloorTile_Stone_2m (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344891659510925471, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -595,6 +627,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorTile_Stone_2m (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7344891659510925471, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -656,6 +692,10 @@ PrefabInstance:
     - target: {fileID: 2977815260764504573, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
       propertyPath: m_Name
       value: FloorTile_Stone_2m (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344891659510925471, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -719,6 +759,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorTile_Stone_2m (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7344891659510925471, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -780,6 +824,10 @@ PrefabInstance:
     - target: {fileID: 2977815260764504573, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
       propertyPath: m_Name
       value: FloorTile_Stone_2m (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344891659510925471, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -843,6 +891,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorTile_Stone_2m (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 7344891659510925471, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -904,6 +956,10 @@ PrefabInstance:
     - target: {fileID: 2977815260764504573, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
       propertyPath: m_Name
       value: FloorTile_Stone_2m (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344891659510925471, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -967,6 +1023,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorTile_Stone_2m (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 7344891659510925471, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1028,6 +1088,10 @@ PrefabInstance:
     - target: {fileID: 2977815260764504573, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
       propertyPath: m_Name
       value: FloorTile_Stone_2m (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344891659510925471, guid: e9b916a9a4ef2b64f85bbb7666c0f035, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
