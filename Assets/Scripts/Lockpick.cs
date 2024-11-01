@@ -71,6 +71,7 @@ public class Lockpick : MonoBehaviour
 
     private void StartUnlock()
     {
+        
         if (draculaDoor)
         {
             if (bag.GetMedalAmount() <= 0)
@@ -80,7 +81,7 @@ public class Lockpick : MonoBehaviour
             }
             else 
             {
-              MiniGame();
+                MiniGame();
             }
         }
         if(!draculaDoor)
@@ -208,7 +209,7 @@ public class Lockpick : MonoBehaviour
     {
         if(textTimer>=0)
             textTimer -= Time.deltaTime;
-
+        
         if (textTimer > 0)
         {
             infoText.text = text;
@@ -219,6 +220,5 @@ public class Lockpick : MonoBehaviour
         {
             infoPanel.SetActive(false);
         }
-           
     }
 }
