@@ -1,12 +1,5 @@
 using UnityEngine;
 
-public enum TypeMoveCamera
-{
-    None,
-    OnlyMove,
-    WithRotation
-}
-
 public class OnePersonCamera : SingletonBase<OnePersonCamera>
 {
     [Range(0.1f, 9f)][SerializeField] private float sensitivity = 2f;

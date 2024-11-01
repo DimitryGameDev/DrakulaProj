@@ -2,14 +2,6 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public enum MoveType
-{
-    Walk,
-    Run,
-    Sit,
-    Air
-}
-
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CharacterInputController))] 
 [RequireComponent(typeof(AudioSource))]

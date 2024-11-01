@@ -2,14 +2,6 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public enum BottleType
-{
-    LessNoiseLevel,
-    DraculaIndestructible,
-    PlayerDeath,
-    Random
-}
-
 [RequireComponent(typeof(InteractiveObject))]
 public class Bottle : MonoBehaviour
 {
