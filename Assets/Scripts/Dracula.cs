@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(InteractiveObject))]
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(PathBuilder))]
 public class Dracula : SingletonBase<Dracula>
 {
     [SerializeField] private bool playOnAwake = true;
@@ -21,20 +22,20 @@ public class Dracula : SingletonBase<Dracula>
     [SerializeField] private ImpactEffect visionEffectPrefab;
 
     [Space] [Header("Dracula Settings")] 
-    [SerializeField] [Range(1f, 15f)]private int spawnSpeed = 7;
+    [SerializeField] [Range(0.2f, 30f)]private float spawnSpeed = 7;
     [SerializeField] [Range(0f, 10f)]private int speedChange = 2;
-    [SerializeField] [Range(0f, 50f)] private float minDistanceToNextPp = 6;
-    [SerializeField] [Range(0f, 50f)] private float minDistanceToPlayer = 3;
+    [SerializeField] [Range(0f, 50f)] private int minDistanceToNextPp = 6;
     [SerializeField] private AudioClip[] spawnClips;
-    [SerializeField] private PatrolPoint[] spawnPositions;
+    [SerializeField] private DraculaPoint[] spawnPositions;
     
     private Transform character;
+    private DraculaPoint draculaPoint;
+    private DraculaPoint playerPoint;
     private GameObject draculaPrefab;
-    private List<PatrolPoint> patrolPoints;
-    private List<PatrolPoint> nearestPatrolPoints;
     private AudioSource source;
     private MeshRenderer draculaMeshRenderer;
     private DraculaSpawnEffect draculaSpawnEffect;
+    private PathBuilder builder;
     private float timer;
     
     
@@ -54,16 +55,19 @@ public class Dracula : SingletonBase<Dracula>
         CharacterInputController.Instance.heartOff.AddListener(TogleHeartOff);
         GetComponent<InteractiveObject>().onVision.AddListener(TogleVisionOn);
         GetComponent<InteractiveObject>().onHide.AddListener(TogleVisionOff);
-        NoiseLevel.Instance.OnChange += SpeedChange;
-        nearestPatrolPoints = new List<PatrolPoint>();
-        patrolPoints = new List<PatrolPoint>();
         
-        FillPatrolPointsInScene();
+        NoiseLevel.Instance.OnChange += SpeedChange;
         
         character = Character.Instance.transform;
         source = GetComponent<AudioSource>();
-        
-        if (!playOnAwake)enabled = false;
+        builder = GetComponent<PathBuilder>();
+        playerPoint = character.GetComponent<DraculaPoint>();
+        draculaPoint = GetComponent<DraculaPoint>();
+
+        if (playOnAwake)
+        {
+            DraculaSpawn(spawnPositions[Random.Range(0, spawnPositions.Length)]);
+        }
     }
 
     private void OnDestroy()
@@ -161,24 +165,26 @@ public class Dracula : SingletonBase<Dracula>
     }
     public void DraculaSpawn()
     {
-        PatrolPoint rand = spawnPositions[Random.Range(0, spawnPositions.Length)];
+        DraculaPoint rand = spawnPositions[Random.Range(0, spawnPositions.Length)];
         transform.position = rand.transform.position;
         Spawn(rand);
     }
-    public void DraculaSpawn(PatrolPoint spawnPoint)
+    public void DraculaSpawn(DraculaPoint spawnPoint)
     {
         transform.position = spawnPoint.transform.position;
+        draculaPoint = spawnPoint;
         Spawn(spawnPoint);
     }
     
-    public void DraculaSpawns(PatrolPoint[] spawnPoints)
+    public void DraculaSpawns(DraculaPoint[] spawnPoints)
     {
         spawnPositions = spawnPoints;
-        PatrolPoint rand = spawnPositions[Random.Range(0, spawnPositions.Length)];
+        DraculaPoint rand = spawnPositions[Random.Range(0, spawnPositions.Length)];
+        draculaPoint = rand;
         Spawn(rand);
     }
     
-    private void Spawn(PatrolPoint spawnPoint)
+    private void Spawn(DraculaPoint spawnPoint)
     {
         source.PlayOneShot(spawnClips[Random.Range(0,spawnClips.Length)]);
         draculaPrefab = Instantiate(GetDraculaPrefab(spawnPoint), transform.position, Quaternion.identity, transform);
@@ -204,32 +210,29 @@ public class Dracula : SingletonBase<Dracula>
 
     private void DraculaMove()
     {
-        FindNearestPatrolPoint();
-
-        if (nearestPatrolPoints.Count == 0) return;
-        
         Destroy(draculaPrefab);
         
-        var patrolPoint = FindPatrolPointsToPlayer();
-        
-        /*
-        if (patrolPoint.DraculaPos == DraculaPosType.Player)
+        var movePoint = builder.GetDraculaPoint(draculaPoint,playerPoint,minDistanceToNextPp);
+
+        if (movePoint == null) return;
+
+        if (movePoint.IsPlayer)
         {
             KillPlayer();
+            enabled = false;
             return;
-        }*/
-        
-        draculaPrefab = Instantiate(GetDraculaPrefab(patrolPoint), patrolPoint.transform.position, Quaternion.identity, transform);
+        }
+
+        draculaPrefab = Instantiate(GetDraculaPrefab(movePoint), movePoint.transform.position, Quaternion.identity, transform);
         draculaMeshRenderer = draculaPrefab.GetComponent<MeshRenderer>();
         draculaMeshRenderer.enabled = false;
-        CleatNearestPatrolPoint();
-    
+        draculaPoint = movePoint;
     }
 
-    private GameObject GetDraculaPrefab(PatrolPoint patrolPoint)
+    private GameObject GetDraculaPrefab(DraculaPoint draculaPoint)
     {
         var currentDraculaPrefab = draculaPrefabsNone;
-        var currentPoint = patrolPoint.DraculaPos;
+        var currentPoint = draculaPoint.DraculaPos;
         
         if (currentPoint == DraculaPosType.None && currentDraculaPrefab != null)
         {
@@ -250,12 +253,10 @@ public class Dracula : SingletonBase<Dracula>
             && draculaPrefabsHand != null) currentDraculaPrefab = draculaPrefabsHand;
         if (currentPoint == DraculaPosType.Fly 
             && draculaPrefabsFly != null) currentDraculaPrefab = draculaPrefabsFly;
-        transform.position = patrolPoint.transform.position;
+        transform.position = draculaPoint.transform.position;
 
-        Debug.Log(currentDraculaPrefab);
         return currentDraculaPrefab;
     }
-
     private void KillPlayer()
     {
         draculaInPlayer.Invoke(1);
@@ -263,79 +264,11 @@ public class Dracula : SingletonBase<Dracula>
     }
 
     private readonly Vector3 OffsetY = new Vector3(0, 0.5f, 0);
-    private void FindNearestPatrolPoint()
-    {
-        var draculaPos = transform.position;
-        
-        for (int i = 0; i < patrolPoints.Count; i++)
-        {
-            PatrolPoint patrolPoint = patrolPoints[i];
-            var distance = Vector3.Distance(draculaPos, patrolPoint.transform.position);
-            
-            if (distance < minDistanceToNextPp)
-            {   
-                RaycastHit hitInfo;
-                Ray ray = new Ray(transform.position + OffsetY, patrolPoint.transform.position - transform.position + OffsetY);
-                
-                Debug.DrawLine(transform.position + OffsetY, patrolPoint.transform.position + OffsetY, Color.blue,3f);
-                
-                if (Physics.Raycast(ray, out hitInfo,minDistanceToNextPp))
-                {
-                    if (hitInfo.collider.transform.parent?.GetComponent<Character>())
-                    {
-                        if (Vector3.Distance(hitInfo.transform.position,transform.position) <= minDistanceToPlayer)
-                        {
-                            KillPlayer();
-                            enabled = false;
-                            return;
-                        }
-                    }
-                    Debug.DrawLine(transform.position, patrolPoint.transform.position, Color.red, 3f);
-                    continue;
-                }
- 
-                nearestPatrolPoints.Add(patrolPoint);
-            }
-        }
-    }
     
-    private PatrolPoint FindPatrolPointsToPlayer()
-    {
-        var playerPos = character.transform.position;
-        float minDist =  Mathf.Infinity;
-        PatrolPoint spawnPoints = null;
-        for (int i = 0; i < nearestPatrolPoints.Count; i++)
-        {
-            PatrolPoint patrolPoint = nearestPatrolPoints[i];
-            var distance = Vector3.Distance(playerPos, patrolPoint.transform.position);
-            if (distance < minDist)
-            {
-                spawnPoints = patrolPoint;
-                minDist = distance;
-            }
-        }
-
-        return spawnPoints;
-    }
-
-    private void CleatNearestPatrolPoint()
-    {
-        nearestPatrolPoints.Clear();
-    }
-
-    private void FillPatrolPointsInScene()
-    {
-        patrolPoints.AddRange(FindObjectsOfType<PatrolPoint>());
-    }
-    
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, minDistanceToNextPp);
-        
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, minDistanceToPlayer);
     }
 
 }

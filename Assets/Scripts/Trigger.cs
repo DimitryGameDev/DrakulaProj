@@ -9,9 +9,9 @@ public class Trigger : MonoBehaviour
    public bool IsEnable => isEnable;
    
    [Header("Либо одно либо другое")]
-   [SerializeField] private PatrolPoint spawnPoint;
+   [SerializeField] private DraculaPoint spawnPoint;
    [Space]
-   [SerializeField] private PatrolPoint[] spawnPoints;
+   [SerializeField] private DraculaPoint[] spawnPoints;
    
    [HideInInspector]public UnityEvent onTrigger;
    

@@ -39,6 +39,9 @@ public class InteractiveObject: MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Показывает текст при наведении на обьект
+    /// </summary>
     public void ShowInfoPanel()
     {
         if (infoPanel)
@@ -50,6 +53,9 @@ public class InteractiveObject: MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Показывает текст После применения
+    /// </summary>
     private void ShowAfterText()
     {
         if (infoTextAfterUse != "")
@@ -60,6 +66,9 @@ public class InteractiveObject: MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Убирает UI когда игрок отвел мышь
+    /// </summary>
     public void HideInfoPanel()
     {
         timer = timeBoxHide;
@@ -68,7 +77,7 @@ public class InteractiveObject: MonoBehaviour
     }
     
     /// <summary>
-    ///Вызывается когда камера игрока видит обьект
+    ///Вызывается когда камера игрока в режиме сердца видит обьект видит обьект
     /// </summary>
     public void Visible()
     {
