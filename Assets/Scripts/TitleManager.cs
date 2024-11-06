@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class TitleManager : MonoBehaviour
 {
    [SerializeField] private Text titleText;
+   [SerializeField] private Text skipText;
    [SerializeField] private Image skipImage;
    [Space]
    [SerializeField] private float speedText;
@@ -23,10 +24,13 @@ public class TitleManager : MonoBehaviour
       Cursor.visible = false;
       Cursor.lockState = CursorLockMode.Locked;
       audioSource = GetComponent<AudioSource>();
+      skipText.color = new Color(skipText.color.r, skipText.color.g, skipText.color.b, 0);
    }
 
    private void Update()
    {
+      skipText.color =  new Color(skipText.color.r, skipText.color.g, skipText.color.b,
+         Mathf.MoveTowards(skipText.color.a, 1, Time.deltaTime/5));
       textPos = new Vector3(textPos.x, Mathf.MoveTowards(textPos.y, moveByY, Time.deltaTime * speedText), textPos.z);
       
       titleText.rectTransform.position = textPos;
@@ -61,6 +65,8 @@ public class TitleManager : MonoBehaviour
    private void LoadNextScene()
    {
       audioSource.volume = Mathf.MoveTowards(audioSource.volume,0f, Time.deltaTime);
+      skipText.color =  new Color(skipText.color.r, skipText.color.g, skipText.color.b,
+         Mathf.MoveTowards(skipText.color.a, 0, Time.deltaTime));
       titleText.color = new Color(titleText.color.r, titleText.color.g, titleText.color.b, Mathf.MoveTowards(titleText.color.a,0f, Time.deltaTime));
       if (audioSource.volume == 0)
       {

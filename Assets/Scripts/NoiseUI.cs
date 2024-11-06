@@ -5,7 +5,6 @@ public class NoiseUI : MonoBehaviour
 {
     
     [SerializeField]private FadeUi noiseImagePrefab;
-    private int lastValue = 0;
     private List<FadeUi> noiseObjects = new List<FadeUi>();
     
     private void Start()

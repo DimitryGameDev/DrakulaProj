@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(InteractiveObject))]
@@ -13,7 +12,7 @@ public class Key : MonoBehaviour
     private void Start()
     {
         interactiveObject = GetComponent<InteractiveObject>();
-        interactiveObject.onUse.AddListener(PickUp);
+       // interactiveObject.onUse.AddListener(PickUp);
     }
     
     private void PickUp()

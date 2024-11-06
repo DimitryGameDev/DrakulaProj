@@ -1,34 +1,38 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(InteractiveObject))]
-public class Notes : MonoBehaviour
+public class Notes : InteractiveObject
 {
+   [Header("Setting Notes")]
    [SerializeField] private GameObject notesBox;
    [SerializeField] private Text titleTextUi;
    [SerializeField] private Text notesTextUi;
    [SerializeField] private AudioClip clip;
    [Space]
-   
    [SerializeField] private string titleText;
    [SerializeField] private string text;
-
-   private InteractiveObject interactiveObject;
+   
    private AudioSource source;
    private Dracula dracula;
-   private void Start()
+   private bool isNotes;
+   protected override void Start()
    {
+      base.Start();
       notesBox.SetActive(false);
-      enabled = false;
+      isNotes = false;
       source = GetComponent<AudioSource>();
-      interactiveObject = GetComponent<InteractiveObject>();
       dracula = Dracula.Instance;
-      interactiveObject.onUse.AddListener(OpenNotes);
+   }
+
+   public override void Use()
+   {
+      base.Use();
+      OpenNotes();
    }
 
    private void OpenNotes()
    { 
-      enabled = true;
+      isNotes = true;
       titleTextUi.text = titleText;
       notesTextUi.text = text;
       notesBox.SetActive(true);
@@ -42,25 +46,19 @@ public class Notes : MonoBehaviour
       }
    }
 
-   private void Update()
+   protected override void Update()
    {
-      if (Input.GetKeyDown(KeyCode.Escape))
-      {
-         CloseNotes();
-      }
+      base.Update();
+      if (Input.GetKeyDown(KeyCode.Escape) && isNotes) CloseNotes();
    }
 
    protected virtual void CloseNotes()
    { 
-      enabled = false;
+      isNotes = false;
       notesBox.SetActive(false);
       source.PlayOneShot(clip);
-      
       OnePersonCamera.Instance.UnLock();
       CharacterInputController.Instance.enabled = true;
-      if (dracula)
-      {
-         dracula.DraculaEnable(); //включает дракулу
-      }
+      if (dracula)  dracula.DraculaEnable(); //включает дракулу
    }
 }

@@ -54,19 +54,19 @@ public class Lockpick : MonoBehaviour
         dracula = Dracula.Instance;
         onePersonCamera = OnePersonCamera.Instance;
         interactiveObject = GetComponent<InteractiveObject>();
-        interactiveObject.onUse.AddListener(StartUnlock);
+        // interactiveObject.onUse.AddListener(StartUnlock);
         ResetPoint();
     }
 
     private void OnDestroy()
     {
-        interactiveObject.onUse.RemoveListener(StartUnlock);
+        //interactiveObject.onUse.RemoveListener(StartUnlock);
     }
 
     private void Update()
     { 
        PointMove();
-       InfoText();
+       //InfoText();
     }
 
     private void StartUnlock()
@@ -180,7 +180,7 @@ public class Lockpick : MonoBehaviour
 
         animator.SetBool("Open", true);
         
-        interactiveObject.onUse.RemoveListener(StartUnlock);
+        //interactiveObject.onUse.RemoveListener(StartUnlock);
         Destroy(this);
         Destroy(interactiveObject);
     }
@@ -204,7 +204,7 @@ public class Lockpick : MonoBehaviour
             Random.Range(background.rect.y + point.rect.size.y/2, background.rect.yMax - point.rect.yMax)
         );
     }
-
+/*
     private void InfoText()
     {
         if(textTimer>=0)
@@ -221,4 +221,5 @@ public class Lockpick : MonoBehaviour
             infoPanel.SetActive(false);
         }
     }
+ */
 }

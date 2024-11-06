@@ -1,76 +1,92 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class InteractiveObject: MonoBehaviour
 {
-    [Header("Если Хотим Писать текст Прикрепляем UseBox и UseText")]
-    [SerializeField] public GameObject infoPanel;
-    [SerializeField] private Text infoPanelText;
+    [Header("Settings")]
     [SerializeField] private string infoText;
     [SerializeField] private string infoTextAfterUse;
-
+    [SerializeField] private Sprite icon;
+    [SerializeField] private Sprite afterIcon;
+    [Tooltip("Как быстро скрывается UI, после отвода камеры")][SerializeField] private float  timeBoxHide = 0.1f;
+    [Tooltip("Как быстро скрывается UI ,после применения")][SerializeField] private float  timeAfterText = 3f;
+    
     // Можно подписаться из скрипта на этом же обьекте на это событие
     [HideInInspector]public UnityEvent onVision;
     [HideInInspector]public UnityEvent onHide;
-    [HideInInspector]public UnityEvent onUse;
     public UnityAction<InteractiveObject> Ondestroy;
 
+    private float time ;
     private float timer ;
-    private float timeBoxHide = 0.1f;
-    private void Start()
-    {
-        if (infoPanel)
-        {
-            infoPanel.SetActive(false);
-        }
-        enabled = false;
-    }
-
-    private void Update()
-    {
-        timer += Time.deltaTime;
-        if (timer >= timeBoxHide) 
-        {
-            infoPanel.SetActive(false);
-            timer = 0;
-            timeBoxHide = 0.1f;
-            enabled = false;
-        }
-    }
-
-    public void ShowInfoPanel()
-    {
-        if (infoPanel)
-        {
-            infoPanelText.text = infoText;
-            timer = 0;
-            infoPanel.SetActive(true);
-            enabled = true;
-        }
-    }
+    private bool isText;
     
-    private void ShowAfterText()
+    private InteractiveBoxUI interactiveBoxUI;
+    protected virtual void Start()
     {
-        if (infoTextAfterUse != "")
-        {
-            infoPanelText.text = infoTextAfterUse;
-            timer = 0;
-            timeBoxHide = 1f;
-        }
+        interactiveBoxUI = InteractiveBoxUI.Instance;
+        isText = false;
     }
 
-    public void HideInfoPanel()
+    protected virtual void Update()
     {
+        if (isText)
+        {
+            time += Time.deltaTime;
+            if (time >= timer)
+            {
+                HideInfoPanel();
+            }
+        }
+        
+    }
+
+    /// <summary>
+    /// Показывает текст при наведении на обьект
+    /// </summary>
+    public virtual void ShowText()
+    {
+        interactiveBoxUI.Enable();
+        interactiveBoxUI.text.text = infoText;
+        if (icon != null)interactiveBoxUI.icon.sprite = icon;
+        else interactiveBoxUI.HideIcon();
         timer = timeBoxHide;
-        infoPanel.SetActive(false);
-        enabled = false;
+        isText = true;
     }
     
     /// <summary>
-    ///Вызывается когда камера игрока видит обьект
+    /// Показывает текст После применения
     /// </summary>
-    public void Visible()
+    protected virtual void ShowAfterText()
+    {
+        interactiveBoxUI.text.text = infoTextAfterUse;
+        if (icon != null) interactiveBoxUI.icon.sprite = afterIcon;
+        else interactiveBoxUI.HideIcon();
+        interactiveBoxUI.HideCursor();
+        time = 0;
+        timer = timeAfterText; 
+        isText = true;
+    }
+    
+    /// <summary>
+    /// Убирает UI когда игрок отвел мышь
+    /// </summary>
+    protected virtual void HideInfoPanel()
+    {
+        interactiveBoxUI.Disable();
+        time = 0;
+        isText = false;
+    }
+    
+        
+    /// <summary>
+    /// Вызывается когда игрок Применил действие
+    /// </summary>
+    public virtual void Use(){}
+    
+    /// <summary>
+    ///Вызывается когда камера игрока в режиме сердца видит обьект видит обьект
+    /// </summary>
+    public virtual void InCamera()
     {
         onVision.Invoke();
     }
@@ -78,23 +94,13 @@ public class InteractiveObject: MonoBehaviour
     /// <summary>
     /// Вызывается когда камера игрока не видит объект
     /// </summary>
-    public void Hide()
+    public virtual void OutCamera()
     {
         onHide.Invoke();
     }
     
-    /// <summary>
-    /// Вызывается когда игрок Применил действие
-    /// </summary>
-    public void Use()
-    {
-        ShowAfterText();
-        onUse.Invoke();
-    }
-    
     private void OnDestroy()
     {
-        onUse.RemoveAllListeners();
         onHide.RemoveAllListeners();
         onVision.RemoveAllListeners();
         Ondestroy.Invoke(this);

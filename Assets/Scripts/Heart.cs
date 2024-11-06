@@ -1,12 +1,11 @@
-using System;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(AudioSource))]
 public class Heart : MonoBehaviour
 {
     [SerializeField] private CharacterInputController characterInputController;
-    [SerializeField] private PostProcessVolume postProcessVolume;
     [SerializeField] private float vignetteSpeed = 5f;
     [SerializeField] private float lensDistortionSpeed = 8f;
     [SerializeField] private float tickRateStress = 1f;
@@ -16,6 +15,7 @@ public class Heart : MonoBehaviour
     
     private bool isActive;
     public bool IsActive => isActive;
+    private Volume postProcessVolume;
     private Vignette vignette;
     private LensDistortion lensDistortion;
     private Character character;
@@ -28,8 +28,9 @@ public class Heart : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         CharacterInputController.Instance.heartOn.AddListener(PlaySFX);
         character = (Character)Character.Instance;
-        postProcessVolume.profile.TryGetSettings(out vignette);
-        postProcessVolume.profile.TryGetSettings(out lensDistortion);
+        postProcessVolume = GetComponent<Volume>();
+        postProcessVolume.profile.TryGet<Vignette>(out vignette);
+        postProcessVolume.profile.TryGet<LensDistortion>(out lensDistortion);
     }
 
     private void Update()
@@ -61,9 +62,9 @@ public class Heart : MonoBehaviour
         {
             isActive = false;
             
-            if (vignette.opacity.value != 0)
+            if (vignette.smoothness.value != 0)
             {
-                vignette.opacity.value = Mathf.Lerp(vignette.opacity.value, 0, vignetteSpeed * Time.deltaTime);
+                vignette.smoothness.value = Mathf.Lerp(vignette.smoothness.value, 0, vignetteSpeed * Time.deltaTime);
             }
             if (lensDistortion.intensity.value != 0)
             {
@@ -74,13 +75,13 @@ public class Heart : MonoBehaviour
         {
             isActive = true;
  
-            if (vignette.opacity.value != 1)
+            if (vignette.smoothness.value != 1)
             {
-                vignette.opacity.value = Mathf.Lerp(vignette.opacity.value, 1, vignetteSpeed * Time.deltaTime);
+                vignette.smoothness.value = Mathf.Lerp(vignette.smoothness.value, 1, vignetteSpeed * Time.deltaTime);
             }
-            if (lensDistortion.intensity.value != -60)
+            if (lensDistortion.intensity.value != -0.5f)
             {
-                lensDistortion.intensity.value = Mathf.Lerp(lensDistortion.intensity.value, -60, lensDistortionSpeed * Time.deltaTime);
+                lensDistortion.intensity.value = Mathf.Lerp(lensDistortion.intensity.value, -0.5f, lensDistortionSpeed * Time.deltaTime);
             }
         }
     }

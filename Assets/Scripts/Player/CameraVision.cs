@@ -40,7 +40,7 @@ public class CameraVision : MonoBehaviour
                     {
                         Debug.DrawLine(playerCamera.transform.position, visionObjs[i].transform.position, Color.red,
                             Time.deltaTime);
-                        visionObjs[i].Visible();
+                        visionObjs[i].InCamera();
                     }
                 }
                 
@@ -48,7 +48,7 @@ public class CameraVision : MonoBehaviour
                 {
                     Debug.DrawLine(playerCamera.transform.position, visionObjs[i].transform.position, Color.black,
                         Time.deltaTime);
-                    visionObjs[i].Hide();
+                    visionObjs[i].OutCamera();
                 }
             }
     }

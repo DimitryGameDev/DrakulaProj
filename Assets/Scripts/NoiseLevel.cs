@@ -29,7 +29,6 @@ public class NoiseLevel : SingletonBase<NoiseLevel>
         if (currentLevel < maxLevel)
         {
             currentLevel++;
-            Debug.Log("Increased");
             OnChange?.Invoke(currentLevel);
             timer = resetTime;
         }

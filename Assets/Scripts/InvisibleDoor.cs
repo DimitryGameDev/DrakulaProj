@@ -4,11 +4,11 @@ public class InvisibleDoor : MonoBehaviour
 {
     [SerializeField] private GameObject[] walls;
 
-    private Collider collider;
+    private Collider colliderObj;
 
     private void Start()
     {
-        collider = GetComponent<Collider>();
+        colliderObj = GetComponent<Collider>();
     }
 
     private void OnTriggerStay(Collider other)
@@ -28,7 +28,7 @@ public class InvisibleDoor : MonoBehaviour
                 Destroy(walls[i]);
             }
 
-            Destroy(collider);
+            Destroy(colliderObj);
         }
     }
 }

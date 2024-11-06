@@ -15,7 +15,7 @@ public class Bottle : MonoBehaviour
     private void Start()
     {
         interactiveObject = GetComponent<InteractiveObject>();
-        interactiveObject.onUse.AddListener(SetBottleType);
+        //interactiveObject.onUse.AddListener(SetBottleType);
 
         death = Character.Instance.GetComponent<Death>();
     }

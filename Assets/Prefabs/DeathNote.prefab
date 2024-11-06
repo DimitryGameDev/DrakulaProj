@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6174307156318050227}
-  - component: {fileID: 836222477397110841}
   - component: {fileID: 1092393328148806504}
   - component: {fileID: 7658437106196393200}
   m_Layer: 0
@@ -36,31 +35,6 @@ Transform:
   - {fileID: 200716448391486478}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 78.618, z: 0}
---- !u!114 &836222477397110841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 557268422765073949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4602cd3d0f83452ba597aa28a56e6c65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  infoPanel: {fileID: 0}
-  infoPanelText: {fileID: 0}
-  infoText: "\u041F\u0440\u043E\u0447\u0438\u0442\u0430\u0442\u044C"
-  infoTextAfterUse: 
-  onVision:
-    m_PersistentCalls:
-      m_Calls: []
-  onHide:
-    m_PersistentCalls:
-      m_Calls: []
-  onUse:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!82 &1092393328148806504
 AudioSource:
   m_ObjectHideFlags: 0
@@ -169,6 +143,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01cea6e6239f0204eb2322fe301f6150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infoText: 
+  infoTextAfterUse: 
+  icon: {fileID: 0}
+  afterIcon: {fileID: 0}
+  timeBoxHide: 0.1
+  timeAfterText: 3
+  onVision:
+    m_PersistentCalls:
+      m_Calls: []
+  onHide:
+    m_PersistentCalls:
+      m_Calls: []
   notesBox: {fileID: 0}
   titleTextUi: {fileID: 0}
   notesTextUi: {fileID: 0}
