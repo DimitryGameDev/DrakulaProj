@@ -19,6 +19,7 @@ public class InteractiveObject: MonoBehaviour
     private float time ;
     private float timer ;
     private bool isText;
+    public bool isAfterText;
     
     private InteractiveBoxUI interactiveBoxUI;
     protected virtual void Start()
@@ -37,7 +38,6 @@ public class InteractiveObject: MonoBehaviour
                 HideInfoPanel();
             }
         }
-        
     }
 
     /// <summary>
@@ -65,6 +65,7 @@ public class InteractiveObject: MonoBehaviour
         time = 0;
         timer = timeAfterText; 
         isText = true;
+        isAfterText = true;
     }
     
     /// <summary>
@@ -75,6 +76,7 @@ public class InteractiveObject: MonoBehaviour
         interactiveBoxUI.Disable();
         time = 0;
         isText = false;
+        isAfterText = false;
     }
     
         

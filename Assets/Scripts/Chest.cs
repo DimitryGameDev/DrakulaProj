@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Chest : InteractiveObject
 {
-    private InteractiveObject interactiveObject;
     private Animator animator;
     protected override void Start()
     {
@@ -20,7 +19,6 @@ public class Chest : InteractiveObject
     private void OpenChest()
     {
         animator.enabled = true;
-        Destroy(interactiveObject);
+        Destroy(this);
     }
-
 }

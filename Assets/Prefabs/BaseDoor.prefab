@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &165680583820707391
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7331538037659428746}
+  - component: {fileID: 2153921312142557410}
+  m_Layer: 2
+  m_Name: InteractiveTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7331538037659428746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165680583820707391}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8941289909700233653}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2153921312142557410
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165680583820707391}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.6, z: 0.15}
+  m_Center: {x: 1, y: 1, z: 0.3}
 --- !u!1 &277443497375494389
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,7 +98,6 @@ GameObject:
   - component: {fileID: 4721622087472371607}
   - component: {fileID: 8225965780088440804}
   - component: {fileID: 5591482961629210622}
-  - component: {fileID: 3437507864595563079}
   m_Layer: 2
   m_Name: BaseDoor
   m_TagString: Untagged
@@ -66,6 +118,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7331538037659428746}
   - {fileID: 4803115125419285877}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -198,32 +251,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b379d0d6d6547b34f8bf4c9660f33b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infoPanel: {fileID: 0}
-  infoText: {fileID: 0}
-  textOpen: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435 (\u0415)"
+  infoText: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0434\u0432\u0435\u0440\u044C
+    (\u0415)"
+  infoTextAfterUse: 
+  icon: {fileID: 0}
+  afterIcon: {fileID: 0}
+  timeBoxHide: 0.1
+  timeAfterText: 3
+  onVision:
+    m_PersistentCalls:
+      m_Calls: []
+  onHide:
+    m_PersistentCalls:
+      m_Calls: []
+  isAfterText: 0
   animator: {fileID: 8225965780088440804}
   closedTrigger: {fileID: 0}
---- !u!65 &3437507864595563079
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2822966819342906851}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 1, y: 0.5, z: 0.72}
 --- !u!1 &3127397297676320639
 GameObject:
   m_ObjectHideFlags: 0
