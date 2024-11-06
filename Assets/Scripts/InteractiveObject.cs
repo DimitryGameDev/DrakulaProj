@@ -1,85 +1,92 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class InteractiveObject: MonoBehaviour
 {
-    [Header("Если Хотим Писать текст Прикрепляем UseBox и UseText")]
-    [SerializeField] public GameObject infoPanel;
-    [SerializeField] private Text infoPanelText;
+    [Header("Settings")]
     [SerializeField] private string infoText;
     [SerializeField] private string infoTextAfterUse;
-
+    [SerializeField] private Sprite icon;
+    [SerializeField] private Sprite afterIcon;
+    [Tooltip("Как быстро скрывается UI, после отвода камеры")][SerializeField] private float  timeBoxHide = 0.1f;
+    [Tooltip("Как быстро скрывается UI ,после применения")][SerializeField] private float  timeAfterText = 3f;
+    
     // Можно подписаться из скрипта на этом же обьекте на это событие
     [HideInInspector]public UnityEvent onVision;
     [HideInInspector]public UnityEvent onHide;
-    [HideInInspector]public UnityEvent onUse;
     public UnityAction<InteractiveObject> Ondestroy;
 
+    private float time ;
     private float timer ;
-    private float timeBoxHide = 0.1f;
-    private void Start()
+    private bool isText;
+    
+    private InteractiveBoxUI interactiveBoxUI;
+    protected virtual void Start()
     {
-        if (infoPanel)
-        {
-            infoPanel.SetActive(false);
-        }
-        enabled = false;
+        interactiveBoxUI = InteractiveBoxUI.Instance;
+        isText = false;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= timeBoxHide) 
+        if (isText)
         {
-            infoPanel.SetActive(false);
-            timer = 0;
-            timeBoxHide = 0.1f;
-            enabled = false;
+            time += Time.deltaTime;
+            if (time >= timer)
+            {
+                HideInfoPanel();
+            }
         }
+        
     }
 
     /// <summary>
     /// Показывает текст при наведении на обьект
     /// </summary>
-    public void ShowInfoPanel()
+    public virtual void ShowText()
     {
-        if (infoPanel)
-        {
-            infoPanelText.text = infoText;
-            timer = 0;
-            infoPanel.SetActive(true);
-            enabled = true;
-        }
+        interactiveBoxUI.Enable();
+        interactiveBoxUI.text.text = infoText;
+        if (icon != null)interactiveBoxUI.icon.sprite = icon;
+        else interactiveBoxUI.HideIcon();
+        timer = timeBoxHide;
+        isText = true;
     }
     
     /// <summary>
     /// Показывает текст После применения
     /// </summary>
-    private void ShowAfterText()
+    protected virtual void ShowAfterText()
     {
-        if (infoTextAfterUse != "")
-        {
-            infoPanelText.text = infoTextAfterUse;
-            timer = 0;
-            timeBoxHide = 1f;
-        }
+        interactiveBoxUI.text.text = infoTextAfterUse;
+        if (icon != null) interactiveBoxUI.icon.sprite = afterIcon;
+        else interactiveBoxUI.HideIcon();
+        interactiveBoxUI.HideCursor();
+        time = 0;
+        timer = timeAfterText; 
+        isText = true;
     }
-
+    
     /// <summary>
     /// Убирает UI когда игрок отвел мышь
     /// </summary>
-    public void HideInfoPanel()
+    protected virtual void HideInfoPanel()
     {
-        timer = timeBoxHide;
-        infoPanel.SetActive(false);
-        enabled = false;
+        interactiveBoxUI.Disable();
+        time = 0;
+        isText = false;
     }
+    
+        
+    /// <summary>
+    /// Вызывается когда игрок Применил действие
+    /// </summary>
+    public virtual void Use(){}
     
     /// <summary>
     ///Вызывается когда камера игрока в режиме сердца видит обьект видит обьект
     /// </summary>
-    public void Visible()
+    public virtual void InCamera()
     {
         onVision.Invoke();
     }
@@ -87,23 +94,13 @@ public class InteractiveObject: MonoBehaviour
     /// <summary>
     /// Вызывается когда камера игрока не видит объект
     /// </summary>
-    public void Hide()
+    public virtual void OutCamera()
     {
         onHide.Invoke();
     }
     
-    /// <summary>
-    /// Вызывается когда игрок Применил действие
-    /// </summary>
-    public void Use()
-    {
-        ShowAfterText();
-        onUse.Invoke();
-    }
-    
     private void OnDestroy()
     {
-        onUse.RemoveAllListeners();
         onHide.RemoveAllListeners();
         onVision.RemoveAllListeners();
         Ondestroy.Invoke(this);

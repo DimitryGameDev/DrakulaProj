@@ -17,11 +17,11 @@ public class Trigger : MonoBehaviour
    
    private void SpawnDraculaSpawnPoint()
    {
-      Dracula.Instance.DraculaSpawn(spawnPoint);
+      Dracula.Instance.SetPoint(spawnPoint);
    }
    private void SpawnDraculaSpawnPoints()
    {
-      Dracula.Instance.DraculaSpawns(spawnPoints);
+      Dracula.Instance.SetPoints(spawnPoints);
    }
    private void Start()
    {
@@ -37,7 +37,7 @@ public class Trigger : MonoBehaviour
       
       if (!isEnable)
       {
-         onTrigger.AddListener(Dracula.Instance.DraculaDisable);
+         onTrigger.AddListener(Dracula.Instance.DraculaDespawn);
          gameObject.SetActive(false);
       }
    }

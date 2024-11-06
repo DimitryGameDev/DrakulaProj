@@ -15,8 +15,6 @@ public class Death : MonoBehaviour
     private Animator animator;
     private void Start()
     {
-        heartPostProcessVolume.profile.TryGetSettings(out vignette);
-
         if (Dracula.Instance != null)
         {
             dracula = Dracula.Instance;
@@ -29,16 +27,7 @@ public class Death : MonoBehaviour
     }
 
     private const float VignetteSpeed = 5F;
-
-    private void Update()
-    {
-        vignette.opacity.value = Mathf.Lerp(vignette.opacity.value, 1, VignetteSpeed * Time.deltaTime);
-        if (Mathf.Approximately(vignette.opacity.value, 1))
-        {
-            enabled = false;
-        }
-    }
-
+    
     public void DeathCharacter(int animID)
     {
         var rb = Character.Instance.GetComponent<Rigidbody>();

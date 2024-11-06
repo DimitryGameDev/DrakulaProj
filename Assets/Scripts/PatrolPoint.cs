@@ -11,8 +11,10 @@ public class PatrolPoint : MonoBehaviour
     
     [Space]
     [Header("Debug settings")]
+    [SerializeField] private bool enabledGizmos;
     [SerializeField] private bool isDebug;
     [Space]
+    [Header("If Debug Enabled set this Setting")]
     [SerializeField] private Canvas debugBox;
     [SerializeField] private Image image;
     [SerializeField] private Text weightText;
@@ -60,28 +62,35 @@ public class PatrolPoint : MonoBehaviour
     {
         pathIndex = 0;
         IsVisit = false;
+        Gizmos.color = Color.white;
         if (isDebug) image.color = Color.white;
     }
 
     public void Visit()
     {
         IsVisit = true;
+        Gizmos.color = Color.green;
         if (isDebug)  image.color = Color.green;
     }
 
     public void FinalPoint()
     { 
+        Gizmos.color = Color.yellow;
         if (isDebug)  image.color = Color.yellow;
     }
     public void NoPath()
     { 
+        Gizmos.color =  Color.red;
         if (isDebug)  image.color = Color.red;
     }
     
     private void OnDrawGizmos()
     {
-        Gizmos.color = gColor;
-        Gizmos.DrawSphere(transform.position, radius);
+        if (enabledGizmos)
+        {
+            Gizmos.color = gColor;
+            Gizmos.DrawSphere(transform.position, radius);
+        }
     }
 }
 

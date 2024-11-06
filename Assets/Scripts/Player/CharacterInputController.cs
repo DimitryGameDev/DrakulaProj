@@ -75,13 +75,6 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         
         var ground = IsGrounded();
         
-        /*
-        if (Input.GetButton("Jump") && ground)
-        {
-            character.Jump();
-        }
-        */
-        
         playerMoveDirection = new Vector3(dirX, 0, dirZ);
             
         if (IsWall() && !ground) return;
@@ -119,7 +112,43 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         character.CameraMove(dirX, dirY);
     }
 
-    private bool IsGrounded()
+
+    private void HeartState()
+    {
+        if(!pickUpHeart) return;
+        
+        if (heartEnabled == false)
+        {
+            timeHeart -= Time.deltaTime;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (timeHeart <= 0)
+            {
+                heartEnabled = true;
+                isMove = false;
+                heartOn.Invoke();
+                timeHeart = heartTimeUsage;
+            }
+        }
+        
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            heartEnabled = false;
+            isMove = true;
+            heartOff.Invoke();
+        }
+    }
+
+    public void ChangeSpeedTime(int value)
+    {
+        timeSprint += value;
+    }
+    #region RayLogick
+
+    
+private bool IsGrounded()
     {
         RaycastHit hitLegs;
         var vectorDown = character.transform.TransformDirection(Vector3.down);
@@ -182,36 +211,8 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         }
 
         return false;
+        
     }
-
-    private void HeartState()
-    {
-        if(!pickUpHeart) return;
-        
-        if (heartEnabled == false)
-        {
-            timeHeart -= Time.deltaTime;
-        }
-        
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (timeHeart <= 0)
-            {
-                heartEnabled = true;
-                isMove = false;
-                heartOn.Invoke();
-                timeHeart = heartTimeUsage;
-            }
-        }
-        
-        if (Input.GetKeyUp(KeyCode.F))
-        {
-            heartEnabled = false;
-            isMove = true;
-            heartOff.Invoke();
-        }
-    }
-    
     private void MainRay()
     {
         RaycastHit hitCamera;
@@ -225,9 +226,9 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
             {
                 var hit = hitCamera.collider.transform.parent.GetComponent<InteractiveObject>();
 
-                hit.ShowInfoPanel();
-                
-                if (Input.GetKeyDown(KeyCode.E))
+                hit.ShowText();
+
+                if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     hit.Use();
                 }
@@ -238,5 +239,9 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         }
         IsLook = false;
     }
+    #endregion
+    
+
+    
 
 }

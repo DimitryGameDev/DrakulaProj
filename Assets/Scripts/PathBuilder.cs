@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PathBuilder : MonoBehaviour
 {
-    private PatrolPoint startPatrolPoint;
-    [SerializeField] private PatrolPoint targetPatrolPoint;
     private List<PatrolPoint> patrolPoints;
     private List<PatrolPoint> nearPatrolPoints;
     private List<PatrolPoint> pathPatrolPoints;
@@ -24,8 +22,7 @@ public class PathBuilder : MonoBehaviour
         nearPatrolPoints = new List<PatrolPoint>();
         pathPatrolPoints = new List<PatrolPoint>();
         potentialPath = new List<PatrolPoint>();
-        currentPatrolPoint = startPatrolPoint;
-        currentTarget = targetPatrolPoint;
+        currentTarget = Character.Instance.GetComponent<DraculaPoint>();
     }
     
     public DraculaPoint GetDraculaPoint(PatrolPoint currentPoint , PatrolPoint targetPoint,int radius)
@@ -72,7 +69,7 @@ public class PathBuilder : MonoBehaviour
         CreatePath(currentPatrolPoint);
     }
     
-    private void ClearPath()
+    public void ClearPath()
     {
         for (int i = 0; i < patrolPoints.Count; i++)patrolPoints[i].Reset();
         index = 0;
@@ -84,7 +81,7 @@ public class PathBuilder : MonoBehaviour
     
     private void CreatePath(PatrolPoint checkPoint)
     {
-        if (currentPatrolPoint == targetPatrolPoint)
+        if (currentPatrolPoint == currentTarget)
         {
             for (int i = 0; i < pathPatrolPoints.Count; i++)
             {

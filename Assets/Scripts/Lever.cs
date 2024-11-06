@@ -16,7 +16,7 @@ public class Lever : MonoBehaviour
         interactiveObject = GetComponent<InteractiveObject>();
         audioSource = GetComponent<AudioSource>();
         trigger.SetActive(false);
-        interactiveObject.onUse.AddListener(Open);
+        //interactiveObject.onUse.AddListener(Open);
     }
 
     public void Open()
@@ -28,6 +28,6 @@ public class Lever : MonoBehaviour
 
     private void OnDestroy()
     {
-        interactiveObject.onUse.RemoveListener(Open);
+       // interactiveObject.onUse.RemoveListener(Open);
     }
 }

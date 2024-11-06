@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -41,6 +40,7 @@ public class Dracula : SingletonBase<Dracula>
     
     private bool isHeart = false;
     private bool isVisible = false;
+    private bool isSpawning = false;
 
     [HideInInspector] public UnityEvent<int> draculaInPlayer;
 
@@ -66,7 +66,11 @@ public class Dracula : SingletonBase<Dracula>
 
         if (playOnAwake)
         {
-            DraculaSpawn(spawnPositions[Random.Range(0, spawnPositions.Length)]);
+            SetPoint(spawnPositions[Random.Range(0, spawnPositions.Length)]);
+        }
+        else
+        {
+            enabled = false;
         }
     }
 
@@ -80,7 +84,7 @@ public class Dracula : SingletonBase<Dracula>
     }
 
     private int lastValue = 0;
-    private void SpeedChange(int value)
+    public void SpeedChange(int value)
     {
         if (lastValue > value) spawnSpeed += speedChange;
         else if (spawnSpeed - speedChange >= 0 )spawnSpeed -= speedChange;
@@ -163,20 +167,21 @@ public class Dracula : SingletonBase<Dracula>
             draculaPrefab.transform.LookAt(new Vector3(character.position.x,transform.position.y,character.position.z));
         }
     }
-    public void DraculaSpawn()
+    public void RandomPoint()
     {
         DraculaPoint rand = spawnPositions[Random.Range(0, spawnPositions.Length)];
         transform.position = rand.transform.position;
         Spawn(rand);
     }
-    public void DraculaSpawn(DraculaPoint spawnPoint)
+    
+    public void SetPoint(DraculaPoint spawnPoint)
     {
         transform.position = spawnPoint.transform.position;
         draculaPoint = spawnPoint;
         Spawn(spawnPoint);
     }
     
-    public void DraculaSpawns(DraculaPoint[] spawnPoints)
+    public void SetPoints(DraculaPoint[] spawnPoints)
     {
         spawnPositions = spawnPoints;
         DraculaPoint rand = spawnPositions[Random.Range(0, spawnPositions.Length)];
@@ -186,6 +191,7 @@ public class Dracula : SingletonBase<Dracula>
     
     private void Spawn(DraculaPoint spawnPoint)
     {
+        isSpawning = true;
         source.PlayOneShot(spawnClips[Random.Range(0,spawnClips.Length)]);
         draculaPrefab = Instantiate(GetDraculaPrefab(spawnPoint), transform.position, Quaternion.identity, transform);
         draculaMeshRenderer = draculaPrefab.GetComponent<MeshRenderer>();
@@ -195,8 +201,11 @@ public class Dracula : SingletonBase<Dracula>
 
     public void DraculaEnable()
     {
-        transform.position = lastPosition;
-        enabled = true;
+        if (isSpawning)
+        {
+            transform.position = lastPosition;
+            enabled = true;
+        }
     }
     
     private Vector3 lastPosition;
@@ -207,7 +216,13 @@ public class Dracula : SingletonBase<Dracula>
         timer = 0;
         enabled = false;
     }
-
+    public void DraculaDespawn()
+    {
+        DraculaDisable();
+        builder.ClearPath();
+        isSpawning = false;
+    }
+    
     private void DraculaMove()
     {
         Destroy(draculaPrefab);
