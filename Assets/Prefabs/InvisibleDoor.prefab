@@ -481,7 +481,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5653722191823050843}
   - component: {fileID: 5634477548489878550}
-  - component: {fileID: 4432329808927966395}
   m_Layer: 0
   m_Name: InvisibleDoor
   m_TagString: Untagged
@@ -518,28 +517,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6bfd350e02546342b0346b4a5dc767d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wall: {fileID: 3713215036311967765}
---- !u!65 &4432329808927966395
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5714772782435923644}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.6, y: 0.5, z: 2}
-  m_Center: {x: -1, y: 0.55, z: 1.2000002}
+  infoText: 
+  infoTextAfterUse: 
+  icon: {fileID: 0}
+  afterIcon: {fileID: 0}
+  timeBoxHide: 0.1
+  timeAfterText: 3
+  onVision:
+    m_PersistentCalls:
+      m_Calls: []
+  onHide:
+    m_PersistentCalls:
+      m_Calls: []
+  isAfterText: 0
+  walls: []
 --- !u!1 &6296672899924760514
 GameObject:
   m_ObjectHideFlags: 0

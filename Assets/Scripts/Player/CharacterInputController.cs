@@ -216,27 +216,31 @@ private bool IsGrounded()
     private void MainRay()
     {
         RaycastHit hitCamera;
- 
-        if (Physics.Raycast(character.Camera.transform.position, character.Camera.transform.forward, out hitCamera, maxDistanseHitCamera ,LayerMask.NameToLayer("Player")))
+
+        if (Physics.Raycast(character.Camera.transform.position, character.Camera.transform.forward, out hitCamera,
+                maxDistanseHitCamera, LayerMask.NameToLayer("Player")))
         {
             //Debug.DrawRay(character.Camera.transform.position, character.Camera.transform.forward * hitCamera.distance, Color.yellow, 0.01f);
             Debug.DrawLine(character.Camera.transform.position, hitCamera.transform.position, Color.yellow);
-            
+
             if (hitCamera.collider.transform.parent?.GetComponent<InteractiveObject>())
             {
                 var hit = hitCamera.collider.transform.parent.GetComponent<InteractiveObject>();
 
-                hit.ShowText();
+                if (!hit.isAfterText)
+                    hit.ShowText();
 
                 if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     hit.Use();
                 }
+
                 IsLook = true;
                 return;
             }
-            
+
         }
+
         IsLook = false;
     }
     #endregion

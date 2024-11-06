@@ -1,20 +1,18 @@
 using UnityEngine;
 
-[RequireComponent(typeof(InteractiveObject))]
-public class Key : MonoBehaviour
+public class Key : InteractiveObject
 {
     [SerializeField] private int keyCount;
     [SerializeField] private GameObject impactEffect;
     [SerializeField] private GameObject visualModel;
 
-    private InteractiveObject interactiveObject;
-    
-    private void Start()
+    public override void Use()
     {
-        interactiveObject = GetComponent<InteractiveObject>();
-       // interactiveObject.onUse.AddListener(PickUp);
+        base.Use();
+        PickUp();
+        ShowAfterText();
     }
-    
+
     private void PickUp()
     {
         Character.Instance.GetComponent<Bag>().AddKey(keyCount);
@@ -23,6 +21,5 @@ public class Key : MonoBehaviour
             Instantiate(impactEffect, transform.position, Quaternion.identity);
         
         Destroy(visualModel);
-        interactiveObject.Ondestroy.Invoke(interactiveObject);
     }
 }
