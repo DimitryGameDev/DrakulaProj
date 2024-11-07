@@ -230,7 +230,7 @@ public class Dracula : SingletonBase<Dracula>
         var movePoint = builder.GetDraculaPoint(draculaPoint,playerPoint,minDistanceToNextPp);
 
         if (movePoint == null) return;
-
+        
         if (movePoint.IsPlayer)
         {
             KillPlayer();
@@ -278,8 +278,6 @@ public class Dracula : SingletonBase<Dracula>
         enabled = false;
     }
 
-    private readonly Vector3 OffsetY = new Vector3(0, 0.5f, 0);
-    
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

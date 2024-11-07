@@ -3,6 +3,7 @@ using Random = UnityEngine.Random;
 
 public class Lockpick : InteractiveObject
 {
+    [Header("Door Settings")]
     [SerializeField] private bool draculaDoor;
     
     [Header("Player")]
@@ -29,14 +30,14 @@ public class Lockpick : InteractiveObject
     private Bag bag;
     private Dracula dracula;
     
-    private float timer;
+    private float timer2;
     
     private Vector2 randomImagePosition;
     private Vector2 screenMousePosition;
     
     private bool isOpening;
     
-    private void Start()
+    protected override void Start()
     {
         base.Start();
         audioSource = GetComponent<AudioSource>();
@@ -47,7 +48,7 @@ public class Lockpick : InteractiveObject
         ResetPoint();
     }
 
-    private void Update()
+    protected override void Update()
     { 
        base.Update();
        PointMove();
@@ -82,10 +83,10 @@ public class Lockpick : InteractiveObject
     {
         if(!isOpening) return;
         
-        if (timer >= 0)
-            timer -= Time.deltaTime;
+        if (timer2 >= 0)
+            timer2 -= Time.deltaTime;
         else
-            timer = 0;
+            timer2 = 0;
         
         screenMousePosition = Input.mousePosition;
         
@@ -102,7 +103,7 @@ public class Lockpick : InteractiveObject
         if (localPoint.x >= point.rect.xMin && localPoint.x <= point.rect.xMax &&
             localPoint.y >= point.rect.yMin && localPoint.y <= point.rect.yMax)
         {
-            if (timer <= 0.1f)
+            if (timer2 <= 0.1f)
             {
                 bag.DrawKey(1);
                 ResetPoint();
@@ -137,7 +138,7 @@ public class Lockpick : InteractiveObject
                 dracula.DraculaDisable();
             }
             
-            timer = timeToSuccess;
+            timer2 = timeToSuccess;
             isOpening = true;
         }
     }
@@ -149,13 +150,18 @@ public class Lockpick : InteractiveObject
             bag.RemoveMedal();
         }
 
+        OpenDoor();
+    }
+
+    public void OpenDoor()
+    {
         audioSource.PlayOneShot(successOpenSFX);
         animator.SetBool("Open", true);
-        
         Destroy(triggerCollider);
         Destroy(this);
     }
-    
+
+
     private void ResetPoint()
     {
         if (dracula)
@@ -166,7 +172,7 @@ public class Lockpick : InteractiveObject
         CharacterInputController.Instance.enabled = true;
         onePersonCamera.SetTarget(character.CameraPos,TypeMoveCamera.OnlyMove,false);
 
-        timer = 0;
+        timer2 = 0;
         isOpening = false;
         
         panel.SetActive(false);

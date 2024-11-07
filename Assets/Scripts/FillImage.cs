@@ -15,8 +15,8 @@ public class FillImage : MonoBehaviour
 
     private void Update()
     {
-        if (characterInputController.IsSprinting) image.color = startColor;
-        if (!characterInputController.IsSprinting) image.color = Color.yellow;
+        if (characterInputController.isSprinting) image.color = startColor;
+        if (!characterInputController.isSprinting) image.color = Color.yellow;
         image.fillAmount = characterInputController.SprintTimer / characterInputController.TimeSprint;
     }
 }

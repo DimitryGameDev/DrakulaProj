@@ -13,7 +13,6 @@ public class Chest : InteractiveObject
     {
         base.Use();
         OpenChest();
-        ShowAfterText();
     }
 
     private void OpenChest()

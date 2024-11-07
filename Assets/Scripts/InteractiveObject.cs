@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class InteractiveObject: MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class InteractiveObject: MonoBehaviour
     private float time ;
     private float timer ;
     private bool isText;
-    public bool isAfterText;
+    private bool isAfterText;
+    public bool IsAfterText => isAfterText;
     
     private InteractiveBoxUI interactiveBoxUI;
     protected virtual void Start()
@@ -58,6 +60,7 @@ public class InteractiveObject: MonoBehaviour
     /// </summary>
     protected virtual void ShowAfterText()
     {
+        interactiveBoxUI.Enable();
         interactiveBoxUI.text.text = infoTextAfterUse;
         if (icon != null) interactiveBoxUI.icon.sprite = afterIcon;
         else interactiveBoxUI.HideIcon();

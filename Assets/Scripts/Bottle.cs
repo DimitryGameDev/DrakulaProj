@@ -4,13 +4,14 @@ using Random = UnityEngine.Random;
 
 public class Bottle : InteractiveObject
 {
+    [Header("Bottle Settings")]
     [SerializeField] private BottleType bottleType;
     [SerializeField] private GameObject visualModel;
     [SerializeField] private GameObject impactEffect;
     
     private Death death;
 
-    private void Start()
+    protected override void Start()
     {
         base.Start();
         death = Character.Instance.GetComponent<Death>();

@@ -3,13 +3,14 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class BaseDoor : InteractiveObject
 {
+    [Header("Door Settings")]
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject closedTrigger;
     [SerializeField] private Collider openTrigger;
 
     private AudioSource audioSource;
 
-    private void Start()
+    protected override void Start()
     {
         base.Start();
         audioSource = GetComponent<AudioSource>();
@@ -21,10 +22,10 @@ public class BaseDoor : InteractiveObject
         OpenDoor();
     }
 
-    private void OpenDoor()
+    public void OpenDoor()
     {
         if(animator)
-        animator.SetBool("Open", true);
+            animator.SetBool("Open", true);
         audioSource.Play();
 
         if (closedTrigger)

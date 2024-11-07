@@ -9,7 +9,7 @@ public class Lever : InteractiveObject
     
     private AudioSource audioSource;
     
-    private void Start()
+    protected override void Start()
     {
         base.Start();
         audioSource = GetComponent<AudioSource>();
