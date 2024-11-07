@@ -8,10 +8,9 @@ public class NoiseLevel : SingletonBase<NoiseLevel>
     [SerializeField] private int maxLevel;
     [SerializeField] private float resetTime;
 
-    public int MaxLevel { get { return maxLevel; } }
-    private int currentLevel;
-    public int CurrentLevel => currentLevel;
-    
+    public int MaxLevel => maxLevel;
+    public int CurrentLevel { get; private set; }
+
     private float timer;
 
     private void Awake()
@@ -27,28 +26,28 @@ public class NoiseLevel : SingletonBase<NoiseLevel>
 
     public void IncreaseLevel()
     {
-        if (currentLevel < maxLevel)
+        if (CurrentLevel < maxLevel)
         {
-            currentLevel++;
-            OnChange?.Invoke(currentLevel);
+            CurrentLevel++;
+            OnChange?.Invoke(CurrentLevel);
             timer = resetTime;
         }
     }
 
     private void DecreaseLevel()
     {
-        if (currentLevel > 0 && timer <= 0)
+        if (CurrentLevel > 0 && timer <= 0)
         {
-            currentLevel--;
-            OnChange?.Invoke(currentLevel);
+            CurrentLevel--;
+            OnChange?.Invoke(CurrentLevel);
             timer = resetTime;
         }
     }
 
     public void SetZeroLevel()
     {
-        currentLevel = 0;
-        OnChange?.Invoke(currentLevel);
+        CurrentLevel = 0;
+        OnChange?.Invoke(CurrentLevel);
     }
     
     private void UpdateTimer()

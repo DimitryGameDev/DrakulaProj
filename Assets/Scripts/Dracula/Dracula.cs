@@ -38,9 +38,9 @@ public class Dracula : SingletonBase<Dracula>
     private float timer;
     private float spawnSpeed;
     
-    private bool isHeart = false;
-    private bool isVisible = false;
-    private bool isSpawning = false;
+    private bool isHeart;
+    private bool isVisible;
+    private bool isSpawning;
 
     [HideInInspector] public UnityEvent<int> draculaInPlayer;
 
@@ -51,10 +51,10 @@ public class Dracula : SingletonBase<Dracula>
 
     private void Start()
     {
-        CharacterInputController.Instance.heartOn.AddListener(TogleHeartOn);
-        CharacterInputController.Instance.heartOff.AddListener(TogleHeartOff);
-        GetComponent<VisibleObject>().onVision.AddListener(TogleVisionOn);
-        GetComponent<VisibleObject>().onHide.AddListener(TogleVisionOff);
+        CharacterInputController.Instance.heartOn.AddListener(ToggleHeartOn);
+        CharacterInputController.Instance.heartOff.AddListener(ToggleHeartOff);
+        GetComponent<VisibleObject>().onVision.AddListener(ToggleVisionOn);
+        GetComponent<VisibleObject>().onHide.AddListener(ToggleVisionOff);
         
         NoiseLevel.Instance.OnChange += SpeedChange;
         
@@ -85,13 +85,13 @@ public class Dracula : SingletonBase<Dracula>
 
     private void OnDestroy()
     {
-        CharacterInputController.Instance.draculaAnim.RemoveListener(TogleHeartOn);
-        CharacterInputController.Instance.draculaAnim.RemoveListener(TogleHeartOff);
+        CharacterInputController.Instance.draculaAnim.RemoveListener(ToggleHeartOn);
+        CharacterInputController.Instance.draculaAnim.RemoveListener(ToggleHeartOff);
         NoiseLevel.Instance.OnChange -= SpeedChange;
     }
 
     private int lastValue;
-    public void SpeedChange(int value)
+    private void SpeedChange(int value)
     {
         var changeSpeed = maxSpawnSpeed / NoiseLevel.Instance.MaxLevel;
         
@@ -134,10 +134,10 @@ public class Dracula : SingletonBase<Dracula>
         DraculaEffect();
     }
     
-    private void TogleVisionOn() => isVisible = true;
-    private void TogleVisionOff() => isVisible = false;
-    private void TogleHeartOn() => isHeart = true;
-    private void TogleHeartOff() => isHeart = false;
+    private void ToggleVisionOn() => isVisible = true;
+    private void ToggleVisionOff() => isVisible = false;
+    private void ToggleHeartOn() => isHeart = true;
+    private void ToggleHeartOff() => isHeart = false;
 
     private bool isActiveMesh;
     private void VisibleMeshDracula()
@@ -155,7 +155,7 @@ public class Dracula : SingletonBase<Dracula>
             }
             else
             {
-                if (draculaMeshRenderer.enabled == true)
+                if (draculaMeshRenderer.enabled)
                 {
                     isActiveMesh = false;
                     draculaMeshRenderer.enabled = false;
@@ -262,31 +262,31 @@ public class Dracula : SingletonBase<Dracula>
         draculaPoint = movePoint;
     }
 
-    private GameObject GetDraculaPrefab(DraculaPoint draculaPoint)
+    private GameObject GetDraculaPrefab(DraculaPoint currentPoint)
     {
         var currentDraculaPrefab = draculaPrefabsNone;
-        var currentPoint = draculaPoint.DraculaPos;
+        var posType = currentPoint.DraculaPos;
         
-        if (currentPoint == DraculaPosType.None && currentDraculaPrefab != null)
+        if (posType == DraculaPosType.None && currentDraculaPrefab != null)
         {
             var rand = Random.Range(0,3);
-            if (rand == 0) currentPoint = DraculaPosType.Fly;
-            if (rand == 1) currentPoint = DraculaPosType.Stand;
-            if (rand == 2) currentPoint = DraculaPosType.Cross;
-            if (rand == 3) currentPoint = DraculaPosType.Hand ; 
+            if (rand == 0) posType = DraculaPosType.Fly;
+            if (rand == 1) posType = DraculaPosType.Stand;
+            if (rand == 2) posType = DraculaPosType.Cross;
+            if (rand == 3) posType = DraculaPosType.Hand ; 
         }
         
-        if (currentPoint == DraculaPosType.Sexy 
+        if (posType == DraculaPosType.Sexy 
             && draculaPrefabsSexy != null) currentDraculaPrefab = draculaPrefabsSexy;
-        if (currentPoint == DraculaPosType.Stand 
+        if (posType == DraculaPosType.Stand 
             && draculaPrefabsStand != null) currentDraculaPrefab = draculaPrefabsStand;
-        if (currentPoint == DraculaPosType.Cross 
+        if (posType == DraculaPosType.Cross 
             && draculaPrefabsCross != null) currentDraculaPrefab = draculaPrefabsCross;
-        if (currentPoint == DraculaPosType.Hand 
+        if (posType == DraculaPosType.Hand 
             && draculaPrefabsHand != null) currentDraculaPrefab = draculaPrefabsHand;
-        if (currentPoint == DraculaPosType.Fly 
+        if (posType == DraculaPosType.Fly 
             && draculaPrefabsFly != null) currentDraculaPrefab = draculaPrefabsFly;
-        transform.position = draculaPoint.transform.position;
+        transform.position = currentPoint.transform.position;
 
         return currentDraculaPrefab;
     }

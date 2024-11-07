@@ -14,7 +14,7 @@ public class MedalInfoUI : MonoBehaviour
         
         if (bag != null)
         {
-            bag.ChangeMedalPieceAmount.AddListener(SetImageVisible);
+            bag.changeMedalPieceAmount.AddListener(SetImageVisible);
         }
         SetImageInvisible();
     }
@@ -23,7 +23,7 @@ public class MedalInfoUI : MonoBehaviour
     {
         if (bag != null)
         {
-            bag.ChangeMedalPieceAmount.RemoveListener(SetImageVisible);
+            bag.changeMedalPieceAmount.RemoveListener(SetImageVisible);
         }
     }
 

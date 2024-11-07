@@ -4,15 +4,14 @@ public class OnePersonCamera : SingletonBase<OnePersonCamera>
 {
     [Range(0.1f, 9f)][SerializeField] private float sensitivity = 2f;
     [Range(0f, 90f)][SerializeField] private float yRotationLimit = 88f;
-    [Range(6f, 100f)][SerializeField] private float cameraSmothMoveSpead = 8f;
-    [Range(1f, 50f)][SerializeField] private float cameraSmothRotateSpead = 5f;
+    [Range(6f, 100f)][SerializeField] private float cameraSmoothMoveSpeed = 8f;
+    [Range(1f, 50f)][SerializeField] private float cameraSmoothRotateSpeed = 5f;
     
     public TypeMoveCamera typeMove;
     private Transform target;
-    private Camera mainCamera;
+    
     private Vector2 rotation;
-
-    private bool isLocked = false;
+    private bool isLocked;
     public bool IsLocked => isLocked;
     private void Awake()
     {
@@ -21,7 +20,7 @@ public class OnePersonCamera : SingletonBase<OnePersonCamera>
 
     private void Start()
     {
-        mainCamera = GetComponent<Camera>();
+       
         transform.parent = null;
         enabled = false;
     }
@@ -51,8 +50,8 @@ public class OnePersonCamera : SingletonBase<OnePersonCamera>
         {
             if (transform.position != target.transform.position || transform.rotation != target.transform.rotation)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * cameraSmothMoveSpead);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, target.rotation, cameraSmothRotateSpead);
+                transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * cameraSmoothMoveSpeed);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, target.rotation, cameraSmoothRotateSpeed);
             }
             else
             {
@@ -67,7 +66,7 @@ public class OnePersonCamera : SingletonBase<OnePersonCamera>
         {
             if (transform.position != target.transform.position)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target.position , Time.deltaTime * cameraSmothMoveSpead);
+                transform.position = Vector3.MoveTowards(transform.position, target.position , Time.deltaTime * cameraSmoothMoveSpeed);
             }
             else
             {

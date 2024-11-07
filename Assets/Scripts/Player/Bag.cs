@@ -8,14 +8,14 @@ public class Bag : MonoBehaviour
     private int medalPieceCount;
     private int keyAmount;
 
-    [HideInInspector]public UnityEvent ChangeKeyAmount;
-    [HideInInspector]public UnityEvent ChangeMedalAmount;
-    [HideInInspector]public UnityEvent ChangeMedalPieceAmount;
+    [HideInInspector]public UnityEvent changeKeyAmount;
+    [HideInInspector]public UnityEvent changeMedalAmount;
+    [HideInInspector]public UnityEvent changeMedalPieceAmount;
 
     public void AddKey(int amount)
     {
         keyAmount += amount;
-        ChangeKeyAmount?.Invoke();
+        changeKeyAmount?.Invoke();
     }
     
     public bool DrawKey(int amount)
@@ -23,7 +23,7 @@ public class Bag : MonoBehaviour
         if (keyAmount - amount < 0) return false;
 
         keyAmount -= amount;
-        ChangeKeyAmount?.Invoke();
+        changeKeyAmount?.Invoke();
 
         return true;
     }
@@ -35,31 +35,31 @@ public class Bag : MonoBehaviour
     
     public void AddMedalPiece(int pieceCount)
     {
-        if (medalPieceCount + pieceCount == countPieceForMedal)
+        if (Mathf.Approximately(medalPieceCount + pieceCount, countPieceForMedal))
         {
             AddMedal();
             medalPieceCount = 1;
-            ChangeMedalPieceAmount.Invoke();
+            changeMedalPieceAmount.Invoke();
             return;
         }
         medalPieceCount += pieceCount;
-        ChangeMedalPieceAmount.Invoke();
+        changeMedalPieceAmount.Invoke();
     }
 
     public int GetMedalAmount()
     {
         return medalCount;
     }
-    
-    public void AddMedal()
+
+    private void AddMedal()
     {
         medalCount++;
-        ChangeMedalAmount.Invoke();
+        changeMedalAmount.Invoke();
     }
     
     public void RemoveMedal()
     {
         medalCount--;
-        ChangeMedalAmount.Invoke();
+        changeMedalAmount.Invoke();
     }
 }

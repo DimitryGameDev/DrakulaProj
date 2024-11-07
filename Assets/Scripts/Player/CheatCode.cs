@@ -42,7 +42,7 @@ public class CheatCode : MonoBehaviour
             {
                 t.WallVisible();
             }
-            var z = FindObjectsOfType<Lockpick>();
+            var z = FindObjectsOfType<LockPick>();
             foreach (var t in z)
             {
                 t.OpenDoor();
