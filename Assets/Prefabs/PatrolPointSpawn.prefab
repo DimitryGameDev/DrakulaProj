@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 731056316360110972}
-  - component: {fileID: 2624195754851953038}
+  - component: {fileID: 4477112446195737680}
   m_Layer: 0
   m_Name: PatrolPointSpawn
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2624195754851953038
+--- !u!114 &4477112446195737680
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6222770725585558051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bdb12bb3fec947d1830c4b772199ab6, type: 3}
+  m_Script: {fileID: 11500000, guid: 88255d2eb5986fc44888ebdf55277a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  draculaPos: 0
   radius: 0.5
-  Gizmocolor: {r: 0.3518045, g: 1, b: 0, a: 0.3}
+  gColor: {r: 1, g: 0, b: 0, a: 0.3}
+  isDebug: 0
+  debugBox: {fileID: 0}
+  image: {fileID: 0}
+  weightText: {fileID: 0}
+  lengthToStartText: {fileID: 0}
+  lenghtToObjText: {fileID: 0}
+  pathIndex: 0
+  draculaPos: 0
+  isPlayer: 0

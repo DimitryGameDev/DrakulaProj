@@ -1,39 +1,25 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 
-[RequireComponent(typeof(InteractiveObject))]
-public class FloorTrigger : MonoBehaviour
+public class FloorTrigger : InteractiveObject
 {
     [SerializeField] private Transform teleportPosition;
-    [SerializeField] private Wakeup imageVisual;
     private InteractiveObject interactiveObject;
     private CharacterInputController character;
-    private OnePersonCamera onePersonCamera;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         character = CharacterInputController.Instance;
-        onePersonCamera = OnePersonCamera.Instance;
-        interactiveObject = GetComponent<InteractiveObject>();
-        interactiveObject.onUse.AddListener(Teleport);
-        enabled = false;
     }
 
-    private void Update()
+    public override void Use()
     {
-        if (!imageVisual.isWakeup)
-        {
-            character.transform.position = teleportPosition.position;
-            interactiveObject.infoPanel.SetActive(true);
-            enabled = false;
-        }
-        interactiveObject.infoPanel.SetActive(false);
+        Teleport();
+        base.Use();
     }
 
     private void Teleport()
     {
-        imageVisual.WakeUp();
-        enabled = true;
+        character.transform.position = teleportPosition.position;
     }
 }
