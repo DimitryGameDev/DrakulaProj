@@ -6,13 +6,13 @@ public class CameraVision : MonoBehaviour
 {
     [SerializeField] private float maxDistance = 100f;
     private Camera playerCamera;
-    private List<InteractiveObject> visionObjs;
+    private List<VisibleObject> visionObjs;
     [SerializeField] private Heart heartPrefab;
 
     private void Awake()
     {
-        visionObjs = new List<InteractiveObject>();
-        visionObjs.AddRange(FindObjectsOfType<InteractiveObject>());
+        visionObjs = new List<VisibleObject>();
+        visionObjs.AddRange(FindObjectsOfType<VisibleObject>());
         
         for (var i = 0; i < visionObjs.Count; i++)
         {
@@ -25,32 +25,36 @@ public class CameraVision : MonoBehaviour
         playerCamera = Camera.main;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         FindObjIntoCamera();
     }
 
     private void FindObjIntoCamera()
     {
-            for (var i = 0; i < visionObjs.Count; i++)
-            { 
-                if (heartPrefab.IsActive)
+        for (var i = 0; i < visionObjs.Count; i++)
+        { 
+            if (heartPrefab.IsActive)
+            {
+                if (IsVisionObj(visionObjs[i].gameObject))
                 {
-                    if (IsVisionObj(visionObjs[i].gameObject))
-                    {
-                        Debug.DrawLine(playerCamera.transform.position, visionObjs[i].transform.position, Color.red,
-                            Time.deltaTime);
-                        visionObjs[i].InCamera();
-                    }
-                }
-                
-                if (!IsVisionObj(visionObjs[i].gameObject))
-                {
-                    Debug.DrawLine(playerCamera.transform.position, visionObjs[i].transform.position, Color.black,
+                    Debug.DrawLine(playerCamera.transform.position, visionObjs[i].transform.position, Color.green,
                         Time.deltaTime);
-                    visionObjs[i].OutCamera();
+                    visionObjs[i].InCamera();
                 }
             }
+                
+            if (!IsVisionObj(visionObjs[i].gameObject))
+            {
+                //Debug.DrawLine(playerCamera.transform.position, visionObjs[i].transform.position, Color.grey,Time.deltaTime);
+                //  
+                visionObjs[i].OutCamera();
+            }
+            else
+            {
+                Debug.DrawLine(playerCamera.transform.position, visionObjs[i].transform.position, Color.grey,Time.deltaTime);
+            }
+        }
     }
 
     private bool IsVisionObj(GameObject objectToCheck)
@@ -73,7 +77,7 @@ public class CameraVision : MonoBehaviour
         return false;
     }
 
-    private void RemoveVisionObj(InteractiveObject objectToRemove)
+    private void RemoveVisionObj(VisibleObject objectToRemove)
     {
         visionObjs.Remove(objectToRemove);
     }

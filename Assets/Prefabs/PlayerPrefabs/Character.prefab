@@ -128,7 +128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7725004567211214877}
   - component: {fileID: 6742056660056185345}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collider
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -778,7 +778,7 @@ MonoBehaviour:
   tickRateStress: 1
   addStressValue: 5
   removeStressValue: 2
-  heartOnSFX: {fileID: 8300000, guid: f47ac91274edc5948aabb017c3d82500, type: 3}
+  heartOnSfx: {fileID: 8300000, guid: f47ac91274edc5948aabb017c3d82500, type: 3}
 --- !u!114 &5628578840177419116
 MonoBehaviour:
   m_ObjectHideFlags: 0

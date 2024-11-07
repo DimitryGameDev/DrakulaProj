@@ -1,8 +1,6 @@
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
 
-public class InteractiveObject: MonoBehaviour
+public class InteractiveObject: VisibleObject
 {
     [Header("Settings")]
     [SerializeField] private string infoText;
@@ -12,11 +10,6 @@ public class InteractiveObject: MonoBehaviour
     [Tooltip("Как быстро скрывается UI, после отвода камеры")][SerializeField] private float  timeBoxHide = 0.1f;
     [Tooltip("Как быстро скрывается UI ,после применения")][SerializeField] private float  timeAfterText = 3f;
     
-    // Можно подписаться из скрипта на этом же обьекте на это событие
-    [HideInInspector]public UnityEvent onVision;
-    [HideInInspector]public UnityEvent onHide;
-    public UnityAction<InteractiveObject> Ondestroy;
-
     private float time ;
     private float timer ;
     private bool isText;
@@ -82,32 +75,8 @@ public class InteractiveObject: MonoBehaviour
         isAfterText = false;
     }
     
-        
     /// <summary>
     /// Вызывается когда игрок Применил действие
     /// </summary>
     public virtual void Use(){}
-    
-    /// <summary>
-    ///Вызывается когда камера игрока в режиме сердца видит обьект видит обьект
-    /// </summary>
-    public virtual void InCamera()
-    {
-        onVision.Invoke();
-    }
-    
-    /// <summary>
-    /// Вызывается когда камера игрока не видит объект
-    /// </summary>
-    public virtual void OutCamera()
-    {
-        onHide.Invoke();
-    }
-    
-    private void OnDestroy()
-    {
-        onHide.RemoveAllListeners();
-        onVision.RemoveAllListeners();
-        Ondestroy.Invoke(this);
-    }
 }

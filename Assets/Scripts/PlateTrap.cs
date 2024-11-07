@@ -1,19 +1,16 @@
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class PlateTrap : MonoBehaviour
+public class PlateTrap : VisibleObject
 {
     [SerializeField] private AudioClip floorSound;
     [SerializeField] private Collider trapPlateCollider;
    // [SerializeField] Collider normalPlate;
-    
     [SerializeField] MeshRenderer trapPlateMesh;
-    [SerializeField] InteractiveObject interactiveObject;
     
     private AudioSource audioSource;
-    // Start is called before the first frame update
-    
     private NoiseLevel noiseLevel;
+    
     void OnTriggerEnter(Collider other)
     {
         if (trapPlateCollider != null)
@@ -32,16 +29,14 @@ public class PlateTrap : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         noiseLevel = NoiseLevel.Instance;
         trapPlateMesh.enabled = false;
-        interactiveObject.onVision.AddListener(VisionOn);
-        interactiveObject.onHide.AddListener(VisionOff);
     } 
     
-    private void VisionOn()
+    public override void InCamera()
     {
         trapPlateMesh.enabled = true;
     }
 
-    private void VisionOff()
+    public override void OutCamera()
     {
         trapPlateMesh.enabled = false;
     }
