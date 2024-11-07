@@ -6,10 +6,12 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     [SerializeField] private float heartTimeUsage = 2f;
     [SerializeField] private float maxDistanseHitCamera = 1f;
     [SerializeField] private float timeSprint = 2f;
+    [SerializeField] private AudioClip sprintEndClip;
     public float TimeSprint => timeSprint;
     private Character character; 
     public Character Character => character;
     
+    private AudioSource audioSource;
     private Vector3 playerMoveDirection;
     private float radiusCharacter;
     private float heightCharacter;
@@ -41,6 +43,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         heartEnabled = false;
         
         character = GetComponent<Character>();
+        audioSource = GetComponent<AudioSource>();
         radiusCharacter = character.GetComponentInChildren<CapsuleCollider>().radius;
         heightCharacter = character.GetComponentInChildren<CapsuleCollider>().height;
         Cursor.visible = false;
@@ -88,7 +91,12 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         if (Input.GetKey(KeyCode.LeftShift) && isSprinting && Character.isMove)
         {
             sprintTimer += Time.deltaTime;
-            if (sprintTimer >= timeSprint)  isSprinting = false;
+            if (sprintTimer >= timeSprint)
+            {
+                isSprinting = false;
+                audioSource.PlayOneShot(sprintEndClip);
+                NoiseLevel.Instance.IncreaseLevel();
+            }
             
             character.Move(playerMoveDirection, MoveType.Run);
             return;

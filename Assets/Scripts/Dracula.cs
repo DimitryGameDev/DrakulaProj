@@ -21,8 +21,8 @@ public class Dracula : SingletonBase<Dracula>
     [SerializeField] private ImpactEffect visionEffectPrefab;
 
     [Space] [Header("Dracula Settings")] 
-    [SerializeField] [Range(0.2f, 30f)]private float spawnSpeed = 7;
-    [SerializeField] [Range(0f, 10f)]private int speedChange = 2;
+    [SerializeField] [Range(0.2f, 30f)] private float maxSpawnSpeed = 10f;
+    [SerializeField] [Range(0.2f, 30f)] private float minSpawnSpeed = 1f;
     [SerializeField] [Range(0f, 50f)] private int minDistanceToNextPp = 4;
     [SerializeField] private AudioClip[] spawnClips;
     [SerializeField] private DraculaPoint[] spawnPositions;
@@ -36,6 +36,7 @@ public class Dracula : SingletonBase<Dracula>
     private DraculaSpawnEffect draculaSpawnEffect;
     private PathBuilder builder;
     private float timer;
+    private float spawnSpeed;
     
     private bool isHeart = false;
     private bool isVisible = false;
@@ -62,7 +63,8 @@ public class Dracula : SingletonBase<Dracula>
         builder = GetComponent<PathBuilder>();
         playerPoint = character.GetComponent<DraculaPoint>();
         draculaPoint = GetComponent<DraculaPoint>();
-
+        spawnSpeed = maxSpawnSpeed;
+        
         if (playOnAwake)
         {
             SetPoint(spawnPositions[Random.Range(0, spawnPositions.Length)]);
@@ -88,11 +90,22 @@ public class Dracula : SingletonBase<Dracula>
         NoiseLevel.Instance.OnChange -= SpeedChange;
     }
 
-    private int lastValue = 0;
+    private int lastValue;
     public void SpeedChange(int value)
     {
-        if (lastValue > value) spawnSpeed += speedChange;
-        else if (spawnSpeed - speedChange >= 0 )spawnSpeed -= speedChange;
+        var changeSpeed = maxSpawnSpeed / NoiseLevel.Instance.MaxLevel;
+        
+        if (lastValue < value)
+        {
+            if (spawnSpeed - changeSpeed >= minSpawnSpeed) spawnSpeed -= changeSpeed;
+            else spawnSpeed = minSpawnSpeed;
+        }
+
+        if (lastValue > value)
+        {
+            if (spawnSpeed + changeSpeed <= maxSpawnSpeed) spawnSpeed += changeSpeed;
+            else spawnSpeed = maxSpawnSpeed;
+        }
         lastValue = value;
     }
 
