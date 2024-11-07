@@ -52,13 +52,14 @@ MonoBehaviour:
   icon: {fileID: 0}
   afterIcon: {fileID: 0}
   timeBoxHide: 0.1
-  timeAfterText: 3
+  timeAfterText: 2
   onVision:
     m_PersistentCalls:
       m_Calls: []
   onHide:
     m_PersistentCalls:
       m_Calls: []
+  isAfterText: 0
   keyCount: 1
   impactEffect: {fileID: 8361973088753977710, guid: db55ace5370bc004ab2eb3b198be21d9, type: 3}
   visualModel: {fileID: 649130321608502381}

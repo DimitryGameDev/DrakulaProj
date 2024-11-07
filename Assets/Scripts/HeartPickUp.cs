@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class HeartPickUp : InteractiveObject
 {
+    [Header("Heart Settings")]
     [SerializeField] private GameObject impactEffect;
     [SerializeField] private GameObject visualModel;
 

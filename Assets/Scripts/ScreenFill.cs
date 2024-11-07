@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Wakeup : MonoBehaviour
+public class ScreenFill : MonoBehaviour
 {
    private Image image;
    
-   public bool isWakeup;
+   public bool isFill;
    
-   private void Awake()
+   private void Start()
    {
       image = GetComponent<Image>();
       image.color = Color.black;
@@ -15,10 +15,10 @@ public class Wakeup : MonoBehaviour
 
    private void Update()
    {
-      if (isWakeup)
+      if (isFill)
       {
          image.color = new Color(image.color.r, image.color.g, image.color.b, Mathf.MoveTowards(image.color.a, 1, Time.deltaTime / 2));
-         if (Mathf.Approximately(image.color.a, 1)) isWakeup = false;
+         if (Mathf.Approximately(image.color.a, 1)) isFill = false;
       }
       else
       {
@@ -28,9 +28,9 @@ public class Wakeup : MonoBehaviour
       if (image.color.a == 0) enabled = false;
    }
 
-   public void WakeUp()
+   public void Fill()
    {
-      isWakeup = true;
+      isFill = true;
       enabled = true;
    }
 }

@@ -865,7 +865,6 @@ MonoBehaviour:
   onHide:
     m_PersistentCalls:
       m_Calls: []
-  isAfterText: 0
   draculaDoor: 0
   cameraTarget: {fileID: 1015965497134504957}
   triggerCollider: {fileID: 3866016683577980266}
@@ -897,7 +896,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 3.4610658
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -933,7 +932,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.9
       inSlope: 0
       outSlope: 0
       tangentMode: 0

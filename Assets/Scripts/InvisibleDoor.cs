@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class InvisibleDoor : InteractiveObject
 {
+    [Header("Door Settings")]
     [SerializeField] private GameObject[] walls;
 
     public override void InCamera()
@@ -10,15 +11,20 @@ public class InvisibleDoor : InteractiveObject
         WallVisible();
     }
 
-    private void WallVisible()
+    public override void ShowText() 
+    {
+        // выключит отображение при наведении
+    }
+    
+    public void WallVisible()
     {
         HideInfoPanel();
-        //if (CharacterInputController.Instance.HeartEnabled)
-       // {
-            for (int i = 0; i < walls.Length; i++)
-            {
-                Destroy(walls[i]);
-            }
-        //}
+        ShowAfterText();
+
+        for (int i = 0; i < walls.Length; i++)
+        {
+            Destroy(walls[i]);
+        }
+       
     }
 }

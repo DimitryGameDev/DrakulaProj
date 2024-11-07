@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Key : InteractiveObject
 {
+    [Header("Key Settings")]
     [SerializeField] private int keyCount;
     [SerializeField] private GameObject impactEffect;
     [SerializeField] private GameObject visualModel;

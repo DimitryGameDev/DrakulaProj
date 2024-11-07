@@ -169,31 +169,20 @@ public class PathBuilder : MonoBehaviour
         var currentPosOffset = currentPoint.transform.position + new Vector3(0,0.5f,0);
 
         Ray ray = new Ray(currentPosOffset, (checkPoint.transform.position - currentPoint.transform.position)+ new Vector3(0,0.5f,0));
-            
-        var layerMask = 1 << LayerMask.NameToLayer("Player");
-        layerMask = ~ layerMask;
-        
-        if (Physics.Raycast(ray, out var hitInfo,rad,layerMask))
+
+        if (Physics.Raycast(ray, out var hitInfo,rad))
         {
+            if (hitInfo.collider.isTrigger || hitInfo.collider.CompareTag("IgnoreDraculaMove") || hitInfo.collider.CompareTag("Player"))
+            { 
+                Debug.DrawLine(currentPosOffset, checkPoint.transform.position + new Vector3(0,0.5f,0), Color.blue,5f);
+                return true;
+            }
             Debug.DrawLine(currentPosOffset,checkPoint.transform.position + new Vector3(0,0.5f,0), Color.red,5f);
             return false;
         }
-        else
-        {
-            Debug.DrawLine(currentPosOffset, checkPoint.transform.position + new Vector3(0,0.5f,0), Color.blue,5f);
-            return true;
-        }
+
+        Debug.DrawLine(currentPosOffset, checkPoint.transform.position + new Vector3(0,0.5f,0), Color.blue,5f);
+        return true;
     }
-
-
     #endregion
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, rad);
-        
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, 1);
-    }
 }

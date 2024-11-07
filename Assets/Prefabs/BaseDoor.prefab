@@ -142,7 +142,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 3.89
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -178,7 +178,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.9
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -264,9 +264,9 @@ MonoBehaviour:
   onHide:
     m_PersistentCalls:
       m_Calls: []
-  isAfterText: 0
   animator: {fileID: 8225965780088440804}
   closedTrigger: {fileID: 0}
+  openTrigger: {fileID: 0}
 --- !u!1 &3127397297676320639
 GameObject:
   m_ObjectHideFlags: 0
