@@ -10,7 +10,10 @@ public class DraculaPoint : PatrolPoint
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, 4f);
+        if (!isPlayer)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, 4f);
+        }
     }
 }

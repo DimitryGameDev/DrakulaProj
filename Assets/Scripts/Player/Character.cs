@@ -47,6 +47,8 @@ public class Character : Player
     {
         if (direction.magnitude > 1) direction /= 2;
         
+        stepTime += Time.deltaTime;
+        
         if (direction == Vector3.zero && moveType != MoveType.Air)
         {
             isMove = false;
@@ -55,7 +57,6 @@ public class Character : Player
         }
         
         rb.AddRelativeForce(direction * (Acceleration * Time.deltaTime),ForceMode.Acceleration);
-        
         switch (moveType)
         {
             case MoveType.Sit:
@@ -104,7 +105,6 @@ public class Character : Player
 
     private void StepsPlay(float stepLenght)
     {
-        stepTime += Time.deltaTime;
         if (stepTime >= stepLenght)
         {
             audioSource.PlayOneShot(stepSounds[Random.Range(0,stepSounds.Length)]);

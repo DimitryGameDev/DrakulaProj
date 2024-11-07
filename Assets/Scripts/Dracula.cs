@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(InteractiveObject))]
+[RequireComponent(typeof(VisibleObject))]
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(PathBuilder))]
 public class Dracula : SingletonBase<Dracula>
@@ -21,9 +21,9 @@ public class Dracula : SingletonBase<Dracula>
     [SerializeField] private ImpactEffect visionEffectPrefab;
 
     [Space] [Header("Dracula Settings")] 
-    [SerializeField] [Range(0.2f, 30f)]private float spawnSpeed = 7;
-    [SerializeField] [Range(0f, 10f)]private int speedChange = 2;
-    [SerializeField] [Range(0f, 50f)] private int minDistanceToNextPp = 6;
+    [SerializeField] [Range(0.2f, 30f)] private float maxSpawnSpeed = 10f;
+    [SerializeField] [Range(0.2f, 30f)] private float minSpawnSpeed = 1f;
+    [SerializeField] [Range(0f, 50f)] private int minDistanceToNextPp = 4;
     [SerializeField] private AudioClip[] spawnClips;
     [SerializeField] private DraculaPoint[] spawnPositions;
     
@@ -36,7 +36,7 @@ public class Dracula : SingletonBase<Dracula>
     private DraculaSpawnEffect draculaSpawnEffect;
     private PathBuilder builder;
     private float timer;
-    
+    private float spawnSpeed;
     
     private bool isHeart = false;
     private bool isVisible = false;
@@ -53,8 +53,8 @@ public class Dracula : SingletonBase<Dracula>
     {
         CharacterInputController.Instance.heartOn.AddListener(TogleHeartOn);
         CharacterInputController.Instance.heartOff.AddListener(TogleHeartOff);
-        GetComponent<InteractiveObject>().onVision.AddListener(TogleVisionOn);
-        GetComponent<InteractiveObject>().onHide.AddListener(TogleVisionOff);
+        GetComponent<VisibleObject>().onVision.AddListener(TogleVisionOn);
+        GetComponent<VisibleObject>().onHide.AddListener(TogleVisionOff);
         
         NoiseLevel.Instance.OnChange += SpeedChange;
         
@@ -63,7 +63,8 @@ public class Dracula : SingletonBase<Dracula>
         builder = GetComponent<PathBuilder>();
         playerPoint = character.GetComponent<DraculaPoint>();
         draculaPoint = GetComponent<DraculaPoint>();
-
+        spawnSpeed = maxSpawnSpeed;
+        
         if (playOnAwake)
         {
             SetPoint(spawnPositions[Random.Range(0, spawnPositions.Length)]);
@@ -74,25 +75,43 @@ public class Dracula : SingletonBase<Dracula>
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            KillPlayer(3);
+        }
+    }
+
     private void OnDestroy()
     {
         CharacterInputController.Instance.draculaAnim.RemoveListener(TogleHeartOn);
         CharacterInputController.Instance.draculaAnim.RemoveListener(TogleHeartOff);
-        GetComponent<InteractiveObject>().onVision.RemoveListener(TogleVisionOn);
-        GetComponent<InteractiveObject>().onHide.RemoveListener(TogleVisionOff);
         NoiseLevel.Instance.OnChange -= SpeedChange;
     }
 
-    private int lastValue = 0;
+    private int lastValue;
     public void SpeedChange(int value)
     {
-        if (lastValue > value) spawnSpeed += speedChange;
-        else if (spawnSpeed - speedChange >= 0 )spawnSpeed -= speedChange;
+        var changeSpeed = maxSpawnSpeed / NoiseLevel.Instance.MaxLevel;
+        
+        if (lastValue < value)
+        {
+            if (spawnSpeed - changeSpeed >= minSpawnSpeed) spawnSpeed -= changeSpeed;
+            else spawnSpeed = minSpawnSpeed;
+        }
+
+        if (lastValue > value)
+        {
+            if (spawnSpeed + changeSpeed <= maxSpawnSpeed) spawnSpeed += changeSpeed;
+            else spawnSpeed = maxSpawnSpeed;
+        }
         lastValue = value;
     }
 
     private void FixedUpdate()
     {
+       
         if (draculaSpawnEffect != null && draculaSpawnEffect.IsPlaying())
         {
             DraculaState();
@@ -100,7 +119,6 @@ public class Dracula : SingletonBase<Dracula>
         }
         
         timer += Time.deltaTime;
-        
         if (timer >= spawnSpeed)
         {
             DraculaMove();
@@ -233,7 +251,7 @@ public class Dracula : SingletonBase<Dracula>
         
         if (movePoint.IsPlayer)
         {
-            KillPlayer();
+            KillPlayer(1);
             enabled = false;
             return;
         }
@@ -272,9 +290,9 @@ public class Dracula : SingletonBase<Dracula>
 
         return currentDraculaPrefab;
     }
-    private void KillPlayer()
+    private void KillPlayer(int animNumber)
     {
-        draculaInPlayer.Invoke(1);
+        draculaInPlayer.Invoke(animNumber);
         enabled = false;
     }
 

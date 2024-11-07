@@ -11,10 +11,9 @@ public class Heart : MonoBehaviour
     [SerializeField] private float tickRateStress = 1f;
     [SerializeField] private float addStressValue = 1f;
     [SerializeField] private float removeStressValue = 1f;
-    [SerializeField] private AudioClip heartOnSFX;
-    
-    private bool isActive;
-    public bool IsActive => isActive;
+    [SerializeField] private AudioClip heartOnSfx;
+
+    public bool IsActive { get; private set; }
     private Volume postProcessVolume;
     private Vignette vignette;
     private LensDistortion lensDistortion;
@@ -26,11 +25,11 @@ public class Heart : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        CharacterInputController.Instance.heartOn.AddListener(PlaySFX);
+        CharacterInputController.Instance.heartOn.AddListener(PlaySfx);
         character = (Character)Character.Instance;
         postProcessVolume = GetComponent<Volume>();
-        postProcessVolume.profile.TryGet<Vignette>(out vignette);
-        postProcessVolume.profile.TryGet<LensDistortion>(out lensDistortion);
+        postProcessVolume.profile.TryGet(out vignette);
+        postProcessVolume.profile.TryGet(out lensDistortion);
     }
 
     private void Update()
@@ -44,7 +43,7 @@ public class Heart : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= tickRateStress)
         {
-            if (isActive )
+            if (IsActive )
             {
                 character.AddStress(addStressValue);
             }
@@ -60,7 +59,7 @@ public class Heart : MonoBehaviour
     {
         if (!characterInputController.HeartEnabled)
         {
-            isActive = false;
+            IsActive = false;
             
             if (vignette.smoothness.value != 0)
             {
@@ -73,26 +72,26 @@ public class Heart : MonoBehaviour
         }
         if (characterInputController.HeartEnabled)
         {
-            isActive = true;
+            IsActive = true;
  
-            if (vignette.smoothness.value != 1)
+            if (!Mathf.Approximately(vignette.smoothness.value, 1))
             {
                 vignette.smoothness.value = Mathf.Lerp(vignette.smoothness.value, 1, vignetteSpeed * Time.deltaTime);
             }
-            if (lensDistortion.intensity.value != -0.5f)
+            if (!Mathf.Approximately(lensDistortion.intensity.value, -0.5f))
             {
                 lensDistortion.intensity.value = Mathf.Lerp(lensDistortion.intensity.value, -0.5f, lensDistortionSpeed * Time.deltaTime);
             }
         }
     }
 
-    private void PlaySFX()
+    private void PlaySfx()
     {
-        audioSource.PlayOneShot(heartOnSFX);
+        audioSource.PlayOneShot(heartOnSfx);
     }
 
     private void OnDestroy()
     {
-        CharacterInputController.Instance.heartOn.RemoveListener(PlaySFX);
+        CharacterInputController.Instance.heartOn.RemoveListener(PlaySfx);
     }
 }

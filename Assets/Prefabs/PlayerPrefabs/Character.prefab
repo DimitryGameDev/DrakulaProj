@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 6742056660056185345}
   m_Layer: 7
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -282,7 +282,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -305,7 +305,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras: []
-  m_RendererIndex: 0
+  m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -522,6 +522,7 @@ MonoBehaviour:
   heartTimeUsage: 1
   maxDistanseHitCamera: 2.2
   timeSprint: 3
+  sprintEndClip: {fileID: 8300000, guid: 5f918cb5985e7394da8679c74bf24bbd, type: 3}
   isMove: 1
   pickUpHeart: 0
   heartOn:
@@ -533,6 +534,7 @@ MonoBehaviour:
   draculaAnim:
     m_PersistentCalls:
       m_Calls: []
+  isSprinting: 0
   IsLook: 0
 --- !u!114 &8480812018889599076
 MonoBehaviour:
@@ -585,7 +587,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -595,7 +597,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 2
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -630,7 +632,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -684,6 +686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   gColor: {r: 1, g: 0.5519297, b: 0, a: 0.3}
+  enabledGizmos: 0
   isDebug: 0
   debugBox: {fileID: 0}
   image: {fileID: 0}
@@ -736,7 +739,7 @@ GameObject:
   - component: {fileID: 2280108597574474885}
   - component: {fileID: 5628578840177419116}
   - component: {fileID: 2155742799705069474}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -771,13 +774,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterInputController: {fileID: 786862915565640646}
-  postProcessVolume: {fileID: 0}
   vignetteSpeed: 5
   lensDistortionSpeed: 8
   tickRateStress: 1
   addStressValue: 5
   removeStressValue: 2
-  heartOnSFX: {fileID: 8300000, guid: f47ac91274edc5948aabb017c3d82500, type: 3}
+  heartOnSfx: {fileID: 8300000, guid: f47ac91274edc5948aabb017c3d82500, type: 3}
 --- !u!114 &5628578840177419116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,7 +796,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 4.24
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 2c0203b8049c47544aa06b1475ebc9a5, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 765d45a5ff8b331428175005d6f86d45, type: 2}
 --- !u!82 &2155742799705069474
 AudioSource:
   m_ObjectHideFlags: 0

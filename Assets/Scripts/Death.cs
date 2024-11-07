@@ -38,7 +38,7 @@ public class Death : MonoBehaviour
         
         if (animID == 1) DieLogic1();
         if (animID == 2) DieLogic2();
-        
+        if (animID == 3) DieLogic3();
         LoseGame();
     }
     
@@ -57,7 +57,6 @@ public class Death : MonoBehaviour
     /// </summary>
     private void DieLogic1()
     {
-        
         draculaPrefab.transform.localPosition = nosferatuPos1;
         draculaPrefab.transform.localRotation = Quaternion.Euler(nosferatuRotate1);
         
@@ -72,6 +71,24 @@ public class Death : MonoBehaviour
         draculaPrefab.SetActive(true);
         
         animator.Play("Attack1");
+    }
+    
+    private void DieLogic3()
+    {
+        draculaPrefab.transform.localPosition = nosferatuPos2;
+        draculaPrefab.transform.localRotation = Quaternion.Euler(nosferatuRotate2);
+        
+        cameraTargetDeath.LookAt(new Vector3(dracula.transform.position.x, cameraTargetDeath.transform.position.y, dracula.transform.position.z));
+        cameraTargetDeath.transform.parent = null;
+        
+        OnePersonCamera.Instance.SetTarget(cameraTargetDeath, TypeMoveCamera.WithRotation, true);
+        
+        transform.LookAt(new Vector3(dracula.transform.position.x, transform.position.y, dracula.transform.position.z));
+        
+        enabled = true; //вкдючает эффекты в Update
+        draculaPrefab.SetActive(true);
+        
+        animator.Play("Attack2");
     }
     
     /// <summary>

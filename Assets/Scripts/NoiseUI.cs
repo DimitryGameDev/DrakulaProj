@@ -9,26 +9,30 @@ public class NoiseUI : MonoBehaviour
     
     private void Start()
     {
+        var y = transform.childCount;
+        for (int i = 0; i < y; i++)
+        {
+            Destroy(transform.GetChild(i).gameObject);
+        }
         NoiseLevel.Instance.OnChange += UpdateUI;
+        for (int i = 0; i < NoiseLevel.Instance.MaxLevel; i++)
+        {
+            var x = Instantiate(noiseImagePrefab, transform);
+            noiseObjects.Add(x);
+        }
     }
     
     private void UpdateUI(int value)
     {
-        /*
-        if (lastValue > value)
+        for (int i = 0; i < noiseObjects.Count; i++)
         {
-            var i = Instantiate(noiseImagePrefab);
-            noiseObjects.Add(i);
-        }
-        
-        else if (lastValue < value)
-        {
-            if (noiseObjects.Count > 0)
+            if (value > 0)
             {
-                noiseObjects[0].Hide();
+                value--;
+                noiseObjects[i].Show();
+                continue;
             }
+            noiseObjects[i].Hide();
         }
-        lastValue = value;
-        */
     }
 }
