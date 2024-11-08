@@ -1,20 +1,18 @@
 using UnityEngine;
 
-[RequireComponent(typeof(InteractiveObject))]
-public class HeartPickUp : MonoBehaviour
+public class HeartPickUp : InteractiveObject
 {
+    [Header("Heart Settings")]
     [SerializeField] private GameObject impactEffect;
     [SerializeField] private GameObject visualModel;
-    
-    private InteractiveObject interactiveObject;
 
-    private void Start()
+    public override void Use()
     {
-        interactiveObject = GetComponent<InteractiveObject>();
-        interactiveObject.onUse.AddListener(PickUp);
-        
+        base.Use();
+        PickUp();
+        ShowAfterText();
     }
-    
+
     private void PickUp()
     {
         CharacterInputController.Instance.pickUpHeart = true;
@@ -23,7 +21,5 @@ public class HeartPickUp : MonoBehaviour
             Instantiate(impactEffect, transform.position, Quaternion.identity);
         
         Destroy(visualModel);
-        interactiveObject.Ondestroy.Invoke(interactiveObject);
     }
-
 }

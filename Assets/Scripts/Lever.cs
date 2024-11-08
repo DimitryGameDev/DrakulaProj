@@ -1,22 +1,25 @@
 using UnityEngine;
 
-[RequireComponent(typeof(InteractiveObject))]
 [RequireComponent(typeof(AudioSource))]
-public class Lever : MonoBehaviour
+public class Lever : InteractiveObject
 {
     [SerializeField] private GameObject trigger;
     [SerializeField] private Animator animator;
     [SerializeField] private AudioClip audioClip;
     
     private AudioSource audioSource;
-    private InteractiveObject interactiveObject;
     
-    private void Start()
+    protected override void Start()
     {
-        interactiveObject = GetComponent<InteractiveObject>();
+        base.Start();
         audioSource = GetComponent<AudioSource>();
         trigger.SetActive(false);
-        interactiveObject.onUse.AddListener(Open);
+    }
+
+    public override void Use()
+    {
+        base.Use();
+        Open();
     }
 
     public void Open()
@@ -24,10 +27,6 @@ public class Lever : MonoBehaviour
         trigger.SetActive(true);
         audioSource.PlayOneShot(audioClip);
         animator.SetBool("Open", true);
-    }
-
-    private void OnDestroy()
-    {
-        interactiveObject.onUse.RemoveListener(Open);
+        ShowAfterText();
     }
 }

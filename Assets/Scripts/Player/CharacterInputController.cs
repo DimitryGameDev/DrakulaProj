@@ -6,10 +6,12 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     [SerializeField] private float heartTimeUsage = 2f;
     [SerializeField] private float maxDistanseHitCamera = 1f;
     [SerializeField] private float timeSprint = 2f;
+    [SerializeField] private AudioClip sprintEndClip;
     public float TimeSprint => timeSprint;
     private Character character; 
     public Character Character => character;
     
+    private AudioSource audioSource;
     private Vector3 playerMoveDirection;
     private float radiusCharacter;
     private float heightCharacter;
@@ -27,8 +29,8 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private float sprintTimer;
     public float SprintTimer => sprintTimer;
-    private bool isSprinting;
-    public bool IsSprinting => isSprinting;
+    
+    public bool isSprinting;
     
     public bool IsLook;
     private void Awake()
@@ -41,6 +43,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         heartEnabled = false;
         
         character = GetComponent<Character>();
+        audioSource = GetComponent<AudioSource>();
         radiusCharacter = character.GetComponentInChildren<CapsuleCollider>().radius;
         heightCharacter = character.GetComponentInChildren<CapsuleCollider>().height;
         Cursor.visible = false;
@@ -75,13 +78,6 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         
         var ground = IsGrounded();
         
-        /*
-        if (Input.GetButton("Jump") && ground)
-        {
-            character.Jump();
-        }
-        */
-        
         playerMoveDirection = new Vector3(dirX, 0, dirZ);
             
         if (IsWall() && !ground) return;
@@ -95,7 +91,12 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         if (Input.GetKey(KeyCode.LeftShift) && isSprinting && Character.isMove)
         {
             sprintTimer += Time.deltaTime;
-            if (sprintTimer >= timeSprint)  isSprinting = false;
+            if (sprintTimer >= timeSprint)
+            {
+                isSprinting = false;
+                audioSource.PlayOneShot(sprintEndClip);
+                NoiseLevel.Instance.IncreaseLevel();
+            }
             
             character.Move(playerMoveDirection, MoveType.Run);
             return;
@@ -119,7 +120,43 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         character.CameraMove(dirX, dirY);
     }
 
-    private bool IsGrounded()
+
+    private void HeartState()
+    {
+        if(!pickUpHeart) return;
+        
+        if (heartEnabled == false)
+        {
+            timeHeart -= Time.deltaTime;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (timeHeart <= 0)
+            {
+                heartEnabled = true;
+                isMove = false;
+                heartOn.Invoke();
+                timeHeart = heartTimeUsage;
+            }
+        }
+        
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            heartEnabled = false;
+            isMove = true;
+            heartOff.Invoke();
+        }
+    }
+
+    public void ChangeSpeedTime(int value)
+    {
+        timeSprint += value;
+    }
+    #region RayLogick
+
+    
+private bool IsGrounded()
     {
         RaycastHit hitLegs;
         var vectorDown = character.transform.TransformDirection(Vector3.down);
@@ -182,61 +219,40 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         }
 
         return false;
+        
     }
-
-    private void HeartState()
-    {
-        if(!pickUpHeart) return;
-        
-        if (heartEnabled == false)
-        {
-            timeHeart -= Time.deltaTime;
-        }
-        
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (timeHeart <= 0)
-            {
-                heartEnabled = true;
-                isMove = false;
-                heartOn.Invoke();
-                timeHeart = heartTimeUsage;
-            }
-        }
-        
-        if (Input.GetKeyUp(KeyCode.F))
-        {
-            heartEnabled = false;
-            isMove = true;
-            heartOff.Invoke();
-        }
-    }
-    
     private void MainRay()
     {
         RaycastHit hitCamera;
- 
-        if (Physics.Raycast(character.Camera.transform.position, character.Camera.transform.forward, out hitCamera, maxDistanseHitCamera ,LayerMask.NameToLayer("Player")))
+
+        if (Physics.Raycast(character.Camera.transform.position, character.Camera.transform.forward, out hitCamera,
+                maxDistanseHitCamera, LayerMask.NameToLayer("Player")))
         {
-            //Debug.DrawRay(character.Camera.transform.position, character.Camera.transform.forward * hitCamera.distance, Color.yellow, 0.01f);
             Debug.DrawLine(character.Camera.transform.position, hitCamera.transform.position, Color.yellow);
-            
+
             if (hitCamera.collider.transform.parent?.GetComponent<InteractiveObject>())
             {
                 var hit = hitCamera.collider.transform.parent.GetComponent<InteractiveObject>();
 
-                hit.ShowInfoPanel();
-                
-                if (Input.GetKeyDown(KeyCode.E))
+                if (!hit.IsAfterText)
+                    hit.ShowText();
+
+                if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     hit.Use();
                 }
+
                 IsLook = true;
                 return;
             }
-            
+
         }
+
         IsLook = false;
     }
+    #endregion
+    
+
+    
 
 }

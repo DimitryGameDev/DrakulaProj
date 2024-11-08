@@ -1,65 +1,36 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
-public class BaseDoor : MonoBehaviour
+public class BaseDoor : InteractiveObject
 {
-    [SerializeField] private GameObject infoPanel;
-    [SerializeField] private Text infoText;
-    [SerializeField] private string textOpen;
+    [Header("Door Settings")]
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject closedTrigger;
-    
+    [SerializeField] private Collider openTrigger;
+
     private AudioSource audioSource;
-    private float textTimer;
-    private bool isOpened;
-        
-    private void Start()
+
+    protected override void Start()
     {
+        base.Start();
         audioSource = GetComponent<AudioSource>();
     }
 
-    private void Update()
+    public override void Use()
     {
-        InfoText();
+        base.Use();
+        OpenDoor();
     }
 
-    private void OnTriggerStay(Collider other)
+    public void OpenDoor()
     {
-        if (other == Character.Instance.GetComponentInChildren<Collider>())
-        {
-            OpenDoor();
-
-            if (!isOpened)
-                textTimer = 1;
-        }
-    }
-
-    private void OpenDoor()
-    {
-        if (Input.GetKey(KeyCode.E))
-        {
+        if(animator)
             animator.SetBool("Open", true);
-            audioSource.Play();
-            
-            isOpened = true;
-            
-            if(closedTrigger)
-            Destroy(closedTrigger);
-        }
-    }
-    
-    private void InfoText()
-    {
-        if(textTimer>=0)
-            textTimer -= Time.deltaTime;
+        audioSource.Play();
 
-        if (textTimer > 0)
-        {
-            infoText.text = textOpen;
-            infoPanel.SetActive(true);
-        }
-        else if (!CharacterInputController.Instance.IsLook)
-            infoPanel.SetActive(false);
+        if (closedTrigger)
+            Destroy(closedTrigger);
+        if (openTrigger)
+            Destroy(openTrigger);
     }
 }

@@ -4945,7 +4945,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5963461149208262680}
-  - component: {fileID: 6871602982321605649}
   - component: {fileID: 1119906924173683448}
   m_Layer: 0
   m_Name: Bottle3
@@ -4970,32 +4969,6 @@ Transform:
   - {fileID: 3149468187691960267}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6871602982321605649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7426389060488099692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4602cd3d0f83452ba597aa28a56e6c65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  infoPanel: {fileID: 0}
-  infoPanelText: {fileID: 0}
-  infoText: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435 (\u0415) \u0434\u043B\u044F
-    \u043F\u043E\u0434\u0431\u043E\u0440\u0430"
-  infoTextAfterUse: "\u042D\u0442\u043E \u0431\u044B\u043B \u044F\u0434"
-  onVision:
-    m_PersistentCalls:
-      m_Calls: []
-  onHide:
-    m_PersistentCalls:
-      m_Calls: []
-  onUse:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1119906924173683448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5008,6 +4981,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f63820af82617a439551e230da8e80d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infoText: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435 (\u0415) \u0434\u043B\u044F
+    \u043F\u043E\u0434\u0431\u043E\u0440\u0430"
+  infoTextAfterUse: "\u042D\u0442\u043E \u0431\u044B\u043B \u044F\u0434"
+  icon: {fileID: 0}
+  afterIcon: {fileID: 0}
+  timeBoxHide: 0.1
+  timeAfterText: 3
+  onVision:
+    m_PersistentCalls:
+      m_Calls: []
+  onHide:
+    m_PersistentCalls:
+      m_Calls: []
+  isAfterText: 0
   bottleType: 2
   visualModel: {fileID: 1578550658889490834}
   impactEffect: {fileID: 8361973088753977710, guid: 2049bcd3a8a659143abdfd7de771a247, type: 3}

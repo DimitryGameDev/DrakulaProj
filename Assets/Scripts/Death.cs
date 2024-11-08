@@ -15,8 +15,6 @@ public class Death : MonoBehaviour
     private Animator animator;
     private void Start()
     {
-        heartPostProcessVolume.profile.TryGetSettings(out vignette);
-
         if (Dracula.Instance != null)
         {
             dracula = Dracula.Instance;
@@ -29,16 +27,7 @@ public class Death : MonoBehaviour
     }
 
     private const float VignetteSpeed = 5F;
-
-    private void Update()
-    {
-        vignette.opacity.value = Mathf.Lerp(vignette.opacity.value, 1, VignetteSpeed * Time.deltaTime);
-        if (Mathf.Approximately(vignette.opacity.value, 1))
-        {
-            enabled = false;
-        }
-    }
-
+    
     public void DeathCharacter(int animID)
     {
         var rb = Character.Instance.GetComponent<Rigidbody>();
@@ -49,7 +38,7 @@ public class Death : MonoBehaviour
         
         if (animID == 1) DieLogic1();
         if (animID == 2) DieLogic2();
-        
+        if (animID == 3) DieLogic3();
         LoseGame();
     }
     
@@ -68,7 +57,6 @@ public class Death : MonoBehaviour
     /// </summary>
     private void DieLogic1()
     {
-        
         draculaPrefab.transform.localPosition = nosferatuPos1;
         draculaPrefab.transform.localRotation = Quaternion.Euler(nosferatuRotate1);
         
@@ -83,6 +71,24 @@ public class Death : MonoBehaviour
         draculaPrefab.SetActive(true);
         
         animator.Play("Attack1");
+    }
+    
+    private void DieLogic3()
+    {
+        draculaPrefab.transform.localPosition = nosferatuPos2;
+        draculaPrefab.transform.localRotation = Quaternion.Euler(nosferatuRotate2);
+        
+        cameraTargetDeath.LookAt(new Vector3(dracula.transform.position.x, cameraTargetDeath.transform.position.y, dracula.transform.position.z));
+        cameraTargetDeath.transform.parent = null;
+        
+        OnePersonCamera.Instance.SetTarget(cameraTargetDeath, TypeMoveCamera.WithRotation, true);
+        
+        transform.LookAt(new Vector3(dracula.transform.position.x, transform.position.y, dracula.transform.position.z));
+        
+        enabled = true; //вкдючает эффекты в Update
+        draculaPrefab.SetActive(true);
+        
+        animator.Play("Attack2");
     }
     
     /// <summary>

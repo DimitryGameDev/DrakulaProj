@@ -5,7 +5,7 @@ public class SingletonBase<T> : MonoBehaviour where T : MonoBehaviour
 {
     public static T Instance { get; private set; }
 
-    public void Init()
+    protected void Init()
     {
         if (Instance != null)
         {

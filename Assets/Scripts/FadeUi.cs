@@ -3,35 +3,38 @@ using UnityEngine.UI;
 
 public class FadeUi : MonoBehaviour
 {
-    /*private Image image;
+    private Image image;
 
-    private int set;
+    private bool isShow;
     private void Start()
     {
         image = GetComponent<Image>();
         image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
-        set = 1;
+        enabled = false;
     }
 
     private void Update()
     {
-        if (image.color.a != set)
+        if (isShow)
         {
-            image.color = new Color(image.color.r, image.color.g, image.color.b, Mathf.MoveTowards(image.color.a, set, Time.deltaTime));
+            image.color = new Color(image.color.r, image.color.g, image.color.b, Mathf.MoveTowards(image.color.a, 1, Time.deltaTime));
+            if (Mathf.Approximately(image.color.a, 1)) enabled = false;
         }
         else
         {
-            if (set == 1)
-            {
-                Destroy(gameObject);
-            }
-            enabled = false;
+            image.color = new Color(image.color.r, image.color.g, image.color.b, Mathf.MoveTowards(image.color.a, 0, Time.deltaTime));
+            if (Mathf.Approximately(image.color.a, 0))enabled = false;
         }
     }
 
+    public void Show()
+    {
+        isShow = true;
+        enabled = true;
+    }
     public void Hide()
     {
-        set = 0;
+        isShow = false;
         enabled = true;
-    }*/
+    }
 }

@@ -1,21 +1,23 @@
 using UnityEngine;
 
-public class Chest : MonoBehaviour
+public class Chest : InteractiveObject
 {
-    private InteractiveObject interactiveObject;
     private Animator animator;
-    private void Start()
+    protected override void Start()
     {
-        interactiveObject = GetComponent<InteractiveObject>();
-        interactiveObject.onUse.AddListener(OpenChest);
+        base.Start();
         animator = GetComponent<Animator>();
+    }
+
+    public override void Use()
+    {
+        base.Use();
+        OpenChest();
     }
 
     private void OpenChest()
     {
         animator.enabled = true;
-        interactiveObject.HideInfoPanel();
-        Destroy(interactiveObject);
+        Destroy(this);
     }
-
 }

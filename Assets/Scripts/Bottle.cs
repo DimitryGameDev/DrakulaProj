@@ -2,22 +2,26 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(InteractiveObject))]
-public class Bottle : MonoBehaviour
+public class Bottle : InteractiveObject
 {
+    [Header("Bottle Settings")]
     [SerializeField] private BottleType bottleType;
     [SerializeField] private GameObject visualModel;
     [SerializeField] private GameObject impactEffect;
-
-    private InteractiveObject interactiveObject;
+    
     private Death death;
 
-    private void Start()
+    protected override void Start()
     {
-        interactiveObject = GetComponent<InteractiveObject>();
-        interactiveObject.onUse.AddListener(SetBottleType);
-
+        base.Start();
         death = Character.Instance.GetComponent<Death>();
+    }
+
+    public override void Use()
+    {
+        base.Use();
+        SetBottleType();
+        ShowAfterText();
     }
 
     public void SetBottleType()
@@ -48,7 +52,6 @@ public class Bottle : MonoBehaviour
     private void PickUp()
     {
         Destroy(visualModel);
-        interactiveObject.Ondestroy.Invoke(interactiveObject);
         
         if (impactEffect)
             Instantiate(impactEffect, transform.position, Quaternion.identity);

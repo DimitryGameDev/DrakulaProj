@@ -1,34 +1,30 @@
 using UnityEngine;
 
-public class InvisibleDoor : MonoBehaviour
+public class InvisibleDoor : InteractiveObject
 {
+    [Header("Door Settings")]
     [SerializeField] private GameObject[] walls;
 
-    private Collider collider;
-
-    private void Start()
+    public override void InCamera()
     {
-        collider = GetComponent<Collider>();
+        base.InCamera();
+        WallVisible();
     }
 
-    private void OnTriggerStay(Collider other)
+    public override void ShowText() 
     {
-        if (other == Character.Instance.GetComponentInChildren<Collider>())
-            WallVisible();
+        // выключит отображение при наведении
     }
-
-    private void WallVisible()
+    
+    public void WallVisible()
     {
-        //if(wall == null) return;
+        HideInfoPanel();
+        ShowAfterText();
 
-        if (CharacterInputController.Instance.HeartEnabled)
+        for (int i = 0; i < walls.Length; i++)
         {
-            for (int i = 0; i < walls.Length; i++)
-            {
-                Destroy(walls[i]);
-            }
-
-            Destroy(collider);
+            Destroy(walls[i]);
         }
+       
     }
 }

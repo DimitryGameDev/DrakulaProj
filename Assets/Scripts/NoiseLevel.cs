@@ -8,6 +8,7 @@ public class NoiseLevel : SingletonBase<NoiseLevel>
     [SerializeField] private int maxLevel;
     [SerializeField] private float resetTime;
 
+    public int MaxLevel { get { return maxLevel; } }
     private int currentLevel;
     public int CurrentLevel => currentLevel;
     
@@ -29,7 +30,6 @@ public class NoiseLevel : SingletonBase<NoiseLevel>
         if (currentLevel < maxLevel)
         {
             currentLevel++;
-            Debug.Log("Increased");
             OnChange?.Invoke(currentLevel);
             timer = resetTime;
         }
@@ -48,6 +48,7 @@ public class NoiseLevel : SingletonBase<NoiseLevel>
     public void SetZeroLevel()
     {
         currentLevel = 0;
+        OnChange?.Invoke(currentLevel);
     }
     
     private void UpdateTimer()
