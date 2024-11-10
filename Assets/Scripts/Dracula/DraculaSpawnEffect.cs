@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DraculaSpawnEffect : MonoBehaviour
 {
-    private float lifeTime = 1f;
+    private readonly float lifeTime = 1f;
     private ParticleSystem particleEffect;
     private CharacterInputController characterInputController;
     private float minTimeParticle;

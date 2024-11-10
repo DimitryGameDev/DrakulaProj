@@ -24,7 +24,7 @@ public class Bottle : InteractiveObject
         ShowAfterText();
     }
 
-    public void SetBottleType()
+    private void SetBottleType()
     {
         switch (bottleType)
         {

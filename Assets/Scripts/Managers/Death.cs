@@ -1,20 +1,21 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering;
+using Vignette = UnityEngine.Rendering.Universal.Vignette;
 
 public class Death : MonoBehaviour
 {
     [SerializeField]private GameObject draculaPrefab;
     [SerializeField] private Transform cameraTargetDeath;
-    [SerializeField] private PostProcessVolume heartPostProcessVolume;
+    [SerializeField] private Volume heartPostProcessVolume;
     private Vignette vignette;
     private Dracula dracula;
     
-    public UnityEvent OnDeath;
+    public UnityEvent onDeath;
     private Animator animator;
     private void Start()
     {
+        heartPostProcessVolume.profile.TryGet(out vignette);
         if (Dracula.Instance != null)
         {
             dracula = Dracula.Instance;
@@ -27,7 +28,12 @@ public class Death : MonoBehaviour
     }
 
     private const float VignetteSpeed = 5F;
-    
+
+    private void Update()
+    {
+        vignette.smoothness.value = Mathf.Lerp(vignette.smoothness.value, 1, VignetteSpeed * Time.deltaTime);
+    }
+
     public void DeathCharacter(int animID)
     {
         var rb = Character.Instance.GetComponent<Rigidbody>();
@@ -44,13 +50,13 @@ public class Death : MonoBehaviour
     
     public void LoseGame()
     {
-        OnDeath?.Invoke();
+        onDeath?.Invoke();
     }
     
-    private Vector3 nosferatuPos1 = new Vector3(0f, -1.7f, 0.5f);
-    private Vector3 nosferatuPos2 = new Vector3(0f, -1f, 2.5f);
-    private Vector3 nosferatuRotate1 = new Vector3(0f, 160f, 0f);
-    private Vector3 nosferatuRotate2 = new Vector3(0f, 180f, 0f);
+    private readonly Vector3 nosferatuPos1 = new Vector3(0f, -1.7f, 0.5f);
+    private readonly Vector3 nosferatuPos2 = new Vector3(0f, -1f, 2.5f);
+    private readonly Vector3 nosferatuRotate1 = new Vector3(0f, 160f, 0f);
+    private readonly Vector3 nosferatuRotate2 = new Vector3(0f, 180f, 0f);
     
     /// <summary>
     /// ALARM!!!!!! Не трогать ни при каких условиях!

@@ -22,9 +22,9 @@ public class PatrolPoint : MonoBehaviour
     [SerializeField] private Text lenghtToObjText;
 
     public int pathIndex;
-    public int Weight { get; private set; }
-    public int LengthToStart { get; private set; }
-    public int LenghtToObj { get; private set; }
+    private int Weight { get; set; }
+    private int LengthToStart { get; set; }
+    private int LenghtToObj { get; set; }
     public bool IsVisit { get; private set; }
     public float Radius => radius;
 

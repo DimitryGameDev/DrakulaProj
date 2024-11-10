@@ -8,17 +8,17 @@ public class TriggerController : SingletonBase<TriggerController>
         Init();
         triggers = FindObjectsOfType<Trigger>();
         
-        for (int j = 0; j < triggers.Length; j++)
+        foreach (var t in triggers)
         {
-            triggers[j].onTrigger.AddListener(SwithAllTriggers);
+            t.onTrigger.AddListener(SwitchAllTriggers);
         }
     }
 
-    private void SwithAllTriggers()
+    private void SwitchAllTriggers()
     {
-        for (int j = 0; j < triggers.Length; j++)
+        foreach (var t in triggers)
         {
-            triggers[j].SwitchActive();
+            t.SwitchActive();
         }
     }
 }

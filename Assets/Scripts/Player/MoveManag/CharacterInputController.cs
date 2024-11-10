@@ -4,12 +4,11 @@ using UnityEngine.Events;
 public class CharacterInputController : SingletonBase<CharacterInputController>
 {    
     [SerializeField] private float heartTimeUsage = 2f;
-    [SerializeField] private float maxDistanseHitCamera = 1f;
+    [SerializeField] private float maxDistanceHitCamera = 2f;
     [SerializeField] private float timeSprint = 2f;
     [SerializeField] private AudioClip sprintEndClip;
     public float TimeSprint => timeSprint;
     private Character character; 
-    public Character Character => character;
     
     private AudioSource audioSource;
     private Vector3 playerMoveDirection;
@@ -18,8 +17,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     private float timeHeart;
     public bool isMove = true;
 
-    private bool heartEnabled;
-    public bool HeartEnabled => heartEnabled;
+    public bool HeartEnabled { get; private set; }
 
     [HideInInspector] public bool pickUpHeart;
     
@@ -32,7 +30,8 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     
     public bool isSprinting;
     
-    public bool IsLook;
+    public bool isLook;
+    
     private void Awake()
     {
         Init();
@@ -40,7 +39,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     public void Start()
     {
-        heartEnabled = false;
+        HeartEnabled = false;
         
         character = GetComponent<Character>();
         audioSource = GetComponent<AudioSource>();
@@ -88,7 +87,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
             return;
         }
         
-        if (Input.GetKey(KeyCode.LeftShift) && isSprinting && Character.isMove)
+        if (Input.GetKey(KeyCode.LeftShift) && isSprinting && character.isMove)
         {
             sprintTimer += Time.deltaTime;
             if (sprintTimer >= timeSprint)
@@ -125,7 +124,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     {
         if(!pickUpHeart) return;
         
-        if (heartEnabled == false)
+        if (HeartEnabled == false)
         {
             timeHeart -= Time.deltaTime;
         }
@@ -134,7 +133,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         {
             if (timeHeart <= 0)
             {
-                heartEnabled = true;
+                HeartEnabled = true;
                 isMove = false;
                 heartOn.Invoke();
                 timeHeart = heartTimeUsage;
@@ -143,7 +142,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         
         if (Input.GetKeyUp(KeyCode.F))
         {
-            heartEnabled = false;
+            HeartEnabled = false;
             isMove = true;
             heartOff.Invoke();
         }
@@ -158,11 +157,10 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     
 private bool IsGrounded()
     {
-        RaycastHit hitLegs;
         var vectorDown = character.transform.TransformDirection(Vector3.down);
         var maxDistance = heightCharacter / 2 + 0.1f;
 
-        if (Physics.Raycast(character.transform.position - new Vector3(radiusCharacter, 0, 0), vectorDown, out hitLegs, maxDistance))
+        if (Physics.Raycast(character.transform.position - new Vector3(radiusCharacter, 0, 0), vectorDown, out var hitLegs, maxDistance))
         {
             Debug.DrawRay(character.transform.position - new Vector3(radiusCharacter, 0, 0), vectorDown * hitLegs.distance, Color.red);
             return true;
@@ -191,10 +189,9 @@ private bool IsGrounded()
 
     private bool IsWall()
     {
-        RaycastHit hitLegs;
         var maxRadius = radiusCharacter + 0.1f;
         
-        if (Physics.Raycast(character.transform.position, character.transform.TransformDirection(Vector3.forward), out hitLegs, maxRadius))
+        if (Physics.Raycast(character.transform.position, character.transform.TransformDirection(Vector3.forward), out var hitLegs, maxRadius))
         {
             Debug.DrawRay(character.transform.position , character.transform.TransformDirection(Vector3.forward) * hitLegs.distance, Color.red);
             return true;
@@ -223,16 +220,14 @@ private bool IsGrounded()
     }
     private void MainRay()
     {
-        RaycastHit hitCamera;
-
-        if (Physics.Raycast(character.Camera.transform.position, character.Camera.transform.forward, out hitCamera,
-                maxDistanseHitCamera, LayerMask.NameToLayer("Player")))
+        if (Physics.Raycast(character.Camera.transform.position, character.Camera.transform.forward, out var hitCamera,
+                maxDistanceHitCamera, LayerMask.NameToLayer("Player")))
         {
             Debug.DrawLine(character.Camera.transform.position, hitCamera.transform.position, Color.yellow);
 
             if (hitCamera.collider.transform.parent?.GetComponent<InteractiveObject>())
             {
-                var hit = hitCamera.collider.transform.parent.GetComponent<InteractiveObject>();
+                var hit = hitCamera.collider.transform.parent?.GetComponent<InteractiveObject>();
 
                 if (!hit.IsAfterText)
                     hit.ShowText();
@@ -242,13 +237,13 @@ private bool IsGrounded()
                     hit.Use();
                 }
 
-                IsLook = true;
+                isLook = true;
                 return;
             }
 
         }
 
-        IsLook = false;
+        isLook = false;
     }
     #endregion
     

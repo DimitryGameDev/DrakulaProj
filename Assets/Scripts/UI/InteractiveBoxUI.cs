@@ -26,7 +26,7 @@ public class InteractiveBoxUI : SingletonBase<InteractiveBoxUI>
         if (isCursor) iconPickUp.color = ChangeTransparent(iconPickUp.color,1);
         else iconPickUp.color = ChangeTransparent(iconPickUp.color,0);
         if (icon.sprite && isIcon) icon.color = ChangeTransparent(icon.color,1);
-        else icon.color = new Color(icon.color.r, icon.color.g, icon.color.b,0);;
+        else icon.color = new Color(icon.color.r, icon.color.g, icon.color.b,0);
         
         if (isEnable)
         {

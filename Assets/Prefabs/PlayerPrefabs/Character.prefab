@@ -345,8 +345,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivity: 2
   yRotationLimit: 88
-  cameraSmothMoveSpead: 9
-  cameraSmothRotateSpead: 5
+  cameraSmoothMoveSpeed: 8
+  cameraSmoothRotateSpeed: 5
   typeMove: 0
 --- !u!114 &7728004928073808892
 MonoBehaviour:
@@ -520,7 +520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartTimeUsage: 1
-  maxDistanseHitCamera: 2.2
+  maxDistanceHitCamera: 2.2
   timeSprint: 3
   sprintEndClip: {fileID: 8300000, guid: 5f918cb5985e7394da8679c74bf24bbd, type: 3}
   isMove: 1
@@ -535,7 +535,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isSprinting: 0
-  IsLook: 0
+  isLook: 0
 --- !u!114 &8480812018889599076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,13 +549,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countPieceForMedal: 3
-  ChangeKeyAmount:
+  changeKeyAmount:
     m_PersistentCalls:
       m_Calls: []
-  ChangeMedalAmount:
+  changeMedalAmount:
     m_PersistentCalls:
       m_Calls: []
-  ChangeMedalPieceAmount:
+  changeMedalPieceAmount:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &7314905624224714595
@@ -572,8 +572,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   draculaPrefab: {fileID: 5629595769716382360}
   cameraTargetDeath: {fileID: 7708894270326520532}
-  heartPostProcessVolume: {fileID: 0}
-  OnDeath:
+  heartPostProcessVolume: {fileID: 5628578840177419116}
+  onDeath:
     m_PersistentCalls:
       m_Calls: []
 --- !u!82 &3124069453675828783
