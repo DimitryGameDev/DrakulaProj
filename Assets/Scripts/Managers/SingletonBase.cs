@@ -11,7 +11,7 @@ public class SingletonBase<T> : MonoBehaviour where T : MonoBehaviour
         {
             Debug.LogWarning("MonoSingleton: object of type already exists, instance will be destroyed = " + typeof(T).Name);
             Destroy(this);
-            ; return;
+            return;
         }
 
         Instance = this as T;

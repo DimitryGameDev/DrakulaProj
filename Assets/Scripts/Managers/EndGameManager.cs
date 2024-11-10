@@ -19,7 +19,7 @@ public class EndGameManager : MonoBehaviour
 
         if (death != null)
         {
-            death.OnDeath.AddListener(Lose);
+            death.onDeath.AddListener(Lose);
         }
     }
 
@@ -27,7 +27,7 @@ public class EndGameManager : MonoBehaviour
     {
         if (death != null)
         {
-            death.OnDeath.RemoveListener(Lose);
+            death.onDeath.RemoveListener(Lose);
         }
     }
 

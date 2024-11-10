@@ -5,10 +5,11 @@ public class NoiseUI : MonoBehaviour
 {
     
     [SerializeField]private FadeUi noiseImagePrefab;
-    private List<FadeUi> noiseObjects = new List<FadeUi>();
+    private List<FadeUi> noiseObjects;
     
     private void Start()
     {
+        noiseObjects = new List<FadeUi>();
         var y = transform.childCount;
         for (int i = 0; i < y; i++)
         {
@@ -24,15 +25,15 @@ public class NoiseUI : MonoBehaviour
     
     private void UpdateUI(int value)
     {
-        for (int i = 0; i < noiseObjects.Count; i++)
+        foreach (var t in noiseObjects)
         {
             if (value > 0)
             {
                 value--;
-                noiseObjects[i].Show();
+                t.Show();
                 continue;
             }
-            noiseObjects[i].Hide();
+            t.Hide();
         }
     }
 }

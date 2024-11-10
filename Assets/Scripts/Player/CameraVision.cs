@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,9 +13,9 @@ public class CameraVision : MonoBehaviour
         visionObjs = new List<VisibleObject>();
         visionObjs.AddRange(FindObjectsOfType<VisibleObject>());
         
-        for (var i = 0; i < visionObjs.Count; i++)
+        foreach (var t in visionObjs)
         {
-            visionObjs[i].Ondestroy += RemoveVisionObj;
+            t.Ondestroy += RemoveVisionObj;
         }
     }
 
@@ -32,41 +31,40 @@ public class CameraVision : MonoBehaviour
 
     private void FindObjIntoCamera()
     {
-        for (var i = 0; i < visionObjs.Count; i++)
-        { 
+        foreach (var t in visionObjs)
+        {
             if (heartPrefab.IsActive)
             {
-                if (IsVisionObj(visionObjs[i].gameObject))
+                if (IsVisionObj(t.gameObject))
                 {
-                    Debug.DrawLine(playerCamera.transform.position, visionObjs[i].transform.position, Color.green,
+                    Debug.DrawLine(playerCamera.transform.position, t.transform.position, Color.green,
                         Time.deltaTime);
-                    visionObjs[i].InCamera();
+                    t.InCamera();
                 }
             }
                 
-            if (!IsVisionObj(visionObjs[i].gameObject))
+            if (!IsVisionObj(t.gameObject))
             {
                 //Debug.DrawLine(playerCamera.transform.position, visionObjs[i].transform.position, Color.grey,Time.deltaTime);
                 //  
-                visionObjs[i].OutCamera();
+                t.OutCamera();
             }
             else
             {
-                Debug.DrawLine(playerCamera.transform.position, visionObjs[i].transform.position, Color.grey,Time.deltaTime);
+                Debug.DrawLine(playerCamera.transform.position, t.transform.position, Color.grey,Time.deltaTime);
             }
         }
     }
 
     private bool IsVisionObj(GameObject objectToCheck)
     {
-        Vector3 viewPortPoint = playerCamera.WorldToViewportPoint(objectToCheck.transform.position);
+        var viewPortPoint = playerCamera.WorldToViewportPoint(objectToCheck.transform.position);
         
         if (viewPortPoint is { z: > 0, y: < 0.9f and > 0.1f, x: > 0.1f and < 0.9f })
         {
-            Ray ray = playerCamera.ScreenPointToRay(playerCamera.WorldToScreenPoint(objectToCheck.transform.position));
-            RaycastHit hitInfo;
+            var ray = playerCamera.ScreenPointToRay(playerCamera.WorldToScreenPoint(objectToCheck.transform.position));
 
-            if (Physics.Raycast(ray, out hitInfo, maxDistance,LayerMask.NameToLayer("Player") | LayerMask.NameToLayer("Ignore Raycast")))
+            if (Physics.Raycast(ray, out var hitInfo, maxDistance,LayerMask.NameToLayer("Player") | LayerMask.NameToLayer("Ignore Raycast")))
             {
                 if (hitInfo.transform.parent.gameObject == objectToCheck && hitInfo.transform.parent.gameObject != null)
                 {

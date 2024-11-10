@@ -1,7 +1,8 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class Lockpick : InteractiveObject
+public class LockPick : InteractiveObject
 {
     [Header("Door Settings")]
     [SerializeField] private bool draculaDoor;
@@ -20,9 +21,10 @@ public class Lockpick : InteractiveObject
     [SerializeField] private RectTransform background;
     [SerializeField] private RectTransform point;
     
+    [FormerlySerializedAs("successOpenSFX")]
     [Header("SFX")]
-    [SerializeField] private AudioClip successOpenSFX;
-    [SerializeField] private AudioClip failOpenSFX;
+    [SerializeField] private AudioClip successOpenSfx;
+    [SerializeField] private AudioClip failOpenSfx;
 
     private AudioSource audioSource;
     private OnePersonCamera onePersonCamera;
@@ -96,9 +98,8 @@ public class Lockpick : InteractiveObject
         }
         
         point.anchoredPosition = Vector2.MoveTowards(point.anchoredPosition, randomImagePosition, 100 * Time.deltaTime);
-        
-        Vector2 localPoint;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(point, screenMousePosition, null, out localPoint);
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(point, screenMousePosition, null, out var localPoint);
         
         if (localPoint.x >= point.rect.xMin && localPoint.x <= point.rect.xMax &&
             localPoint.y >= point.rect.yMin && localPoint.y <= point.rect.yMax)
@@ -116,7 +117,7 @@ public class Lockpick : InteractiveObject
             NoiseLevel.Instance.IncreaseLevel();
             ResetPoint();
             
-            audioSource.PlayOneShot(failOpenSFX);
+            audioSource.PlayOneShot(failOpenSfx);
         }
     }
 
@@ -155,7 +156,7 @@ public class Lockpick : InteractiveObject
 
     public void OpenDoor()
     {
-        audioSource.PlayOneShot(successOpenSFX);
+        audioSource.PlayOneShot(successOpenSfx);
         animator.SetBool("Open", true);
         Destroy(triggerCollider);
         Destroy(this);

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -71,7 +70,9 @@ public class PathBuilder : MonoBehaviour
     
     public void ClearPath()
     {
-        for (int i = 0; i < patrolPoints.Count; i++)patrolPoints[i].Reset();
+        foreach (var t in patrolPoints)
+            t.Reset();
+
         index = 0;
         nearPatrolPoints.Clear();
         pathPatrolPoints.Clear();
@@ -123,38 +124,38 @@ public class PathBuilder : MonoBehaviour
     {
         nearPatrolPoints.Clear();
         
-        for (int i = 0; i < patrolPoints.Count; i++)
+        foreach (var t in patrolPoints)
         {
-            if (checkPoint == patrolPoints[i]) continue;
-            var dist = Vector3.Distance(checkPoint.transform.position, patrolPoints[i].transform.position);
+            if (checkPoint == t) continue;
+            var dist = Vector3.Distance(checkPoint.transform.position, t.transform.position);
             
-            if (dist <= rad && !patrolPoints[i].IsVisit)
+            if (dist <= rad && !t.IsVisit)
             {
-                patrolPoints[i].SetDistanceToStart(checkPoint.transform.position);
-                patrolPoints[i].SetDistanceToObject(currentTarget.transform.position);
-                nearPatrolPoints.Add(patrolPoints[i]);
+                t.SetDistanceToStart(checkPoint.transform.position);
+                t.SetDistanceToObject(currentTarget.transform.position);
+                nearPatrolPoints.Add(t);
             }
         }
         
-        for (int i = 0; i < nearPatrolPoints.Count; i++)
+        foreach (var t in nearPatrolPoints)
         {
-            if (CheckWall(nearPatrolPoints[i],checkPoint))
+            if (CheckWall(t,checkPoint))
             {
-                potentialPath.Add(nearPatrolPoints[i]);
+                potentialPath.Add(t);
             }
         }
         
         if (potentialPath.Count > 0)
         {
             var weight = Mathf.Infinity;
-            for (int i = 0; i < potentialPath.Count; i++)
-            { 
-                var x = potentialPath[i].GetWeight();
+            foreach (var t in potentialPath)
+            {
+                var x = t.GetWeight();
                 
                 if (weight >= x)
                 {
                     weight = x;
-                    currentPatrolPoint  = potentialPath[i];
+                    currentPatrolPoint  = t;
                 }
             }
             
