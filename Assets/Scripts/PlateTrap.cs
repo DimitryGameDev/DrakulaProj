@@ -19,7 +19,7 @@ public class PlateTrap : VisibleObject
             {
                 noiseLevel.IncreaseLevel();
                 audioSource.PlayOneShot(floorSound);
-                Debug.Log(noiseLevel.CurrentLevel);
+                //Debug.Log(noiseLevel.CurrentLevel);
             }
         }
     }

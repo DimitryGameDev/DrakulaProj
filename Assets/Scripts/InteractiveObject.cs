@@ -79,4 +79,14 @@ public class InteractiveObject: VisibleObject
     /// Вызывается когда игрок Применил действие
     /// </summary>
     public virtual void Use(){}
+
+    protected virtual void SetInfoText(string text)
+    {
+        infoText = text;
+    }
+    
+    protected virtual void SetInfoTextAfterUse(string text)
+    {
+        infoTextAfterUse = text;
+    }
 }

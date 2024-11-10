@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -111,7 +113,6 @@ public class Dracula : SingletonBase<Dracula>
 
     private void FixedUpdate()
     {
-       
         if (draculaSpawnEffect != null && draculaSpawnEffect.IsPlaying())
         {
             DraculaState();
@@ -225,7 +226,21 @@ public class Dracula : SingletonBase<Dracula>
             enabled = true;
         }
     }
-    
+
+    public void DraculaIndestructible(float time)
+    {
+        StartCoroutine(TemporaryShutdown(time));
+    }
+
+    private IEnumerator TemporaryShutdown(float time)
+    {
+        DraculaDisable();
+        yield return new WaitForSeconds(time);
+        Debug.Log("Dracula enable again");
+        isSpawning = true;
+        DraculaEnable();
+    }
+
     private Vector3 lastPosition;
     public void DraculaDisable()
     {

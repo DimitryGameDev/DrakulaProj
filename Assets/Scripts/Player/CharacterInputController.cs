@@ -153,6 +153,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     {
         timeSprint += value;
     }
+    
     #region RayLogick
 
     
