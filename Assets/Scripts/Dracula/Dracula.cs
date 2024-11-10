@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -224,6 +225,20 @@ public class Dracula : SingletonBase<Dracula>
             transform.position = lastPosition;
             enabled = true;
         }
+    }
+    
+    public void DraculaIndestructible(float time)
+    {
+        StartCoroutine(TemporaryShutdown(time));
+    }
+
+    private IEnumerator TemporaryShutdown(float time)
+    {
+        DraculaDisable();
+        yield return new WaitForSeconds(time);
+        Debug.Log("Dracula enable again");
+        isSpawning = true;
+        DraculaEnable();
     }
     
     private Vector3 lastPosition;
