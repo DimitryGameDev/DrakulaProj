@@ -11,6 +11,7 @@ public class HeartPickUp : InteractiveObject
         base.Use();
         PickUp();
         ShowAfterText();
+        wosActive = true;
     }
 
     private void PickUp()
@@ -20,6 +21,10 @@ public class HeartPickUp : InteractiveObject
         if (impactEffect)
             Instantiate(impactEffect, transform.position, Quaternion.identity);
         
+        Destroy(visualModel);
+    }
+    protected override void ObjectWosActive()
+    {
         Destroy(visualModel);
     }
 }

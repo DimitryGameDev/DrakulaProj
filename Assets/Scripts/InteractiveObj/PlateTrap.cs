@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class PlateTrap : VisibleObject
+public class PlateTrap : InteractiveObject
 {
     [SerializeField] private AudioClip floorSound;
     [SerializeField] private Collider trapPlateCollider;
@@ -23,9 +23,12 @@ public class PlateTrap : VisibleObject
             }
         }
     }
+
+    public override void ShowText(){}
     
-    void Start()
+    protected override void Start()
     {
+        base.Start();;
         audioSource = GetComponent<AudioSource>();
         noiseLevel = NoiseLevel.Instance;
         trapPlateMesh.enabled = false;

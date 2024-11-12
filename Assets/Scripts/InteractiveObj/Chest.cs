@@ -13,11 +13,17 @@ public class Chest : InteractiveObject
     {
         base.Use();
         OpenChest();
+        wosActive = true;
     }
 
     private void OpenChest()
     {
         animator.enabled = true;
         Destroy(this);
+    }
+    
+    protected override void ObjectWosActive()
+    {
+        OpenChest();
     }
 }

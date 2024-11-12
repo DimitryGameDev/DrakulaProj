@@ -20,6 +20,7 @@ public class BaseDoor : InteractiveObject
     {
         base.Use();
         OpenDoor();
+        wosActive = true;
     }
 
     public void OpenDoor()
@@ -32,5 +33,10 @@ public class BaseDoor : InteractiveObject
             Destroy(closedTrigger);
         if (openTrigger)
             Destroy(openTrigger);
+    }
+    
+    protected override void ObjectWosActive()
+    {
+        OpenDoor();
     }
 }

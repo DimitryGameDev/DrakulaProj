@@ -20,6 +20,8 @@ public class Lever : InteractiveObject
     {
         base.Use();
         Open();
+        ShowAfterText();
+        wosActive = true;
     }
 
     public void Open()
@@ -27,6 +29,11 @@ public class Lever : InteractiveObject
         trigger.SetActive(true);
         audioSource.PlayOneShot(audioClip);
         animator.SetBool("Open", true);
-        ShowAfterText();
+        
+    }
+    
+    protected override void ObjectWosActive()
+    {
+        Open();
     }
 }

@@ -156,12 +156,17 @@ public class LockPick : InteractiveObject
 
     public void OpenDoor()
     {
+        wosActive = true;
         audioSource.PlayOneShot(successOpenSfx);
         animator.SetBool("Open", true);
         Destroy(triggerCollider);
         Destroy(this);
     }
 
+    protected override void ObjectWosActive()
+    {
+        OpenDoor();
+    }
 
     private void ResetPoint()
     {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class InteractiveObject: VisibleObject
@@ -10,6 +11,9 @@ public class InteractiveObject: VisibleObject
     [Tooltip("Как быстро скрывается UI, после отвода камеры")][SerializeField] private float  timeBoxHide = 0.1f;
     [Tooltip("Как быстро скрывается UI ,после применения")][SerializeField] private float  timeAfterText = 3f;
     
+    protected bool wosActive;
+    public bool WosActive => wosActive;
+    
     private float time ;
     private float timer ;
     private bool isText;
@@ -17,6 +21,7 @@ public class InteractiveObject: VisibleObject
     public bool IsAfterText => isAfterText;
     
     private InteractiveBoxUI interactiveBoxUI;
+    
     protected virtual void Start()
     {
         interactiveBoxUI = InteractiveBoxUI.Instance;
@@ -74,11 +79,14 @@ public class InteractiveObject: VisibleObject
         isText = false;
         isAfterText = false;
     }
-    
+
     /// <summary>
     /// Вызывается когда игрок Применил действие
     /// </summary>
-    public virtual void Use(){}
+    public virtual void Use()
+    {
+        
+    }
 
     protected virtual void SetInfoText(string text)
     {
@@ -89,4 +97,28 @@ public class InteractiveObject: VisibleObject
     {
         infoTextAfterUse = text;
     }
+
+    #region SaveLogic
+
+    public void SaveState()
+    {
+        InteractiveState.Instance.Save(this,wosActive);
+    }
+    
+    public void LoadState()
+    {
+        wosActive = InteractiveState.Instance.GetState(this);
+        if (wosActive)
+        {
+            ObjectWosActive();
+        }
+    }
+
+    protected virtual void ObjectWosActive()
+    {
+        Destroy(gameObject);
+    }
+
+    #endregion
+   
 }
