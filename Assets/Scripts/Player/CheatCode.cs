@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CheatCode : MonoBehaviour
 {
@@ -49,5 +50,16 @@ public class CheatCode : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            Debug.Log("Файл сохранения удалён");
+            InteractiveState.Instance.ResetState();
+            PlayerState.Instance.ResetState();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }

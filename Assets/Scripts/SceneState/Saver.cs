@@ -5,6 +5,7 @@ using UnityEngine;
 [Serializable]
 public  class Saver<T>
 { 
+    public T data;
     public static void TryLoad(string fileName, ref T data)
     {
         var path = FileHandler.Path(fileName);
@@ -28,8 +29,6 @@ public  class Saver<T>
         var dataString = JsonUtility.ToJson(wrapper);
         File.WriteAllText(FileHandler.Path(fileName), dataString);
     } 
-
-    public T data;
 }
 
 public static class FileHandler
@@ -49,7 +48,7 @@ public static class FileHandler
         }
     }
 
-    internal static bool HasFile(string fileName)
+    public static bool HasFile(string fileName)
     {
         return File.Exists(Path(fileName));
     }

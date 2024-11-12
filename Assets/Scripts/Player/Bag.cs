@@ -8,6 +8,7 @@ public class Bag : MonoBehaviour
     private int medalPieceCount;
     private int keyAmount;
 
+
     [HideInInspector]public UnityEvent changeKeyAmount;
     [HideInInspector]public UnityEvent changeMedalAmount;
     [HideInInspector]public UnityEvent changeMedalPieceAmount;
@@ -35,6 +36,8 @@ public class Bag : MonoBehaviour
     
     public void AddMedalPiece(int pieceCount)
     {
+        if (pieceCount == 0) return;
+
         if (Mathf.Approximately(medalPieceCount + pieceCount, countPieceForMedal))
         {
             AddMedal();
@@ -51,6 +54,11 @@ public class Bag : MonoBehaviour
         return medalCount;
     }
 
+    public int GetMedalPeaceAmount()
+    { 
+        return medalPieceCount;
+    }
+    
     private void AddMedal()
     {
         medalCount++;

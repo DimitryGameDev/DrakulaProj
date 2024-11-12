@@ -12,6 +12,7 @@ public class Medal : InteractiveObject
         base.Use();
         PickUp();
         ShowAfterText();
+        wosActive = true;
     }
 
     private void PickUp()
@@ -22,5 +23,9 @@ public class Medal : InteractiveObject
             Instantiate(impactEffect, transform.position, Quaternion.identity);
         
         Destroy(visualModel);
+    }
+    protected override void ObjectWosActive()
+    {
+        Destroy(visualModel);   
     }
 }

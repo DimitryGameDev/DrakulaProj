@@ -1,6 +1,83 @@
 using UnityEngine;
+using System;
+using System.Collections.Generic;
 
-public class InteractiveState : MonoBehaviour
+public class InteractiveState : SingletonBase<InteractiveState>
 {
+    private const string FileName = "InteractiveState.dat";
+    [SerializeField] private ObjectState[] objData;
     
+    [Serializable]
+    private class ObjectState
+    {
+        public InteractiveObject obj;
+        public bool state;
+    }
+    
+    private void Awake()
+    {
+        Init();
+        if (FileHandler.HasFile(FileName))
+        {
+            Debug.Log("Файл найден");
+            Saver<ObjectState[]>.TryLoad(FileName,ref objData);
+        }
+        else
+        {
+            Debug.Log("Создан новый файл" + FileName);
+            InteractiveObject[] objects = FindObjectsOfType<InteractiveObject>();
+            var listObjState = new List<ObjectState>();
+            
+            for (int i = 0; i < objects.Length; i++)
+            {
+                ObjectState state = new ObjectState();
+                
+                state.obj = objects[i];
+                state.state = objects[i].WosActive;
+                
+                listObjState.Add(state);
+            }
+            objData = listObjState.ToArray();
+            Saver<ObjectState[]>.Save(FileName, objData);
+        }
+    }
+    
+    public void Save(InteractiveObject currentObj,bool state)
+    {
+        if (Instance)
+        {
+            foreach (var item in objData)
+            {
+                if (item.obj == currentObj)
+                {
+                    if (state != item.state)
+                    {
+                        item.state = state;
+                    }
+                }
+            }
+            Saver<ObjectState[]>.Save(FileName, objData);
+        }
+        else
+        {
+            Debug.Log("Bruuuh");
+        }     
+    }
+    
+    public bool GetState(InteractiveObject currentObj)
+    {
+        foreach (var item in objData)
+        {
+            if (item.obj == currentObj)
+            {
+               return item.state;
+            }
+        }
+        return false;
+    }
+
+    public void ResetState()
+    {
+        FileHandler.Reset(FileName);
+    }
 }
