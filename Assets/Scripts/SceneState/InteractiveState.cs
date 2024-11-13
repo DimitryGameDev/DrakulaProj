@@ -10,7 +10,7 @@ public class InteractiveState : SingletonBase<InteractiveState>
     [Serializable]
     private class ObjectState
     {
-        public InteractiveObject obj;
+        public string objName;
         public bool state;
     }
     
@@ -32,7 +32,7 @@ public class InteractiveState : SingletonBase<InteractiveState>
             {
                 ObjectState state = new ObjectState();
                 
-                state.obj = objects[i];
+                state.objName = objects[i].name;
                 state.state = objects[i].WosActive;
                 
                 listObjState.Add(state);
@@ -48,7 +48,7 @@ public class InteractiveState : SingletonBase<InteractiveState>
         {
             foreach (var item in objData)
             {
-                if (item.obj == currentObj)
+                if (item.objName == currentObj.name)
                 {
                     if (state != item.state)
                     {
@@ -68,7 +68,7 @@ public class InteractiveState : SingletonBase<InteractiveState>
     {
         foreach (var item in objData)
         {
-            if (item.obj == currentObj)
+            if (item.objName == currentObj.name)
             {
                return item.state;
             }

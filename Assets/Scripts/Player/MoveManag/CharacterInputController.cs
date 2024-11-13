@@ -7,7 +7,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     [SerializeField] private float maxDistanceHitCamera = 2f;
     [SerializeField] private float timeSprint = 2f;
     [SerializeField] private AudioClip sprintEndClip;
-    public float TimeSprint => timeSprint;
+
     private Character character; 
     
     private AudioSource audioSource;
@@ -27,6 +27,8 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private float sprintTimer;
     public float SprintTimer => sprintTimer;
+    
+    public float TimeSprint => timeSprint;
     
     public bool isSprinting;
     
@@ -148,10 +150,16 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         }
     }
 
-    public void ChangeSpeedTime(int value)
+    public void ChangeSpeedTime(float value)
     {
         timeSprint += value;
     }
+    
+    public void SetSpeedTime(float value)
+    {
+        timeSprint = value;
+    }
+    
     #region RayLogick
 
     

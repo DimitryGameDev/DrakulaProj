@@ -20,11 +20,11 @@ public class InteractiveObject: VisibleObject
     private bool isAfterText;
     public bool IsAfterText => isAfterText;
     
-    private InteractiveBoxUI interactiveBoxUI;
+    protected InteractiveBoxUI InteractiveBoxUI;
     
     protected virtual void Start()
     {
-        interactiveBoxUI = InteractiveBoxUI.Instance;
+        InteractiveBoxUI = InteractiveBoxUI.Instance;
         isText = false;
     }
 
@@ -45,10 +45,10 @@ public class InteractiveObject: VisibleObject
     /// </summary>
     public virtual void ShowText()
     {
-        interactiveBoxUI.Enable();
-        interactiveBoxUI.text.text = infoText;
-        if (icon != null)interactiveBoxUI.icon.sprite = icon;
-        else interactiveBoxUI.HideIcon();
+        InteractiveBoxUI.Enable();
+        InteractiveBoxUI.text.text = infoText;
+        if (icon != null)InteractiveBoxUI.icon.sprite = icon;
+        else InteractiveBoxUI.HideIcon();
         timer = timeBoxHide;
         isText = true;
     }
@@ -58,11 +58,11 @@ public class InteractiveObject: VisibleObject
     /// </summary>
     protected virtual void ShowAfterText()
     {
-        interactiveBoxUI.Enable();
-        interactiveBoxUI.text.text = infoTextAfterUse;
-        if (icon != null) interactiveBoxUI.icon.sprite = afterIcon;
-        else interactiveBoxUI.HideIcon();
-        interactiveBoxUI.HideCursor();
+        InteractiveBoxUI.Enable();
+        InteractiveBoxUI.text.text = infoTextAfterUse;
+        if (icon != null) InteractiveBoxUI.icon.sprite = afterIcon;
+        else InteractiveBoxUI.HideIcon();
+        InteractiveBoxUI.HideCursor();
         time = 0;
         timer = timeAfterText; 
         isText = true;
@@ -74,7 +74,7 @@ public class InteractiveObject: VisibleObject
     /// </summary>
     protected virtual void HideInfoPanel()
     {
-        interactiveBoxUI.Disable();
+        InteractiveBoxUI.Disable();
         time = 0;
         isText = false;
         isAfterText = false;
@@ -83,10 +83,7 @@ public class InteractiveObject: VisibleObject
     /// <summary>
     /// Вызывается когда игрок Применил действие
     /// </summary>
-    public virtual void Use()
-    {
-        
-    }
+    public virtual void Use() { }
 
     protected virtual void SetInfoText(string text)
     {
@@ -118,7 +115,7 @@ public class InteractiveObject: VisibleObject
     {
         Destroy(gameObject);
     }
-
+    
     #endregion
    
 }
