@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class CheatCode : MonoBehaviour
 {
+    
+#if UNITY_EDITOR
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))
@@ -62,4 +64,6 @@ public class CheatCode : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
+#endif
+   
 }

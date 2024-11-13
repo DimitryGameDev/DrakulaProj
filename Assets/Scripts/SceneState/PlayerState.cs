@@ -11,10 +11,10 @@ public class PlayerState : SingletonBase<PlayerState>
     private class States
     {
         public Vector3 pos;
+        public Vector3 cameraPos;
         public int keyAmount;
         public int medalAmount;
-        public int noisesAmount;
-        //public int sprintAmount;
+        public float sprintAmount;
         public bool heartState;
     }
     
@@ -34,14 +34,15 @@ public class PlayerState : SingletonBase<PlayerState>
         }
     }
     
-    public void Save(Vector3 playerPos,int keys, int medals, int noises, bool heartState)
+    public void Save(Vector3 playerPos,Vector3 cameraPos,int keys, int medals,float sprintAmount, bool heartState)
     {
         if (Instance)
         {
             playerData.pos = playerPos;
+            playerData.cameraPos = cameraPos;
             playerData.keyAmount = keys;
             playerData.medalAmount = medals;
-            playerData.noisesAmount = noises;
+            playerData.sprintAmount = sprintAmount;
             playerData.heartState = heartState;
             Saver<States>.Save(FileName, playerData);
         }
@@ -52,9 +53,13 @@ public class PlayerState : SingletonBase<PlayerState>
     } 
     
     
-    public Vector3 GetPos()
+    public Vector3 GetPlayerPos()
     {
         return playerData.pos;
+    }
+    public Vector3 GetCameraPos()
+    {
+        return playerData.cameraPos;
     }
     
     public int GetKeyAmount()
@@ -65,11 +70,11 @@ public class PlayerState : SingletonBase<PlayerState>
     public int GetMedalAmount()
     {
         return playerData.medalAmount;
-    } 
+    }
     
-    public int GetNoisesAmount()
+    public float GetSprintAmount()
     {
-        return playerData.noisesAmount;
+        return playerData.sprintAmount;
     } 
     
     public bool GetHeartState()

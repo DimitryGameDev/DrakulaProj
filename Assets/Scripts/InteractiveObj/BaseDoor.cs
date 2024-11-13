@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -10,10 +11,14 @@ public class BaseDoor : InteractiveObject
 
     private AudioSource audioSource;
 
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     protected override void Start()
     {
         base.Start();
-        audioSource = GetComponent<AudioSource>();
     }
 
     public override void Use()

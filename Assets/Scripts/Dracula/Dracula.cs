@@ -190,6 +190,7 @@ public class Dracula : SingletonBase<Dracula>
     {
         DraculaPoint rand = spawnPositions[Random.Range(0, spawnPositions.Length)];
         transform.position = rand.transform.position;
+        draculaPoint = rand;
         Spawn(rand);
     }
     
@@ -237,7 +238,6 @@ public class Dracula : SingletonBase<Dracula>
         DraculaDisable();
         yield return new WaitForSeconds(time);
         Debug.Log("Dracula enable again");
-        isSpawning = true;
         DraculaEnable();
     }
     
@@ -249,11 +249,13 @@ public class Dracula : SingletonBase<Dracula>
         timer = 0;
         enabled = false;
     }
+    
     public void DraculaDespawn()
     {
         DraculaDisable();
         builder.ClearPath();
         isSpawning = false;
+        enabled = false;
     }
     
     private void DraculaMove()
@@ -262,7 +264,12 @@ public class Dracula : SingletonBase<Dracula>
         
         var movePoint = builder.GetDraculaPoint(draculaPoint,playerPoint,minDistanceToNextPp);
 
-        if (movePoint == null) return;
+        if (movePoint == null)
+        {
+            DraculaDespawn();
+            RandomPoint();
+            return;
+        }
         
         if (movePoint.IsPlayer)
         {

@@ -497,12 +497,12 @@ MonoBehaviour:
   onStress:
     m_PersistentCalls:
       m_Calls: []
-  maxSpeedWalk: 3
-  maxSpeedRun: 5
+  maxSpeedWalk: 2
+  maxSpeedRun: 4
   cameraMain: {fileID: 844262806813105437}
   cameraPos: {fileID: 7763886565670185974}
-  stepRateWalk: 0.6
-  stepRateRun: 0.3
+  stepRateWalk: 0.7
+  stepRateRun: 0.4
   stepSounds:
   - {fileID: 8300000, guid: c22ba271f1e8c6249beeeeacc03e559a, type: 3}
   - {fileID: 8300000, guid: 50d3c0404ca8d5f4eb652fee1822644d, type: 3}
@@ -779,7 +779,7 @@ MonoBehaviour:
   tickRateStress: 1
   addStressValue: 5
   removeStressValue: 2
-  heartOnSfx: {fileID: 8300000, guid: f47ac91274edc5948aabb017c3d82500, type: 3}
+  heartOnSfx: {fileID: 8300000, guid: 24288de73cdfe9a429bfcd58c823b037, type: 3}
 --- !u!114 &5628578840177419116
 MonoBehaviour:
   m_ObjectHideFlags: 0

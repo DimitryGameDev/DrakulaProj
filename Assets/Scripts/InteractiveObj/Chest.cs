@@ -1,14 +1,23 @@
+using System;
 using UnityEngine;
 
 public class Chest : InteractiveObject
 {
     private Animator animator;
-    protected override void Start()
+
+    private void Awake()
     {
-        base.Start();
         animator = GetComponent<Animator>();
     }
 
+    public override void ShowText()
+    {
+        if (!wosActive)
+        {
+            base.ShowText();
+        }
+    }
+    
     public override void Use()
     {
         base.Use();
@@ -19,7 +28,6 @@ public class Chest : InteractiveObject
     private void OpenChest()
     {
         animator.enabled = true;
-        Destroy(this);
     }
     
     protected override void ObjectWosActive()

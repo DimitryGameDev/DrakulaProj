@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -38,11 +39,15 @@ public class LockPick : InteractiveObject
     private Vector2 screenMousePosition;
     
     private bool isOpening;
-    
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     protected override void Start()
     {
         base.Start();
-        audioSource = GetComponent<AudioSource>();
         character = Character.Instance.GetComponent<Character>();
         bag = Character.Instance.GetComponent<Bag>();
         dracula = Dracula.Instance;
@@ -160,7 +165,6 @@ public class LockPick : InteractiveObject
         audioSource.PlayOneShot(successOpenSfx);
         animator.SetBool("Open", true);
         Destroy(triggerCollider);
-        Destroy(this);
     }
 
     protected override void ObjectWosActive()
