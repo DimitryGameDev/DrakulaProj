@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -8,11 +9,15 @@ public class Lever : InteractiveObject
     [SerializeField] private AudioClip audioClip;
     
     private AudioSource audioSource;
-    
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     protected override void Start()
     {
         base.Start();
-        audioSource = GetComponent<AudioSource>();
         trigger.SetActive(false);
     }
 
