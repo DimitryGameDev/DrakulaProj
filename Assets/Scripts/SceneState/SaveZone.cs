@@ -15,6 +15,11 @@ public class SaveZone : InteractiveObject
     private InteractiveObject[] objects;
     private AudioSource audioSource;
     
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+    
     protected override void Start()
     {
         base.Start();
@@ -24,8 +29,6 @@ public class SaveZone : InteractiveObject
         onePersonCamera = OnePersonCamera.Instance;
         noiseLevel = NoiseLevel.Instance;
         characterInputController = CharacterInputController.Instance;
-        
-        audioSource = GetComponent<AudioSource>();
         bag = character.GetComponent<Bag>();
         objects = FindObjectsOfType<InteractiveObject>();
         

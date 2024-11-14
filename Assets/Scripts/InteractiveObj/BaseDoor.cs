@@ -6,7 +6,7 @@ public class BaseDoor : InteractiveObject
 {
     [Header("Door Settings")]
     [SerializeField] private Animator animator;
-    [SerializeField] private GameObject closedTrigger;
+    [SerializeField] private Collider closedTrigger;
     [SerializeField] private Collider openTrigger;
 
     private AudioSource audioSource;
