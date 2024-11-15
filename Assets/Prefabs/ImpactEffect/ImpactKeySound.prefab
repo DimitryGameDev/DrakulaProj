@@ -89,7 +89,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.9
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -142,4 +142,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 2
-  addKeySFX: {fileID: 8300000, guid: d8200dfe1a0b99440a764c8c0204bdd3, type: 3}
+  addKeySfx: {fileID: 8300000, guid: d8200dfe1a0b99440a764c8c0204bdd3, type: 3}

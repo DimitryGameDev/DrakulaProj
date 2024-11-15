@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,24 +8,37 @@ public class Trigger : MonoBehaviour
    [Header("Включить если EnterTrigger")]
    [SerializeField] private bool isEnable;
    public bool IsEnable => isEnable;
-   
-   [Header("Либо одно либо другое")]
-   [SerializeField] private PatrolPoint spawnPoint;
+
+   [Header("Выбрать что то одно")] 
+   [SerializeField] private bool randomSpawn;
+   [SerializeField] private DraculaPoint spawnPoint;
    [Space]
-   [SerializeField] private PatrolPoint[] spawnPoints;
+   [SerializeField] private DraculaPoint[] spawnPoints;
    
    [HideInInspector]public UnityEvent onTrigger;
    
+   private Dracula dracula;
    private void SpawnDraculaSpawnPoint()
    {
-      Dracula.Instance.DraculaSpawn(spawnPoint);
+      dracula.SetPoint(spawnPoint);
    }
    private void SpawnDraculaSpawnPoints()
    {
-      Dracula.Instance.DraculaSpawns(spawnPoints);
+      dracula.SetPoints(spawnPoints);
+   }
+   private void SpawnDraculaRandomPint()
+   {
+      dracula.RandomPoint(); 
    }
    private void Start()
    {
+      dracula = Dracula.Instance;
+      
+      if (randomSpawn)
+      {
+         onTrigger.AddListener(SpawnDraculaRandomPint);
+      }
+      
       if (spawnPoint)
       {
          onTrigger.AddListener(SpawnDraculaSpawnPoint);
@@ -37,7 +51,7 @@ public class Trigger : MonoBehaviour
       
       if (!isEnable)
       {
-         onTrigger.AddListener(Dracula.Instance.DraculaDisable);
+         onTrigger.AddListener(dracula.DraculaDespawn);
          gameObject.SetActive(false);
       }
    }
@@ -46,6 +60,7 @@ public class Trigger : MonoBehaviour
    {
       if (collision.transform.parent.GetComponent<Character>())
       {
+         if (dracula.enabled)return;
          onTrigger?.Invoke();
       }
    }

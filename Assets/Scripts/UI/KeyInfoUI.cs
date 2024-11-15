@@ -10,12 +10,12 @@ public class KeyInfoUI : MonoBehaviour
     {
         bag = Character.Instance.GetComponent<Bag>();
         
-        bag.ChangeKeyAmount.AddListener(ChangeText);
+        bag.changeKeyAmount.AddListener(ChangeText);
     }
 
     private void OnDestroy()
     {
-        bag.ChangeKeyAmount.RemoveAllListeners();
+        bag.changeKeyAmount.RemoveAllListeners();
     }
 
     private void ChangeText()

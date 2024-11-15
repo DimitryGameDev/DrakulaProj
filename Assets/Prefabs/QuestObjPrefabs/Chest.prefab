@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 45845488278310658}
   - component: {fileID: 5409721187358606651}
-  - component: {fileID: 683520003180563833}
   - component: {fileID: 1780102544734661669}
   m_Layer: 0
   m_Name: Chest
@@ -58,31 +57,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &683520003180563833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 287399384628396323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4602cd3d0f83452ba597aa28a56e6c65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  infoPanel: {fileID: 0}
-  infoPanelText: {fileID: 0}
-  infoText: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C"
-  infoTextAfterUse: 
-  onVision:
-    m_PersistentCalls:
-      m_Calls: []
-  onHide:
-    m_PersistentCalls:
-      m_Calls: []
-  onUse:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1780102544734661669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +69,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 577cc78a9eb03b04fa49bd4b9c4db773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infoText: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C (E)"
+  infoTextAfterUse: 
+  icon: {fileID: 0}
+  afterIcon: {fileID: 0}
+  timeBoxHide: 0.1
+  timeAfterText: 3
+  onVision:
+    m_PersistentCalls:
+      m_Calls: []
+  onHide:
+    m_PersistentCalls:
+      m_Calls: []
+  isAfterText: 0
 --- !u!1 &3497884599776139737
 GameObject:
   m_ObjectHideFlags: 0
