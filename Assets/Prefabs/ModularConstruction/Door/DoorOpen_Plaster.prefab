@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2655042501004471522, guid: 74334143385ad6242bd99017537af13f, type: 3}
       propertyPath: m_Name
-      value: DoorOpen_Plaster Variant
+      value: DoorOpen_Plaster
       objectReference: {fileID: 0}
     - target: {fileID: 3417338323624638119, guid: 74334143385ad6242bd99017537af13f, type: 3}
       propertyPath: m_Size.z
@@ -76,6 +76,8 @@ PrefabInstance:
     - {fileID: 3946173549995593464, guid: 74334143385ad6242bd99017537af13f, type: 3}
     - {fileID: 8076985823175407724, guid: 74334143385ad6242bd99017537af13f, type: 3}
     - {fileID: 4537594667166556563, guid: 74334143385ad6242bd99017537af13f, type: 3}
+    - {fileID: 6275940565026925622, guid: 74334143385ad6242bd99017537af13f, type: 3}
+    - {fileID: 6243670371182344389, guid: 74334143385ad6242bd99017537af13f, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3861767461281367394, guid: 74334143385ad6242bd99017537af13f, type: 3}
