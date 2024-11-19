@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -69,5 +70,12 @@ public class Bag : MonoBehaviour
     {
         medalCount--;
         changeMedalAmount.Invoke();
+    }
+    
+    public void Reset()
+    {
+        medalPieceCount = 0;
+        medalCount = 0;
+        keyAmount = 0;
     }
 }

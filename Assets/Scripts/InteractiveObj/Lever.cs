@@ -18,7 +18,7 @@ public class Lever : InteractiveObject
     protected override void Start()
     {
         base.Start();
-        trigger.SetActive(false);
+        //trigger.SetActive(false);
     }
 
     public override void Use()

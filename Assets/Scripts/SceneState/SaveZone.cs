@@ -66,6 +66,8 @@ public class SaveZone : InteractiveObject
 
     private void LoadSceneState()
     {
+        bag.Reset();
+        
         for (int i = 0; i < objects.Length; i++) objects[i].LoadState();
         
         if (playerState.GetPlayerPos() != Vector3.zero)character.transform.position = playerState.GetPlayerPos();

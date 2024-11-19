@@ -94,6 +94,12 @@ public class Dracula : SingletonBase<Dracula>
     private int lastValue;
     private void SpeedChange(int value)
     {
+        if (value == 0)
+        {
+            lastValue = 0;
+            spawnSpeed = maxSpawnSpeed;
+            return;
+        }
         var changeSpeed = maxSpawnSpeed / NoiseLevel.Instance.MaxLevel;
         
         if (lastValue < value)
@@ -188,10 +194,13 @@ public class Dracula : SingletonBase<Dracula>
     }
     public void RandomPoint()
     {
-        DraculaPoint rand = spawnPositions[Random.Range(0, spawnPositions.Length)];
-        transform.position = rand.transform.position;
-        draculaPoint = rand;
-        Spawn(rand);
+        if (spawnPositions.Length !=0)
+        {
+            DraculaPoint rand = spawnPositions[Random.Range(0, spawnPositions.Length)];
+            transform.position = rand.transform.position;
+            draculaPoint = rand;
+            Spawn(rand);
+        }
     }
     
     public void SetPoint(DraculaPoint spawnPoint)
@@ -245,7 +254,7 @@ public class Dracula : SingletonBase<Dracula>
     public void DraculaDisable()
     {
         lastPosition = transform.position;
-        transform.position = Vector3.zero;
+        transform.position =new Vector3(100,100,100);
         timer = 0;
         enabled = false;
     }

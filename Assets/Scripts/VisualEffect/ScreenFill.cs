@@ -17,12 +17,12 @@ public class ScreenFill : MonoBehaviour
    {
       if (isFill)
       {
-         image.color = new Color(image.color.r, image.color.g, image.color.b, Mathf.MoveTowards(image.color.a, 1, Time.deltaTime / 2));
+         image.color = new Color(image.color.r, image.color.g, image.color.b, Mathf.MoveTowards(image.color.a, 1, Time.deltaTime / 4));
          if (Mathf.Approximately(image.color.a, 1)) isFill = false;
       }
       else
       {
-         image.color = new Color(image.color.r, image.color.g, image.color.b, Mathf.MoveTowards(image.color.a, 0, Time.deltaTime / 2));
+         image.color = new Color(image.color.r, image.color.g, image.color.b, Mathf.MoveTowards(image.color.a, 0, Time.deltaTime / 4));
       }
       
       if (image.color.a == 0) enabled = false;
