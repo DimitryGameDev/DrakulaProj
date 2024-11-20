@@ -31,7 +31,7 @@ public class Lever : InteractiveObject
 
     public void Open()
     {
-        trigger.SetActive(true);
+         //trigger.SetActive(true);
         audioSource.PlayOneShot(audioClip);
         animator.SetBool("Open", true);
         
