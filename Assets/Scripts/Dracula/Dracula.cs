@@ -221,7 +221,7 @@ public class Dracula : SingletonBase<Dracula>
     private void Spawn(DraculaPoint spawnPoint)
     {
         isSpawning = true;
-        source.PlayOneShot(spawnClips[Random.Range(0,spawnClips.Length)]);
+        //source.PlayOneShot(spawnClips[Random.Range(0,spawnClips.Length)]);
         draculaPrefab = Instantiate(GetDraculaPrefab(spawnPoint), transform.position, Quaternion.identity, transform);
         draculaMeshRenderer = draculaPrefab.GetComponent<MeshRenderer>();
         draculaMeshRenderer.enabled = false;
