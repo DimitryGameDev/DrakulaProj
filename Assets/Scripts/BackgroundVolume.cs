@@ -19,6 +19,12 @@ public abstract class BackgroundVolume<T> : SingletonBase<BackgroundVolume<T>> w
     {
         if (playing)
         {
+            if (audioSource.isPlaying && currentClip != nextClip)
+            {
+                audioSource.volume = Mathf.MoveTowards(audioSource.volume,0f, Time.deltaTime);
+                if (audioSource.volume != 0) return;
+            }
+            
             if (audioSource.clip != nextClip)
             {
                 audioSource.volume = 0;
@@ -26,12 +32,6 @@ public abstract class BackgroundVolume<T> : SingletonBase<BackgroundVolume<T>> w
                 audioSource.clip = currentClip;
                 audioSource.Play();
             } 
-            
-            if (audioSource.isPlaying && currentClip != nextClip)
-            {
-                audioSource.volume = Mathf.MoveTowards(audioSource.volume,0f, Time.deltaTime);
-                return;
-            }
             
             audioSource.volume = Mathf.MoveTowards(audioSource.volume,0.6f, Time.deltaTime);
             if (Mathf.Approximately(audioSource.volume, 0.6f)) enabled = false;

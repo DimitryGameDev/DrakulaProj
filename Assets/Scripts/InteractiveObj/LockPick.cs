@@ -65,7 +65,7 @@ public class LockPick : InteractiveObject
             ShowAfterText();
         }
 
-        if (draculaDoor && bag.GetMedalAmount() <= 0)
+        if (draculaDoor && bag.GetMedalPeaceAmount() < 3)
         {
             ShowAfterText();
         }
@@ -73,7 +73,7 @@ public class LockPick : InteractiveObject
 
     private void StartUnlock()
     {
-        if (draculaDoor && bag.GetMedalAmount() > 0)
+        if (draculaDoor && bag.GetMedalPeaceAmount() >= 3)
             MiniGame();
 
         if (!draculaDoor)
@@ -147,7 +147,7 @@ public class LockPick : InteractiveObject
     {
         if (draculaDoor)
         {
-            bag.RemoveMedal();
+            bag.RemoveMedalPiece();
         }
 
         OpenDoor();
