@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class InteractiveObject: VisibleObject
 {
     [Header("Settings")]
@@ -11,6 +12,7 @@ public class InteractiveObject: VisibleObject
     [Tooltip("Как быстро скрывается UI, после отвода камеры")][SerializeField] private float  timeBoxHide = 0.1f;
     [Tooltip("Как быстро скрывается UI ,после применения")][SerializeField] private float  timeAfterText = 3f;
     
+    protected AudioSource AudioSource;
     protected bool wosActive;
     public bool WosActive => wosActive;
     
@@ -21,7 +23,12 @@ public class InteractiveObject: VisibleObject
     public bool IsAfterText => isAfterText;
     
     protected InteractiveBoxUI InteractiveBoxUI;
-    
+
+    private void Awake()
+    {
+        AudioSource = GetComponent<AudioSource>();
+    }
+
     protected virtual void Start()
     {
         InteractiveBoxUI = InteractiveBoxUI.Instance;

@@ -26,8 +26,7 @@ public class LockPick : InteractiveObject
     [Header("SFX")]
     [SerializeField] private AudioClip successOpenSfx;
     [SerializeField] private AudioClip failOpenSfx;
-
-    private AudioSource audioSource;
+    
     private OnePersonCamera onePersonCamera;
     private Character character;
     private Bag bag;
@@ -39,12 +38,7 @@ public class LockPick : InteractiveObject
     private Vector2 screenMousePosition;
     
     private bool isOpening;
-
-    private void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
-
+    
     protected override void Start()
     {
         base.Start();
@@ -122,7 +116,7 @@ public class LockPick : InteractiveObject
             NoiseLevel.Instance.IncreaseLevel();
             ResetPoint();
             
-            audioSource.PlayOneShot(failOpenSfx);
+            AudioSource.PlayOneShot(failOpenSfx);
         }
     }
 
@@ -161,10 +155,10 @@ public class LockPick : InteractiveObject
 
     public void OpenDoor()
     {
-        wosActive = true;
-        audioSource.PlayOneShot(successOpenSfx);
+        if (!wosActive)  AudioSource.PlayOneShot(successOpenSfx);
         animator.SetBool("Open", true);
         Destroy(triggerCollider);
+        wosActive = true;
     }
 
     protected override void ObjectWosActive()

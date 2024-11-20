@@ -8,19 +8,8 @@ public class BaseDoor : InteractiveObject
     [SerializeField] private Animator animator;
     [SerializeField] private Collider closedTrigger;
     [SerializeField] private Collider openTrigger;
-
-    private AudioSource audioSource;
-
-    private void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
-
-    protected override void Start()
-    {
-        base.Start();
-    }
-
+    [SerializeField] private AudioClip openSound;
+    
     public override void Use()
     {
         base.Use();
@@ -32,8 +21,9 @@ public class BaseDoor : InteractiveObject
     {
         if(animator)
             animator.SetBool("Open", true);
-        audioSource.Play();
-
+        
+        if (!wosActive) AudioSource.PlayOneShot(openSound);
+        
         if (closedTrigger)
             Destroy(closedTrigger);
         if (openTrigger)

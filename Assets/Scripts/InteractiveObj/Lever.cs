@@ -7,13 +7,6 @@ public class Lever : InteractiveObject
     [SerializeField] private GameObject trigger;
     [SerializeField] private Animator animator;
     [SerializeField] private AudioClip audioClip;
-    
-    private AudioSource audioSource;
-
-    private void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
 
     protected override void Start()
     {
@@ -31,10 +24,9 @@ public class Lever : InteractiveObject
 
     public void Open()
     {
-         //trigger.SetActive(true);
-        audioSource.PlayOneShot(audioClip);
+        //trigger.SetActive(true);
+        if (!wosActive)AudioSource.PlayOneShot(audioClip);
         animator.SetBool("Open", true);
-        
     }
     
     protected override void ObjectWosActive()

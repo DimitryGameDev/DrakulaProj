@@ -13,12 +13,7 @@ public class SaveZone : InteractiveObject
     private Bag bag;
     private NoiseLevel noiseLevel;
     private InteractiveObject[] objects;
-    private AudioSource audioSource;
-    
-    private void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
+    private Dracula dracula;
     
     protected override void Start()
     {
@@ -29,6 +24,7 @@ public class SaveZone : InteractiveObject
         onePersonCamera = OnePersonCamera.Instance;
         noiseLevel = NoiseLevel.Instance;
         characterInputController = CharacterInputController.Instance;
+        dracula = Dracula.Instance;
         bag = character.GetComponent<Bag>();
         objects = FindObjectsOfType<InteractiveObject>();
         
@@ -45,7 +41,7 @@ public class SaveZone : InteractiveObject
         {
             SaveSceneState();
             ShowAfterText();
-            audioSource.Play();
+            AudioSource.Play();
         }
     }
     
@@ -54,14 +50,14 @@ public class SaveZone : InteractiveObject
         BacgroundMusic.Instance.Play(backgroundMusic);
         base.ShowText();
         InteractiveBoxUI.HideCursor();
-        if (Dracula.Instance) Dracula.Instance.DraculaDespawn();
+        if (dracula) dracula.DraculaDespawn();
         noiseLevel.SetZeroLevel();
     }
 
     public void ExitTrigger()
     {
         BacgroundMusic.Instance.Stop();
-        if (Dracula.Instance) Dracula.Instance.RandomPoint();
+        if (dracula) dracula.RandomPoint();
     }
 
     private void LoadSceneState()
