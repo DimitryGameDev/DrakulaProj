@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class StateManager : SingletonBase<StateManager>
@@ -10,6 +11,10 @@ public class StateManager : SingletonBase<StateManager>
     private InteractiveObject[] objects;
     private Character character;
 
+    private void Awake()
+    {
+        Init();
+    }
     private void Start()
     {
         interactiveState = InteractiveState.Instance;
@@ -30,9 +35,9 @@ public class StateManager : SingletonBase<StateManager>
         if (playerState.GetPlayerPos() != Vector3.zero)character.transform.position = playerState.GetPlayerPos();
         if (playerState.GetCameraPos() != Vector3.zero) onePersonCamera.transform.position = playerState.GetCameraPos();
         if (playerState.GetSprintAmount() != 0) characterInputController.SetSpeedTime(playerState.GetSprintAmount());
+        if (playerState.GetKeyAmount() != 0) bag.AddKey(playerState.GetKeyAmount());
+        if (playerState.GetMedalAmount() !=0) bag.AddMedalPiece(playerState.GetMedalAmount());
         
-        bag.AddKey(playerState.GetKeyAmount());
-        bag.AddMedalPiece(playerState.GetMedalAmount());
         characterInputController.pickUpHeart = playerState.GetHeartState();
     }
     
