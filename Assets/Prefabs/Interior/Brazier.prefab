@@ -44,6 +44,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6764192571173379540}
   - component: {fileID: 1560002175564673094}
+  - component: {fileID: 45358813155800489}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -128,6 +129,29 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &45358813155800489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3864285104809458133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &4126616635684205099
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +164,7 @@ GameObject:
   - component: {fileID: 6261325195237846794}
   - component: {fileID: 1193268413538489373}
   m_Layer: 0
-  m_Name: Particle
+  m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

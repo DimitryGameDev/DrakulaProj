@@ -1,8 +1,8 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(VisibleObject))]
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(PathBuilder))]
 public class Dracula : SingletonBase<Dracula>
@@ -53,8 +53,8 @@ public class Dracula : SingletonBase<Dracula>
     {
         CharacterInputController.Instance.heartOn.AddListener(ToggleHeartOn);
         CharacterInputController.Instance.heartOff.AddListener(ToggleHeartOff);
-        GetComponent<VisibleObject>().onVision.AddListener(ToggleVisionOn);
-        GetComponent<VisibleObject>().onHide.AddListener(ToggleVisionOff);
+        GetComponentInChildren<VisibleObject>().onVision.AddListener(ToggleVisionOn);
+        GetComponentInChildren<VisibleObject>().onHide.AddListener(ToggleVisionOff);
         
         NoiseLevel.Instance.OnChange += SpeedChange;
         
@@ -93,6 +93,12 @@ public class Dracula : SingletonBase<Dracula>
     private int lastValue;
     private void SpeedChange(int value)
     {
+        if (value == 0)
+        {
+            lastValue = 0;
+            spawnSpeed = maxSpawnSpeed;
+            return;
+        }
         var changeSpeed = maxSpawnSpeed / NoiseLevel.Instance.MaxLevel;
         
         if (lastValue < value)
@@ -187,9 +193,13 @@ public class Dracula : SingletonBase<Dracula>
     }
     public void RandomPoint()
     {
-        DraculaPoint rand = spawnPositions[Random.Range(0, spawnPositions.Length)];
-        transform.position = rand.transform.position;
-        Spawn(rand);
+        if (spawnPositions.Length !=0)
+        {
+            DraculaPoint rand = spawnPositions[Random.Range(0, spawnPositions.Length)];
+            transform.position = rand.transform.position;
+            draculaPoint = rand;
+            Spawn(rand);
+        }
     }
     
     public void SetPoint(DraculaPoint spawnPoint)
@@ -210,7 +220,7 @@ public class Dracula : SingletonBase<Dracula>
     private void Spawn(DraculaPoint spawnPoint)
     {
         isSpawning = true;
-        source.PlayOneShot(spawnClips[Random.Range(0,spawnClips.Length)]);
+        //source.PlayOneShot(spawnClips[Random.Range(0,spawnClips.Length)]);
         draculaPrefab = Instantiate(GetDraculaPrefab(spawnPoint), transform.position, Quaternion.identity, transform);
         draculaMeshRenderer = draculaPrefab.GetComponent<MeshRenderer>();
         draculaMeshRenderer.enabled = false;
@@ -226,19 +236,34 @@ public class Dracula : SingletonBase<Dracula>
         }
     }
     
+    public void DraculaIndestructible(float time)
+    {
+        StartCoroutine(TemporaryShutdown(time));
+    }
+
+    private IEnumerator TemporaryShutdown(float time)
+    {
+        DraculaDisable();
+        yield return new WaitForSeconds(time);
+        Debug.Log("Dracula enable again");
+        DraculaEnable();
+    }
+    
     private Vector3 lastPosition;
     public void DraculaDisable()
     {
         lastPosition = transform.position;
-        transform.position = Vector3.zero;
+        transform.position =new Vector3(100,100,100);
         timer = 0;
         enabled = false;
     }
+    
     public void DraculaDespawn()
     {
         DraculaDisable();
         builder.ClearPath();
         isSpawning = false;
+        enabled = false;
     }
     
     private void DraculaMove()
@@ -247,7 +272,12 @@ public class Dracula : SingletonBase<Dracula>
         
         var movePoint = builder.GetDraculaPoint(draculaPoint,playerPoint,minDistanceToNextPp);
 
-        if (movePoint == null) return;
+        if (movePoint == null)
+        {
+            DraculaDespawn();
+            RandomPoint();
+            return;
+        }
         
         if (movePoint.IsPlayer)
         {

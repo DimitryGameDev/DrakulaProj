@@ -852,6 +852,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7187462cd332a0541b8e0e2d0ce61496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onVision:
+    m_PersistentCalls:
+      m_Calls: []
+  onHide:
+    m_PersistentCalls:
+      m_Calls: []
   infoText: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C
     \u043E\u0442\u043C\u044B\u0447\u043A\u0443 (\u0415)"
   infoTextAfterUse: "\u041D\u0443\u0436\u043D\u0430 \u043E\u0442\u043C\u044B\u0447\u043A\u0430"
@@ -859,12 +865,6 @@ MonoBehaviour:
   afterIcon: {fileID: 0}
   timeBoxHide: 0.1
   timeAfterText: 3
-  onVision:
-    m_PersistentCalls:
-      m_Calls: []
-  onHide:
-    m_PersistentCalls:
-      m_Calls: []
   draculaDoor: 0
   cameraTarget: {fileID: 1015965497134504957}
   triggerCollider: {fileID: 3866016683577980266}
@@ -874,8 +874,8 @@ MonoBehaviour:
   panel: {fileID: 0}
   background: {fileID: 0}
   point: {fileID: 0}
-  successOpenSFX: {fileID: 8300000, guid: a2fc029b53f30484d828afaf1264f812, type: 3}
-  failOpenSFX: {fileID: 8300000, guid: 31dd0dae2f02ba640afccf78dfe90217, type: 3}
+  successOpenSfx: {fileID: 8300000, guid: a2fc029b53f30484d828afaf1264f812, type: 3}
+  failOpenSfx: {fileID: 8300000, guid: 31dd0dae2f02ba640afccf78dfe90217, type: 3}
 --- !u!82 &4721622087472371607
 AudioSource:
   m_ObjectHideFlags: 0
@@ -896,8 +896,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 3.4610658
-  MaxDistance: 500
+  MinDistance: 1
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -932,7 +932,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.9
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

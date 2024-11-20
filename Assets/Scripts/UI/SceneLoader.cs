@@ -6,6 +6,13 @@ public class SceneLoader : MonoBehaviour
     public void NewGame()
     {
         SceneManager.LoadScene(1);
+        FileHandler.Reset("PlayerState.dat");
+        FileHandler.Reset("InteractiveState.dat");
+    }
+
+    public void LoadGame()
+    {
+        SceneManager.LoadScene(2);
     }
 
     public void MainMenu()
@@ -17,4 +24,6 @@ public class SceneLoader : MonoBehaviour
     {
         Application.Quit();
     }
+    
+    
 }

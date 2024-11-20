@@ -9,7 +9,7 @@ public class VisibleObject : MonoBehaviour
     public UnityAction<VisibleObject> Ondestroy;
         
     /// <summary>
-    ///Вызывается когда камера игрока в режиме сердца видит обьект видит обьект
+    ///Вызывается когда камера игрока в режиме сердца видит обьект
     /// </summary>
     public virtual void InCamera()
     {

@@ -1,14 +1,11 @@
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class PlateTrap : VisibleObject
+public class PlateTrap : InteractiveObject
 {
     [SerializeField] private AudioClip floorSound;
     [SerializeField] private Collider trapPlateCollider;
-   // [SerializeField] Collider normalPlate;
     [SerializeField] MeshRenderer trapPlateMesh;
-    
-    private AudioSource audioSource;
     private NoiseLevel noiseLevel;
     
     void OnTriggerEnter(Collider other)
@@ -18,15 +15,16 @@ public class PlateTrap : VisibleObject
             if (other.transform.parent.CompareTag("Player"))
             {
                 noiseLevel.IncreaseLevel();
-                audioSource.PlayOneShot(floorSound);
-                Debug.Log(noiseLevel.CurrentLevel);
+                AudioSource.PlayOneShot(floorSound);
             }
         }
     }
+
+    public override void ShowText(){}
     
-    void Start()
+    protected override void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        base.Start();;
         noiseLevel = NoiseLevel.Instance;
         trapPlateMesh.enabled = false;
     } 

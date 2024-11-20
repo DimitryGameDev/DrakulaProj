@@ -1,15 +1,14 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Bag : MonoBehaviour
 {   
     [SerializeField] private float countPieceForMedal;
-    private int medalCount;
     private int medalPieceCount;
     private int keyAmount;
-
+    
     [HideInInspector]public UnityEvent changeKeyAmount;
-    [HideInInspector]public UnityEvent changeMedalAmount;
     [HideInInspector]public UnityEvent changeMedalPieceAmount;
 
     public void AddKey(int amount)
@@ -35,31 +34,18 @@ public class Bag : MonoBehaviour
     
     public void AddMedalPiece(int pieceCount)
     {
-        if (Mathf.Approximately(medalPieceCount + pieceCount, countPieceForMedal))
-        {
-            AddMedal();
-            medalPieceCount = 1;
-            changeMedalPieceAmount.Invoke();
-            return;
-        }
         medalPieceCount += pieceCount;
         changeMedalPieceAmount.Invoke();
     }
 
-    public int GetMedalAmount()
-    {
-        return medalCount;
+    public int GetMedalPeaceAmount()
+    { 
+        return medalPieceCount;
     }
 
-    private void AddMedal()
+    public void RemoveMedalPiece()
     {
-        medalCount++;
-        changeMedalAmount.Invoke();
+        medalPieceCount = 0;
     }
     
-    public void RemoveMedal()
-    {
-        medalCount--;
-        changeMedalAmount.Invoke();
-    }
 }
