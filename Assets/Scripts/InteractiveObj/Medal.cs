@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Medal : InteractiveObject
@@ -6,13 +8,29 @@ public class Medal : InteractiveObject
     [SerializeField] private int countPiece;
     [SerializeField] private GameObject impactEffect;
     [SerializeField] private GameObject visualModel;
-
+    [SerializeField] private AudioClip medalSound;
     public override void Use()
     {
         base.Use();
         PickUp();
         ShowAfterText();
         wosActive = true;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        if (!wosActive)
+        {
+            AudioSource.clip = medalSound;
+            AudioSource.Play();
+        }
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        
     }
 
     private void PickUp()

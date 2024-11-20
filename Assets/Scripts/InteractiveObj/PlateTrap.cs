@@ -5,10 +5,7 @@ public class PlateTrap : InteractiveObject
 {
     [SerializeField] private AudioClip floorSound;
     [SerializeField] private Collider trapPlateCollider;
-   // [SerializeField] Collider normalPlate;
     [SerializeField] MeshRenderer trapPlateMesh;
-    
-    private AudioSource audioSource;
     private NoiseLevel noiseLevel;
     
     void OnTriggerEnter(Collider other)
@@ -18,7 +15,7 @@ public class PlateTrap : InteractiveObject
             if (other.transform.parent.CompareTag("Player"))
             {
                 noiseLevel.IncreaseLevel();
-                audioSource.PlayOneShot(floorSound);
+                AudioSource.PlayOneShot(floorSound);
                 Debug.Log(noiseLevel.CurrentLevel);
             }
         }
@@ -29,7 +26,6 @@ public class PlateTrap : InteractiveObject
     protected override void Start()
     {
         base.Start();;
-        audioSource = GetComponent<AudioSource>();
         noiseLevel = NoiseLevel.Instance;
         trapPlateMesh.enabled = false;
     } 
