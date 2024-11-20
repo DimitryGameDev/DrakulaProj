@@ -1,0 +1,48 @@
+using UnityEngine;
+
+public class StateManager : SingletonBase<StateManager>
+{    
+    private InteractiveState interactiveState;
+    private PlayerState playerState;
+    private OnePersonCamera onePersonCamera;
+    private CharacterInputController characterInputController;
+    private Bag bag;
+    private InteractiveObject[] objects;
+    private Character character;
+
+    private void Start()
+    {
+        interactiveState = InteractiveState.Instance;
+        playerState = PlayerState.Instance;
+        character = (Character)Character.Instance;
+        onePersonCamera = OnePersonCamera.Instance;
+        characterInputController = CharacterInputController.Instance;
+        bag = character.GetComponent<Bag>();
+        objects = FindObjectsOfType<InteractiveObject>();
+
+        LoadSceneState();
+    }
+    
+    private void LoadSceneState()
+    {
+        for (int i = 0; i < objects.Length; i++) objects[i].LoadState();
+        
+        if (playerState.GetPlayerPos() != Vector3.zero)character.transform.position = playerState.GetPlayerPos();
+        if (playerState.GetCameraPos() != Vector3.zero) onePersonCamera.transform.position = playerState.GetCameraPos();
+        if (playerState.GetSprintAmount() != 0) characterInputController.SetSpeedTime(playerState.GetSprintAmount());
+        
+        bag.AddKey(playerState.GetKeyAmount());
+        bag.AddMedalPiece(playerState.GetMedalAmount());
+        characterInputController.pickUpHeart = playerState.GetHeartState();
+    }
+    
+    public void SaveSceneState()
+    {
+        for (int i = 0; i < objects.Length; i++)
+        {
+            interactiveState.Save(objects[i],objects[i].WosActive);
+        }
+        
+        playerState.Save(character.transform.position,onePersonCamera.transform.position, bag.GetKeyAmount(),bag.GetMedalPeaceAmount(),characterInputController.TimeSprint,characterInputController.pickUpHeart);
+    }
+}
