@@ -18,13 +18,13 @@ public  class Saver<T>
         }
         else
         {
-            Debug.Log($"The file was not found :{FileHandler.Path(fileName)}");
+           // Debug.Log($"The file was not found :{FileHandler.Path(fileName)}");
         }
     }
 
     public static void Save(string fileName, T data)
     {
-        Debug.Log($"File saving to :{FileHandler.Path(fileName)}");
+        //Debug.Log($"File saving to :{FileHandler.Path(fileName)}");
         var wrapper = new Saver<T>{data = data};
         var dataString = JsonUtility.ToJson(wrapper);
         File.WriteAllText(FileHandler.Path(fileName), dataString);

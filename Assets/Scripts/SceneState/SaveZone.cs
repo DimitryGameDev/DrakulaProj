@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SaveZone : InteractiveObject
+public class SaveZone : InteractiveObject 
 {
     [Header("SaveZone Settings")]
     [SerializeField]private AudioClip backgroundMusic;
@@ -47,7 +47,7 @@ public class SaveZone : InteractiveObject
     
     public void EnterTrigger()
     {
-        BacgroundMusic.Instance.Play(backgroundMusic);
+        BackgroundMusic.Instance.Play(backgroundMusic);
         base.ShowText();
         InteractiveBoxUI.HideCursor();
         if (dracula) dracula.DraculaDespawn();
@@ -56,7 +56,7 @@ public class SaveZone : InteractiveObject
 
     public void ExitTrigger()
     {
-        BacgroundMusic.Instance.Stop();
+        BackgroundMusic.Instance.Stop();
         if (dracula) dracula.RandomPoint();
     }
 

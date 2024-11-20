@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Medal : InteractiveObject
@@ -20,23 +18,14 @@ public class Medal : InteractiveObject
     protected override void Start()
     {
         base.Start();
-        if (!wosActive)
-        {
-            AudioSource.clip = medalSound;
-            AudioSource.Play();
-        }
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-        
+        AudioSource.clip = medalSound;
+        AudioSource.Play();
     }
 
     private void PickUp()
     {
         Character.Instance.GetComponent<Bag>().AddMedalPiece(countPiece);
-        
+        AudioSource.Stop();
         if (impactEffect)
             Instantiate(impactEffect, transform.position, Quaternion.identity);
         
@@ -44,6 +33,7 @@ public class Medal : InteractiveObject
     }
     protected override void ObjectWosActive()
     {
+        AudioSource.Stop();
         Destroy(visualModel);   
     }
 }

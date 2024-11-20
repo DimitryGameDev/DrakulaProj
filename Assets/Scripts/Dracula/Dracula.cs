@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(VisibleObject))]
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(PathBuilder))]
 public class Dracula : SingletonBase<Dracula>
@@ -54,8 +53,8 @@ public class Dracula : SingletonBase<Dracula>
     {
         CharacterInputController.Instance.heartOn.AddListener(ToggleHeartOn);
         CharacterInputController.Instance.heartOff.AddListener(ToggleHeartOff);
-        GetComponent<VisibleObject>().onVision.AddListener(ToggleVisionOn);
-        GetComponent<VisibleObject>().onHide.AddListener(ToggleVisionOff);
+        GetComponentInChildren<VisibleObject>().onVision.AddListener(ToggleVisionOn);
+        GetComponentInChildren<VisibleObject>().onHide.AddListener(ToggleVisionOff);
         
         NoiseLevel.Instance.OnChange += SpeedChange;
         

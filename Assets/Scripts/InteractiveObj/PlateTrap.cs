@@ -16,7 +16,6 @@ public class PlateTrap : InteractiveObject
             {
                 noiseLevel.IncreaseLevel();
                 AudioSource.PlayOneShot(floorSound);
-                Debug.Log(noiseLevel.CurrentLevel);
             }
         }
     }
