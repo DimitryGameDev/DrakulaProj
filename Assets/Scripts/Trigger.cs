@@ -20,11 +20,11 @@ public class Trigger : MonoBehaviour
    private Dracula dracula;
    private void SpawnDraculaSpawnPoint()
    {
-      dracula.SetPoint(spawnPoint);
+      dracula.SetSpawnPoint(spawnPoint);
    }
    private void SpawnDraculaSpawnPoints()
    {
-      dracula.SetPoints(spawnPoints);
+      dracula.SetSpawnPoints(spawnPoints);
    }
    private void SpawnDraculaRandomPint()
    {
