@@ -131,7 +131,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
             timeHeart -= Time.deltaTime;
         }
         
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             if (timeHeart <= 0)
             {
@@ -142,7 +142,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
             }
         }
         
-        if (Input.GetKeyUp(KeyCode.F))
+        if (Input.GetKeyUp(KeyCode.Mouse1))
         {
             HeartEnabled = false;
             isMove = true;

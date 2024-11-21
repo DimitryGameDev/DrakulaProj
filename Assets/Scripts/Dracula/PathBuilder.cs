@@ -23,6 +23,14 @@ public class PathBuilder : MonoBehaviour
         potentialPath = new List<PatrolPoint>();
         currentTarget = Character.Instance.GetComponent<DraculaPoint>();
     }
+
+    public void ResetPath()
+    {
+        if (currentPatrolPoint != null && currentTarget != null)
+        {
+            SetProperties(currentPatrolPoint,currentTarget,rad);
+        }
+    }
     
     public DraculaPoint GetDraculaPoint(PatrolPoint currentPoint , PatrolPoint targetPoint,int radius)
     {
@@ -38,7 +46,13 @@ public class PathBuilder : MonoBehaviour
                 return (DraculaPoint)firstPatrolPoint;
             }
         }
-        
+        /*
+        if (Vector3.Distance(lastPosTarget,targetPoint.transform.position) >= 3)
+        {
+            SetProperties(currentPoint, targetPoint, radius);
+            return (DraculaPoint)firstPatrolPoint;
+        }
+       */ 
         if (index == pathPatrolPoints.Count - 2)
         {
             SetProperties(currentPoint, targetPoint, radius);
@@ -59,9 +73,12 @@ public class PathBuilder : MonoBehaviour
 
     
     #region PathLogic
+
+    private Vector3 lastPosTarget;
     private void SetProperties(PatrolPoint currentPoint, PatrolPoint targetPoint, int radius)
     {
         ClearPath();
+        lastPosTarget = targetPoint.transform.position;
         currentTarget = targetPoint;
         currentPatrolPoint = currentPoint;
         rad = radius;

@@ -9,6 +9,7 @@ public class Bag : MonoBehaviour
     
     [HideInInspector]public UnityEvent changeKeyAmount;
     [HideInInspector]public UnityEvent changeMedalPieceAmount;
+    [HideInInspector]public UnityEvent addMedalPieceAmount;
 
     public void AddKey(int amount)
     {
@@ -34,7 +35,11 @@ public class Bag : MonoBehaviour
     public void AddMedalPiece(int pieceCount)
     {
         medalPieceCount += pieceCount;
-        changeMedalPieceAmount.Invoke();
+        for (int i = 0; i < pieceCount; i++)
+        {
+            changeMedalPieceAmount.Invoke();
+            addMedalPieceAmount.Invoke();
+        }
     }
 
     public int GetMedalPeaceAmount()
