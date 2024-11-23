@@ -182,6 +182,7 @@ public class LockPick : InteractiveObject
         panel.SetActive(false);
         
         Cursor.visible = false;
+        Cursor.SetCursor(null,Vector2.zero, CursorMode.Auto);
         Cursor.lockState = CursorLockMode.Locked;
         
         point.anchoredPosition = Vector2.zero;

@@ -9,8 +9,9 @@ public class CheatCode : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            Debug.Log("Сердце получено");
-            CharacterInputController.Instance.pickUpHeart = true;
+            Debug.Log("Мушкет получен");
+            CharacterInputController.Instance.IsRiflePickup = true;
+            Character.Instance.GetComponentInChildren<Bag>().AddProjectile(10);
         }
 
         if (Input.GetKeyDown(KeyCode.F2))

@@ -6,8 +6,10 @@ public class Bag : MonoBehaviour
     [SerializeField] private float countPieceForMedal;
     private int medalPieceCount;
     private int keyAmount;
+    private int projectileAmount;
     
     [HideInInspector]public UnityEvent changeKeyAmount;
+    [HideInInspector]public UnityEvent changeProjectileAmount;
     [HideInInspector]public UnityEvent changeMedalPieceAmount;
     [HideInInspector]public UnityEvent addMedalPieceAmount;
 
@@ -30,6 +32,27 @@ public class Bag : MonoBehaviour
     public int GetKeyAmount()
     {
         return keyAmount;
+    }
+    
+    public void AddProjectile(int amount)
+    {
+        projectileAmount += amount;
+        changeProjectileAmount?.Invoke();
+    }
+    
+    public bool DrawProjectile(int amount)
+    {
+        if (projectileAmount - amount < 0) return false;
+
+        projectileAmount -= amount;
+        changeProjectileAmount?.Invoke();
+
+        return true;
+    }
+    
+    public int GetProjectileAmount()
+    {
+        return projectileAmount;
     }
     
     public void AddMedalPiece(int pieceCount)

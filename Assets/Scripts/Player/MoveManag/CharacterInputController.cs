@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class CharacterInputController : SingletonBase<CharacterInputController>
 {    
@@ -19,10 +20,13 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     public bool HeartEnabled { get; private set; }
 
-    [HideInInspector] public bool pickUpHeart;
+    [HideInInspector] public bool IsRiflePickup;
     
     [HideInInspector] public UnityEvent heartOn;
     [HideInInspector] public UnityEvent heartOff;
+    [HideInInspector] public UnityEvent rifleOn;
+    [HideInInspector] public UnityEvent rifleOff;
+    [HideInInspector] public UnityEvent rifleShoot;
     [HideInInspector] public UnityEvent draculaAnim;
 
     private float sprintTimer;
@@ -61,6 +65,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         MainRay();
         AdminCameraMove();
         HeartState();
+        RifleState();
     }
 
     private const string Horizontal = "Horizontal";
@@ -120,12 +125,9 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         
         character.CameraMove(dirX, dirY);
     }
-
-
+    
     private void HeartState()
     {
-        if(!pickUpHeart) return;
-        
         if (HeartEnabled == false)
         {
             timeHeart -= Time.deltaTime;
@@ -147,6 +149,26 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
             HeartEnabled = false;
             isMove = true;
             heartOff.Invoke();
+        }
+    }
+
+    private void RifleState()
+    {
+        if (!IsRiflePickup) return;
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            rifleOn?.Invoke();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            rifleOff?.Invoke();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            rifleShoot?.Invoke();
         }
     }
 
