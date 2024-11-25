@@ -46,7 +46,8 @@ public class LockPick : InteractiveObject
         bag = Character.Instance.GetComponent<Bag>();
         dracula = Dracula.Instance;
         onePersonCamera = OnePersonCamera.Instance;
-        ResetPoint();
+        ResetPoint();// тут надо убрать вызов включения character input.
+        
     }
 
     protected override void Update()

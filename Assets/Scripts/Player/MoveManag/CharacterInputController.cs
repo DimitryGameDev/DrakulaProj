@@ -1,6 +1,6 @@
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 public class CharacterInputController : SingletonBase<CharacterInputController>
 {    
@@ -10,6 +10,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     [SerializeField] private AudioClip sprintEndClip;
 
     private Character character; 
+    private OnePersonCamera onePersonCamera;
     
     private AudioSource audioSource;
     private Vector3 playerMoveDirection;
@@ -36,8 +37,6 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     
     public bool isSprinting;
     
-    public bool isLook;
-    
     private void Awake()
     {
         Init();
@@ -47,31 +46,35 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     {
         HeartEnabled = false;
         
-        character = GetComponent<Character>();
+        character = (Character)Character.Instance;
+        onePersonCamera = OnePersonCamera.Instance;
         audioSource = GetComponent<AudioSource>();
         radiusCharacter = character.GetComponentInChildren<CapsuleCollider>().radius;
         heightCharacter = character.GetComponentInChildren<CapsuleCollider>().height;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     private void FixedUpdate()
     {
-        AdminMove();
+        CharacterMove();
+        CharacterRotate();
     }
 
     private void Update()
-    { 
+    {
+        CameraUpdate();
         MainRay();
-        AdminCameraMove();
         HeartState();
         RifleState();
     }
 
+
     private const string Horizontal = "Horizontal";
     private const string Vertical = "Vertical";
 
-    private void AdminMove()
+    private void CharacterMove()
     {
         var dirZ = Input.GetAxis(Vertical);
         var dirX = Input.GetAxis(Horizontal);
@@ -116,14 +119,21 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         character.Move(playerMoveDirection, MoveType.Walk);
     }
 
+    private void CharacterRotate()
+    {
+        if (onePersonCamera.IsLocked || onePersonCamera.enabled) return;
+        var rotation = new Quaternion(0, onePersonCamera.transform.rotation.y,0, onePersonCamera.transform.rotation.w);
+        character.CharacterRotate(rotation);
+    }
+    
     private const string XAxis = "Mouse X";
     private const string YAxis = "Mouse Y";
-    private void AdminCameraMove()
+    private void CameraUpdate()
     {
         var dirY = Input.GetAxis(YAxis);
         var dirX = Input.GetAxis(XAxis);
         
-        character.CameraMove(dirX, dirY);
+        onePersonCamera.Move(dirX, dirY);
     }
     
     private void HeartState()
@@ -250,10 +260,10 @@ private bool IsGrounded()
     }
     private void MainRay()
     {
-        if (Physics.Raycast(character.Camera.transform.position, character.Camera.transform.forward, out var hitCamera,
+        if (Physics.Raycast(onePersonCamera.transform.position, onePersonCamera.transform.forward, out var hitCamera,
                 maxDistanceHitCamera, LayerMask.NameToLayer("Player")))
         {
-            Debug.DrawLine(character.Camera.transform.position, hitCamera.transform.position, Color.yellow);
+            Debug.DrawLine(onePersonCamera.transform.position, hitCamera.transform.position, Color.yellow);
 
             if (hitCamera.collider.transform.parent?.GetComponent<InteractiveObject>())
             {
@@ -266,14 +276,10 @@ private bool IsGrounded()
                 {
                     hit.Use();
                 }
-
-                isLook = true;
-                return;
+                
             }
-
         }
 
-        isLook = false;
     }
     #endregion
     

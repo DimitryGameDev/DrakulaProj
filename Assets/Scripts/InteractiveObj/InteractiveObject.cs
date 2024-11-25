@@ -112,16 +112,10 @@ public class InteractiveObject: VisibleObject
     public void LoadState()
     {
         wosActive = InteractiveState.Instance.GetState(this);
-        if (wosActive)
-        {
-            ObjectWosActive();
-        }
+        if (wosActive) ObjectWosActive();
     }
 
-    protected virtual void ObjectWosActive()
-    {
-        Destroy(gameObject);
-    }
+    protected virtual void ObjectWosActive() { }
     
     #endregion
    

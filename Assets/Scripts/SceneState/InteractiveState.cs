@@ -53,10 +53,12 @@ public class InteractiveState : SingletonBase<InteractiveState>
                     if (state != item.state)
                     {
                         item.state = state;
+                        Saver<ObjectState[]>.Save(FileName, objData);
+                        return;
                     }
                 }
             }
-            Saver<ObjectState[]>.Save(FileName, objData);
+           
         }
         else
         {
