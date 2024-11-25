@@ -52,15 +52,21 @@ public class CheatCode : MonoBehaviour
                 t.OpenDoor();
             }
         }
-
+        
         if (Input.GetKeyDown(KeyCode.F6))
+        {
+            Debug.Log("Сохранение");
+            StateManager.Instance.SaveSceneState();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.F7))
         {
             Debug.Log("Файл сохранения удалён");
             InteractiveState.Instance.ResetState();
             PlayerState.Instance.ResetState();
         }
         
-        if (Input.GetKeyDown(KeyCode.F9))
+        if (Input.GetKeyDown(KeyCode.F8))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }

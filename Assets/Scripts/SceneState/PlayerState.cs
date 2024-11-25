@@ -24,13 +24,13 @@ public class PlayerState : SingletonBase<PlayerState>
         Init();
         if (FileHandler.HasFile(FileName))
         {
-            Debug.Log("Файл найден");
+            //Debug.Log("Файл найден");
             Saver<States>.TryLoad(FileName,ref playerData);
         }
         else
         {
-            Debug.Log("Создан новый файл" + FileName);
-            var obj = new States();
+            //Debug.Log("Создан новый файл" + FileName);
+            //var obj = new States();
             Saver<States>.Save(FileName, playerData);
         }
     }
@@ -50,7 +50,7 @@ public class PlayerState : SingletonBase<PlayerState>
         }
         else
         {
-            Debug.Log("Bruuuh");
+            //Debug.Log("Bruuuh");
         }     
     } 
     

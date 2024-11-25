@@ -32,14 +32,12 @@ public class StateManager : SingletonBase<StateManager>
     private void LoadSceneState()
     {
         for (int i = 0; i < objects.Length; i++) objects[i].LoadState();
-
         if (playerState.GetPlayerPos() != Vector3.zero) character.transform.position = playerState.GetPlayerPos();
         if (playerState.GetCameraPos() != Vector3.zero) onePersonCamera.transform.position = playerState.GetCameraPos();
         if (playerState.GetSprintAmount() != 0) characterInputController.SetSpeedTime(playerState.GetSprintAmount());
         if (playerState.GetKeyAmount() != 0) bag.AddKey(playerState.GetKeyAmount());
         if (playerState.GetProjectileAmount() != 0) bag.AddProjectile(playerState.GetProjectileAmount());
         if (playerState.GetMedalAmount() != 0) bag.AddMedalPiece(playerState.GetMedalAmount());
-
         characterInputController.IsRiflePickup = playerState.GetRifleState();
     }
 
