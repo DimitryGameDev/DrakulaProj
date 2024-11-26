@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -74,5 +75,12 @@ public class Bag : MonoBehaviour
     {
         medalPieceCount = 0;
     }
-    
+
+    private void OnDestroy()
+    {
+        changeKeyAmount.RemoveAllListeners();
+        changeProjectileAmount.RemoveAllListeners();
+        changeMedalPieceAmount.RemoveAllListeners();
+        addMedalPieceAmount.RemoveAllListeners();
+    }
 }

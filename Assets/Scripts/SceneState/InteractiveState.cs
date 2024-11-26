@@ -19,12 +19,12 @@ public class InteractiveState : SingletonBase<InteractiveState>
         Init();
         if (FileHandler.HasFile(FileName))
         {
-            Debug.Log("Файл найден");
+            //Debug.Log("Файл найден");
             Saver<ObjectState[]>.TryLoad(FileName,ref objData);
         }
         else
         {
-            Debug.Log("Создан новый файл" + FileName);
+            //Debug.Log("Создан новый файл" + FileName);
             InteractiveObject[] objects = FindObjectsOfType<InteractiveObject>();
             var listObjState = new List<ObjectState>();
             

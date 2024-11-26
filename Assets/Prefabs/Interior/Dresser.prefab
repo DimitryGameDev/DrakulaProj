@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2257304485502193880}
@@ -191,7 +191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3324315797729155074, guid: d973643d8147b884b9e5203369ddaea6, type: 3}
       propertyPath: m_Name
-      value: DrawerChest
+      value: DrawerChest 9
       objectReference: {fileID: 0}
     - target: {fileID: 8218379105926792294, guid: d973643d8147b884b9e5203369ddaea6, type: 3}
       propertyPath: openSfx
@@ -229,7 +229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3324315797729155074, guid: d973643d8147b884b9e5203369ddaea6, type: 3}
       propertyPath: m_Name
-      value: DrawerChest (2)
+      value: DrawerChest 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -283,7 +283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3324315797729155074, guid: d973643d8147b884b9e5203369ddaea6, type: 3}
       propertyPath: m_Name
-      value: DrawerChest (1)
+      value: DrawerChest 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

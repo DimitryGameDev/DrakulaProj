@@ -56,7 +56,8 @@ public class CheatCode : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F6))
         {
             Debug.Log("Сохранение");
-            StateManager.Instance.SaveSceneState();
+            InteractiveStateManager.Instance.Save();
+            CharacterStateManager.Instance.Save();
         }
         
         if (Input.GetKeyDown(KeyCode.F7))

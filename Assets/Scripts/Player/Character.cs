@@ -28,14 +28,14 @@ public class Character : Player
     private void Awake()
     {
         Init();
+        audioSource = GetComponent<AudioSource>();
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
     }
     
     private void Start()
     {
         OnePersonCamera.Instance.SetTarget(cameraPos,TypeMoveCamera.WithRotation);
-        audioSource = GetComponent<AudioSource>();
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
     }
     
     private const float Acceleration = 100f;
