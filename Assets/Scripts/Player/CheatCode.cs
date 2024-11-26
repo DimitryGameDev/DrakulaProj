@@ -18,7 +18,7 @@ public class CheatCode : MonoBehaviour
         {
             Debug.Log("Бесконечный спринт");
             CharacterInputController.Instance.ChangeSpeedTime(1000);
-            CharacterInputController.Instance.isSprinting = true;
+            CharacterInputController.Instance.isStamina = true;
         }
 
         if (Input.GetKeyDown(KeyCode.F3))
