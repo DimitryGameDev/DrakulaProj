@@ -11,6 +11,7 @@ public class PlayerState : SingletonBase<PlayerState>
     private class States
     {
         public Vector3 pos;
+        public Quaternion rotation;
         public Vector3 cameraPos;
         public int keyAmount;
         public int projectileAmount;
@@ -35,11 +36,12 @@ public class PlayerState : SingletonBase<PlayerState>
         }
     }
     
-    public void Save(Vector3 playerPos,Vector3 cameraPos,int keys, int projectiles, int medals,float sprintAmount, bool rifleState)
+    public void Save(Vector3 playerPos,Quaternion rotation,Vector3 cameraPos,int keys, int projectiles, int medals,float sprintAmount, bool rifleState)
     {
         if (Instance)
         {
             playerData.pos = playerPos;
+            playerData.rotation = rotation;
             playerData.cameraPos = cameraPos;
             playerData.keyAmount = keys;
             playerData.projectileAmount = projectiles;
@@ -59,6 +61,12 @@ public class PlayerState : SingletonBase<PlayerState>
     {
         return playerData.pos;
     }
+    
+    public Quaternion GetPlayerRotation()
+    {
+        return playerData.rotation;
+    }
+    
     public Vector3 GetCameraPos()
     {
         return playerData.cameraPos;

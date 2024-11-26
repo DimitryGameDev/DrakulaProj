@@ -45,15 +45,13 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     public void Start()
     {
         HeartEnabled = false;
-        
-        character = (Character)Character.Instance;
         onePersonCamera = OnePersonCamera.Instance;
+        character = GetComponent<Character>();
         audioSource = GetComponent<AudioSource>();
         radiusCharacter = character.GetComponentInChildren<CapsuleCollider>().radius;
         heightCharacter = character.GetComponentInChildren<CapsuleCollider>().height;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
     }
 
     private void FixedUpdate()

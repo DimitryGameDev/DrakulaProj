@@ -408,7 +408,6 @@ public class Dracula : SingletonBase<Dracula>
     {
         CharacterInputController.Instance.draculaAnim.RemoveListener(ToggleHeartOn);
         CharacterInputController.Instance.draculaAnim.RemoveListener(ToggleHeartOff);
-        character.GetComponent<Bag>().addMedalPieceAmount.RemoveListener(PlayerFindMedal);
         NoiseLevel.Instance.OnChange -= SpeedChange;
     }
 
