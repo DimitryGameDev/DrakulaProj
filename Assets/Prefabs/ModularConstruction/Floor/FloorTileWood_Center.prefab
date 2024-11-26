@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 840669794482389701, guid: dfac4242a50d6274caed42f9a34a3461, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 840669794482389701, guid: dfac4242a50d6274caed42f9a34a3461, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 840669794482389701, guid: dfac4242a50d6274caed42f9a34a3461, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 840669794482389701, guid: dfac4242a50d6274caed42f9a34a3461, type: 3}
       propertyPath: m_LocalRotation.w
@@ -50,7 +50,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4774510211365661553, guid: dfac4242a50d6274caed42f9a34a3461, type: 3}
       propertyPath: m_Name
-      value: FloorTileWood_Center Variant
+      value: FloorTileWood_Center
+      objectReference: {fileID: 0}
+    - target: {fileID: 4774510211365661553, guid: dfac4242a50d6274caed42f9a34a3461, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5919116091162152297, guid: dfac4242a50d6274caed42f9a34a3461, type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6171782262491425475, guid: dfac4242a50d6274caed42f9a34a3461, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710982368244691837, guid: dfac4242a50d6274caed42f9a34a3461, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7845760532651767243, guid: dfac4242a50d6274caed42f9a34a3461, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
