@@ -149,6 +149,9 @@ public class Dracula : SingletonBase<Dracula>
         if (movePoint == null)
         {
             Debug.Log("Игрок вне досягаемости");
+            Debug.Log("Спавнюсь в новой точке");
+            DraculaDespawn();
+            RandomPoint();
             return;
         }
         
@@ -260,7 +263,8 @@ public class Dracula : SingletonBase<Dracula>
         if (spawnPositions.Length !=0)
         {
             DraculaPoint rand = spawnPositions[Random.Range(0, spawnPositions.Length)];
-            transform.position = rand.transform.position;
+            if(rand != null) transform.position = rand.transform.position;
+            else Debug.Log("Spawn point not set");
             draculaPoint = rand;
             Spawn(rand);
         }
@@ -307,11 +311,13 @@ public class Dracula : SingletonBase<Dracula>
     }
     public void DraculaDisable()
     {
+        isVisible = false;
         lastPosition = transform.position;
         transform.position =new Vector3(100,100,100);
         timer = 0;
         enabled = false;
     }
+    
     private void SpeedChange(int value)
     {
         if (value == 0)

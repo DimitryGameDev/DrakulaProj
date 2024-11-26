@@ -51,7 +51,7 @@ public class CharacterStateManager : SingletonBase<CharacterStateManager>
     public void Save()
     {
         playerState.Save(character.transform.position,character.transform.rotation, onePersonCamera.transform.position, bag.GetKeyAmount(),
-            bag.GetProjectileAmount(), bag.GetMedalPeaceAmount(), characterInputController.TimeSprint,
+            bag.GetProjectileAmount(), bag.GetMedalPeaceAmount(), characterInputController.Stamina,
             characterInputController.IsRiflePickup);
     }
 }

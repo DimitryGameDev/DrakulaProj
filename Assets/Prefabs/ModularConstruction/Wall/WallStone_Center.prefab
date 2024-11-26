@@ -10,11 +10,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 317184200949465231, guid: 913ef119930731146abbe041ff85a72c, type: 3}
       propertyPath: m_Name
-      value: WallStone_Center Variant
+      value: WallStone_Center
+      objectReference: {fileID: 0}
+    - target: {fileID: 317184200949465231, guid: 913ef119930731146abbe041ff85a72c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3390059622614564091, guid: 913ef119930731146abbe041ff85a72c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3464829103743906333, guid: 913ef119930731146abbe041ff85a72c, type: 3}
+      propertyPath: m_CastShadows
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3982859447558191885, guid: 913ef119930731146abbe041ff85a72c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3982859447558191885, guid: 913ef119930731146abbe041ff85a72c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -22,23 +34,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3982859447558191885, guid: 913ef119930731146abbe041ff85a72c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 3982859447558191885, guid: 913ef119930731146abbe041ff85a72c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3982859447558191885, guid: 913ef119930731146abbe041ff85a72c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3982859447558191885, guid: 913ef119930731146abbe041ff85a72c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3982859447558191885, guid: 913ef119930731146abbe041ff85a72c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3982859447558191885, guid: 913ef119930731146abbe041ff85a72c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -46,11 +58,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3982859447558191885, guid: 913ef119930731146abbe041ff85a72c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3982859447558191885, guid: 913ef119930731146abbe041ff85a72c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076337773205003172, guid: 913ef119930731146abbe041ff85a72c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7880953530800736758, guid: 913ef119930731146abbe041ff85a72c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8361435003804441537, guid: 913ef119930731146abbe041ff85a72c, type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601666934649920123, guid: 913ef119930731146abbe041ff85a72c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649248455700804716, guid: 913ef119930731146abbe041ff85a72c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894376294517069897, guid: 913ef119930731146abbe041ff85a72c, type: 3}
+      propertyPath: m_CastShadows
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

@@ -15,8 +15,8 @@ public class SprintBarUI : MonoBehaviour
 
     private void Update()
     {
-        if (characterInputController.isSprinting) image.color = startColor;
-        if (!characterInputController.isSprinting) image.color = Color.yellow;
-        image.fillAmount = characterInputController.SprintTimer / characterInputController.TimeSprint;
+        if (characterInputController.isStamina) image.color = startColor;
+        if (!characterInputController.isStamina) image.color = Color.red;
+        image.fillAmount = characterInputController.StaminaTimer / characterInputController.Stamina;
     }
 }
