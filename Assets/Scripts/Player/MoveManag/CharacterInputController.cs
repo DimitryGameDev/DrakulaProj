@@ -25,8 +25,6 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     
     [HideInInspector] public UnityEvent heartOn;
     [HideInInspector] public UnityEvent heartOff;
-    [HideInInspector] public UnityEvent rifleOn;
-    [HideInInspector] public UnityEvent rifleOff;
     [HideInInspector] public UnityEvent rifleShoot;
     [HideInInspector] public UnityEvent draculaAnim;
     [HideInInspector] public bool IsRiflePickup;
@@ -177,16 +175,6 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     private void RifleState()
     {
         if (!IsRiflePickup) return;
-
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            rifleOn?.Invoke();
-        }
-
-        if (Input.GetKeyUp(KeyCode.Mouse1))
-        {
-            rifleOff?.Invoke();
-        }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
