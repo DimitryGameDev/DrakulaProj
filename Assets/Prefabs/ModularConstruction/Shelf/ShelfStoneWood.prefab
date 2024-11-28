@@ -8,9 +8,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2598201616883852069, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3093193505619018694, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174571144958139915, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4951402845441575858, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5349488648199388298, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5495469903208644167, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
       propertyPath: m_Name
-      value: ShelfStoneWood Variant
+      value: ShelfStoneWood
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495469903208644167, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658216893323308958, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6519412260093641128, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296841015334679512, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8854485874878584071, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -61,6 +97,9 @@ PrefabInstance:
     - {fileID: 4352892785852756251, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
     - {fileID: 425684854483229261, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
     - {fileID: 2532731792867607789, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
+    - {fileID: 2595586860952703493, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
+    - {fileID: 4533433035511823689, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
+    - {fileID: 7576532647709382789, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6a18259b8d2f8046a5e53c93769289c, type: 3}

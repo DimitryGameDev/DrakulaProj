@@ -18,7 +18,7 @@ public class CheatCode : MonoBehaviour
         {
             Debug.Log("Бесконечный спринт");
             CharacterInputController.Instance.ChangeSpeedTime(1000);
-            CharacterInputController.Instance.isSprinting = true;
+            CharacterInputController.Instance.isStamina = true;
         }
 
         if (Input.GetKeyDown(KeyCode.F3))
@@ -56,7 +56,8 @@ public class CheatCode : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F6))
         {
             Debug.Log("Сохранение");
-            StateManager.Instance.SaveSceneState();
+            InteractiveStateManager.Instance.Save();
+            CharacterStateManager.Instance.Save();
         }
         
         if (Input.GetKeyDown(KeyCode.F7))

@@ -634,7 +634,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -870,9 +870,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd4c18be71619884ebe7a01f230a6240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heartTimeUsage: 1
   maxDistanceHitCamera: 2.2
-  timeSprint: 3
+  stamina: 4
+  heartScale: 1
+  runScale: 0.6
+  heartCooldown: 1
+  staminaCooldown: 2
   sprintEndClip: {fileID: 8300000, guid: 5f918cb5985e7394da8679c74bf24bbd, type: 3}
   isMove: 1
   IsRiflePickup: 0
@@ -894,7 +897,7 @@ MonoBehaviour:
   draculaAnim:
     m_PersistentCalls:
       m_Calls: []
-  isSprinting: 0
+  isStamina: 0
 --- !u!114 &8480812018889599076
 MonoBehaviour:
   m_ObjectHideFlags: 0

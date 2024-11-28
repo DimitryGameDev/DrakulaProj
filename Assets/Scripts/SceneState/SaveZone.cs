@@ -7,13 +7,15 @@ public class SaveZone : InteractiveObject
     
     private NoiseLevel noiseLevel;
     private Dracula dracula;
-    private StateManager stateManager;
+    private InteractiveStateManager interactiveStateManager;
+    private CharacterStateManager characterStateManager;
     protected override void Start()
     {
         base.Start();
         noiseLevel = NoiseLevel.Instance;
         dracula = Dracula.Instance;
-        stateManager = StateManager.Instance;
+        interactiveStateManager = InteractiveStateManager.Instance;
+        characterStateManager = CharacterStateManager.Instance;
     }
 
     public override void ShowText() { }
@@ -24,7 +26,8 @@ public class SaveZone : InteractiveObject
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            stateManager.SaveSceneState();
+            interactiveStateManager.Save();
+            characterStateManager.Save();
             ShowAfterText();
             AudioSource.Play();
         }

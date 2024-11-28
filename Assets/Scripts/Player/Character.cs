@@ -28,18 +28,18 @@ public class Character : Player
     private void Awake()
     {
         Init();
-    }
-    
-    private void Start()
-    {
-        OnePersonCamera.Instance.SetTarget(cameraPos,TypeMoveCamera.WithRotation);
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
     }
     
-    private const float Acceleration = 100f;
-    private const float AirMoveLimit = 0.300f;
+    private void Start()
+    {
+        OnePersonCamera.Instance.SetTarget(cameraPos,TypeMoveCamera.WithRotation);
+    }
+    
+    private const float Acceleration = 50f;
+    private const float AirMoveLimit = 0.400f;
     
     public void Move(Vector3 direction,MoveType moveType)
     {
@@ -83,7 +83,7 @@ public class Character : Player
             }
     
             case MoveType.Air:
-                rb.velocity = new Vector3(Mathf.Lerp(rb.velocity.x,0,AirMoveLimit), rb.velocity.y, Mathf.Lerp(rb.velocity.z,0,AirMoveLimit));
+                rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x,0,AirMoveLimit), rb.velocity.y, Mathf.Clamp(rb.velocity.z,0,AirMoveLimit));
                 break;
             
             default:
