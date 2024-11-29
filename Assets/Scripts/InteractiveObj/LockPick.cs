@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -25,8 +26,7 @@ public class LockPick : InteractiveObject
     [Header("SFX")]
     [SerializeField] private AudioClip successOpenSfx;
     [SerializeField] private AudioClip failOpenSfx;
-
-    private AudioSource audioSource;
+    
     private OnePersonCamera onePersonCamera;
     private Character character;
     private Bag bag;
@@ -42,12 +42,12 @@ public class LockPick : InteractiveObject
     protected override void Start()
     {
         base.Start();
-        audioSource = GetComponent<AudioSource>();
         character = Character.Instance.GetComponent<Character>();
         bag = Character.Instance.GetComponent<Bag>();
         dracula = Dracula.Instance;
         onePersonCamera = OnePersonCamera.Instance;
-        ResetPoint();
+        ResetPoint();// тут надо убрать вызов включения character input.
+        
     }
 
     protected override void Update()
@@ -66,7 +66,7 @@ public class LockPick : InteractiveObject
             ShowAfterText();
         }
 
-        if (draculaDoor && bag.GetMedalAmount() <= 0)
+        if (draculaDoor && bag.GetMedalPeaceAmount() < 3)
         {
             ShowAfterText();
         }
@@ -74,7 +74,7 @@ public class LockPick : InteractiveObject
 
     private void StartUnlock()
     {
-        if (draculaDoor && bag.GetMedalAmount() > 0)
+        if (draculaDoor && bag.GetMedalPeaceAmount() >= 3)
             MiniGame();
 
         if (!draculaDoor)
@@ -117,7 +117,7 @@ public class LockPick : InteractiveObject
             NoiseLevel.Instance.IncreaseLevel();
             ResetPoint();
             
-            audioSource.PlayOneShot(failOpenSfx);
+            AudioSource.PlayOneShot(failOpenSfx);
         }
     }
 
@@ -148,7 +148,7 @@ public class LockPick : InteractiveObject
     {
         if (draculaDoor)
         {
-            bag.RemoveMedal();
+            bag.RemoveMedalPiece();
         }
 
         OpenDoor();
@@ -156,12 +156,16 @@ public class LockPick : InteractiveObject
 
     public void OpenDoor()
     {
-        audioSource.PlayOneShot(successOpenSfx);
+        if (!wosActive)  AudioSource.PlayOneShot(successOpenSfx);
         animator.SetBool("Open", true);
         Destroy(triggerCollider);
-        Destroy(this);
+        wosActive = true;
     }
 
+    protected override void ObjectWosActive()
+    {
+        OpenDoor();
+    }
 
     private void ResetPoint()
     {
@@ -179,6 +183,7 @@ public class LockPick : InteractiveObject
         panel.SetActive(false);
         
         Cursor.visible = false;
+        Cursor.SetCursor(null,Vector2.zero, CursorMode.Auto);
         Cursor.lockState = CursorLockMode.Locked;
         
         point.anchoredPosition = Vector2.zero;

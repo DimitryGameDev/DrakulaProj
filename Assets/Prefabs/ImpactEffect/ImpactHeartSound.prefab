@@ -43,7 +43,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: dde889deed2ffaa489c4be54364e17a3, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -142,4 +142,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 2
-  addKeySFX: {fileID: 8300000, guid: dde889deed2ffaa489c4be54364e17a3, type: 3}
+  addKeySfx: {fileID: 8300000, guid: dde889deed2ffaa489c4be54364e17a3, type: 3}

@@ -95,9 +95,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8941289909700233653}
-  - component: {fileID: 4721622087472371607}
   - component: {fileID: 8225965780088440804}
   - component: {fileID: 5591482961629210622}
+  - component: {fileID: 4721622087472371607}
   m_Layer: 2
   m_Name: BaseDoor
   m_TagString: Untagged
@@ -122,6 +122,56 @@ Transform:
   - {fileID: 4803115125419285877}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &8225965780088440804
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2822966819342906851}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0776b88d6701fde41940c4994826b4c2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5591482961629210622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2822966819342906851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b379d0d6d6547b34f8bf4c9660f33b86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onVision:
+    m_PersistentCalls:
+      m_Calls: []
+  onHide:
+    m_PersistentCalls:
+      m_Calls: []
+  infoText: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0434\u0432\u0435\u0440\u044C
+    (\u0415)"
+  infoTextAfterUse: 
+  icon: {fileID: 0}
+  afterIcon: {fileID: 0}
+  timeBoxHide: 0.1
+  timeAfterText: 3
+  animator: {fileID: 8225965780088440804}
+  closedTrigger: {fileID: 0}
+  openTrigger: {fileID: 2153921312142557410}
+  openSound: {fileID: 8300000, guid: 5f4d5234afa37c447bd81b89fcd2d810, type: 3}
 --- !u!82 &4721622087472371607
 AudioSource:
   m_ObjectHideFlags: 0
@@ -142,8 +192,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 3.89
-  MaxDistance: 500
+  MinDistance: 1
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -178,7 +228,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.9
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -218,55 +268,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &8225965780088440804
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2822966819342906851}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0776b88d6701fde41940c4994826b4c2, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5591482961629210622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2822966819342906851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b379d0d6d6547b34f8bf4c9660f33b86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  infoText: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0434\u0432\u0435\u0440\u044C
-    (\u0415)"
-  infoTextAfterUse: 
-  icon: {fileID: 0}
-  afterIcon: {fileID: 0}
-  timeBoxHide: 0.1
-  timeAfterText: 3
-  onVision:
-    m_PersistentCalls:
-      m_Calls: []
-  onHide:
-    m_PersistentCalls:
-      m_Calls: []
-  animator: {fileID: 8225965780088440804}
-  closedTrigger: {fileID: 0}
-  openTrigger: {fileID: 0}
 --- !u!1 &3127397297676320639
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,9 +444,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7786094062253139723, guid: 00690b02b17477c408af433bf7f9cfae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5107886880088651382, guid: 00690b02b17477c408af433bf7f9cfae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -3248026780508260582, guid: 00690b02b17477c408af433bf7f9cfae, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1968008779794979537, guid: 00690b02b17477c408af433bf7f9cfae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 00690b02b17477c408af433bf7f9cfae, type: 3}
       propertyPath: m_Name
@@ -456,6 +469,26 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2586001405652732305, guid: 00690b02b17477c408af433bf7f9cfae, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053383304375925968, guid: 00690b02b17477c408af433bf7f9cfae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3501751296489843965, guid: 00690b02b17477c408af433bf7f9cfae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174122090218014585, guid: 00690b02b17477c408af433bf7f9cfae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586291206641583743, guid: 00690b02b17477c408af433bf7f9cfae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7821454924873763396, guid: 00690b02b17477c408af433bf7f9cfae, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}

@@ -31,6 +31,7 @@ public class Bottle : InteractiveObject
         base.Use();
         SetBottleType();
         ShowAfterText();
+        wosActive = true;
     }
 
     private void SetBottleType()
@@ -72,5 +73,10 @@ public class Bottle : InteractiveObject
         
         if (impactEffect)
             Instantiate(impactEffect, transform.position, Quaternion.identity);
+    }
+    
+    protected override void ObjectWosActive()
+    {
+        Destroy(visualModel);
     }
 }

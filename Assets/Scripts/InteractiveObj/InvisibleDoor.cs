@@ -9,6 +9,8 @@ public class InvisibleDoor : InteractiveObject
     {
         base.InCamera();
         WallVisible();
+        ShowAfterText();
+        wosActive = true;
     }
 
     public override void ShowText() 
@@ -18,13 +20,14 @@ public class InvisibleDoor : InteractiveObject
     
     public void WallVisible()
     {
-        HideInfoPanel();
-        ShowAfterText();
-
         for (int i = 0; i < walls.Length; i++)
         {
             Destroy(walls[i]);
         }
-       
+    }
+    
+    protected override void ObjectWosActive()
+    {
+        WallVisible();
     }
 }

@@ -1,16 +1,18 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Bag : MonoBehaviour
 {   
     [SerializeField] private float countPieceForMedal;
-    private int medalCount;
     private int medalPieceCount;
     private int keyAmount;
-
+    private int projectileAmount;
+    
     [HideInInspector]public UnityEvent changeKeyAmount;
-    [HideInInspector]public UnityEvent changeMedalAmount;
+    [HideInInspector]public UnityEvent changeProjectileAmount;
     [HideInInspector]public UnityEvent changeMedalPieceAmount;
+    [HideInInspector]public UnityEvent addMedalPieceAmount;
 
     public void AddKey(int amount)
     {
@@ -33,33 +35,52 @@ public class Bag : MonoBehaviour
         return keyAmount;
     }
     
-    public void AddMedalPiece(int pieceCount)
+    public void AddProjectile(int amount)
     {
-        if (Mathf.Approximately(medalPieceCount + pieceCount, countPieceForMedal))
-        {
-            AddMedal();
-            medalPieceCount = 1;
-            changeMedalPieceAmount.Invoke();
-            return;
-        }
-        medalPieceCount += pieceCount;
-        changeMedalPieceAmount.Invoke();
-    }
-
-    public int GetMedalAmount()
-    {
-        return medalCount;
-    }
-
-    private void AddMedal()
-    {
-        medalCount++;
-        changeMedalAmount.Invoke();
+        projectileAmount += amount;
+        changeProjectileAmount?.Invoke();
     }
     
-    public void RemoveMedal()
+    public bool DrawProjectile(int amount)
     {
-        medalCount--;
-        changeMedalAmount.Invoke();
+        if (projectileAmount - amount < 0) return false;
+
+        projectileAmount -= amount;
+        changeProjectileAmount?.Invoke();
+
+        return true;
+    }
+    
+    public int GetProjectileAmount()
+    {
+        return projectileAmount;
+    }
+    
+    public void AddMedalPiece(int pieceCount)
+    {
+        medalPieceCount += pieceCount;
+        for (int i = 0; i < pieceCount; i++)
+        {
+            changeMedalPieceAmount.Invoke();
+            addMedalPieceAmount.Invoke();
+        }
+    }
+
+    public int GetMedalPeaceAmount()
+    { 
+        return medalPieceCount;
+    }
+
+    public void RemoveMedalPiece()
+    {
+        medalPieceCount = 0;
+    }
+
+    private void OnDestroy()
+    {
+        changeKeyAmount.RemoveAllListeners();
+        changeProjectileAmount.RemoveAllListeners();
+        changeMedalPieceAmount.RemoveAllListeners();
+        addMedalPieceAmount.RemoveAllListeners();
     }
 }

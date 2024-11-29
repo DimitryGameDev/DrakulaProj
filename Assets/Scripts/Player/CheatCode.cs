@@ -1,20 +1,24 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CheatCode : MonoBehaviour
 {
+    
+#if UNITY_EDITOR
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            Debug.Log("Сердце получено");
-            CharacterInputController.Instance.pickUpHeart = true;
+            Debug.Log("Мушкет получен");
+            CharacterInputController.Instance.IsRiflePickup = true;
+            Character.Instance.GetComponentInChildren<Bag>().AddProjectile(10);
         }
 
         if (Input.GetKeyDown(KeyCode.F2))
         {
             Debug.Log("Бесконечный спринт");
             CharacterInputController.Instance.ChangeSpeedTime(1000);
-            CharacterInputController.Instance.isSprinting = true;
+            CharacterInputController.Instance.isStamina = true;
         }
 
         if (Input.GetKeyDown(KeyCode.F3))
@@ -48,6 +52,26 @@ public class CheatCode : MonoBehaviour
                 t.OpenDoor();
             }
         }
-
+        
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            Debug.Log("Сохранение");
+            InteractiveStateManager.Instance.Save();
+            CharacterStateManager.Instance.Save();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.F7))
+        {
+            Debug.Log("Файл сохранения удалён");
+            InteractiveState.Instance.ResetState();
+            PlayerState.Instance.ResetState();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.F8))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
+#endif
+   
 }

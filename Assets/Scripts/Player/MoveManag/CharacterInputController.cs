@@ -3,34 +3,37 @@ using UnityEngine.Events;
 
 public class CharacterInputController : SingletonBase<CharacterInputController>
 {    
-    [SerializeField] private float heartTimeUsage = 2f;
     [SerializeField] private float maxDistanceHitCamera = 2f;
-    [SerializeField] private float timeSprint = 2f;
+    [SerializeField] private float stamina = 2f;
+    [SerializeField] private float heartScale = 0.5f;
+    [SerializeField] private float runScale = 2f;
+    [SerializeField] private float heartCooldown = 2f;
+    [SerializeField] private float staminaCooldown = 2f;
     [SerializeField] private AudioClip sprintEndClip;
-    public float TimeSprint => timeSprint;
+
     private Character character; 
+    private OnePersonCamera onePersonCamera;
     
     private AudioSource audioSource;
     private Vector3 playerMoveDirection;
     private float radiusCharacter;
     private float heightCharacter;
     private float timeHeart;
-    public bool isMove = true;
-
-    public bool HeartEnabled { get; private set; }
-
-    [HideInInspector] public bool pickUpHeart;
+    private float staminaTimer;
+    public float StaminaTimer => staminaTimer;
+    public float Stamina => stamina;
     
     [HideInInspector] public UnityEvent heartOn;
     [HideInInspector] public UnityEvent heartOff;
+    [HideInInspector] public UnityEvent rifleOn;
+    [HideInInspector] public UnityEvent rifleOff;
+    [HideInInspector] public UnityEvent rifleShoot;
     [HideInInspector] public UnityEvent draculaAnim;
-
-    private float sprintTimer;
-    public float SprintTimer => sprintTimer;
-    
-    public bool isSprinting;
-    
-    public bool isLook;
+    [HideInInspector] public bool IsRiflePickup;
+    public bool isStamina;
+    private bool isRun;
+    public bool isMove = true;
+    public bool HeartEnabled { get; private set; }
     
     private void Awake()
     {
@@ -40,7 +43,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     public void Start()
     {
         HeartEnabled = false;
-        
+        onePersonCamera = OnePersonCamera.Instance;
         character = GetComponent<Character>();
         audioSource = GetComponent<AudioSource>();
         radiusCharacter = character.GetComponentInChildren<CapsuleCollider>().radius;
@@ -51,20 +54,24 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private void FixedUpdate()
     {
-        AdminMove();
+        CharacterMove();
+        CharacterRotate();
     }
 
     private void Update()
-    { 
+    {
+        StaminaUpdate();
+        CameraUpdate();
         MainRay();
-        AdminCameraMove();
         HeartState();
+        RifleState();
     }
+
 
     private const string Horizontal = "Horizontal";
     private const string Vertical = "Vertical";
 
-    private void AdminMove()
+    private void CharacterMove()
     {
         var dirZ = Input.GetAxis(Vertical);
         var dirX = Input.GetAxis(Horizontal);
@@ -87,60 +94,79 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
             return;
         }
         
-        if (Input.GetKey(KeyCode.LeftShift) && isSprinting && character.isMove)
+        if (Input.GetKey(KeyCode.LeftShift) && isStamina && character.isMove)
         {
-            sprintTimer += Time.deltaTime;
-            if (sprintTimer >= timeSprint)
-            {
-                isSprinting = false;
-                audioSource.PlayOneShot(sprintEndClip);
-                NoiseLevel.Instance.IncreaseLevel();
-            }
-            
+            isRun = true;
+            staminaTimer += Time.deltaTime * runScale;
             character.Move(playerMoveDirection, MoveType.Run);
             return;
         }
         else
         {
-            if (sprintTimer >= 0)sprintTimer -= Time.deltaTime/2;
-            if (sprintTimer <= 0)isSprinting = true;
+            isRun = false;
         }
-
+        
+        
         character.Move(playerMoveDirection, MoveType.Walk);
     }
 
+    private void StaminaUpdate()
+    {
+        if (!HeartEnabled && !isRun)
+        {
+            if (staminaTimer >= 0)staminaTimer -= Time.deltaTime/staminaCooldown;
+            if (staminaTimer <= 0)isStamina = true;
+        }
+        
+        if (staminaTimer > stamina)
+        {
+            staminaTimer = stamina;
+            isStamina = false;
+            audioSource.PlayOneShot(sprintEndClip,staminaCooldown);
+            NoiseLevel.Instance.IncreaseLevel();
+        }
+    }
+
+    private void CharacterRotate()
+    {
+        if (onePersonCamera.IsLocked || onePersonCamera.enabled) return;
+        var rotation = new Quaternion(0, onePersonCamera.transform.rotation.y,0, onePersonCamera.transform.rotation.w);
+        character.CharacterRotate(rotation);
+    }
+    
     private const string XAxis = "Mouse X";
     private const string YAxis = "Mouse Y";
-    private void AdminCameraMove()
+    private void CameraUpdate()
     {
         var dirY = Input.GetAxis(YAxis);
         var dirX = Input.GetAxis(XAxis);
         
-        character.CameraMove(dirX, dirY);
+        onePersonCamera.Move(dirX, dirY);
     }
-
-
+    
     private void HeartState()
     {
-        if(!pickUpHeart) return;
-        
         if (HeartEnabled == false)
         {
             timeHeart -= Time.deltaTime;
         }
+        else if (isStamina)
+        {
+            staminaTimer += Time.deltaTime * heartScale;
+        }
         
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.Mouse1) && isStamina)
         {
             if (timeHeart <= 0)
             {
                 HeartEnabled = true;
                 isMove = false;
                 heartOn.Invoke();
-                timeHeart = heartTimeUsage;
+                timeHeart = heartCooldown;
             }
         }
         
-        if (Input.GetKeyUp(KeyCode.F))
+        if (Input.GetKeyUp(KeyCode.Mouse1) && HeartEnabled || isStamina == false)
         {
             HeartEnabled = false;
             isMove = true;
@@ -148,10 +174,36 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         }
     }
 
-    public void ChangeSpeedTime(int value)
+    private void RifleState()
     {
-        timeSprint += value;
+        if (!IsRiflePickup) return;
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            rifleOn?.Invoke();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            rifleOff?.Invoke();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            rifleShoot?.Invoke();
+        }
     }
+
+    public void ChangeSpeedTime(float value)
+    {
+        stamina += value;
+    }
+    
+    public void SetSpeedTime(float value)
+    {
+        stamina = value;
+    }
+    
     #region RayLogick
 
     
@@ -220,10 +272,10 @@ private bool IsGrounded()
     }
     private void MainRay()
     {
-        if (Physics.Raycast(character.Camera.transform.position, character.Camera.transform.forward, out var hitCamera,
+        if (Physics.Raycast(onePersonCamera.transform.position, onePersonCamera.transform.forward, out var hitCamera,
                 maxDistanceHitCamera, LayerMask.NameToLayer("Player")))
         {
-            Debug.DrawLine(character.Camera.transform.position, hitCamera.transform.position, Color.yellow);
+            Debug.DrawLine(onePersonCamera.transform.position, hitCamera.transform.position, Color.yellow);
 
             if (hitCamera.collider.transform.parent?.GetComponent<InteractiveObject>())
             {
@@ -236,14 +288,10 @@ private bool IsGrounded()
                 {
                     hit.Use();
                 }
-
-                isLook = true;
-                return;
+                
             }
-
         }
 
-        isLook = false;
     }
     #endregion
     

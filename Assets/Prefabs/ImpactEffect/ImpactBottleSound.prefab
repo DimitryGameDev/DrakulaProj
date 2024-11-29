@@ -142,4 +142,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 2
-  addKeySFX: {fileID: 8300000, guid: 9cba82170573cae479a9d1db6a5a87cc, type: 3}
+  addKeySfx: {fileID: 8300000, guid: 9cba82170573cae479a9d1db6a5a87cc, type: 3}

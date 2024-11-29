@@ -25,12 +25,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2309157677872286240}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8205711772304318754}
+  m_Father: {fileID: 6963665697172039351}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1333135471659915103
 BoxCollider:
@@ -51,8 +51,59 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.25, y: 0.5, z: 1.25}
+  m_Size: {x: 1.25, y: 2, z: 1.25}
   m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!1 &2717992864066379516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6963665697172039351}
+  - component: {fileID: 1250884572471016141}
+  m_Layer: 0
+  m_Name: Vision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6963665697172039351
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2717992864066379516}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4373966151718316599}
+  m_Father: {fileID: 8205711772304318754}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1250884572471016141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2717992864066379516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fbe027a514f4787b9e9604481ce0b4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onVision:
+    m_PersistentCalls:
+      m_Calls: []
+  onHide:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8228517700685265482
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,9 +114,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8205711772304318754}
   - component: {fileID: 7725249361171625947}
-  - component: {fileID: 7595149920051348018}
-  - component: {fileID: 1927389643681340454}
   - component: {fileID: 2525777662896232512}
+  - component: {fileID: 1927389643681340454}
   - component: {fileID: 1461263184935840726}
   m_Layer: 0
   m_Name: Dracula
@@ -87,8 +137,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6963665697172039351}
   - {fileID: 6365971147578957288}
-  - {fileID: 4373966151718316599}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7725249361171625947
@@ -104,25 +154,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnAwake: 0
-  draculaPrefabsNone: {fileID: 740178084291543719, guid: b3a1862a9d42f074b92bcc7a587922b9, type: 3}
-  draculaPrefabsSexy: {fileID: 3369693194535960404, guid: 417d3999a3bad7248a94f6143bcfe125, type: 3}
-  draculaPrefabsCross: {fileID: 1567872088887843998, guid: 5a40032110b27be4fa742a1fed224beb, type: 3}
-  draculaPrefabsStand: {fileID: 3589427302363245269, guid: 6db526faec442b44198becd4e3111b44, type: 3}
-  draculaPrefabsFly: {fileID: 7898647379886207394, guid: 84e70370e540c3241892d9c0eecb7758, type: 3}
-  draculaPrefabsHand: {fileID: 6423580480786229064, guid: 07dffcd828f281349964950726f25c58, type: 3}
-  draculaSpawnEffectPrefab: {fileID: 3372215897970909540, guid: 3d5a14a42f696a846bc2549c5f74ab02, type: 3}
-  visionEffectPrefab: {fileID: -4490127325991210572, guid: 2f3338a8e1355e24590ca81bef837def, type: 3}
-  spawnSpeed: 16
-  speedChange: 5
+  maxSpawnSpeed: 11
+  maxSpeedChange: 3
+  minSpawnSpeed: 0.4
   minDistanceToNextPp: 4
   spawnClips:
   - {fileID: 8300000, guid: 5dbefb0d6d692de4fb5dcc0b5afdb1ab, type: 3}
   spawnPositions:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  draculaPrefabNone: {fileID: 740178084291543719, guid: b3a1862a9d42f074b92bcc7a587922b9, type: 3}
+  draculaPrefabSexy: {fileID: 3369693194535960404, guid: 417d3999a3bad7248a94f6143bcfe125, type: 3}
+  draculaPrefabCross: {fileID: 1567872088887843998, guid: 5a40032110b27be4fa742a1fed224beb, type: 3}
+  draculaPrefabStand: {fileID: 3589427302363245269, guid: 6db526faec442b44198becd4e3111b44, type: 3}
+  draculaPrefabFly: {fileID: 7898647379886207394, guid: 84e70370e540c3241892d9c0eecb7758, type: 3}
+  draculaPrefabHand: {fileID: 6423580480786229064, guid: 07dffcd828f281349964950726f25c58, type: 3}
+  nosferatuPrefabNone: {fileID: 740178084291543719, guid: b3a1862a9d42f074b92bcc7a587922b9, type: 3}
+  nosferatuPrefabSexy: {fileID: 740178084291543719, guid: b3a1862a9d42f074b92bcc7a587922b9, type: 3}
+  nosferatuPrefabCross: {fileID: 740178084291543719, guid: b3a1862a9d42f074b92bcc7a587922b9, type: 3}
+  nosferatuPrefabStand: {fileID: 740178084291543719, guid: b3a1862a9d42f074b92bcc7a587922b9, type: 3}
+  nosferatuPrefabFly: {fileID: 740178084291543719, guid: b3a1862a9d42f074b92bcc7a587922b9, type: 3}
+  nosferatuPrefabHand: {fileID: 740178084291543719, guid: b3a1862a9d42f074b92bcc7a587922b9, type: 3}
+  draculaSpawnEffectPrefab: {fileID: 3372215897970909540, guid: 3d5a14a42f696a846bc2549c5f74ab02, type: 3}
+  visionEffectPrefab: {fileID: -4490127325991210572, guid: 2f3338a8e1355e24590ca81bef837def, type: 3}
   draculaInPlayer:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7595149920051348018
+--- !u!114 &2525777662896232512
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,21 +190,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8228517700685265482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4602cd3d0f83452ba597aa28a56e6c65, type: 3}
+  m_Script: {fileID: 11500000, guid: 3179d3ee77a9e3344b31bb52e14c321c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onVision:
-    m_PersistentCalls:
-      m_Calls: []
-  onHide:
-    m_PersistentCalls:
-      m_Calls: []
-  infoText: 
-  infoTextAfterUse: 
-  icon: {fileID: 0}
-  afterIcon: {fileID: 0}
-  timeBoxHide: 0.1
-  timeAfterText: 3
 --- !u!82 &1927389643681340454
 AudioSource:
   m_ObjectHideFlags: 0
@@ -242,18 +289,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2525777662896232512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8228517700685265482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3179d3ee77a9e3344b31bb52e14c321c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1461263184935840726
 BoxCollider:
   m_ObjectHideFlags: 0

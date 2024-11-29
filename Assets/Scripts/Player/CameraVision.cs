@@ -45,8 +45,7 @@ public class CameraVision : MonoBehaviour
                 
             if (!IsVisionObj(t.gameObject))
             {
-                //Debug.DrawLine(playerCamera.transform.position, visionObjs[i].transform.position, Color.grey,Time.deltaTime);
-                //  
+                //Debug.DrawLine(playerCamera.transform.position, t.transform.position, Color.grey,Time.deltaTime);
                 t.OutCamera();
             }
             else
