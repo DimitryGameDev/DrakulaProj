@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class CharacterInputController : SingletonBase<CharacterInputController>
 {    
@@ -27,7 +28,8 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     [HideInInspector] public UnityEvent heartOff;
     [HideInInspector] public UnityEvent rifleShoot;
     [HideInInspector] public UnityEvent draculaAnim;
-    [HideInInspector] public bool IsRiflePickup;
+    
+    public bool isRiflePickup;
     public bool isStamina;
     private bool isRun;
     public bool isMove = true;
@@ -48,6 +50,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         heightCharacter = character.GetComponentInChildren<CapsuleCollider>().height;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        staminaTimer = stamina;
     }
 
     private void FixedUpdate()
@@ -60,12 +63,11 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     {
         StaminaUpdate();
         CameraUpdate();
-        MainRay();
+        if (!HeartEnabled)MainRay();
         HeartState();
         RifleState();
     }
-
-
+    
     private const string Horizontal = "Horizontal";
     private const string Vertical = "Vertical";
 
@@ -95,7 +97,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         if (Input.GetKey(KeyCode.LeftShift) && isStamina && character.isMove)
         {
             isRun = true;
-            staminaTimer += Time.deltaTime * runScale;
+            staminaTimer -= Time.deltaTime * runScale;
             character.Move(playerMoveDirection, MoveType.Run);
             return;
         }
@@ -103,8 +105,6 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         {
             isRun = false;
         }
-        
-        
         character.Move(playerMoveDirection, MoveType.Walk);
     }
 
@@ -112,13 +112,13 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     {
         if (!HeartEnabled && !isRun)
         {
-            if (staminaTimer >= 0)staminaTimer -= Time.deltaTime/staminaCooldown;
-            if (staminaTimer <= 0)isStamina = true;
+            if (staminaTimer <= stamina) staminaTimer += Time.deltaTime/staminaCooldown;
+            if (staminaTimer >= stamina) isStamina = true;
         }
         
-        if (staminaTimer > stamina)
+        if (staminaTimer <= 0)
         {
-            staminaTimer = stamina;
+            //staminaTimer = stamina;
             isStamina = false;
             audioSource.PlayOneShot(sprintEndClip,staminaCooldown);
             NoiseLevel.Instance.IncreaseLevel();
@@ -150,7 +150,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         }
         else if (isStamina)
         {
-            staminaTimer += Time.deltaTime * heartScale;
+            staminaTimer -= Time.deltaTime * heartScale;
         }
         
         if (Input.GetKeyDown(KeyCode.Mouse1) && isStamina)
@@ -174,7 +174,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private void RifleState()
     {
-        if (!IsRiflePickup) return;
+        if (!isRiflePickup) return;
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {

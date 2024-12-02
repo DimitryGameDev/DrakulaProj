@@ -3,7 +3,27 @@ guid: edd2f8af401b33e478505045f8550baf
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Model001_Material001
+    second: {fileID: 2100000, guid: 981d2a6aa351f3e4cbd54cdfbb02c332, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Model001_Material002
+    second: {fileID: 2100000, guid: 9620104b2e91fe143aa906c8e9edf668, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Model001_Material003
+    second: {fileID: 2100000, guid: edd8aef0c73cecc40868022aecd57739, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Model001_Material004
+    second: {fileID: 2100000, guid: d264cedcde44df34ba196ffac076bd7f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -48,7 +68,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -90,7 +110,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.19999999
+    globalScale: 20
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

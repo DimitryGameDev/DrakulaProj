@@ -35,6 +35,7 @@ public class CharacterStateManager : SingletonBase<CharacterStateManager>
         character = Instantiate(characterPrefab, characterSpawnPoint.position,characterSpawnPoint.rotation);
         bag = character.GetComponent<Bag>();
         characterInputController = character.GetComponent<CharacterInputController>();
+        characterInputController.isRiflePickup = playerState.GetRifleState();
         onePersonCamera = OnePersonCamera.Instance;
     }
     
@@ -45,13 +46,13 @@ public class CharacterStateManager : SingletonBase<CharacterStateManager>
         if (playerState.GetKeyAmount() != 0) bag.AddKey(playerState.GetKeyAmount());
         if (playerState.GetProjectileAmount() != 0) bag.AddProjectile(playerState.GetProjectileAmount());
         if (playerState.GetMedalAmount() != 0) bag.AddMedalPiece(playerState.GetMedalAmount());
-        characterInputController.IsRiflePickup = playerState.GetRifleState();
+        
     }
 
     public void Save()
     {
         playerState.Save(character.transform.position,character.transform.rotation, onePersonCamera.transform.position, bag.GetKeyAmount(),
             bag.GetProjectileAmount(), bag.GetMedalPeaceAmount(), characterInputController.Stamina,
-            characterInputController.IsRiflePickup);
+            characterInputController.isRiflePickup);
     }
 }

@@ -10,7 +10,7 @@ public class CheatCode : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F1))
         {
             Debug.Log("Мушкет получен");
-            CharacterInputController.Instance.IsRiflePickup = true;
+            CharacterInputController.Instance.isRiflePickup = true;
             Character.Instance.GetComponentInChildren<Bag>().AddProjectile(10);
         }
 

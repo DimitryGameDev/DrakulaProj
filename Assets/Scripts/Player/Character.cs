@@ -6,11 +6,13 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(CharacterInputController))] 
 [RequireComponent(typeof(AudioSource))]
 public class Character : Player
-{/*
+{
+    /*
     // TO DO:
     [Range(1f,10f)][SerializeField] private float maxSpeedSit = 1f;
     [Range(0f, 50f)][SerializeField] private float jumpForce = 1f;
     */
+    
     [Header("Character Settings")]
     [Range(1f,10f)][SerializeField] private float maxSpeedWalk = 3f;
     [Range(1f,10f)][SerializeField] private float maxSpeedRun = 6f;

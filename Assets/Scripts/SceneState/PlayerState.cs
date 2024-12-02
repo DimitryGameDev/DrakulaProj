@@ -25,13 +25,10 @@ public class PlayerState : SingletonBase<PlayerState>
         Init();
         if (FileHandler.HasFile(FileName))
         {
-            //Debug.Log("Файл найден");
             Saver<States>.TryLoad(FileName,ref playerData);
         }
         else
         {
-            //Debug.Log("Создан новый файл" + FileName);
-            //var obj = new States();
             Saver<States>.Save(FileName, playerData);
         }
     }
@@ -50,10 +47,6 @@ public class PlayerState : SingletonBase<PlayerState>
             playerData.rifleState = rifleState;
             Saver<States>.Save(FileName, playerData);
         }
-        else
-        {
-            //Debug.Log("Bruuuh");
-        }     
     } 
     
     
