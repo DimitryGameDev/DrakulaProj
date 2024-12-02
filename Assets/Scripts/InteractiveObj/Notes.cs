@@ -7,6 +7,7 @@ public class Notes : InteractiveObject
    [SerializeField] private GameObject notesBox;
    [SerializeField] private Text titleTextUi;
    [SerializeField] private Text notesTextUi;
+   [SerializeField] private Text worldText;
    [SerializeField] private AudioClip clip;
    [Space]
    [SerializeField] private string titleText;
@@ -20,6 +21,7 @@ public class Notes : InteractiveObject
       notesBox.SetActive(false);
       isNotes = false;
       dracula = Dracula.Instance;
+      worldText.text = text;
    }
 
    public override void Use()
@@ -47,7 +49,7 @@ public class Notes : InteractiveObject
    protected override void Update()
    {
       base.Update();
-      if (Input.GetKeyDown(KeyCode.Escape) && isNotes) CloseNotes();
+      if (Input.GetKeyDown(KeyCode.Mouse0) && isNotes) CloseNotes();
    }
 
    protected virtual void CloseNotes()

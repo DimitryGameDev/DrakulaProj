@@ -4,6 +4,7 @@ public class SaveZone : InteractiveObject
 {
     [Header("SaveZone Settings")]
     [SerializeField]private AudioClip backgroundMusic;
+    [SerializeField] private DraculaPoint[] spawnPointsDracula;
     
     private NoiseLevel noiseLevel;
     private Dracula dracula;
@@ -45,6 +46,6 @@ public class SaveZone : InteractiveObject
     public void ExitTrigger()
     {
         BackgroundMusic.Instance.Stop();
-        if (dracula) dracula.RandomPoint();
+        if (dracula) dracula.SetSpawnPoints(spawnPointsDracula);
     }
 }

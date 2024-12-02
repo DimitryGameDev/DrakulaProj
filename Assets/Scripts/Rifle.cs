@@ -25,9 +25,7 @@ public class Rifle : MonoBehaviour
 
     private void Start()
     {
-        if (!CharacterInputController.Instance.IsRiflePickup)
-            visualModel.SetActive(false);
-
+        visualModel.SetActive(false);
         CharacterInputController.Instance.heartOn.AddListener(OnRifleActive);
         CharacterInputController.Instance.heartOff.AddListener(OnRifleDeactivate);
         CharacterInputController.Instance.rifleShoot.AddListener(Fire);
@@ -50,7 +48,7 @@ public class Rifle : MonoBehaviour
 
     private void OnRifleActive()
     {
-        if (!CharacterInputController.Instance.IsRiflePickup) return;
+        if (!CharacterInputController.Instance.isRiflePickup) return;
 
         isActive = true;
         visualModel.SetActive(true);
@@ -58,7 +56,7 @@ public class Rifle : MonoBehaviour
 
     private void OnRifleDeactivate()
     {
-        if (!CharacterInputController.Instance.IsRiflePickup) return;
+        if (!CharacterInputController.Instance.isRiflePickup) return;
 
         isActive = false;
         visualModel.SetActive(false);

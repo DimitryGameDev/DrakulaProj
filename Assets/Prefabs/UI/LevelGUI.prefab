@@ -393,10 +393,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5769327588887085225}
   - {fileID: 1819321292535965023}
   - {fileID: 215592417679426595}
   - {fileID: 1732860581338896723}
+  - {fileID: 5769327588887085225}
   - {fileID: 5953209166061446346}
   - {fileID: 3925500561082227373}
   - {fileID: 5737223928886196935}
@@ -1402,6 +1402,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2263679523499531336}
     m_Modifications:
+    - target: {fileID: 715271246917530492, guid: 8369e9d111e0aed4884974c509db2f30, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7777880783254711662, guid: 8369e9d111e0aed4884974c509db2f30, type: 3}
       propertyPath: m_Name
       value: SprintBar
@@ -1758,19 +1762,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7324406500417788945, guid: db8302abca0734d49ab59370624a5ca2, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7324406500417788945, guid: db8302abca0734d49ab59370624a5ca2, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7324406500417788945, guid: db8302abca0734d49ab59370624a5ca2, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7324406500417788945, guid: db8302abca0734d49ab59370624a5ca2, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7324406500417788945, guid: db8302abca0734d49ab59370624a5ca2, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1779,6 +1783,14 @@ PrefabInstance:
     - target: {fileID: 7324406500417788945, guid: db8302abca0734d49ab59370624a5ca2, type: 3}
       propertyPath: m_SizeDelta.y
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324406500417788945, guid: db8302abca0734d49ab59370624a5ca2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324406500417788945, guid: db8302abca0734d49ab59370624a5ca2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7324406500417788945, guid: db8302abca0734d49ab59370624a5ca2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1810,11 +1822,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7324406500417788945, guid: db8302abca0734d49ab59370624a5ca2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 220
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7324406500417788945, guid: db8302abca0734d49ab59370624a5ca2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 100
+      value: -43
       objectReference: {fileID: 0}
     - target: {fileID: 7324406500417788945, guid: db8302abca0734d49ab59370624a5ca2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1833,6 +1845,10 @@ PrefabInstance:
       value: NoiseBar
       objectReference: {fileID: 0}
     - target: {fileID: 8188978269326976592, guid: db8302abca0734d49ab59370624a5ca2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 970d701b806aab547a9e7526f03b1cfa, type: 3}
+    - target: {fileID: 8188978269326976592, guid: db8302abca0734d49ab59370624a5ca2, type: 3}
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
@@ -1846,7 +1862,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8188978269326976592, guid: db8302abca0734d49ab59370624a5ca2, type: 3}
       propertyPath: m_FillAmount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8224404105536588857, guid: db8302abca0734d49ab59370624a5ca2, type: 3}
       propertyPath: m_SizeDelta.x
