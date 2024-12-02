@@ -109,14 +109,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1069886581775841414}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2, y: 0.7, z: 0.45}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.20000008, y: -0.29999995, z: 0.4500008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5551091616249802802}
   - {fileID: 8468087738424740749}
-  m_Father: {fileID: 487218471206118414}
+  m_Father: {fileID: 736479399257183351}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3134186627824336349
 MonoBehaviour:
@@ -136,7 +136,7 @@ MonoBehaviour:
   verticalAngleOffset: 20
   timeIndestructible: 10
   shootDistance: 10
-  hideRifleDistance: 2
+  hideRifleDistance: 1
   muzzleParticleSystem: {fileID: 0}
   shot: {fileID: 8300000, guid: da360379ba7814348874bbac7cfb8902, type: 3}
   click: {fileID: 8300000, guid: 6e9c5b1fcd1d283458ef01d531ca4dda, type: 3}
@@ -920,7 +920,7 @@ Transform:
   m_GameObject: {fileID: 5353381115381319089}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0, z: -0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1196,7 +1196,6 @@ Transform:
   - {fileID: 7763886565670185974}
   - {fileID: 7708894270326520532}
   - {fileID: 4954879023311742761}
-  - {fileID: 3292926263266740108}
   - {fileID: 3486141365106361016}
   - {fileID: 6947574911401198568}
   m_Father: {fileID: 0}
@@ -1801,6 +1800,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3278334942255339376}
+  - {fileID: 3292926263266740108}
   m_Father: {fileID: 487218471206118414}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &463883463511359812
