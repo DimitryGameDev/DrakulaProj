@@ -1,8 +1,14 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+public class SceneLoader : SingletonBase<SceneLoader>
 {
+    private void Awake()
+    {
+        Init();
+    }
+
     public void NewGame()
     {
         SceneManager.LoadScene(1);

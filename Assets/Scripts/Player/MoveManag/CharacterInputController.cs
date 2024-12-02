@@ -67,8 +67,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         HeartState();
         RifleState();
     }
-
-
+    
     private const string Horizontal = "Horizontal";
     private const string Vertical = "Vertical";
 
