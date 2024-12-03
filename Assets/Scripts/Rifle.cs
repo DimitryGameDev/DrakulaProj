@@ -25,9 +25,7 @@ public class Rifle : MonoBehaviour
 
     private void Start()
     {
-        if (!CharacterInputController.Instance.IsRiflePickup)
-            visualModel.SetActive(false);
-
+        visualModel.SetActive(false);
         CharacterInputController.Instance.heartOn.AddListener(OnRifleActive);
         CharacterInputController.Instance.heartOff.AddListener(OnRifleDeactivate);
         CharacterInputController.Instance.rifleShoot.AddListener(Fire);
@@ -50,7 +48,7 @@ public class Rifle : MonoBehaviour
 
     private void OnRifleActive()
     {
-        if (!CharacterInputController.Instance.IsRiflePickup) return;
+        if (!CharacterInputController.Instance.isRiflePickup) return;
 
         isActive = true;
         visualModel.SetActive(true);
@@ -58,7 +56,7 @@ public class Rifle : MonoBehaviour
 
     private void OnRifleDeactivate()
     {
-        if (!CharacterInputController.Instance.IsRiflePickup) return;
+        if (!CharacterInputController.Instance.isRiflePickup) return;
 
         isActive = false;
         visualModel.SetActive(false);
@@ -99,7 +97,7 @@ public class Rifle : MonoBehaviour
     {
         RaycastHit ray;
         
-        if (Physics.Raycast(startRay.position,lookAtTarget.position,out ray, hideRifleDistance))
+        if (Physics.Raycast(Character.Instance.transform.position,Character.Instance.transform.forward,out ray, hideRifleDistance))
         {
             if (!ray.collider.GetComponentInParent<Character>())
             {
@@ -116,7 +114,7 @@ public class Rifle : MonoBehaviour
             if (isCanFire)
             {
                 float newX = Mathf.LerpAngle(transform.eulerAngles.x, 65, Time.deltaTime * 10);
-                transform.localEulerAngles = new Vector3(newX, transform.localEulerAngles.y, transform.localEulerAngles.z);
+                transform.localEulerAngles = new Vector3(newX, transform.localEulerAngles.y,transform.localEulerAngles.z);
             }
             else
             {
@@ -148,7 +146,7 @@ public class Rifle : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(transform.position, transform.forward * shootDistance);
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(startRay.position, lookAtTarget.position * hideRifleDistance);
+        Gizmos.DrawRay(Character.Instance.transform.position, Character.Instance.transform.forward * hideRifleDistance);
     }
 #endif
 }

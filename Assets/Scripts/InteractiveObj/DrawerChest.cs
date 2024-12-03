@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DrawerChest : InteractiveObject
 {
-    [SerializeField] private GameObject item;
+    [SerializeField] private GameObject[] items;
     [SerializeField] private AudioClip openSfx;
     
     private Animator animator;
@@ -11,7 +11,11 @@ public class DrawerChest : InteractiveObject
     {
         base.Start();
         animator = GetComponent<Animator>();
-        if (item != null) item.transform.SetParent(transform.GetChild(0));
+        if (items != null)
+            for (int i = 0; i < items.Length; i++)
+            {
+                items[i].transform.SetParent(transform.GetChild(0));
+            }
     }
 
     public override void Use()

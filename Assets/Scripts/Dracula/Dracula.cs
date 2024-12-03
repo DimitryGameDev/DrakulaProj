@@ -136,7 +136,7 @@ public class Dracula : SingletonBase<Dracula>
     {
         if (other.CompareTag("Player"))
         {
-            KillPlayer(3);
+            KillPlayer(1);
         }
     }
     
@@ -148,8 +148,8 @@ public class Dracula : SingletonBase<Dracula>
 
         if (movePoint == null)
         {
-            Debug.Log("Игрок вне досягаемости");
-            Debug.Log("Спавнюсь в новой точке");
+            //Debug.Log("Игрок вне досягаемости");
+            //Debug.Log("Спавнюсь в новой точке");
             DraculaDespawn();
             RandomPoint();
             return;
@@ -294,6 +294,7 @@ public class Dracula : SingletonBase<Dracula>
         draculaMeshRenderer.enabled = false;
         enabled = true;
     }
+    
     public void DraculaDespawn()
     {
         DraculaDisable();
@@ -301,6 +302,7 @@ public class Dracula : SingletonBase<Dracula>
         isSpawning = false;
         enabled = false;
     }
+    
     public void DraculaEnable()
     {
         if (isSpawning)
@@ -311,6 +313,7 @@ public class Dracula : SingletonBase<Dracula>
     }
     public void DraculaDisable()
     {
+        Destroy(draculaPrefab);
         isVisible = false;
         lastPosition = transform.position;
         transform.position =new Vector3(100,100,100);

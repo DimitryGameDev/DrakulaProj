@@ -7,12 +7,6 @@ public class RiflePickUp : InteractiveObject
     [SerializeField] private GameObject visualModel;
 
     private AudioSource audioSource;
-    
-    protected override void Start()
-    {
-        base.Start();
-        audioSource = GetComponent<AudioSource>();
-    }
 
     public override void Use()
     {
@@ -24,15 +18,16 @@ public class RiflePickUp : InteractiveObject
 
     private void PickUp()
     {
-        CharacterInputController.Instance.IsRiflePickup = true;
+        CharacterInputController.Instance.isRiflePickup = true;
 
-        audioSource.Play();
+         AudioSource.Play();
         
         if (impactEffect)
             Instantiate(impactEffect, transform.position, Quaternion.identity);
         
         Destroy(visualModel);
     }
+    
     protected override void ObjectWosActive()
     {
         Destroy(visualModel);
