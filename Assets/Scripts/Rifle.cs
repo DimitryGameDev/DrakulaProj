@@ -140,13 +140,5 @@ public class Rifle : MonoBehaviour
         }
     }
 
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position, transform.forward * shootDistance);
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(Character.Instance.transform.position, Character.Instance.transform.forward * hideRifleDistance);
-    }
-#endif
+
 }

@@ -21,7 +21,11 @@ public class Notes : InteractiveObject
       notesBox.SetActive(false);
       isNotes = false;
       dracula = Dracula.Instance;
-      worldText.text = text;
+      if (worldText != null)
+      {
+         worldText.text = text;
+      }
+    
    }
 
    public override void Use()
