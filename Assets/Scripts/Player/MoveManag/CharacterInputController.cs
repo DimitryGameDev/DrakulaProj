@@ -118,7 +118,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         
         if (staminaTimer <= 0)
         {
-            //staminaTimer = stamina;
+            staminaTimer = 0;
             isStamina = false;
             audioSource.PlayOneShot(sprintEndClip,staminaCooldown);
             NoiseLevel.Instance.IncreaseLevel();
