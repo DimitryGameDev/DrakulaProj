@@ -901,7 +901,7 @@ MonoBehaviour:
   cameraTargetBack: {fileID: 7669030969120390028}
   triggerCollider: {fileID: 3866016683577980266}
   timeToSuccess: 3
-  timeToPrepare: 1.5
+  timeToPrepare: 1
   animator: {fileID: 6825486308354800829}
   mouseTexture: {fileID: 2800000, guid: 6e68c92ce024cd0469c030e61017dd45, type: 3}
   panel: {fileID: 0}
