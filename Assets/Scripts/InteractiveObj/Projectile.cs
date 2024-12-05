@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ProjectilePickup : InteractiveObject
+public class Projectile : InteractiveObject
 {
     [Header("Projectile Settings")]
     [SerializeField] private int projectileCount;
@@ -14,7 +14,12 @@ public class ProjectilePickup : InteractiveObject
         ShowAfterText();
         wosActive = true;
     }
-    
+
+    protected override void ShowAfterText()
+    {
+        
+    }
+
     private void PickUp()
     {
         Character.Instance.GetComponent<Bag>().AddProjectile(projectileCount);

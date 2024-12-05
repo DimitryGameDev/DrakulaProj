@@ -26,8 +26,8 @@ public class Rifle : MonoBehaviour
     private void Start()
     {
         visualModel.SetActive(false);
-        CharacterInputController.Instance.heartOn.AddListener(OnRifleActive);
-        CharacterInputController.Instance.heartOff.AddListener(OnRifleDeactivate);
+        CharacterInputController.Instance.visionOn.AddListener(OnRifleActive);
+        CharacterInputController.Instance.visionOff.AddListener(OnRifleDeactivate);
         CharacterInputController.Instance.rifleShoot.AddListener(Fire);
 
         mainCamera = Camera.main;
@@ -36,8 +36,8 @@ public class Rifle : MonoBehaviour
 
     private void OnDestroy()
     {
-        CharacterInputController.Instance.heartOn.RemoveListener(OnRifleActive);
-        CharacterInputController.Instance.heartOff.RemoveListener(OnRifleDeactivate);
+        CharacterInputController.Instance.visionOn.RemoveListener(OnRifleActive);
+        CharacterInputController.Instance.visionOff.RemoveListener(OnRifleDeactivate);
         CharacterInputController.Instance.rifleShoot.RemoveListener(Fire);
     }
 
@@ -140,5 +140,13 @@ public class Rifle : MonoBehaviour
         }
     }
 
-
+#if UNITY_EDITOR
+  /*  private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(transform.position, transform.forward * shootDistance);
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(Character.Instance.transform.position, Character.Instance.transform.forward * hideRifleDistance);
+    }*/
+#endif
 }

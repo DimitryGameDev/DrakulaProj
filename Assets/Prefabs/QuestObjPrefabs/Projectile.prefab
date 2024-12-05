@@ -157,7 +157,7 @@ MonoBehaviour:
   onHide:
     m_PersistentCalls:
       m_Calls: []
-  infoText: "\u041F\u0430\u0442\u0440\u043E\u043D"
+  infoText: Bullet
   infoTextAfterUse: 
   icon: {fileID: 21300000, guid: 3639c5d217344d94b91681767d7d0a84, type: 3}
   afterIcon: {fileID: 0}

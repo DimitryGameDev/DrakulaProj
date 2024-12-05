@@ -6,9 +6,9 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 {    
     [SerializeField] private float maxDistanceHitCamera = 2f;
     [SerializeField] private float stamina = 2f;
-    [SerializeField] private float heartScale = 0.5f;
+    [FormerlySerializedAs("heartScale")] [SerializeField] private float visionScale = 0.5f;
     [SerializeField] private float runScale = 2f;
-    [SerializeField] private float heartCooldown = 2f;
+    [FormerlySerializedAs("heartCooldown")] [SerializeField] private float visionCooldown = 2f;
     [SerializeField] private float staminaCooldown = 2f;
     [SerializeField] private AudioClip sprintEndClip;
 
@@ -19,13 +19,13 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     private Vector3 playerMoveDirection;
     private float radiusCharacter;
     private float heightCharacter;
-    private float timeHeart;
+    private float timeVision;
     private float staminaTimer;
     public float StaminaTimer => staminaTimer;
     public float Stamina => stamina;
     
-    [HideInInspector] public UnityEvent heartOn;
-    [HideInInspector] public UnityEvent heartOff;
+    [HideInInspector] public UnityEvent visionOn;
+    [HideInInspector] public UnityEvent visionOff;
     [HideInInspector] public UnityEvent rifleShoot;
     [HideInInspector] public UnityEvent draculaAnim;
     
@@ -33,7 +33,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     public bool isStamina;
     private bool isRun;
     public bool isMove = true;
-    public bool HeartEnabled { get; private set; }
+    public bool VisionEnabled { get; private set; }
     
     private void Awake()
     {
@@ -42,7 +42,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     public void Start()
     {
-        HeartEnabled = false;
+        VisionEnabled = false;
         onePersonCamera = OnePersonCamera.Instance;
         character = GetComponent<Character>();
         audioSource = GetComponent<AudioSource>();
@@ -63,8 +63,8 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     {
         StaminaUpdate();
         CameraUpdate();
-        if (!HeartEnabled)MainRay();
-        HeartState();
+        if (!VisionEnabled)MainRay();
+        VisionState();
         RifleState();
     }
     
@@ -110,13 +110,13 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
 
     private void StaminaUpdate()
     {
-        if (!HeartEnabled && !isRun)
+        if (!VisionEnabled && !isRun)
         {
             if (staminaTimer <= stamina) staminaTimer += Time.deltaTime/staminaCooldown;
             if (staminaTimer >= stamina) isStamina = true;
         }
         
-        if (staminaTimer <= 0)
+        if (staminaTimer < 0)
         {
             staminaTimer = 0;
             isStamina = false;
@@ -142,33 +142,33 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
         onePersonCamera.Move(dirX, dirY);
     }
     
-    private void HeartState()
+    private void VisionState()
     {
-        if (HeartEnabled == false)
+        if (VisionEnabled == false)
         {
-            timeHeart -= Time.deltaTime;
+            timeVision -= Time.deltaTime;
         }
         else if (isStamina)
         {
-            staminaTimer -= Time.deltaTime * heartScale;
+            staminaTimer -= Time.deltaTime * visionScale;
         }
         
         if (Input.GetKeyDown(KeyCode.Mouse1) && isStamina)
         {
-            if (timeHeart <= 0)
+            if (timeVision <= 0)
             {
-                HeartEnabled = true;
+                VisionEnabled = true;
                 isMove = false;
-                heartOn.Invoke();
-                timeHeart = heartCooldown;
+                visionOn.Invoke();
+                timeVision = visionCooldown;
             }
         }
         
-        if (Input.GetKeyUp(KeyCode.Mouse1) && HeartEnabled || isStamina == false)
+        if (Input.GetKeyUp(KeyCode.Mouse1) && VisionEnabled || isStamina == false)
         {
-            HeartEnabled = false;
+            VisionEnabled = false;
             isMove = true;
-            heartOff.Invoke();
+            visionOff.Invoke();
         }
     }
 
@@ -185,11 +185,13 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     public void ChangeSpeedTime(float value)
     {
         stamina += value;
+        staminaTimer = stamina;
     }
     
     public void SetSpeedTime(float value)
     {
         stamina = value;
+        staminaTimer = stamina;
     }
     
     #region RayLogick

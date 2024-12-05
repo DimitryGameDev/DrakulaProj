@@ -4840,7 +4840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7323835212068526312}
   - component: {fileID: 6180411761292958476}
-  - component: {fileID: 7914163193596825969}
+  - component: {fileID: 7954338941785303868}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -4857,7 +4857,7 @@ Transform:
   m_GameObject: {fileID: 1686134240235291888}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.000000029802322, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalPosition: {x: 0, y: 0.411, z: -0.002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4875,8 +4875,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.9924528, g: 0.74352455, b: 0.31271622, a: 1}
-  m_Intensity: 1
-  m_Range: 0.7
+  m_Intensity: 0.1
+  m_Range: 5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -4925,7 +4925,7 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &7914163193596825969
+--- !u!114 &7954338941785303868
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5046,6 +5046,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8169020414577115212, guid: 7d28352c8a0d51f47be7d1b73be85f8a, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 7d28352c8a0d51f47be7d1b73be85f8a, type: 3}
       propertyPath: m_ReceiveGI
       value: 2
@@ -5053,6 +5057,10 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7d28352c8a0d51f47be7d1b73be85f8a, type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 7d28352c8a0d51f47be7d1b73be85f8a, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -4509402547358102991, guid: 7d28352c8a0d51f47be7d1b73be85f8a, type: 3}
       propertyPath: m_StaticEditorFlags

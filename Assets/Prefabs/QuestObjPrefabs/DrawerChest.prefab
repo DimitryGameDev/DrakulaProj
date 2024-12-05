@@ -149,13 +149,13 @@ MonoBehaviour:
   onHide:
     m_PersistentCalls:
       m_Calls: []
-  infoText: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C"
+  infoText: 
   infoTextAfterUse: 
   icon: {fileID: 0}
   afterIcon: {fileID: 0}
   timeBoxHide: 0.1
   timeAfterText: 3
-  item: {fileID: 0}
+  items: []
   openSfx: {fileID: 8300000, guid: 7924a3a0c5919d84eb6cbc3acc12469b, type: 3}
 --- !u!95 &3247890790340282880
 Animator:

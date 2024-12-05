@@ -48,9 +48,13 @@ public class TitleManager : MonoBehaviour
             nextScene = true;
          }
       }
-      else
+      else if (!nextScene)
       {
-         timer = 0;
+         timer -= Time.deltaTime;
+         if (timer <= 0)
+         {
+            timer = 0;
+         }
       }
       
       skipImage.fillAmount = timer / timeToScip;

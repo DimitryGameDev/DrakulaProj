@@ -909,8 +909,8 @@ MonoBehaviour:
   onHide:
     m_PersistentCalls:
       m_Calls: []
-  infoText: "\u041C\u0443\u0448\u043A\u0435\u0442"
-  infoTextAfterUse: "\u041C\u041E\u0427\u0418 \u0414\u0420\u0410\u041A\u0423\u041B\u0423!"
+  infoText: Musket
+  infoTextAfterUse: Shooting when vision is activated
   icon: {fileID: 0}
   afterIcon: {fileID: 0}
   timeBoxHide: 0.1

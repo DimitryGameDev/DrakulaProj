@@ -42,6 +42,7 @@ public class Death : MonoBehaviour
         rb.freezeRotation = true;
         rb.velocity = new Vector3(0, 0, 0);
         CharacterInputController.Instance.enabled = false;
+        Pause.Instance.enabled = false;
         BackgroundMusic.Instance.Stop();
         FindObjectOfType<Heart>().enabled = false;
         

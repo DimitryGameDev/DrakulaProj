@@ -52,7 +52,7 @@ MonoBehaviour:
   onHide:
     m_PersistentCalls:
       m_Calls: []
-  infoText: "\u0412\u044B\u043F\u0438\u0442\u044C"
+  infoText: Drink
   infoTextAfterUse: 
   icon: {fileID: 0}
   afterIcon: {fileID: 0}

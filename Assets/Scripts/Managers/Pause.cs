@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Pause : SingletonBase<Pause>
@@ -12,7 +10,6 @@ public class Pause : SingletonBase<Pause>
     private void Awake()
     {
         Init();
-        
     }
     
     private void Update()
@@ -32,6 +29,7 @@ public class Pause : SingletonBase<Pause>
 
     private void ShowPauseMenu()
     {
+        CharacterInputController.Instance.enabled = false;
         OnePersonCamera.Instance.Lock();
         Time.timeScale = 0f;
         gui.SetActive(false);
@@ -61,6 +59,7 @@ public class Pause : SingletonBase<Pause>
     
     private void HidePauseMenu()
     {
+        CharacterInputController.Instance.enabled = true;
         OnePersonCamera.Instance.UnLock();
         Time.timeScale = 1f;
         gui.SetActive(true);
