@@ -76,7 +76,7 @@ MonoBehaviour:
   onHide:
     m_PersistentCalls:
       m_Calls: []
-  infoText: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C"
+  infoText: Open
   infoTextAfterUse: 
   icon: {fileID: 0}
   afterIcon: {fileID: 0}

@@ -4,9 +4,11 @@ public class DrawerChest : InteractiveObject
 {
     [SerializeField] private GameObject[] items;
     [SerializeField] private AudioClip openSfx;
-    
     private Animator animator;
 
+    private const string OpenText = "Open";
+    private const string CloseText = "Close";
+        
     protected override void Start()
     {
         base.Start();
@@ -18,6 +20,13 @@ public class DrawerChest : InteractiveObject
             }
     }
 
+    public override void ShowText()
+    {
+        base.ShowText();
+        if (wosActive)InteractiveBoxUI.text.text = CloseText;
+        else InteractiveBoxUI.text.text = OpenText;
+    }
+    
     public override void Use()
     {
         base.Use();

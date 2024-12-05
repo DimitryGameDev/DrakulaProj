@@ -22,6 +22,10 @@ public class Medal : InteractiveObject
         AudioSource.Play();
     }
 
+    protected override void ShowAfterText()
+    {
+        
+    }
     private void PickUp()
     {
         Character.Instance.GetComponent<Bag>().AddMedalPiece(countPiece);

@@ -25,7 +25,7 @@ public class PlayerState : SingletonBase<PlayerState>
         Init();
         if (FileHandler.HasFile(FileName))
         {
-            Saver<States>.TryLoad(FileName,ref playerData);
+            Saver<States>.TryLoad(FileName, ref playerData);
         }
         else
         {

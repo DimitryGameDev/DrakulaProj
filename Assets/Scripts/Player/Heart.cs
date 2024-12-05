@@ -25,7 +25,7 @@ public class Heart : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        CharacterInputController.Instance.heartOn.AddListener(PlaySfx);
+        CharacterInputController.Instance.visionOn.AddListener(PlaySfx);
         character = (Character)Character.Instance;
         postProcessVolume = GetComponent<Volume>();
         postProcessVolume.profile.TryGet(out vignette);
@@ -57,7 +57,7 @@ public class Heart : MonoBehaviour
 
     private void SetHeartView()
     {
-        if (!characterInputController.HeartEnabled)
+        if (!characterInputController.VisionEnabled)
         {
             IsActive = false;
             
@@ -70,7 +70,7 @@ public class Heart : MonoBehaviour
                 lensDistortion.intensity.value = Mathf.Lerp(lensDistortion.intensity.value, 0, lensDistortionSpeed * Time.deltaTime);
             }
         }
-        if (characterInputController.HeartEnabled)
+        if (characterInputController.VisionEnabled)
         {
             IsActive = true;
  
@@ -92,6 +92,6 @@ public class Heart : MonoBehaviour
 
     private void OnDestroy()
     {
-        CharacterInputController.Instance.heartOn.RemoveListener(PlaySfx);
+        CharacterInputController.Instance.visionOn.RemoveListener(PlaySfx);
     }
 }

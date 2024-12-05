@@ -11,9 +11,9 @@ public class SceneLoader : SingletonBase<SceneLoader>
 
     public void NewGame()
     {
-        SceneManager.LoadScene(1);
         FileHandler.Reset("PlayerState.dat");
         FileHandler.Reset("InteractiveState.dat");
+        SceneManager.LoadScene(1);
     }
 
     public void LoadGame()

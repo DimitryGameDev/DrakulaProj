@@ -4,7 +4,7 @@ public class EndGameManager : MonoBehaviour
 {
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
-    
+    [SerializeField] private GameObject gui;
     [SerializeField] private float loseDelayTimer;
     
     private Death death;
@@ -39,6 +39,7 @@ public class EndGameManager : MonoBehaviour
     private void Lose()
     {
         isLose = true;
+        gui.SetActive(false);
         Dracula.Instance.DraculaDisable();
     }
 

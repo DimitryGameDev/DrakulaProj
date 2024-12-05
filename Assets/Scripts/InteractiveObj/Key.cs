@@ -14,7 +14,11 @@ public class Key : InteractiveObject
         ShowAfterText();
         wosActive = true;
     }
-    
+
+    protected override void ShowAfterText()
+    {
+        
+    }
     private void PickUp()
     {
         Character.Instance.GetComponent<Bag>().AddKey(keyCount);

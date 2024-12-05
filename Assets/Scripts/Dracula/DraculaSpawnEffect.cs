@@ -20,7 +20,7 @@ public class DraculaSpawnEffect : MonoBehaviour
         
         if (particleEffect != null)
         {
-            if (!characterInputController.HeartEnabled && timer >= minTimeParticle)
+            if (!characterInputController.VisionEnabled && timer >= minTimeParticle)
             {
                 particleEffect.Stop();
                 if (!IsPlaying())

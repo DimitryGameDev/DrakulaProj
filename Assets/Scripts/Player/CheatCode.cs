@@ -60,15 +60,9 @@ public class CheatCode : MonoBehaviour
             CharacterStateManager.Instance.Save();
         }
         
-        if (Input.GetKeyDown(KeyCode.F7))
-        {
-            Debug.Log("Файл сохранения удалён");
-            InteractiveState.Instance.ResetState();
-            PlayerState.Instance.ResetState();
-        }
-        
         if (Input.GetKeyDown(KeyCode.F8))
         {
+            Debug.Log("Загрузка");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }

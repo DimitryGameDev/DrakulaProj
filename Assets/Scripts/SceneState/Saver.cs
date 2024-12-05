@@ -11,14 +11,14 @@ public  class Saver<T>
         var path = FileHandler.Path(fileName);
         if (File.Exists(path))
         {
-            //Debug.Log($"Load file from :{FileHandler.Path(fileName)}");
+            Debug.Log($"Load file from :{FileHandler.Path(fileName)}");
             var dataString = File.ReadAllText(path);
             var saver = JsonUtility.FromJson<Saver<T>>(dataString);
             data = saver.data;
         }
         else
         {
-           // Debug.Log($"The file was not found :{FileHandler.Path(fileName)}");
+            Debug.Log($"The file was not found :{FileHandler.Path(fileName)}");
         }
     }
 

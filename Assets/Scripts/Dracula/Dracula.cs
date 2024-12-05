@@ -17,7 +17,7 @@ public class Dracula : SingletonBase<Dracula>
     [SerializeField] [Range(0.2f, 30f)] private float maxSpawnSpeed = 15f;
     
     [Tooltip("Изменение максимальной скорости на данное значение при подборе амулета")]
-    [SerializeField] [Range(1, 30)] private int maxSpeedChange = 2;
+    [SerializeField] [Range(1, 30)] private float maxSpeedChange = 2;
     
     [Tooltip("минимальная скорость перемещения")]
     [SerializeField] [Range(0.2f, 30f)] private float minSpawnSpeed = 1f;
@@ -89,8 +89,8 @@ public class Dracula : SingletonBase<Dracula>
 
     private void Start()
     {
-        CharacterInputController.Instance.heartOn.AddListener(ToggleHeartOn);
-        CharacterInputController.Instance.heartOff.AddListener(ToggleHeartOff);
+        CharacterInputController.Instance.visionOn.AddListener(ToggleHeartOn);
+        CharacterInputController.Instance.visionOff.AddListener(ToggleHeartOff);
         GetComponentInChildren<VisibleObject>().onVision.AddListener(ToggleVisionOn);
         GetComponentInChildren<VisibleObject>().onHide.AddListener(ToggleVisionOff);
         
@@ -245,7 +245,7 @@ public class Dracula : SingletonBase<Dracula>
             {
                 draculaSpawnEffect = Instantiate(draculaSpawnEffectPrefab,new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity);
             }
-            else if (!draculaSpawnEffect.IsPlaying())
+            else if (!draculaSpawnEffect.IsPlaying() && draculaMeshRenderer.enabled)
             {
                 draculaSpawnEffect = Instantiate(draculaSpawnEffectPrefab,new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity);
             }
@@ -307,6 +307,7 @@ public class Dracula : SingletonBase<Dracula>
     {
         if (isSpawning)
         {
+            DraculaMove();
             transform.position = lastPosition;
             enabled = true;
         }
@@ -314,7 +315,8 @@ public class Dracula : SingletonBase<Dracula>
     public void DraculaDisable()
     {
         Destroy(draculaPrefab);
-        isVisible = false;
+        builder.ClearPath();
+        //isVisible = false;
         lastPosition = transform.position;
         transform.position =new Vector3(100,100,100);
         timer = 0;

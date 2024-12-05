@@ -52,15 +52,15 @@ MonoBehaviour:
   onHide:
     m_PersistentCalls:
       m_Calls: []
-  infoText: "\u0410\u043A\u0442\u0438\u0432\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
-  infoTextAfterUse: "\u0412\u044B \u043E\u0442\u043A\u0440\u044B\u043B\u0438 \u043F\u0440\u043E\u0445\u043E\u0434
-    \u0447\u0435\u0440\u0435\u0437 \u043B\u044E\u043A"
+  infoText: Use
+  infoTextAfterUse: You opened the passage through the hatch
   icon: {fileID: 0}
   afterIcon: {fileID: 0}
   timeBoxHide: 0.1
   timeAfterText: 3
   trigger: {fileID: 0}
   animator: {fileID: 3224839024139188714}
+  animator2: {fileID: 0}
   audioClip: {fileID: 8300000, guid: 02fe01ff5faf4a34db1417a651964fbc, type: 3}
 --- !u!82 &2600415150225592604
 AudioSource:
