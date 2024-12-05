@@ -507,6 +507,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: c7556f604a0e3204c9f8b49ba0f4e513, type: 2}
     - target: {fileID: 747046518119104319, guid: a9ad3242078e03640b6507cf97ce28ee, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1526868750706597633, guid: c7556f604a0e3204c9f8b49ba0f4e513, type: 2}
+    - target: {fileID: 747046518119104319, guid: a9ad3242078e03640b6507cf97ce28ee, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 1
       objectReference: {fileID: 0}
@@ -517,6 +521,10 @@ PrefabInstance:
     - target: {fileID: 4010422028982649633, guid: a9ad3242078e03640b6507cf97ce28ee, type: 3}
       propertyPath: m_Name
       value: WinGamePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010422028982649633, guid: a9ad3242078e03640b6507cf97ce28ee, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5342205966575451701, guid: a9ad3242078e03640b6507cf97ce28ee, type: 3}
       propertyPath: m_Pivot.x
@@ -602,6 +610,10 @@ PrefabInstance:
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: c7556f604a0e3204c9f8b49ba0f4e513, type: 2}
+    - target: {fileID: 7671905030575909757, guid: a9ad3242078e03640b6507cf97ce28ee, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1526868750706597633, guid: c7556f604a0e3204c9f8b49ba0f4e513, type: 2}
     - target: {fileID: 7671905030575909757, guid: a9ad3242078e03640b6507cf97ce28ee, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 1

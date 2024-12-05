@@ -232,6 +232,7 @@ MonoBehaviour:
   timeIndestructible: 10
   shootDistance: 10
   hideRifleDistance: 0.8
+  fireRate: 1
   shot: {fileID: 8300000, guid: da360379ba7814348874bbac7cfb8902, type: 3}
   empty: {fileID: 8300000, guid: 6e9c5b1fcd1d283458ef01d531ca4dda, type: 3}
 --- !u!1 &2244458065883165205
