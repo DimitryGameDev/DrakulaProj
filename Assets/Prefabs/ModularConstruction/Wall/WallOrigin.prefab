@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -3347820368920901958, guid: 4ca6755eb42399347bd67db276853d1c, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -3129584681878631399, guid: 4ca6755eb42399347bd67db276853d1c, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -189,6 +193,10 @@ PrefabInstance:
     - target: {fileID: -1462483402274767202, guid: 4ca6755eb42399347bd67db276853d1c, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 629608461301261078, guid: 4ca6755eb42399347bd67db276853d1c, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4ca6755eb42399347bd67db276853d1c, type: 3}
       propertyPath: m_Name

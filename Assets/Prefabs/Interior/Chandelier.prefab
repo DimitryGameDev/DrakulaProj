@@ -45,8 +45,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6354123, b: 0.111320674, a: 1}
-  m_Intensity: 0.2
-  m_Range: 10
+  m_Intensity: 0.4
+  m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -163,8 +163,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6354123, b: 0.111320674, a: 1}
-  m_Intensity: 0.2
-  m_Range: 10
+  m_Intensity: 0.4
+  m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -5112,8 +5112,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6354123, b: 0.111320674, a: 1}
-  m_Intensity: 0.2
-  m_Range: 10
+  m_Intensity: 0.4
+  m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -10061,8 +10061,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6354123, b: 0.111320674, a: 1}
-  m_Intensity: 0.2
-  m_Range: 10
+  m_Intensity: 0.4
+  m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -15010,8 +15010,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6354123, b: 0.111320674, a: 1}
-  m_Intensity: 0.2
-  m_Range: 10
+  m_Intensity: 0.4
+  m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -24790,8 +24790,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6354123, b: 0.111320674, a: 1}
-  m_Intensity: 0.2
-  m_Range: 10
+  m_Intensity: 0.4
+  m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -39433,8 +39433,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6354123, b: 0.111320674, a: 1}
-  m_Intensity: 0.2
-  m_Range: 10
+  m_Intensity: 0.4
+  m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -39551,8 +39551,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6354123, b: 0.111320674, a: 1}
-  m_Intensity: 0.2
-  m_Range: 10
+  m_Intensity: 0.4
+  m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -39693,12 +39693,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8243859162516691323, guid: 2d379f5dd8473144aa309fc73e335073, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -8243859162516691323, guid: 2d379f5dd8473144aa309fc73e335073, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c5336b07890e5a14d930267c4666db5e, type: 2}
     - target: {fileID: -7511558181221131132, guid: 2d379f5dd8473144aa309fc73e335073, type: 3}
       propertyPath: m_ReceiveGI
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2d379f5dd8473144aa309fc73e335073, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -2290999899181831159, guid: 2d379f5dd8473144aa309fc73e335073, type: 3}
       propertyPath: m_StaticEditorFlags

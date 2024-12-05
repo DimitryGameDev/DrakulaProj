@@ -443,6 +443,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8134814474233566475, guid: 00690b02b17477c408af433bf7f9cfae, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -7786094062253139723, guid: 00690b02b17477c408af433bf7f9cfae, type: 3}
       propertyPath: m_IsActive
       value: 0

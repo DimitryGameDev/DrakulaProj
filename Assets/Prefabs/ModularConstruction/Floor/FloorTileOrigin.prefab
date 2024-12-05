@@ -162,6 +162,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3050296357422784397, guid: e0bdda886c8385f43baff9fcd428283a, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7098321317678080052, guid: e0bdda886c8385f43baff9fcd428283a, type: 3}
       propertyPath: m_CastShadows
       value: 2
