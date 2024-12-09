@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScene.unity
     guid: 3b18a9e4141151e4eb195ad0e9ef5815
   - enabled: 1
-    path: Assets/Scenes/BranCastle.unity
+    path: Assets/Scenes/FinalScene.unity
     guid: 3ad94b250dd1ec84b9f197f2032e51b6
   m_configObjects: {}
