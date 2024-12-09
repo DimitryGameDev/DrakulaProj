@@ -23,10 +23,16 @@ public class Dracula : SingletonBase<Dracula>
     [SerializeField] [Range(0.2f, 30f)] private float minSpawnSpeed = 1f;
     
     [Tooltip("Дальность перемещения")]
-    [SerializeField] [Range(0f, 50f)] private int minDistanceToNextPp = 4;
+    [SerializeField] [Range(0f, 50f)] private float minDistanceToNextPp = 4;
     
-    [SerializeField] private AudioClip[] spawnClips;
+    [Tooltip("Spawn Positions")]
     [SerializeField] private DraculaPoint[] spawnPositions;
+    
+    [Tooltip("Sound Settings")]
+    [SerializeField] private AudioSource sourceNearPlayer;
+    [SerializeField] private AudioClip audioNearPlayerPhase1;
+    [SerializeField] private AudioClip audioNearPlayerPhase2;
+    [SerializeField] private AudioClip[] deathSounds;
     
     [Space][Header("Dracula Prefabs")]
     [SerializeField] private GameObject draculaPrefabNone;
@@ -55,11 +61,11 @@ public class Dracula : SingletonBase<Dracula>
     private GameObject prefabsFly;
     private GameObject prefabsHand;
     
+    private AudioSource audioSource;
     private Transform character;
     private DraculaPoint draculaPoint;
     private DraculaPoint playerPoint;
     private GameObject draculaPrefab;
-    private AudioSource source;
     private MeshRenderer draculaMeshRenderer;
     private DraculaSpawnEffect draculaSpawnEffect;
     private PathBuilder builder;
@@ -70,6 +76,7 @@ public class Dracula : SingletonBase<Dracula>
     private bool isSpawning;
     private bool isActiveMesh;
     private bool isNewPhase;
+    private bool isKill;
     
     private float timer;
     private float spawnSpeed;
@@ -95,16 +102,16 @@ public class Dracula : SingletonBase<Dracula>
         GetComponentInChildren<VisibleObject>().onHide.AddListener(ToggleVisionOff);
         
         NoiseLevel.Instance.OnChange += SpeedChange;
-        
+
+        audioSource = GetComponent<AudioSource>();
         character = Character.Instance.transform;
-        source = GetComponent<AudioSource>();
         builder = GetComponent<PathBuilder>();
         playerPoint = character.GetComponent<DraculaPoint>();
         character.GetComponent<Bag>().addMedalPieceAmount.AddListener(PlayerFindMedal);
         draculaPoint = GetComponent<DraculaPoint>();
         spawnSpeed = maxSpawnSpeed;
         
-        ChangePrefabs(1);
+        ChangePhase(1);
         if (playOnAwake)
         {
             SetSpawnPoint(spawnPositions[Random.Range(0, spawnPositions.Length)]);
@@ -161,7 +168,7 @@ public class Dracula : SingletonBase<Dracula>
             enabled = false;
             return;
         }
-
+        
         draculaPrefab = Instantiate(GetDraculaPrefab(movePoint), movePoint.transform.position, Quaternion.identity, transform);
         draculaMeshRenderer = draculaPrefab.GetComponent<MeshRenderer>();
         draculaMeshRenderer.enabled = false;
@@ -180,29 +187,35 @@ public class Dracula : SingletonBase<Dracula>
 
     private void ActivateNewPhase()
     {
-        ChangePrefabs(2);
+        ChangePhase(2);
         isNewPhase = true;
     }
 
-    private void ChangePrefabs(int phaseNumber)
+    private void ChangePhase(int phaseNumber)
     {
+        sourceNearPlayer.Stop();
+        
         if (phaseNumber == 1)
         {
+            sourceNearPlayer.clip = audioNearPlayerPhase1;
             prefabsNone = draculaPrefabNone;
             prefabsSexy = draculaPrefabSexy;
             prefabsCross = draculaPrefabCross;
             prefabsStand = draculaPrefabStand;
             prefabsFly = draculaPrefabFly;
             prefabsHand = draculaPrefabHand;
+            sourceNearPlayer.Play();
         }
         if (phaseNumber == 2)
         {
+            sourceNearPlayer.clip = audioNearPlayerPhase2;
             prefabsNone = nosferatuPrefabNone;
             prefabsSexy = nosferatuPrefabSexy;
             prefabsCross = nosferatuPrefabCross;
             prefabsStand = nosferatuPrefabStand;
             prefabsFly = nosferatuPrefabFly;
             prefabsHand = nosferatuPrefabHand;
+            sourceNearPlayer.Play();
         }
     }
 
@@ -305,18 +318,16 @@ public class Dracula : SingletonBase<Dracula>
     
     public void DraculaEnable()
     {
-        if (isSpawning)
-        {
-            DraculaMove();
-            transform.position = lastPosition;
-            enabled = true;
-        }
+        if (isKill || !isSpawning) return;   
+        DraculaMove();
+        transform.position = lastPosition;
+        enabled = true;
+       
     }
     public void DraculaDisable()
     {
         Destroy(draculaPrefab);
         builder.ClearPath();
-        //isVisible = false;
         lastPosition = transform.position;
         transform.position =new Vector3(100,100,100);
         timer = 0;
@@ -366,14 +377,19 @@ public class Dracula : SingletonBase<Dracula>
     }
     public void DraculaIndestructible(float time)
     {
+        if (isKill) return;
         StartCoroutine(TemporaryShutdown(time));
     }
 
     private IEnumerator TemporaryShutdown(float time)
     {
+        var rand = Random.Range(0, deathSounds.Length);
+        audioSource.PlayOneShot(deathSounds[rand]);
+        isKill = true;
+        yield return new WaitForSeconds(1.5f);
         DraculaDisable();
         yield return new WaitForSeconds(time);
-        Debug.Log("Dracula enable again");
+        isKill = false;
         DraculaEnable();
     }
     

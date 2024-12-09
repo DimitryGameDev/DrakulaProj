@@ -154,13 +154,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnAwake: 0
-  maxSpawnSpeed: 11
-  maxSpeedChange: 2.5
+  maxSpawnSpeed: 8.2
+  maxSpeedChange: 2.3
   minSpawnSpeed: 0.2
-  minDistanceToNextPp: 3
-  spawnClips:
-  - {fileID: 8300000, guid: 5dbefb0d6d692de4fb5dcc0b5afdb1ab, type: 3}
+  minDistanceToNextPp: 3.5
   spawnPositions: []
+  sourceNearPlayer: {fileID: 1581282643224755373}
+  audioNearPlayerPhase1: {fileID: 8300000, guid: baeacff31d052d745a6793f605320089, type: 3}
+  audioNearPlayerPhase2: {fileID: 8300000, guid: f9197a6f67997b74b904da4afad73d88, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: 43e012671f757bc4185fd730f4273c8a, type: 3}
+  - {fileID: 8300000, guid: 2cde2163637f5654480adc2ba488c8e6, type: 3}
+  - {fileID: 8300000, guid: b54f85a1d52d19346961d923735ac409, type: 3}
+  - {fileID: 8300000, guid: 4e9aec3507e545448b4337357c4dbd27, type: 3}
   draculaPrefabNone: {fileID: 740178084291543719, guid: b3a1862a9d42f074b92bcc7a587922b9, type: 3}
   draculaPrefabSexy: {fileID: 3369693194535960404, guid: 417d3999a3bad7248a94f6143bcfe125, type: 3}
   draculaPrefabCross: {fileID: 1567872088887843998, guid: 5a40032110b27be4fa742a1fed224beb, type: 3}
@@ -349,8 +355,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: baeacff31d052d745a6793f605320089, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 0.8
   m_Pitch: 1
   Loop: 1
@@ -370,8 +376,8 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.06666667
-      value: 1
+      time: 0.2669497
+      value: 0.99713516
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -380,7 +386,7 @@ AudioSource:
       outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 0.21499634
+      value: 0
       inSlope: -1.0714285
       outSlope: -1.0714285
       tangentMode: 0

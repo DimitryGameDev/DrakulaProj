@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,6 +14,7 @@ public class Trigger : MonoBehaviour
    [Space]
    [SerializeField] private DraculaPoint[] spawnPoints;
    
+   [SerializeField] private AudioClip spawnSound;
    [HideInInspector]public UnityEvent onTrigger;
    
    private Dracula dracula;
@@ -61,6 +61,7 @@ public class Trigger : MonoBehaviour
       if (collision.transform.parent.GetComponent<Character>())
       {
          if (dracula.enabled)return;
+         BackgroundSounds.Instance.Play(spawnSound);
          onTrigger?.Invoke();
       }
    }

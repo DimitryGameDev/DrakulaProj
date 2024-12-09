@@ -1167,9 +1167,9 @@ GameObject:
   - component: {fileID: 786862915565640646}
   - component: {fileID: 8480812018889599076}
   - component: {fileID: 7314905624224714595}
-  - component: {fileID: 6393541432643670455}
   - component: {fileID: 3124069453675828783}
   - component: {fileID: 8159984260240344291}
+  - component: {fileID: 6393541432643670455}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -1241,11 +1241,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistanceHitCamera: 2.2
-  stamina: 4
-  visionScale: 0.8
-  runScale: 0.6
+  stamina: 2.5
+  visionScale: 0.95
+  runScale: 0.8
   visionCooldown: 1
-  staminaCooldown: 1.5
+  staminaCooldown: 1.8
   sprintEndClip: {fileID: 8300000, guid: 5f918cb5985e7394da8679c74bf24bbd, type: 3}
   visionOn:
     m_PersistentCalls:
@@ -1306,30 +1306,6 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6393541432643670455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7706991297277966182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88255d2eb5986fc44888ebdf55277a62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 1
-  gColor: {r: 1, g: 0.5519297, b: 0, a: 0.3}
-  enabledGizmos: 0
-  isDebug: 0
-  debugBox: {fileID: 0}
-  image: {fileID: 0}
-  weightText: {fileID: 0}
-  lengthToStartText: {fileID: 0}
-  lenghtToObjText: {fileID: 0}
-  pathIndex: 0
-  draculaPos: 0
-  isPlayer: 1
 --- !u!82 &3124069453675828783
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1453,6 +1429,30 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &6393541432643670455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7706991297277966182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88255d2eb5986fc44888ebdf55277a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 1
+  gColor: {r: 1, g: 0.5519297, b: 0, a: 0.3}
+  enabledGizmos: 0
+  isDebug: 0
+  debugBox: {fileID: 0}
+  image: {fileID: 0}
+  weightText: {fileID: 0}
+  lengthToStartText: {fileID: 0}
+  lenghtToObjText: {fileID: 0}
+  pathIndex: 0
+  draculaPos: 0
+  isPlayer: 1
 --- !u!1 &7881372390431274431
 GameObject:
   m_ObjectHideFlags: 0

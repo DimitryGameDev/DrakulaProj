@@ -155,7 +155,7 @@ public class LockPick : InteractiveObject
 
         if (draculaDoor && bag.GetMedalPeaceAmount() >= 3)
         {
-            isOpening = true;
+            SuccessUnlock();
         }
     }
 

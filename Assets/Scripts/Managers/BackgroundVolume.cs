@@ -49,9 +49,10 @@ public abstract class BackgroundVolume<T> : SingletonBase<BackgroundVolume<T>> w
         }
     }
 
-    public void Play(AudioClip clip)
+    public void Play(AudioClip clip,float volume = 1)
     {
         nextClip = clip;
+        audioSource.volume = volume;
         enabled = true;
         playing = true;
     }

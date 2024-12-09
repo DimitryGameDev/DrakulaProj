@@ -2,7 +2,7 @@ public enum BottleType
 {
     LessNoiseLevel,
     DraculaIndestructible,
-    PlayerDeath,
     PlayerSprint,
-    Random
+    Random,
+    PlayerRage
 }

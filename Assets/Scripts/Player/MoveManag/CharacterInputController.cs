@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -23,6 +25,7 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     private float staminaTimer;
     public float StaminaTimer => staminaTimer;
     public float Stamina => stamina;
+    private float lastStaminaValue;
     
     [HideInInspector] public UnityEvent visionOn;
     [HideInInspector] public UnityEvent visionOff;
@@ -181,7 +184,21 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
             rifleShoot?.Invoke();
         }
     }
-
+    
+    public void StaminaDisable(float time)
+    {
+        StartCoroutine(InfinityStamina(time));
+    }
+    
+    private const int staminaIncrees = 1000;
+    private IEnumerator InfinityStamina(float time)
+    {
+        lastStaminaValue = stamina;
+        stamina += staminaIncrees;
+        yield return new WaitForSeconds(time);
+        stamina -= staminaIncrees;
+    }
+    
     public void ChangeSpeedTime(float value)
     {
         stamina += value;

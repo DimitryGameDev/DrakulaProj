@@ -11,7 +11,8 @@ public class Notes : InteractiveObject
    [SerializeField] private AudioClip clip;
    [Space]
    [SerializeField] private string titleText;
-   [SerializeField] private string text;
+   [SerializeField] [TextArea(5,10)] private string text;
+  
    
    private Dracula dracula;
    private bool isNotes;
@@ -36,14 +37,15 @@ public class Notes : InteractiveObject
 
    private void OpenNotes()
    { 
+      AudioSource.PlayOneShot(clip);
       isNotes = true;
       titleTextUi.text = titleText;
       notesTextUi.text = text;
       notesBox.SetActive(true);
       AudioSource.PlayOneShot(clip);
-      
       OnePersonCamera.Instance.Lock();
       CharacterInputController.Instance.enabled = false;
+      Pause.Instance.enabled = false;
       if (dracula)
       {
          dracula.DraculaDisable();
@@ -53,16 +55,23 @@ public class Notes : InteractiveObject
    protected override void Update()
    {
       base.Update();
-      if (Input.GetKeyDown(KeyCode.Mouse0) && isNotes) CloseNotes();
+      if (isNotes)
+      {
+         if (Input.GetKeyDown(KeyCode.Mouse0)|| Input.GetKeyDown(KeyCode.Escape)||Input.GetKeyDown(KeyCode.E))
+         {
+            CloseNotes();
+         }
+      }
    }
 
    protected virtual void CloseNotes()
    { 
+      AudioSource.PlayOneShot(clip);
       isNotes = false;
       notesBox.SetActive(false);
-      AudioSource.PlayOneShot(clip);
       OnePersonCamera.Instance.UnLock();
       CharacterInputController.Instance.enabled = true;
+      Pause.Instance.enabled = true;
       if (dracula)  dracula.DraculaEnable(); //включает дракулу
    }
 }

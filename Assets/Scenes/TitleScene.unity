@@ -411,7 +411,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -190, y: 40}
+  m_AnchoredPosition: {x: -210, y: 70}
   m_SizeDelta: {x: 340, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &830004708
@@ -434,7 +434,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dfccea0ebd614f247b54aca960cd5702, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f5871e5092eb9514684376c031e9840a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -502,19 +502,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6981132, g: 0.055548977, b: 0.0355642, a: 1}
+  m_Color: {r: 0.6754716, g: 0, b: 0.32531184, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dfccea0ebd614f247b54aca960cd5702, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f5871e5092eb9514684376c031e9840a, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0
+  m_FillAmount: 0.5
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -845,11 +845,11 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 0.8
   m_Text: "Jonathan Harker went to Transylvania at the invitation of a certain Count
-    Dracula to discuss the sale of real estate in England.\r\n \r\nUpon arrival,
-    he was met by a carriage that took the hero to a castle in the desolate wilderness
-    of the Carpathian Mountains. The deal is successful, but soon Harker discovers
-    that there is no one in the castle except the count. \r\n\r\n\n\nThe next morning,
-    the hero wakes up in the catacombs of the castle\u2026"
+    Dracula to discuss the sale of real estate in England. \n\nUpon arrival, he was
+    met by a carriage that took the hero to a castle in the desolate wilderness of
+    the Carpathian Mountains. The deal is successful, but soon Harker discovers that
+    there is no one in the castle except the count. \n\nThe next morning, he wakes
+    up in the catacombs with a ringing headache and intense thirst..."
 --- !u!222 &1528696161
 CanvasRenderer:
   m_ObjectHideFlags: 0

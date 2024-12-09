@@ -4988,17 +4988,18 @@ MonoBehaviour:
   onHide:
     m_PersistentCalls:
       m_Calls: []
-  infoText: "\u0412\u044B\u043F\u0438\u0442\u044C"
+  infoText: Drink
   infoTextAfterUse: 
   icon: {fileID: 0}
   afterIcon: {fileID: 0}
   timeBoxHide: 0.1
   timeAfterText: 3
-  bottleType: 2
+  bottleType: 3
   visualModel: {fileID: 1578550658889490834}
   impactEffect: {fileID: 8361973088753977710, guid: 2049bcd3a8a659143abdfd7de771a247, type: 3}
-  sprintIncrease: 2
-  timeIndestructible: 5
+  sprintIncrease: 1
+  timeRage: 15
+  timeIndestructible: 7
 --- !u!82 &1417749123917687560
 AudioSource:
   m_ObjectHideFlags: 0

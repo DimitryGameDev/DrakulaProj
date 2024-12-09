@@ -52,7 +52,7 @@ MonoBehaviour:
   onHide:
     m_PersistentCalls:
       m_Calls: []
-  infoText: Passkey
+  infoText: Key
   infoTextAfterUse: 
   icon: {fileID: 21300000, guid: dfc1fe54b5a5cf145bcf671541070ddc, type: 3}
   afterIcon: {fileID: 0}

@@ -16,7 +16,6 @@ public class InteractiveState : SingletonBase<InteractiveState>
     
     private void Awake()
     {
-        Init();
         if (FileHandler.HasFile(FileName))
         {
             //Debug.Log("Файл найден");
@@ -40,6 +39,7 @@ public class InteractiveState : SingletonBase<InteractiveState>
             objData = listObjState.ToArray();
             Saver<ObjectState[]>.Save(FileName, objData);
         }
+        Init();
     }
     
     public void Save(InteractiveObject currentObj,bool state)

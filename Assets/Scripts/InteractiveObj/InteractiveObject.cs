@@ -102,6 +102,20 @@ public class InteractiveObject: VisibleObject
         infoTextAfterUse = text;
     }
 
+    public virtual void StayTrigger()
+    {
+       
+    }
+    
+    public virtual void EnterTrigger()
+    {
+        
+    }
+
+    public virtual void ExitTrigger()
+    {
+        
+    }
     #region SaveLogic
 
     public void SaveState()
