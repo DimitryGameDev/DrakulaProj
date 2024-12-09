@@ -4889,9 +4889,10 @@ MonoBehaviour:
   timeBoxHide: 0.1
   timeAfterText: 2
   countPiece: 1
-  impactEffect: {fileID: 8361973088753977710, guid: db55ace5370bc004ab2eb3b198be21d9, type: 3}
+  impactEffect: {fileID: 0}
   visualModel: {fileID: 9022597368680033053}
   medalSound: {fileID: 8300000, guid: 4d2499b609f72ee4c99fa5ae769f79d6, type: 3}
+  medalPickUpSound: {fileID: 0}
 --- !u!82 &654416183773623504
 AudioSource:
   m_ObjectHideFlags: 0

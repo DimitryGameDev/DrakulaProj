@@ -23,7 +23,7 @@ public class SaveZone : InteractiveObject
     
     public override void Use() { }
 
-    public void StayTrigger()
+    public override void StayTrigger()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -34,7 +34,7 @@ public class SaveZone : InteractiveObject
         }
     }
     
-    public void EnterTrigger()
+    public override void EnterTrigger()
     {
         BackgroundMusic.Instance.Play(backgroundMusic);
         base.ShowText();
@@ -43,7 +43,7 @@ public class SaveZone : InteractiveObject
         noiseLevel.SetZeroLevel();
     }
 
-    public void ExitTrigger()
+    public override void ExitTrigger()
     {
         BackgroundMusic.Instance.Stop();
         if (dracula) dracula.SetSpawnPoints(spawnPointsDracula);

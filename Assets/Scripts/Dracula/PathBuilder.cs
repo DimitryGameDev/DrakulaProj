@@ -12,7 +12,7 @@ public class PathBuilder : MonoBehaviour
     private PatrolPoint currentTarget;
     private PatrolPoint firstPatrolPoint;
 
-    private int rad = 5;
+    private float rad = 5;
     private int index;
     
     private void Start()
@@ -32,7 +32,7 @@ public class PathBuilder : MonoBehaviour
         }
     }
     
-    public DraculaPoint GetDraculaPoint(PatrolPoint currentPoint , PatrolPoint targetPoint,int radius)
+    public DraculaPoint GetDraculaPoint(PatrolPoint currentPoint , PatrolPoint targetPoint,float radius)
     {
         Ray ray = new Ray(currentPoint.transform.position + new Vector3(0,0.5f,0), targetPoint.transform.position - currentPoint.transform.position + new Vector3(0,0.5f,0));
         
@@ -75,7 +75,7 @@ public class PathBuilder : MonoBehaviour
     #region PathLogic
 
     private Vector3 lastPosTarget;
-    private void SetProperties(PatrolPoint currentPoint, PatrolPoint targetPoint, int radius)
+    private void SetProperties(PatrolPoint currentPoint, PatrolPoint targetPoint, float radius)
     {
         ClearPath();
         lastPosTarget = targetPoint.transform.position;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1274,7 +1274,7 @@ PrefabInstance:
     - target: {fileID: 1487361476352161247, guid: bbd8ccd2b321a78408e23c28ba8ffb96, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9bc81b911159c354284f962df575fc4f, type: 3}
+      objectReference: {fileID: 21300000, guid: 358fa51a9eb963142ad554b62ebb4627, type: 3}
     - target: {fileID: 1487361476352161247, guid: bbd8ccd2b321a78408e23c28ba8ffb96, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -1285,12 +1285,24 @@ PrefabInstance:
         \u0414\u0440\u0430\u043A\u0443\u043B\u044B"
       objectReference: {fileID: 0}
     - target: {fileID: 5427541203218820342, guid: bbd8ccd2b321a78408e23c28ba8ffb96, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5427541203218820342, guid: bbd8ccd2b321a78408e23c28ba8ffb96, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5427541203218820342, guid: bbd8ccd2b321a78408e23c28ba8ffb96, type: 3}
       propertyPath: m_SizeDelta.x
       value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 5427541203218820342, guid: bbd8ccd2b321a78408e23c28ba8ffb96, type: 3}
       propertyPath: m_SizeDelta.y
       value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 5427541203218820342, guid: bbd8ccd2b321a78408e23c28ba8ffb96, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -317
       objectReference: {fileID: 0}
     - target: {fileID: 5709943030383864210, guid: bbd8ccd2b321a78408e23c28ba8ffb96, type: 3}
       propertyPath: m_Pivot.x
@@ -1358,7 +1370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5709943030383864210, guid: bbd8ccd2b321a78408e23c28ba8ffb96, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -77
+      value: -51
       objectReference: {fileID: 0}
     - target: {fileID: 5709943030383864210, guid: bbd8ccd2b321a78408e23c28ba8ffb96, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

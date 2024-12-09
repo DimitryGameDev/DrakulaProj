@@ -22,7 +22,6 @@ public class InteractiveStateManager : SingletonBase<InteractiveStateManager>
     private void Load()
     {
         for (int i = 0; i < objects.Length; i++) objects[i].LoadState();
-        
     }
 
     public void Save()

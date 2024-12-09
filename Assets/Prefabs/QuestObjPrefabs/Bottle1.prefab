@@ -58,11 +58,12 @@ MonoBehaviour:
   afterIcon: {fileID: 0}
   timeBoxHide: 0.1
   timeAfterText: 3
-  bottleType: 0
+  bottleType: 3
   visualModel: {fileID: 4671089455054877513}
   impactEffect: {fileID: 8361973088753977710, guid: 2049bcd3a8a659143abdfd7de771a247, type: 3}
-  sprintIncrease: 2
-  timeIndestructible: 5
+  sprintIncrease: 1
+  timeRage: 15
+  timeIndestructible: 7
 --- !u!82 &1701207443562500492
 AudioSource:
   m_ObjectHideFlags: 0

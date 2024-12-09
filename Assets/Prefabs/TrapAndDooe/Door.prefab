@@ -890,8 +890,8 @@ MonoBehaviour:
   onHide:
     m_PersistentCalls:
       m_Calls: []
-  infoText: Try Open
-  infoTextAfterUse: Need passkey
+  infoText: Try to open
+  infoTextAfterUse: Need key
   icon: {fileID: 21300000, guid: dfc1fe54b5a5cf145bcf671541070ddc, type: 3}
   afterIcon: {fileID: 0}
   timeBoxHide: 0.1
