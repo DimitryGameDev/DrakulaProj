@@ -59,7 +59,7 @@ public class Trigger : MonoBehaviour
    {
       if (collision.transform.parent.GetComponent<Character>())
       {
-         if (dracula.IsSpawning) return;
+         if (dracula.IsSpawning && isEnable) return;
          if (spawnSound) BackgroundSounds.Instance.Play(spawnSound);
          onTrigger?.Invoke();
       }
