@@ -39690,7 +39690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8243859162516691323, guid: 2d379f5dd8473144aa309fc73e335073, type: 3}
       propertyPath: m_ReceiveGI
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8243859162516691323, guid: 2d379f5dd8473144aa309fc73e335073, type: 3}
       propertyPath: m_ScaleInLightmap
@@ -39702,7 +39702,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c5336b07890e5a14d930267c4666db5e, type: 2}
     - target: {fileID: -7511558181221131132, guid: 2d379f5dd8473144aa309fc73e335073, type: 3}
       propertyPath: m_ReceiveGI
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 2d379f5dd8473144aa309fc73e335073, type: 3}
       propertyPath: m_ScaleInLightmap

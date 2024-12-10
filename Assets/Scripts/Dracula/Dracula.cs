@@ -73,10 +73,10 @@ public class Dracula : SingletonBase<Dracula>
     private Vector3 lastPosition;
     private bool isHeart;
     private bool isVisible;
-    private bool isSpawning;
     private bool isActiveMesh;
     private bool isNewPhase;
-    private bool isKill;
+    public bool IsSpawning {get; private set;}
+    public bool IsKill {get; private set;}
     
     private float timer;
     private float spawnSpeed;
@@ -300,7 +300,7 @@ public class Dracula : SingletonBase<Dracula>
     
     private void Spawn(DraculaPoint spawnPoint)
     {
-        isSpawning = true;
+        IsSpawning = true;
         //source.PlayOneShot(spawnClips[Random.Range(0,spawnClips.Length)]);
         draculaPrefab = Instantiate(GetDraculaPrefab(spawnPoint), transform.position, Quaternion.identity, transform);
         draculaMeshRenderer = draculaPrefab.GetComponent<MeshRenderer>();
@@ -312,13 +312,13 @@ public class Dracula : SingletonBase<Dracula>
     {
         DraculaDisable();
         builder.ClearPath();
-        isSpawning = false;
+        IsSpawning = false;
         enabled = false;
     }
     
     public void DraculaEnable()
     {
-        if (isKill || !isSpawning) return;   
+        if (IsKill || !IsSpawning) return;   
         DraculaMove();
         transform.position = lastPosition;
         enabled = true;
@@ -336,12 +336,21 @@ public class Dracula : SingletonBase<Dracula>
     
     private void SpeedChange(int value)
     {
+        if(IsSpawning) FindNewPath();;
+        
         if (value == 0)
         {
             lastValue = 0;
             spawnSpeed = maxSpawnSpeed;
             return;
         }
+        if (value ==  NoiseLevel.Instance.MaxLevel)
+        {
+            lastValue = 5;
+            spawnSpeed = minSpawnSpeed;
+            return;
+        }
+        
         var changeSpeed = maxSpawnSpeed / NoiseLevel.Instance.MaxLevel;
         
         if (lastValue < value)
@@ -356,6 +365,8 @@ public class Dracula : SingletonBase<Dracula>
             else spawnSpeed = maxSpawnSpeed;
         }
         lastValue = value;
+        
+        
     }
 
     private void MaxSpeedChange()
@@ -375,9 +386,10 @@ public class Dracula : SingletonBase<Dracula>
     { 
         builder.ResetPath();
     }
+    
     public void DraculaIndestructible(float time)
     {
-        if (isKill) return;
+        if (IsKill) return;
         StartCoroutine(TemporaryShutdown(time));
     }
 
@@ -385,11 +397,11 @@ public class Dracula : SingletonBase<Dracula>
     {
         var rand = Random.Range(0, deathSounds.Length);
         audioSource.PlayOneShot(deathSounds[rand]);
-        isKill = true;
+        IsKill = true;
         yield return new WaitForSeconds(1.5f);
         DraculaDisable();
         yield return new WaitForSeconds(time);
-        isKill = false;
+        IsKill = false;
         DraculaEnable();
     }
     

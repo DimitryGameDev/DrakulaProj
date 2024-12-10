@@ -52,7 +52,6 @@ public class Trigger : MonoBehaviour
       if (!isEnable)
       {
          onTrigger.AddListener(dracula.DraculaDespawn);
-         gameObject.SetActive(false);
       }
    }
 
@@ -60,8 +59,8 @@ public class Trigger : MonoBehaviour
    {
       if (collision.transform.parent.GetComponent<Character>())
       {
-         if (dracula.enabled)return;
-         BackgroundSounds.Instance.Play(spawnSound);
+         if (dracula.IsSpawning) return;
+         if (spawnSound) BackgroundSounds.Instance.Play(spawnSound);
          onTrigger?.Invoke();
       }
    }
