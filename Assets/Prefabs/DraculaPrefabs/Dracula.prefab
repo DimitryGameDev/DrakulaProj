@@ -157,7 +157,7 @@ MonoBehaviour:
   maxSpawnSpeed: 8.2
   maxSpeedChange: 2.3
   minSpawnSpeed: 0.2
-  minDistanceToNextPp: 3.5
+  minDistanceToNextPp: 3
   spawnPositions: []
   sourceNearPlayer: {fileID: 1581282643224755373}
   audioNearPlayerPhase1: {fileID: 8300000, guid: baeacff31d052d745a6793f605320089, type: 3}

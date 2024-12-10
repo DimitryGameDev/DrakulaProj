@@ -195,8 +195,10 @@ public class CharacterInputController : SingletonBase<CharacterInputController>
     {
         lastStaminaValue = stamina;
         stamina += staminaIncrees;
+        staminaTimer = stamina;
         yield return new WaitForSeconds(time);
         stamina -= staminaIncrees;
+        staminaTimer = stamina;
     }
     
     public void ChangeSpeedTime(float value)

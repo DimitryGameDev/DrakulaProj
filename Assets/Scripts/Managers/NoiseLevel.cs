@@ -34,7 +34,7 @@ public class NoiseLevel : SingletonBase<NoiseLevel>
         }
     }
 
-    private void DecreaseLevel()
+    public void DecreaseLevel()
     {
         if (CurrentLevel > 0 && timer <= 0)
         {

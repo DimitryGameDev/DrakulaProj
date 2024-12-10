@@ -41,6 +41,7 @@ public class Death : MonoBehaviour
         var rb = Character.Instance.GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.velocity = new Vector3(0, 0, 0);
+        rb.useGravity = false;
         CharacterInputController.Instance.enabled = false;
         Pause.Instance.enabled = false;
         BackgroundMusic.Instance.Stop();
