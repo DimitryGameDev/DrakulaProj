@@ -47,7 +47,7 @@ public class Bottle : InteractiveObject
                 SetBottleType();
                 return;
             case BottleType.LessNoiseLevel:
-                NoiseLevel.Instance.SetZeroLevel();
+                NoiseLevel.Instance.DecreaseLevel();
                 SetInfoTextAfterUse(LessNoiseLevelText);
                 PickUp();
                 return;

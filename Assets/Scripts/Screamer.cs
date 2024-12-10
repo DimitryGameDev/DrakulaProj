@@ -3,6 +3,7 @@ using UnityEngine;
 public class Screamer : InteractiveObject
 {
     [Header("Screamer Settings")]
+    [SerializeField] private float timeToScream;
     [SerializeField] private GameObject prefab;
     [SerializeField] private Transform pos;
     [SerializeField] private AudioClip clip;
@@ -16,7 +17,8 @@ public class Screamer : InteractiveObject
         if (wosActive) return;
         var scream =Instantiate(prefab, pos.position, pos.rotation);
         if (clip) BackgroundSounds.Instance.Play(clip);
-        Destroy(scream, clip.length);
+        
+        Destroy(scream, timeToScream);
         wosActive = true;
     }
     
