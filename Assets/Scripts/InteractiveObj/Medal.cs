@@ -7,6 +7,7 @@ public class Medal : InteractiveObject
     [SerializeField] private GameObject impactEffect;
     [SerializeField] private GameObject visualModel;
     [SerializeField] private AudioClip medalSound;
+    [SerializeField] private AudioClip medalPickUpSound;
     public override void Use()
     {
         base.Use();
@@ -19,21 +20,28 @@ public class Medal : InteractiveObject
     {
         base.Start();
         AudioSource.clip = medalSound;
-        AudioSource.Play();
+        if (!wosActive)AudioSource.Play();
     }
 
+    protected override void ShowAfterText()
+    {
+        
+    }
+    
     private void PickUp()
     {
         Character.Instance.GetComponent<Bag>().AddMedalPiece(countPiece);
         AudioSource.Stop();
+        BackgroundSounds.Instance.Play(medalPickUpSound);
         if (impactEffect)
             Instantiate(impactEffect, transform.position, Quaternion.identity);
         
         Destroy(visualModel);
     }
+    
     protected override void ObjectWosActive()
     {
-        AudioSource.Stop();
+        
         Destroy(visualModel);   
     }
 }

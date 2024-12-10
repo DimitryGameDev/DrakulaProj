@@ -5,12 +5,14 @@ using Vignette = UnityEngine.Rendering.Universal.Vignette;
 
 public class Death : MonoBehaviour
 {
-    [SerializeField]private GameObject draculaPrefab;
+    [SerializeField] private GameObject draculaPrefab;
     [SerializeField] private Transform cameraTargetDeath;
     [SerializeField] private Volume heartPostProcessVolume;
+    [SerializeField] private AudioClip deathSound;
+    
     private Vignette vignette;
     private Dracula dracula;
-    
+    private AudioSource audioSource;
     public UnityEvent onDeath;
     private Animator animator;
     private void Start()
@@ -23,7 +25,7 @@ public class Death : MonoBehaviour
         }
         animator = draculaPrefab.GetComponentInChildren<Animator>();
         draculaPrefab.SetActive(false);
-        
+        audioSource = GetComponent<AudioSource>();
         enabled = false;
     }
 
@@ -39,12 +41,14 @@ public class Death : MonoBehaviour
         var rb = Character.Instance.GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.velocity = new Vector3(0, 0, 0);
+        rb.useGravity = false;
         CharacterInputController.Instance.enabled = false;
+        Pause.Instance.enabled = false;
+        BackgroundMusic.Instance.Stop();
         FindObjectOfType<Heart>().enabled = false;
         
         if (animID == 1) DieLogic1();
         if (animID == 2) DieLogic2();
-        if (animID == 3) DieLogic3();
         LoseGame();
     }
     
@@ -53,18 +57,17 @@ public class Death : MonoBehaviour
         onDeath?.Invoke();
     }
     
-    private readonly Vector3 nosferatuPos1 = new Vector3(0f, -1.7f, 0.5f);
-    private readonly Vector3 nosferatuPos2 = new Vector3(0f, -1f, 2.5f);
-    private readonly Vector3 nosferatuRotate1 = new Vector3(0f, 160f, 0f);
-    private readonly Vector3 nosferatuRotate2 = new Vector3(0f, 180f, 0f);
+    private readonly Vector3 nosferatuPos = new Vector3(0f, -0.4f, 0.3f);
+    private readonly Vector3 nosferatuRotate = new Vector3(0f, 180f, 0f);
+
     
     /// <summary>
     /// ALARM!!!!!! Не трогать ни при каких условиях!
     /// </summary>
     private void DieLogic1()
     {
-        draculaPrefab.transform.localPosition = nosferatuPos1;
-        draculaPrefab.transform.localRotation = Quaternion.Euler(nosferatuRotate1);
+        draculaPrefab.transform.localPosition = nosferatuPos;
+        draculaPrefab.transform.localRotation = Quaternion.Euler(nosferatuRotate);
         
         cameraTargetDeath.LookAt(new Vector3(dracula.transform.position.x, cameraTargetDeath.transform.position.y, dracula.transform.position.z));
         cameraTargetDeath.transform.parent = null;
@@ -75,10 +78,25 @@ public class Death : MonoBehaviour
         
         enabled = true; //вкдючает эффекты в Update
         draculaPrefab.SetActive(true);
-        
+        audioSource.PlayOneShot(deathSound);
         animator.Play("Attack1");
     }
     
+    private void DieLogic2()
+    {
+        draculaPrefab.transform.localPosition = nosferatuPos;
+        draculaPrefab.transform.localRotation = Quaternion.Euler(nosferatuRotate);
+        
+        cameraTargetDeath.transform.parent = null;
+        OnePersonCamera.Instance.SetTarget(cameraTargetDeath, TypeMoveCamera.WithRotation, true);
+
+        enabled = true; //вкдючает эффекты в Update
+        draculaPrefab.SetActive(true);
+        audioSource.PlayOneShot(deathSound);
+        animator.Play("Attack2");
+    }
+    
+    /*
     private void DieLogic3()
     {
         draculaPrefab.transform.localPosition = nosferatuPos2;
@@ -96,28 +114,7 @@ public class Death : MonoBehaviour
         
         animator.Play("Attack2");
     }
-    
-    /// <summary>
-    /// ALARM!!!!!! Не трогать ни при каких условиях!
-    /// </summary>
-    private void DieLogic2()
-    {
-        draculaPrefab.transform.localPosition = nosferatuPos2;
-        draculaPrefab.transform.localRotation = Quaternion.Euler(nosferatuRotate2);
-        
-        cameraTargetDeath.localRotation = Quaternion.Euler(0, 180, 0);
-        cameraTargetDeath.transform.parent = null;
-        OnePersonCamera.Instance.SetTarget(cameraTargetDeath, TypeMoveCamera.WithRotation, true);
-        
-        Vector3 rotate = transform.eulerAngles;
-        rotate.y += 180;
-        transform.localRotation = Quaternion.Euler(rotate);
-        
-        enabled = true; //вкдючает эффекты в Update
-        draculaPrefab.SetActive(true);
-        
-        animator.Play("Attack2");
-    }
+    */
     
     private void OnDestroy()
     {

@@ -6,20 +6,20 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(CharacterInputController))] 
 [RequireComponent(typeof(AudioSource))]
 public class Character : Player
-{/*
+{
+    /*
     // TO DO:
     [Range(1f,10f)][SerializeField] private float maxSpeedSit = 1f;
     [Range(0f, 50f)][SerializeField] private float jumpForce = 1f;
     */
+    
     [Header("Character Settings")]
     [Range(1f,10f)][SerializeField] private float maxSpeedWalk = 3f;
     [Range(1f,10f)][SerializeField] private float maxSpeedRun = 6f;
-    [SerializeField] private OnePersonCamera cameraMain;
     [SerializeField] private Transform cameraPos;
     [SerializeField] private float stepRateWalk = 0.6f; 
     [SerializeField] private float stepRateRun = 0.6f; 
     [SerializeField] private AudioClip[] stepSounds; 
-    public OnePersonCamera Camera => cameraMain;
     public Transform CameraPos => cameraPos;
     private AudioSource audioSource;
     private Rigidbody rb;
@@ -30,25 +30,25 @@ public class Character : Player
     private void Awake()
     {
         Init();
+        audioSource = GetComponent<AudioSource>();
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
     }
     
     private void Start()
     {
-        cameraMain.SetTarget(cameraPos,TypeMoveCamera.WithRotation);
-        audioSource = GetComponent<AudioSource>();
-        rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
+        OnePersonCamera.Instance.SetTarget(cameraPos,TypeMoveCamera.WithRotation);
     }
     
-    private const float Acceleration = 7000f;
-    private const float AirMoveLimit = 0.300f;
+    private const float Acceleration = 50f;
+    private const float AirMoveLimit = 0.400f;
     
     public void Move(Vector3 direction,MoveType moveType)
     {
         if (direction.magnitude > 1) direction /= 2;
-        
+
         stepTime += Time.deltaTime;
-        
+
         if (direction == Vector3.zero && moveType != MoveType.Air)
         {
             isMove = false;
@@ -56,20 +56,10 @@ public class Character : Player
             return;
         }
         
-        rb.AddRelativeForce(direction * (Acceleration * Time.deltaTime),ForceMode.Acceleration);
+        rb.AddRelativeForce(direction * (Acceleration),ForceMode.Acceleration);
+        
         switch (moveType)
         {
-            case MoveType.Sit:
-            {  
-                /*
-                if (rb.velocity.magnitude >= maxSpeedSit)
-                {
-                    rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeedSit);
-                }
-                */
-                break;
-            }
-            
             case MoveType.Walk:
             {
                 isMove = true;
@@ -95,7 +85,7 @@ public class Character : Player
             }
     
             case MoveType.Air:
-                rb.velocity = new Vector3(Mathf.Lerp(rb.velocity.x,0,AirMoveLimit), rb.velocity.y, Mathf.Lerp(rb.velocity.z,0,AirMoveLimit));
+                rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x,0,AirMoveLimit), rb.velocity.y, Mathf.Clamp(rb.velocity.z,0,AirMoveLimit));
                 break;
             
             default:
@@ -112,30 +102,8 @@ public class Character : Player
         }
     }
     
-    private void CharacterRotate()
+    public void CharacterRotate(Quaternion rotation)
     {
-        if (cameraMain.IsLocked || cameraMain.enabled)
-        {
-            return;
-        }
-      
-        transform.rotation = new Quaternion(0, cameraMain.transform.rotation.y,0, cameraMain.transform.rotation.w);
-    }
-    
-    public void CameraMove(float dirX,float dirY)
-    {
-         cameraMain.Rotate(dirX, dirY);
-         CharacterRotate();
-    }
-    
-    /*
-    public void Jump()
-    {
-        rb.AddRelativeForce(transform.up * jumpForce , ForceMode.Impulse);
-    }
-    */
-    public void SetCamera(OnePersonCamera cameraForPlayer)
-    {
-        cameraMain = cameraForPlayer;
+        transform.rotation = rotation;
     }
 }

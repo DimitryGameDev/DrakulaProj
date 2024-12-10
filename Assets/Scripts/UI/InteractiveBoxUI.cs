@@ -30,9 +30,9 @@ public class InteractiveBoxUI : SingletonBase<InteractiveBoxUI>
         
         if (isEnable)
         {
-            text.color = ChangeTransparent(text.color,1);
+            text.color = ChangeTransparent(text.color,1f);
             
-            backgroundImage.color = ChangeTransparent(backgroundImage.color,1f);
+            backgroundImage.color = ChangeTransparent(backgroundImage.color,0.7f);
             if (Mathf.Approximately(backgroundImage.color.a + iconPickUp.color.a + icon.color.a +   text.color.a, 1f))enabled = false;
         }
         else

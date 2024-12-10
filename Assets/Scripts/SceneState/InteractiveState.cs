@@ -16,15 +16,14 @@ public class InteractiveState : SingletonBase<InteractiveState>
     
     private void Awake()
     {
-        Init();
         if (FileHandler.HasFile(FileName))
         {
-            Debug.Log("Файл найден");
+            //Debug.Log("Файл найден");
             Saver<ObjectState[]>.TryLoad(FileName,ref objData);
         }
         else
         {
-            Debug.Log("Создан новый файл" + FileName);
+            //Debug.Log("Создан новый файл" + FileName);
             InteractiveObject[] objects = FindObjectsOfType<InteractiveObject>();
             var listObjState = new List<ObjectState>();
             
@@ -40,6 +39,7 @@ public class InteractiveState : SingletonBase<InteractiveState>
             objData = listObjState.ToArray();
             Saver<ObjectState[]>.Save(FileName, objData);
         }
+        Init();
     }
     
     public void Save(InteractiveObject currentObj,bool state)
@@ -53,10 +53,12 @@ public class InteractiveState : SingletonBase<InteractiveState>
                     if (state != item.state)
                     {
                         item.state = state;
+                        Saver<ObjectState[]>.Save(FileName, objData);
+                        return;
                     }
                 }
             }
-            Saver<ObjectState[]>.Save(FileName, objData);
+           
         }
         else
         {

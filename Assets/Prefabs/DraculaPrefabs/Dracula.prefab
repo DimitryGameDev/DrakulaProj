@@ -153,24 +153,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e250976986d89406ca626d4c72b4aa0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnAwake: 1
-  draculaPrefabsNone: {fileID: 740178084291543719, guid: b3a1862a9d42f074b92bcc7a587922b9, type: 3}
-  draculaPrefabsSexy: {fileID: 3369693194535960404, guid: 417d3999a3bad7248a94f6143bcfe125, type: 3}
-  draculaPrefabsCross: {fileID: 1567872088887843998, guid: 5a40032110b27be4fa742a1fed224beb, type: 3}
-  draculaPrefabsStand: {fileID: 3589427302363245269, guid: 6db526faec442b44198becd4e3111b44, type: 3}
-  draculaPrefabsFly: {fileID: 7898647379886207394, guid: 84e70370e540c3241892d9c0eecb7758, type: 3}
-  draculaPrefabsHand: {fileID: 6423580480786229064, guid: 07dffcd828f281349964950726f25c58, type: 3}
+  playOnAwake: 0
+  maxSpawnSpeed: 8.2
+  maxSpeedChange: 2.3
+  minSpawnSpeed: 0.2
+  minDistanceToNextPp: 3
+  spawnPositions: []
+  sourceNearPlayer: {fileID: 1581282643224755373}
+  audioNearPlayerPhase1: {fileID: 8300000, guid: baeacff31d052d745a6793f605320089, type: 3}
+  audioNearPlayerPhase2: {fileID: 8300000, guid: f9197a6f67997b74b904da4afad73d88, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: 43e012671f757bc4185fd730f4273c8a, type: 3}
+  - {fileID: 8300000, guid: 2cde2163637f5654480adc2ba488c8e6, type: 3}
+  - {fileID: 8300000, guid: b54f85a1d52d19346961d923735ac409, type: 3}
+  - {fileID: 8300000, guid: 4e9aec3507e545448b4337357c4dbd27, type: 3}
+  draculaPrefabNone: {fileID: 740178084291543719, guid: b3a1862a9d42f074b92bcc7a587922b9, type: 3}
+  draculaPrefabSexy: {fileID: 3369693194535960404, guid: 417d3999a3bad7248a94f6143bcfe125, type: 3}
+  draculaPrefabCross: {fileID: 1567872088887843998, guid: 5a40032110b27be4fa742a1fed224beb, type: 3}
+  draculaPrefabStand: {fileID: 3589427302363245269, guid: 6db526faec442b44198becd4e3111b44, type: 3}
+  draculaPrefabFly: {fileID: 7898647379886207394, guid: 84e70370e540c3241892d9c0eecb7758, type: 3}
+  draculaPrefabHand: {fileID: 6423580480786229064, guid: 07dffcd828f281349964950726f25c58, type: 3}
+  nosferatuPrefabNone: {fileID: 740178084291543719, guid: b3a1862a9d42f074b92bcc7a587922b9, type: 3}
+  nosferatuPrefabSexy: {fileID: 197857745305856386, guid: 4404a0e7944433c42bcd6e048718a221, type: 3}
+  nosferatuPrefabCross: {fileID: 6656748168119338914, guid: c862d01fa0c3cc44491da77c0b9d34e7, type: 3}
+  nosferatuPrefabStand: {fileID: 7148217903660132533, guid: bc01cd3401857194d8d76b65167ae365, type: 3}
+  nosferatuPrefabFly: {fileID: 7194448204953406379, guid: 8b13aaabb4bf6834b8c062b87a942727, type: 3}
+  nosferatuPrefabHand: {fileID: 5185206748763123836, guid: da9c6b3218ee2ef4e8dddf50bdae6312, type: 3}
   draculaSpawnEffectPrefab: {fileID: 3372215897970909540, guid: 3d5a14a42f696a846bc2549c5f74ab02, type: 3}
   visionEffectPrefab: {fileID: -4490127325991210572, guid: 2f3338a8e1355e24590ca81bef837def, type: 3}
-  maxSpawnSpeed: 15
-  minSpawnSpeed: 0.4
-  minDistanceToNextPp: 4
-  spawnClips:
-  - {fileID: 8300000, guid: 5dbefb0d6d692de4fb5dcc0b5afdb1ab, type: 3}
-  spawnPositions:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   draculaInPlayer:
     m_PersistentCalls:
       m_Calls: []
@@ -207,7 +217,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 12
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -242,7 +252,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -345,9 +355,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: baeacff31d052d745a6793f605320089, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -356,7 +366,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 9
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -366,37 +376,19 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1.007988
-      inSlope: -3.0011995
-      outSlope: -3.0011995
+      time: 0.2669497
+      value: 0.99713516
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.36783856
-      value: 0.7240906
-      inSlope: -1.4360765
-      outSlope: -1.4360765
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.28737622
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.59796077
-      value: 0.2889125
-      inSlope: -0.88960695
-      outSlope: -0.88960695
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -0.33346638
-      outSlope: -0.33346638
+      inSlope: -1.0714285
+      outSlope: -1.0714285
       tangentMode: 0
       weightedMode: 0
       inWeight: 0

@@ -1,39 +1,28 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NoiseUI : MonoBehaviour
 {
-    
-    [SerializeField]private FadeUi noiseImagePrefab;
-    private List<FadeUi> noiseObjects;
-    
+    [SerializeField]private Image fill;
+    [SerializeField]private float speedFill;
+    private int current;
+    private int maxNoise;
     private void Start()
     {
-        noiseObjects = new List<FadeUi>();
-        var y = transform.childCount;
-        for (int i = 0; i < y; i++)
-        {
-            Destroy(transform.GetChild(i).gameObject);
-        }
         NoiseLevel.Instance.OnChange += UpdateUI;
-        for (int i = 0; i < NoiseLevel.Instance.MaxLevel; i++)
-        {
-            var x = Instantiate(noiseImagePrefab, transform);
-            noiseObjects.Add(x);
-        }
+        maxNoise = NoiseLevel.Instance.MaxLevel;
     }
-    
+
+    private void Update()
+    {
+        var target = (float) current / maxNoise;
+        fill.fillAmount = Mathf.MoveTowards(fill.fillAmount, target, Time.deltaTime/speedFill);
+        if (Mathf.Approximately(fill.fillAmount, target))enabled = false;
+    }
+
     private void UpdateUI(int value)
     {
-        foreach (var t in noiseObjects)
-        {
-            if (value > 0)
-            {
-                value--;
-                t.Show();
-                continue;
-            }
-            t.Hide();
-        }
+        current = value;
+        enabled = true;
     }
 }

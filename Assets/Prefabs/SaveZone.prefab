@@ -52,14 +52,14 @@ MonoBehaviour:
   onHide:
     m_PersistentCalls:
       m_Calls: []
-  infoText: "\u0414\u043B\u044F \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u044F
-    \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u041F\u0440\u043E\u0431\u0435\u043B"
-  infoTextAfterUse: "\u0418\u0433\u0440\u0430 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0430"
+  infoText: To save, press the "Space"
+  infoTextAfterUse: Game is saved!
   icon: {fileID: 0}
   afterIcon: {fileID: 0}
-  timeBoxHide: 3
+  timeBoxHide: 4
   timeAfterText: 2
   backgroundMusic: {fileID: 8300000, guid: 3ea9a79c5c9b9df489c8074ad4b26b42, type: 3}
+  spawnPointsDracula: []
 --- !u!82 &4682336656399896624
 AudioSource:
   m_ObjectHideFlags: 0

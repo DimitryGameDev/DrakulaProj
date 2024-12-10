@@ -7,6 +7,7 @@ public class TitleManager : MonoBehaviour
    [SerializeField] private Text titleText;
    [SerializeField] private Text skipText;
    [SerializeField] private Image skipImage;
+   [SerializeField] private Image backgroundImage;
    [Space]
    [SerializeField] private float speedText;
    [SerializeField] private int moveByY;
@@ -25,12 +26,15 @@ public class TitleManager : MonoBehaviour
       Cursor.lockState = CursorLockMode.Locked;
       audioSource = GetComponent<AudioSource>();
       skipText.color = new Color(skipText.color.r, skipText.color.g, skipText.color.b, 0);
+      backgroundImage.color = new Color(backgroundImage.color.r, backgroundImage.color.g, backgroundImage.color.b, 0);
    }
 
    private void Update()
    {
       skipText.color =  new Color(skipText.color.r, skipText.color.g, skipText.color.b,
-         Mathf.MoveTowards(skipText.color.a, 1, Time.deltaTime/5));
+         Mathf.MoveTowards(skipText.color.a, 1, Time.deltaTime/2));
+      backgroundImage.color =  new Color(backgroundImage.color.r, backgroundImage.color.g, backgroundImage.color.b,
+         Mathf.MoveTowards(backgroundImage.color.a, 1, Time.deltaTime/2));
       textPos = new Vector3(textPos.x, Mathf.MoveTowards(textPos.y, moveByY, Time.deltaTime * speedText), textPos.z);
       
       titleText.rectTransform.position = textPos;
@@ -44,9 +48,13 @@ public class TitleManager : MonoBehaviour
             nextScene = true;
          }
       }
-      else
+      else if (!nextScene)
       {
-         timer = 0;
+         timer -= Time.deltaTime;
+         if (timer <= 0)
+         {
+            timer = 0;
+         }
       }
       
       skipImage.fillAmount = timer / timeToScip;

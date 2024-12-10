@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,16 +14,17 @@ public class Trigger : MonoBehaviour
    [Space]
    [SerializeField] private DraculaPoint[] spawnPoints;
    
+   [SerializeField] private AudioClip spawnSound;
    [HideInInspector]public UnityEvent onTrigger;
    
    private Dracula dracula;
    private void SpawnDraculaSpawnPoint()
    {
-      dracula.SetPoint(spawnPoint);
+      dracula.SetSpawnPoint(spawnPoint);
    }
    private void SpawnDraculaSpawnPoints()
    {
-      dracula.SetPoints(spawnPoints);
+      dracula.SetSpawnPoints(spawnPoints);
    }
    private void SpawnDraculaRandomPint()
    {
@@ -52,7 +52,6 @@ public class Trigger : MonoBehaviour
       if (!isEnable)
       {
          onTrigger.AddListener(dracula.DraculaDespawn);
-         gameObject.SetActive(false);
       }
    }
 
@@ -60,7 +59,8 @@ public class Trigger : MonoBehaviour
    {
       if (collision.transform.parent.GetComponent<Character>())
       {
-         if (dracula.enabled)return;
+         if (dracula.IsSpawning && isEnable) return;
+         if (spawnSound) BackgroundSounds.Instance.Play(spawnSound);
          onTrigger?.Invoke();
       }
    }

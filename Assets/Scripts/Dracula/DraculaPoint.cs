@@ -12,7 +12,7 @@ public class DraculaPoint : PatrolPoint
         if (!isPlayer)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, 4f);
+            Gizmos.DrawWireSphere(transform.position, 2f);
         }
     }
 }

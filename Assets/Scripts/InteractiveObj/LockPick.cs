@@ -9,11 +9,13 @@ public class LockPick : InteractiveObject
     [SerializeField] private bool draculaDoor;
     
     [Header("Player")]
-    [SerializeField] private Transform cameraTarget;
-
+    [SerializeField] private Transform cameraTargetFront;
+    [SerializeField] private Transform cameraTargetBack;
+    
     [Header("Base")] 
     [SerializeField] private Collider triggerCollider;
     [SerializeField] private float timeToSuccess;
+    [SerializeField] private float timeToPrepare;
     [SerializeField] private Animator animator;
 
     [Header("UI")] 
@@ -22,7 +24,6 @@ public class LockPick : InteractiveObject
     [SerializeField] private RectTransform background;
     [SerializeField] private RectTransform point;
     
-    [FormerlySerializedAs("successOpenSFX")]
     [Header("SFX")]
     [SerializeField] private AudioClip successOpenSfx;
     [SerializeField] private AudioClip failOpenSfx;
@@ -33,11 +34,14 @@ public class LockPick : InteractiveObject
     private Dracula dracula;
     
     private float timer2;
+    private float timer3 = 1f;
     
     private Vector2 randomImagePosition;
     private Vector2 screenMousePosition;
     
     private bool isOpening;
+    
+    private Transform currentCameraTarget;
     
     protected override void Start()
     {
@@ -46,7 +50,7 @@ public class LockPick : InteractiveObject
         bag = Character.Instance.GetComponent<Bag>();
         dracula = Dracula.Instance;
         onePersonCamera = OnePersonCamera.Instance;
-        ResetPoint();
+        ResetPoint();// тут надо убрать вызов включения character input.
     }
 
     protected override void Update()
@@ -58,8 +62,18 @@ public class LockPick : InteractiveObject
     public override void Use()
     {
         base.Use();
+        
+        if (Vector3.Distance(cameraTargetBack.position , character.transform.position)>
+            Vector3.Distance(cameraTargetFront.position , character.transform.position))
+            currentCameraTarget = cameraTargetFront;
+        else
+            currentCameraTarget = cameraTargetBack;
+        
         StartUnlock();
+    }
 
+    private void StartUnlock()
+    {
         if (bag.GetKeyAmount() <= 0)
         {
             ShowAfterText();
@@ -69,64 +83,60 @@ public class LockPick : InteractiveObject
         {
             ShowAfterText();
         }
-    }
-
-    private void StartUnlock()
-    {
-        if (draculaDoor && bag.GetMedalPeaceAmount() >= 3)
-            MiniGame();
-
-        if (!draculaDoor)
-            MiniGame();
+        
+        MiniGame();
     }
 
     private void PointMove()
     {
         if(!isOpening) return;
-        
-        if (timer2 >= 0)
-            timer2 -= Time.deltaTime;
-        else
-            timer2 = 0;
-        
-        screenMousePosition = Input.mousePosition;
-        
-        if (point.anchoredPosition == randomImagePosition)
+        timer3 -= Time.deltaTime;
+       
+        if (timer3 <= 0)
         {
-            GenerateRandomPosition();
-        }
+            if (timer2 >= 0)
+                timer2 -= Time.deltaTime;
+            else
+                timer2 = 0;
         
-        point.anchoredPosition = Vector2.MoveTowards(point.anchoredPosition, randomImagePosition, 100 * Time.deltaTime);
-
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(point, screenMousePosition, null, out var localPoint);
+            screenMousePosition = Input.mousePosition;
         
-        if (localPoint.x >= point.rect.xMin && localPoint.x <= point.rect.xMax &&
-            localPoint.y >= point.rect.yMin && localPoint.y <= point.rect.yMax)
-        {
-            if (timer2 <= 0.1f)
+            if (point.anchoredPosition == randomImagePosition)
             {
-                bag.DrawKey(1);
-                ResetPoint();
-                
-                SuccessUnlock();
+                GenerateRandomPosition();
             }
-        }
-        else
-        {
-            NoiseLevel.Instance.IncreaseLevel();
-            ResetPoint();
+        
+            point.anchoredPosition = Vector2.MoveTowards(point.anchoredPosition, randomImagePosition, 100 * Time.deltaTime);
+
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(point, screenMousePosition, null, out var localPoint);
+        
+            if (localPoint.x >= point.rect.xMin && localPoint.x <= point.rect.xMax &&
+                localPoint.y >= point.rect.yMin && localPoint.y <= point.rect.yMax)
+            {
+                if (timer2 <= 0.1f)
+                {
+                    bag.DrawKey(1);
+                    ResetPoint();
+                    SuccessUnlock();
+                }
+            }
+            else
+            {
+                NoiseLevel.Instance.IncreaseLevel();
+                ResetPoint();
             
-            AudioSource.PlayOneShot(failOpenSfx);
+                AudioSource.PlayOneShot(failOpenSfx);
+            }
         }
     }
 
     private void MiniGame()
     {
-        if (bag.GetKeyAmount() > 0)
+        if (!draculaDoor && bag.GetKeyAmount() > 0)
         {
             panel.SetActive(true);
 
-            onePersonCamera.SetTarget(cameraTarget, TypeMoveCamera.WithRotation, true);
+            onePersonCamera.SetTarget(currentCameraTarget, TypeMoveCamera.WithRotation, true);
             CharacterInputController.Instance.enabled = false;
 
             Cursor.lockState = CursorLockMode.None;
@@ -139,7 +149,13 @@ public class LockPick : InteractiveObject
             }
             
             timer2 = timeToSuccess;
+            timer3 = timeToPrepare;
             isOpening = true;
+        }
+
+        if (draculaDoor && bag.GetMedalPeaceAmount() >= 3)
+        {
+            SuccessUnlock();
         }
     }
 
@@ -182,6 +198,7 @@ public class LockPick : InteractiveObject
         panel.SetActive(false);
         
         Cursor.visible = false;
+        Cursor.SetCursor(null,Vector2.zero, CursorMode.Auto);
         Cursor.lockState = CursorLockMode.Locked;
         
         point.anchoredPosition = Vector2.zero;

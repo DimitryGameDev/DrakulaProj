@@ -6,13 +6,8 @@ public class Lever : InteractiveObject
 {
     [SerializeField] private GameObject trigger;
     [SerializeField] private Animator animator;
+    [SerializeField] private Animator animator2;
     [SerializeField] private AudioClip audioClip;
-
-    protected override void Start()
-    {
-        base.Start();
-        //trigger.SetActive(false);
-    }
 
     public override void Use()
     {
@@ -24,9 +19,9 @@ public class Lever : InteractiveObject
 
     public void Open()
     {
-        //trigger.SetActive(true);
         if (!wosActive)AudioSource.PlayOneShot(audioClip);
         animator.SetBool("Open", true);
+        animator2.SetBool("Open", true);
     }
     
     protected override void ObjectWosActive()

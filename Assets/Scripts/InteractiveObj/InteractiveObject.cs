@@ -102,6 +102,20 @@ public class InteractiveObject: VisibleObject
         infoTextAfterUse = text;
     }
 
+    public virtual void StayTrigger()
+    {
+       
+    }
+    
+    public virtual void EnterTrigger()
+    {
+        
+    }
+
+    public virtual void ExitTrigger()
+    {
+        
+    }
     #region SaveLogic
 
     public void SaveState()
@@ -112,16 +126,10 @@ public class InteractiveObject: VisibleObject
     public void LoadState()
     {
         wosActive = InteractiveState.Instance.GetState(this);
-        if (wosActive)
-        {
-            ObjectWosActive();
-        }
+        if (wosActive) ObjectWosActive();
     }
 
-    protected virtual void ObjectWosActive()
-    {
-        Destroy(gameObject);
-    }
+    protected virtual void ObjectWosActive() { }
     
     #endregion
    

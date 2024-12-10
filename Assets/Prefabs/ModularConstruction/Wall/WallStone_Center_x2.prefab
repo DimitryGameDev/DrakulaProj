@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2799068348682703500
 Transform:
@@ -41,6 +41,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2799068348682703500}
     m_Modifications:
+    - target: {fileID: 558527059447555785, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1178166009033474454, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791917612814460975, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2273849100036661567, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -85,6 +97,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallStone_CenterBottom
       objectReference: {fileID: 0}
+    - target: {fileID: 3219367283985013437, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014025216229659588, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819756279024922206, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684020179200016883, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7585306071988913934, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6887378931382304841, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
@@ -104,6 +136,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2799068348682703500}
     m_Modifications:
+    - target: {fileID: 558527059447555785, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2273849100036661567, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -147,6 +183,30 @@ PrefabInstance:
     - target: {fileID: 3219367283985013437, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
       propertyPath: m_Name
       value: WallStone_CenterTop
+      objectReference: {fileID: 0}
+    - target: {fileID: 3219367283985013437, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014025216229659588, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819756279024922206, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027096376827773563, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684020179200016883, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887378931382304841, guid: 55b6278ad73eec1489fddc069a1b6541, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

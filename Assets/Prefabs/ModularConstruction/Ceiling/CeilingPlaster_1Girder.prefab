@@ -8,17 +8,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2571841323835890233, guid: 5ff1f51f7f472054f8f33d47ee2c46fd, type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613533319178854671, guid: 5ff1f51f7f472054f8f33d47ee2c46fd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 3682389588877801076, guid: 5ff1f51f7f472054f8f33d47ee2c46fd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.1895204
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3682389588877801076, guid: 5ff1f51f7f472054f8f33d47ee2c46fd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.8744602
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3682389588877801076, guid: 5ff1f51f7f472054f8f33d47ee2c46fd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.1045265
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 3682389588877801076, guid: 5ff1f51f7f472054f8f33d47ee2c46fd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -50,7 +58,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5432959345906750243, guid: 5ff1f51f7f472054f8f33d47ee2c46fd, type: 3}
       propertyPath: m_Name
-      value: CeilingPlaster_1Girder Variant
+      value: CeilingPlaster_1Girder
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432959345906750243, guid: 5ff1f51f7f472054f8f33d47ee2c46fd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546657708862541939, guid: 5ff1f51f7f472054f8f33d47ee2c46fd, type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6036489679230199623, guid: 5ff1f51f7f472054f8f33d47ee2c46fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6036489679230199623, guid: 5ff1f51f7f472054f8f33d47ee2c46fd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6166970666604753662, guid: 5ff1f51f7f472054f8f33d47ee2c46fd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

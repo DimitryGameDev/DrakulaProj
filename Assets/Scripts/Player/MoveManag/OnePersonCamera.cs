@@ -16,16 +16,16 @@ public class OnePersonCamera : SingletonBase<OnePersonCamera>
     private void Awake()
     {
         Init();
+        
     }
 
     private void Start()
     {
-       
         transform.parent = null;
         enabled = false;
     }
 
-    public void Rotate(float dirX, float dirY)
+    public void Move(float dirX, float dirY)
     {
         if (enabled || isLocked) return;
         

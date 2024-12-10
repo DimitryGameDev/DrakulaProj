@@ -9,15 +9,16 @@ public class CheatCode : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            Debug.Log("Сердце получено");
-            CharacterInputController.Instance.pickUpHeart = true;
+            Debug.Log("Мушкет получен");
+            CharacterInputController.Instance.isRiflePickup = true;
+            Character.Instance.GetComponentInChildren<Bag>().AddProjectile(10);
         }
 
         if (Input.GetKeyDown(KeyCode.F2))
         {
             Debug.Log("Бесконечный спринт");
             CharacterInputController.Instance.ChangeSpeedTime(1000);
-            CharacterInputController.Instance.isSprinting = true;
+            CharacterInputController.Instance.isStamina = true;
         }
 
         if (Input.GetKeyDown(KeyCode.F3))
@@ -51,16 +52,17 @@ public class CheatCode : MonoBehaviour
                 t.OpenDoor();
             }
         }
-
+        
         if (Input.GetKeyDown(KeyCode.F6))
         {
-            Debug.Log("Файл сохранения удалён");
-            InteractiveState.Instance.ResetState();
-            PlayerState.Instance.ResetState();
+            Debug.Log("Сохранение");
+            InteractiveStateManager.Instance.Save();
+            CharacterStateManager.Instance.Save();
         }
         
-        if (Input.GetKeyDown(KeyCode.F9))
+        if (Input.GetKeyDown(KeyCode.F8))
         {
+            Debug.Log("Загрузка");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }

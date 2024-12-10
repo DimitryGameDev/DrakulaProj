@@ -34,7 +34,7 @@ public class NoiseLevel : SingletonBase<NoiseLevel>
         }
     }
 
-    private void DecreaseLevel()
+    public void DecreaseLevel()
     {
         if (CurrentLevel > 0 && timer <= 0)
         {
@@ -49,7 +49,13 @@ public class NoiseLevel : SingletonBase<NoiseLevel>
         CurrentLevel = 0;
         OnChange?.Invoke(CurrentLevel);
     }
-    
+
+    public void SetMaxLevel()
+    {
+        CurrentLevel = maxLevel;
+        OnChange?.Invoke(CurrentLevel);
+        timer = resetTime;
+    }
     private void UpdateTimer()
     {
         if(timer>0)

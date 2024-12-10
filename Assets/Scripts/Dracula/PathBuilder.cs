@@ -12,7 +12,7 @@ public class PathBuilder : MonoBehaviour
     private PatrolPoint currentTarget;
     private PatrolPoint firstPatrolPoint;
 
-    private int rad = 5;
+    private float rad = 5;
     private int index;
     
     private void Start()
@@ -23,8 +23,16 @@ public class PathBuilder : MonoBehaviour
         potentialPath = new List<PatrolPoint>();
         currentTarget = Character.Instance.GetComponent<DraculaPoint>();
     }
+
+    public void ResetPath()
+    {
+        if (currentPatrolPoint != null && currentTarget != null)
+        {
+            SetProperties(currentPatrolPoint,currentTarget,rad);
+        }
+    }
     
-    public DraculaPoint GetDraculaPoint(PatrolPoint currentPoint , PatrolPoint targetPoint,int radius)
+    public DraculaPoint GetDraculaPoint(PatrolPoint currentPoint , PatrolPoint targetPoint,float radius)
     {
         Ray ray = new Ray(currentPoint.transform.position + new Vector3(0,0.5f,0), targetPoint.transform.position - currentPoint.transform.position + new Vector3(0,0.5f,0));
         
@@ -38,7 +46,13 @@ public class PathBuilder : MonoBehaviour
                 return (DraculaPoint)firstPatrolPoint;
             }
         }
-        
+        /*
+        if (Vector3.Distance(lastPosTarget,targetPoint.transform.position) >= 3)
+        {
+            SetProperties(currentPoint, targetPoint, radius);
+            return (DraculaPoint)firstPatrolPoint;
+        }
+       */ 
         if (index == pathPatrolPoints.Count - 2)
         {
             SetProperties(currentPoint, targetPoint, radius);
@@ -59,9 +73,12 @@ public class PathBuilder : MonoBehaviour
 
     
     #region PathLogic
-    private void SetProperties(PatrolPoint currentPoint, PatrolPoint targetPoint, int radius)
+
+    private Vector3 lastPosTarget;
+    private void SetProperties(PatrolPoint currentPoint, PatrolPoint targetPoint, float radius)
     {
         ClearPath();
+        lastPosTarget = targetPoint.transform.position;
         currentTarget = targetPoint;
         currentPatrolPoint = currentPoint;
         rad = radius;
